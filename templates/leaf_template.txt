@@ -1,0 +1,29 @@
+{
+'obj_type': 'SequinLeaf',
+'obj_name': 'template.leaf',
+'seq_objs': [
+    {
+    'obj_name': 'template.leaf',
+    'param_path': 'pitch',
+    'trait_type': 'kTraitFloat',
+    'data_points': {
+		2:45, 16:-90
+        },
+    'step': 'True',
+    'default': 1.25,
+    'footer': [4,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+    },
+    {
+    'obj_name': 'template.leaf',
+    'param_path': 'turn',
+    'trait_type': 'kTraitFloat',
+    'data_points': {
+        10:30, 26:-90
+        },
+    'step': 'True',
+    'default': 0,
+    'footer': [4,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+    }
+    ],
+'beat_cnt': 32
+}
