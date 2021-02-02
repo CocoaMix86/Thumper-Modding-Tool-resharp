@@ -23,6 +23,11 @@ b. Then wrap the whole thing in curly brackets
 old: https://pastebin.com/qaCGdhef  
 new: https://pastebin.com/wvDKkgTU
 
+If you're comfortable running Powershell, you can open a console inside your custom levels folder and run this command:  
+`Get-ChildItem | % {(Get-Content $_) -notmatch '^\s*$' -replace "^\[","" -replace "\]$","" -notmatch '^\s*$'  -replace "True","'True'" -replace "False","'False'" -replace "\(","[" -replace "\)","]" | Set-Content $_}`  
+This will replace the brackets and surround True/False with quotes, and remove the leading and trailing square brackets.  
+**IT DOES NOT** however do STEP 4 above, for `samp_` and `spn_` files.
+
 ### LEVEL DETAILS  
 Custom levels must include a "LEVEL DETAILS.txt" file. This file contains a few helpful bits of information, like difficulty and the author's name.  
 You can find a template for that here: https://github.com/CocoaMix86/Thumper-Modding-Tool-resharp/blob/master/templates/LEVEL%20DETAILS.txt
