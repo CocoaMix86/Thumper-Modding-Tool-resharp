@@ -9,7 +9,8 @@ The new modding tool follows correct JSON formatting for the custom level files.
 
 2. All strings must be wrapped in quotes. This mainly affects True/False statements  
 old: `'step': False,`  
-new: `'step': 'False'`
+new: `'step': 'False'`  
+Numbers don't need to be wrapped in quotes, such as `'beat_cnt': 64`
 
 3. Curved brackets must now be square brackets.  
 old: `'footer': (1,1,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0)`  
