@@ -1,0 +1,17 @@
+{
+'obj_type': 'SequinLeaf',
+'obj_name': 'checkpoint.leaf',
+'seq_objs': [
+    {
+    'obj_name': 'checkpoint.leaf',
+    'param_path': 'pitch',
+    'trait_type': 'kTraitFloat',
+    'data_points': {
+        },
+    'step': 'True',
+    'default': 1.25,
+    'footer': [4,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,1,0]
+    }
+    ],
+'beat_cnt': 24
+}

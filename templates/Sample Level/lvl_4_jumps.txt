@@ -1,0 +1,41 @@
+{
+'obj_type': 'SequinLevel',
+'obj_name': '4_jumps.lvl',
+'approach_beats': 16,
+'seq_objs': [
+    {
+    'obj_name': '4_jumps.lvl',
+    'param_path': 'layer_volume,0',
+    'trait_type': 'kTraitFloat',
+    'data_points': {
+        0:0, 1:1, 95:1, 96:0
+        },
+    'step': 'False',
+    'default': 0,
+    'footer': [1,1,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
+    },
+    ],
+'leaf_seq': [
+    {
+    'beat_cnt': 80,
+    'leaf_name': '4a_jump_types.leaf',
+    'main_path': 'default.path',
+    'sub_paths': [],
+    'pos': [0, 0, 0],
+    'rot_x': [1, 0, 0],
+    'rot_y': [0, 1, 0],
+    'rot_z': [0, 0, 1],
+    'scale': [1, 1, 1]
+    }
+    ],
+'loops': [
+    {
+    'samp_name': 'drums_sparse_pattern1_level1.samp',
+    'beats_per_loop': 8,
+    }
+    ],
+'volume': 0.5,
+'input_allowed': 'True',
+'tutorial_type': 'TUTORIAL_NONE',
+'start_angle_fracs': [1, 1, 1]
+}

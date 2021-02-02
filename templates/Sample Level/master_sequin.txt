@@ -1,0 +1,65 @@
+{
+'obj_type': 'SequinMaster',
+'obj_name': 'sequin.master',
+'skybox_name': 'skybox_cube',
+'intro_lvl_name': 'intro.lvl',
+'groupings': [
+    {
+    'lvl_name': '1_track.lvl',
+    'gate_name': '',
+    'checkpoint': 'True',
+    'checkpoint_leader_lvl_name': '',
+    'rest_lvl_name': '',
+    'play_plus': 'True'
+    },
+    {
+    'lvl_name': '2_thumps.lvl',
+    'gate_name': '',
+    'checkpoint': 'True',
+    'checkpoint_leader_lvl_name': '',
+    'rest_lvl_name': '',
+    'play_plus': 'True'
+    },
+    {
+    'lvl_name': '3_grindables.lvl',
+    'gate_name': '',
+    'checkpoint': 'True',
+    'checkpoint_leader_lvl_name': '',
+    'rest_lvl_name': '',
+    'play_plus': 'True'
+    },
+    {
+    'lvl_name': '4_jumps.lvl',
+    'gate_name': '',
+    'checkpoint': 'True',
+    'checkpoint_leader_lvl_name': '',
+    'rest_lvl_name': '',
+    'play_plus': 'True'
+    },
+    {
+    'lvl_name': '5_millipedes.lvl',
+    'gate_name': '',
+    'checkpoint': 'True',
+    'checkpoint_leader_lvl_name': '',
+    'rest_lvl_name': '',
+    'play_plus': 'True'
+    },
+    {
+    'lvl_name': '6_sentries.lvl',
+    'gate_name': '',
+    'checkpoint': 'True',
+    'checkpoint_leader_lvl_name': '',
+    'rest_lvl_name': '',
+    'play_plus': 'True'
+    },
+    {
+    'lvl_name': 'win.lvl',
+    'gate_name': '',
+    'checkpoint': 'False',
+    'checkpoint_leader_lvl_name': '',
+    'rest_lvl_name': '',
+    'play_plus': 'True'
+    }
+    ],
+'checkpoint_lvl_name': 'checkpoint.lvl'
+}

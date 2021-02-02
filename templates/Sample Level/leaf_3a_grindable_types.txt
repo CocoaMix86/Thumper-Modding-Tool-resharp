@@ -1,0 +1,117 @@
+{
+'obj_type': 'SequinLeaf',
+'obj_name': '3a_grindable_types.leaf',
+'seq_objs': [
+    {
+    'obj_name': '3a_grindable_types.leaf',
+    'param_path': 'pitch',
+    'trait_type': 'kTraitFloat',
+    'data_points': {
+        },
+    'step': 'True',
+    'default': 1.25,
+    'footer': [4,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+    },
+    {
+    'obj_name': 'thump.spn',
+    'param_path': 'thump_rails.ent',
+    'trait_type': 'kTraitBool',
+    'data_points': {
+        0:1, 8:1, 16:1, 24:1, 32:1, 40:1, 48:1
+        },
+    'step': 'True',
+    'default': 0,
+    'footer': [2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+    },
+    {
+    'obj_name': 'grindable.spn',
+    'param_path': 'grindable_still.ent',
+    'trait_type': 'kTraitBool',
+    'data_points': {
+        1:1, 2:1, 3:1
+        },
+    'step': 'True',
+    'default': 0,
+    'footer': [2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+    },
+    {
+    'obj_name': 'grindable.spn',
+    'param_path': 'left_multi.ent',
+    'trait_type': 'kTraitBool',
+    'data_points': {
+        9:1, 10:1, 11:1
+        },
+    'step': 'True',
+    'default': 0,
+    'footer': [2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+    },
+    {
+    'obj_name': 'grindable.spn',
+    'param_path': 'center_multi.ent',
+    'trait_type': 'kTraitBool',
+    'data_points': {
+        17:1, 18:1, 19:1
+        },
+    'step': 'True',
+    'default': 0,
+    'footer': [2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+    },
+    {
+    'obj_name': 'grindable.spn',
+    'param_path': 'right_multi.ent',
+    'trait_type': 'kTraitBool',
+    'data_points': {
+        25:1, 26:1, 27:1
+        },
+    'step': 'True',
+    'default': 0,
+    'footer': [2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+    },
+    {
+    'obj_name': 'grindable_multi.spn',
+    'param_path': 'grindable_double.ent',
+    'trait_type': 'kTraitBool',
+    'data_points': {
+        33:1, 34:1, 35:1,
+        57:1, 58:1, 59:1
+        },
+    'step': 'True',
+    'default': 0,
+    'footer': [2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+    },
+    {
+    'obj_name': 'grindable_multi.spn',
+    'param_path': 'grindable_thirds.ent',
+    'trait_type': 'kTraitBool',
+    'data_points': {
+        41:1, 42:1, 43:1
+        },
+    'step': 'True',
+    'default': 0,
+    'footer': [2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+    },
+    {
+    'obj_name': 'grindable_multi.spn',
+    'param_path': 'grindable_quarters.ent',
+    'trait_type': 'kTraitBool',
+    'data_points': {
+        49:1, 50:1, 51:1
+        },
+    'step': 'True',
+    'default': 0,
+    'footer': [2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+    },
+    {
+    'obj_name': 'grindable_multi.spn',
+    'param_path': 'grindable_with_thump.ent',
+    'trait_type': 'kTraitBool',
+    'data_points': {
+        56:1
+        },
+    'step': 'True',
+    'default': 0,
+    'footer': [2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+    }
+    ],
+'beat_cnt': 64
+}

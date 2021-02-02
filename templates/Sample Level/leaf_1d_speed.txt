@@ -1,0 +1,29 @@
+{
+'obj_type': 'SequinLeaf',
+'obj_name': '1d_speed.leaf',
+'seq_objs': [
+    {
+    'obj_name': '1d_speed.leaf',
+    'param_path': 'pitch',
+    'trait_type': 'kTraitFloat',
+    'data_points': {
+        },
+    'step': 'True',
+    'default': 1.25,
+    'footer': [4,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+    },
+    {
+    'obj_name': 'avatar.lib',
+    'param_path': 'sequin_speed',
+    'trait_type': 'kTraitFloat',
+    'data_points': {
+        0:1, 8:0.5, 12:2, 28:1
+        },
+    'step': 'False',
+    'default': 1,
+    'default_interp': 'kTraitInterpStep',
+    'footer': [1,1,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
+    }
+    ],
+'beat_cnt': 36
+}

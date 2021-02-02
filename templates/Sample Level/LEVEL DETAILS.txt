@@ -1,0 +1,6 @@
+{
+	"level_name": "Sample Level 1",
+	"difficulty": "D0",
+	"description": "A simple level to get used to modding!"
+	"author": "Rainbow"
+}

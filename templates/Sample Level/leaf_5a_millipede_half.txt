@@ -1,0 +1,233 @@
+{
+'obj_type': 'SequinLeaf',
+'obj_name': '5a_millipede_half.leaf',
+'seq_objs': [
+    {
+    'obj_name': '5a_millipede_half.leaf',
+    'param_path': 'pitch',
+    'trait_type': 'kTraitFloat',
+    'data_points': {
+        },
+    'step': 'True',
+    'default': 1.25,
+    'footer': [4,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+    },
+    {
+    'obj_name': '5a_millipede_half.leaf',
+    'param_path': 'visibla01',
+    'trait_type': 'kTraitBool',
+    'data_points': {
+        0:0, 1:0
+        },
+    'step': 'True',
+    'default': 1,
+    'footer': [2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+    },
+    {
+    'obj_name': '5a_millipede_half.leaf',
+    'param_path': 'visibla02',
+    'trait_type': 'kTraitBool',
+    'data_points': {
+        0:0
+        },
+    'step': 'True',
+    'default': 1,
+    'footer': [2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+    },
+    {
+    'obj_name': '5a_millipede_half.leaf',
+    'param_path': 'visible',
+    'trait_type': 'kTraitBool',
+    'data_points': {
+        },
+    'step': 'True',
+    'default': 1,
+    'footer': [2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+    },
+    {
+    'obj_name': '5a_millipede_half.leaf',
+    'param_path': 'visiblz01',
+    'trait_type': 'kTraitBool',
+    'data_points': {
+        0:0
+        },
+    'step': 'True',
+    'default': 1,
+    'footer': [2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+    },
+    {
+    'obj_name': '5a_millipede_half.leaf',
+    'param_path': 'visiblz02',
+    'trait_type': 'kTraitBool',
+    'data_points': {
+        0:0, 1:0
+        },
+    'step': 'True',
+    'default': 1,
+    'footer': [2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+    },
+    {
+    'obj_name': 'millipede_half.spn',
+    'param_path': 'swerve_off.a01',
+    'trait_type': 'kTraitBool',
+    'data_points': {
+        8:1
+        },
+    'step': 'True',
+    'default': 0,
+    'footer': [2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+    },
+    {
+    'obj_name': 'millipede_half.spn',
+    'param_path': 'swerve_off.a02',
+    'trait_type': 'kTraitBool',
+    'data_points': {
+        8:1
+        },
+    'step': 'True',
+    'default': 0,
+    'footer': [2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+    },
+    {
+    'obj_name': 'millipede_half.spn',
+    'param_path': 'swerve_off.ent',
+    'trait_type': 'kTraitBool',
+    'data_points': {
+        },
+    'step': 'True',
+    'default': 0,
+    'footer': [2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+    },
+    {
+    'obj_name': 'millipede_half.spn',
+    'param_path': 'swerve_off.z01',
+    'trait_type': 'kTraitBool',
+    'data_points': {
+        8:1
+        },
+    'step': 'True',
+    'default': 0,
+    'footer': [2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+    },
+    {
+    'obj_name': 'millipede_half.spn',
+    'param_path': 'swerve_off.z02',
+    'trait_type': 'kTraitBool',
+    'data_points': {
+        8:1
+        },
+    'step': 'True',
+    'default': 0,
+    'footer': [2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+    },
+    {
+    'obj_name': 'millipede_half.spn',
+    'param_path': 'millipede_half.a01',
+    'trait_type': 'kTraitBool',
+    'data_points': {
+        24:1
+        },
+    'step': 'True',
+    'default': 0,
+    'footer': [2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+    },
+    {
+    'obj_name': 'millipede_half.spn',
+    'param_path': 'millipede_half.a02',
+    'trait_type': 'kTraitBool',
+    'data_points': {
+        },
+    'step': 'True',
+    'default': 0,
+    'footer': [2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+    },
+    {
+    'obj_name': 'millipede_half.spn',
+    'param_path': 'millipede_half.ent',
+    'trait_type': 'kTraitBool',
+    'data_points': {
+        24:1
+        },
+    'step': 'True',
+    'default': 0,
+    'footer': [2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+    },
+    {
+    'obj_name': 'millipede_half.spn',
+    'param_path': 'millipede_half.z01',
+    'trait_type': 'kTraitBool',
+    'data_points': {
+        24:1
+        },
+    'step': 'True',
+    'default': 0,
+    'footer': [2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+    },
+    {
+    'obj_name': 'millipede_half.spn',
+    'param_path': 'millipede_half.z02',
+    'trait_type': 'kTraitBool',
+    'data_points': {
+        24:1
+        },
+    'step': 'True',
+    'default': 0,
+    'footer': [2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+    },
+    {
+    'obj_name': 'millipede_half.spn',
+    'param_path': 'millipede_half_phrase.a01',
+    'trait_type': 'kTraitBool',
+    'data_points': {
+        40:1
+        },
+    'step': 'True',
+    'default': 0,
+    'footer': [2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+    },
+    {
+    'obj_name': 'millipede_half.spn',
+    'param_path': 'millipede_half_phrase.a02',
+    'trait_type': 'kTraitBool',
+    'data_points': {
+        40:1
+        },
+    'step': 'True',
+    'default': 0,
+    'footer': [2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+    },
+    {
+    'obj_name': 'millipede_half.spn',
+    'param_path': 'millipede_half_phrase.ent',
+    'trait_type': 'kTraitBool',
+    'data_points': {
+        },
+    'step': 'True',
+    'default': 0,
+    'footer': [2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+    },
+    {
+    'obj_name': 'millipede_half.spn',
+    'param_path': 'millipede_half_phrase.z01',
+    'trait_type': 'kTraitBool',
+    'data_points': {
+        40:1
+        },
+    'step': 'True',
+    'default': 0,
+    'footer': [2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+    },
+    {
+    'obj_name': 'millipede_half.spn',
+    'param_path': 'millipede_half_phrase.z02',
+    'trait_type': 'kTraitBool',
+    'data_points': {
+        40:1
+        },
+    'step': 'True',
+    'default': 0,
+    'footer': [2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+    }
+    ],
+'beat_cnt': 56
+}

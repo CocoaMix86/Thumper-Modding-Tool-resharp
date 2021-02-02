@@ -1,0 +1,37 @@
+{
+'obj_type': 'SequinLevel',
+'obj_name': 'intro.lvl',
+'approach_beats': 16,
+'seq_objs': [
+    {
+    'obj_name': 'intro.flow',
+    'param_path_hash': '0810c3b9',
+    'trait_type': 'kTraitAction',
+    'data_points': {
+        16:1
+        },
+    'step': 'False',
+    'default': 0,
+    'footer': [1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
+    }
+    ],
+'leaf_seq': [
+    {
+    'beat_cnt': 32,
+    'leaf_name': 'intro_32.leaf',
+    'main_path': 'default.path',
+    'sub_paths': [],
+    'pos': [0, 0, 0],
+    'rot_x': [1, 0, 0],
+    'rot_y': [0, 1, 0],
+    'rot_z': [0, 0, 1],
+    'scale': [1, 1, 1]
+    }
+    ],
+'loops': [
+    ],
+'volume': 0.5,
+'input_allowed': 'True',
+'tutorial_type': 'TUTORIAL_NONE',
+'start_angle_fracs': [1, 1, 1]
+}

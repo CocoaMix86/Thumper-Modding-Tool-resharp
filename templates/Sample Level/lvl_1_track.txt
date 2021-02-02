@@ -1,0 +1,74 @@
+{
+'obj_type': 'SequinLevel',
+'obj_name': '1_track.lvl',
+'approach_beats': 16,
+'seq_objs': [
+    {
+    'obj_name': '1_track.lvl',
+    'param_path': 'layer_volume,0',
+    'trait_type': 'kTraitFloat',
+    'data_points': {
+        0:0, 1:1, 179:1, 180:0
+        },
+    'step': 'False',
+    'default': 0,
+    'footer': [1,1,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
+    }
+    ],
+'leaf_seq': [
+    {
+    'beat_cnt': 64,
+    'leaf_name': '1a_turns.leaf',
+    'main_path': 'default.path',
+    'sub_paths': [],
+    'pos': [0, 0, 0],
+    'rot_x': [1, 0, 0],
+    'rot_y': [0, 1, 0],
+    'rot_z': [0, 0, 1],
+    'scale': [1, 1, 1]
+    },
+    {
+    'beat_cnt': 32,
+    'leaf_name': '1b_scale.leaf',
+    'main_path': '',
+    'sub_paths': [],
+    'pos': [0, 0, 0],
+    'rot_x': [1, 0, 0],
+    'rot_y': [0, 1, 0],
+    'rot_z': [0, 0, 1],
+    'scale': [1, 1, 1]
+    },
+    {
+    'beat_cnt': 32,
+    'leaf_name': '1c_multilane.leaf',
+    'main_path': '',
+    'sub_paths': [],
+    'pos': [0, 0, 0],
+    'rot_x': [1, 0, 0],
+    'rot_y': [0, 1, 0],
+    'rot_z': [0, 0, 1],
+    'scale': [1, 1, 1]
+    },
+    {
+    'beat_cnt': 36,
+    'leaf_name': '1d_speed.leaf',
+    'main_path': '',
+    'sub_paths': ['cave_diamond_chrome.path'],
+    'pos': [0, 0, 0],
+    'rot_x': [1, 0, 0],
+    'rot_y': [0, 1, 0],
+    'rot_z': [0, 0, 1],
+    'scale': [1, 1, 1]
+    }
+    ],
+'loops': [
+    {
+    'samp_name': 'rose.samp',
+    'beats_per_loop': 180,
+    }
+    ],
+'volume': 0.5,
+'input_allowed': 'True',
+'tutorial_type': 'TUTORIAL_NONE',
+'start_angle_fracs': [1, 1, 1]
+}

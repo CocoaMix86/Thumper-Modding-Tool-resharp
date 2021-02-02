@@ -1,0 +1,95 @@
+{
+'obj_type': 'SequinLeaf',
+'obj_name': '6b_sentry_multilane.leaf',
+'seq_objs': [
+    {
+    'obj_name': '6b_sentry_multilane.leaf',
+    'param_path': 'pitch',
+    'trait_type': 'kTraitFloat',
+    'data_points': {
+        },
+    'step': 'True',
+    'default': 1.25,
+    'footer': [4,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+    },
+    {
+    'obj_name': '6b_sentry_multilane.leaf',
+    'param_path': 'visibla01',
+    'trait_type': 'kTraitBool',
+    'data_points': {
+        0:0, 1:0, 134:0, 135:0
+        },
+    'step': 'True',
+    'default': 1,
+    'footer': [2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+    },
+    {
+    'obj_name': '6b_sentry_multilane.leaf',
+    'param_path': 'visibla02',
+    'trait_type': 'kTraitBool',
+    'data_points': {
+        0:0, 135:0
+        },
+    'step': 'True',
+    'default': 1,
+    'footer': [2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+    },
+    {
+    'obj_name': '6b_sentry_multilane.leaf',
+    'param_path': 'visiblz01',
+    'trait_type': 'kTraitBool',
+    'data_points': {
+        0:0, 135:0
+        },
+    'step': 'True',
+    'default': 1,
+    'footer': [2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+    },
+    {
+    'obj_name': '6b_sentry_multilane.leaf',
+    'param_path': 'visiblz02',
+    'trait_type': 'kTraitBool',
+    'data_points': {
+        0:0, 1:0, 134:0, 135:0
+        },
+    'step': 'True',
+    'default': 1,
+    'footer': [2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+    },
+    {
+    'obj_name': 'avatar.lib',
+    'param_path': 'sequin_speed',
+    'trait_type': 'kTraitFloat',
+    'data_points': {
+        0:4, 128:1
+        },
+    'step': 'False',
+    'default': 1,
+    'default_interp': 'kTraitInterpStep',
+    'footer': [1,1,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
+    },
+    {
+    'obj_name': 'thump.spn',
+    'param_path': 'thump_rails.ent',
+    'trait_type': 'kTraitBool',
+    'data_points': {
+        0:1, 126:1
+        },
+    'step': 'True',
+    'default': 0,
+    'footer': [2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+    },
+    {
+    'obj_name': 'sentry.spn',
+    'param_path': 'level_8_multi.ent',
+    'trait_type': 'kTraitBool',
+    'data_points': {
+        0:1
+        },
+    'step': 'True',
+    'default': 0,
+    'footer': [2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+    }
+    ],
+'beat_cnt': 136
+}

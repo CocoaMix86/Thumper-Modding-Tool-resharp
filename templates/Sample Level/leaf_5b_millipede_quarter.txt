@@ -1,0 +1,179 @@
+{
+'obj_type': 'SequinLeaf',
+'obj_name': '5b_millipede_quarter.leaf',
+'seq_objs': [
+    {
+    'obj_name': '5b_millipede_quarter.leaf',
+    'param_path': 'pitch',
+    'trait_type': 'kTraitFloat',
+    'data_points': {
+        },
+    'step': 'True',
+    'default': 1.25,
+    'footer': [4,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+    },
+    {
+    'obj_name': '5b_millipede_quarter.leaf',
+    'param_path': 'visibla01',
+    'trait_type': 'kTraitBool',
+    'data_points': {
+        30:0, 31:0
+        },
+    'step': 'True',
+    'default': 1,
+    'footer': [2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+    },
+    {
+    'obj_name': '5b_millipede_quarter.leaf',
+    'param_path': 'visibla02',
+    'trait_type': 'kTraitBool',
+    'data_points': {
+        31:0
+        },
+    'step': 'True',
+    'default': 1,
+    'footer': [2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+    },
+    {
+    'obj_name': '5b_millipede_quarter.leaf',
+    'param_path': 'visible',
+    'trait_type': 'kTraitBool',
+    'data_points': {
+        },
+    'step': 'True',
+    'default': 1,
+    'footer': [2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+    },
+    {
+    'obj_name': '5b_millipede_quarter.leaf',
+    'param_path': 'visiblz01',
+    'trait_type': 'kTraitBool',
+    'data_points': {
+        31:0
+        },
+    'step': 'True',
+    'default': 1,
+    'footer': [2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+    },
+    {
+    'obj_name': '5b_millipede_quarter.leaf',
+    'param_path': 'visiblz02',
+    'trait_type': 'kTraitBool',
+    'data_points': {
+        30:0, 31:0
+        },
+    'step': 'True',
+    'default': 1,
+    'footer': [2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+    },
+    {
+    'obj_name': 'millipede_quarter.spn',
+    'param_path': 'millipede_quarter.a01',
+    'trait_type': 'kTraitBool',
+    'data_points': {
+        0:1
+        },
+    'step': 'True',
+    'default': 0,
+    'footer': [2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+    },
+    {
+    'obj_name': 'millipede_quarter.spn',
+    'param_path': 'millipede_quarter.a02',
+    'trait_type': 'kTraitBool',
+    'data_points': {
+        0:1
+        },
+    'step': 'True',
+    'default': 0,
+    'footer': [2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+    },
+    {
+    'obj_name': 'millipede_quarter.spn',
+    'param_path': 'millipede_quarter.ent',
+    'trait_type': 'kTraitBool',
+    'data_points': {
+        0:1
+        },
+    'step': 'True',
+    'default': 0,
+    'footer': [2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+    },
+    {
+    'obj_name': 'millipede_quarter.spn',
+    'param_path': 'millipede_quarter.z01',
+    'trait_type': 'kTraitBool',
+    'data_points': {
+        },
+    'step': 'True',
+    'default': 0,
+    'footer': [2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+    },
+    {
+    'obj_name': 'millipede_quarter.spn',
+    'param_path': 'millipede_quarter.z02',
+    'trait_type': 'kTraitBool',
+    'data_points': {
+        0:1
+        },
+    'step': 'True',
+    'default': 0,
+    'footer': [2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+    },
+    {
+    'obj_name': 'millipede_quarter.spn',
+    'param_path': 'millipede_quarter_phrase.a01',
+    'trait_type': 'kTraitBool',
+    'data_points': {
+        16:1
+        },
+    'step': 'True',
+    'default': 0,
+    'footer': [2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+    },
+    {
+    'obj_name': 'millipede_quarter.spn',
+    'param_path': 'millipede_quarter_phrase.a02',
+    'trait_type': 'kTraitBool',
+    'data_points': {
+        16:1
+        },
+    'step': 'True',
+    'default': 0,
+    'footer': [2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+    },
+    {
+    'obj_name': 'millipede_quarter.spn',
+    'param_path': 'millipede_quarter_phrase.ent',
+    'trait_type': 'kTraitBool',
+    'data_points': {
+        },
+    'step': 'True',
+    'default': 0,
+    'footer': [2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+    },
+    {
+    'obj_name': 'millipede_quarter.spn',
+    'param_path': 'millipede_quarter_phrase.z01',
+    'trait_type': 'kTraitBool',
+    'data_points': {
+        16:1
+        },
+    'step': 'True',
+    'default': 0,
+    'footer': [2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+    },
+    {
+    'obj_name': 'millipede_quarter.spn',
+    'param_path': 'millipede_quarter_phrase.z02',
+    'trait_type': 'kTraitBool',
+    'data_points': {
+        16:1
+        },
+    'step': 'True',
+    'default': 0,
+    'footer': [2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+    }
+    ],
+'beat_cnt': 32
+}
