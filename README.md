@@ -20,5 +20,5 @@ new: `'rails_color': [0.3, 1, 0, 1],`
 4. Items inside `samp_` and `spn_` files must be inside a list ( JSON denotes lists by square brackets [] )  
 a. To do this, put `'items': [` before the first item in these files, then close the square bracket at the end  
 b. Then wrap the whole thing in curly brackets  
-old: https://pastebin.com/qaCGdhef 
+old: https://pastebin.com/qaCGdhef  
 new: https://pastebin.com/wvDKkgTU
