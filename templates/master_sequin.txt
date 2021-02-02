@@ -12,14 +12,6 @@
     'rest_lvl_name': '',
     'play_plus': 'True'
     },
-    {
-    'lvl_name': 'win.lvl',
-    'gate_name': '',
-    'checkpoint': 'False',
-    'checkpoint_leader_lvl_name': '',
-    'rest_lvl_name': '',
-    'play_plus': 'True'
-    }
     ],
 'checkpoint_lvl_name': 'checkpoint.lvl'
 }
