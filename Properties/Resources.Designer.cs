@@ -79,5 +79,14 @@ namespace Thumper_Modding_Tool_resharp.Properties {
                 return ((byte[])(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string footer {
+            get {
+                return ResourceManager.GetString("footer", resourceCulture);
+            }
+        }
     }
 }

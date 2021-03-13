@@ -11,6 +11,7 @@ namespace Thumper_Modding_Tool_resharp
 	public partial class ThumperModdingTool
 	{
 		JsonLoadSettings jo = new JsonLoadSettings() { CommentHandling = CommentHandling.Load};
+		List<string> footers = Properties.Resources.footer.Split('\n').ToList();
 
 		List<string> file_types = new List<string>() { "gate", "leaf", "lvl", "master", "xfm", "config" };
 		List<string> file_special = new List<string>() { "spn", "samp" };
@@ -327,26 +328,27 @@ namespace Thumper_Modding_Tool_resharp
 				Write_Int(f, 0);
 
 				///footer of object
-				JArray _tempjarray = _obj["footer"];
-				string[] _footer = _tempjarray.ToObject<string[]>();
-				Write_Int(f, int.Parse(_footer[0]));
-				Write_Int(f, int.Parse(_footer[1]));
-				Write_Int(f, int.Parse(_footer[2]));
-				Write_Int(f, int.Parse(_footer[3]));
-				Write_Int(f, int.Parse(_footer[4]));
-				Write_String(f, _footer[5]);
-				Write_String(f, _footer[6]);
-				Write_Bool(f, _footer[7]);
-				Write_Bool(f, _footer[8]);
-				Write_Int(f, int.Parse(_footer[9]));
-				Write_Float(f, float.Parse(_footer[10]));
-				Write_Float(f, float.Parse(_footer[11]));
-				Write_Float(f, float.Parse(_footer[12]));
-				Write_Float(f, float.Parse(_footer[13]));
-				Write_Float(f, float.Parse(_footer[14]));
-				Write_Bool(f, _footer[15]);
-				Write_Bool(f, _footer[16]);
-				Write_Bool(f, _footer[17]);
+				JArray _footer = _obj["footer"];
+				//JArray _footerarray = JArray.Parse(footers.Find(x => x.Contains(((string)_obj["obj_name"]).Replace((string)obj["obj_name"], "leafname")) && x.Contains(Regex.Replace((string)_obj["param_path"], "[.].*", ""))).Split(';')[2]);
+				//string[] _footer = _tempjarray.ToObject<string[]>();
+				Write_Int(f, (int)_footer[0]);
+				Write_Int(f, (int)_footer[1]);
+				Write_Int(f, (int)_footer[2]);
+				Write_Int(f, (int)_footer[3]);
+				Write_Int(f, (int)_footer[4]);
+				Write_String(f, (string)_footer[5]);
+				Write_String(f, (string)_footer[6]);
+				Write_Bool(f, (string)_footer[7]);
+				Write_Bool(f, (string)_footer[8]);
+				Write_Int(f, (int)_footer[9]);
+				Write_Float(f, (float)_footer[10]);
+				Write_Float(f, (float)_footer[11]);
+				Write_Float(f, (float)_footer[12]);
+				Write_Float(f, (float)_footer[13]);
+				Write_Float(f, (float)_footer[14]);
+				Write_Bool(f, (string)_footer[15]);
+				Write_Bool(f, (string)_footer[16]);
+				Write_Bool(f, (string)_footer[17]);
 			}
 		}
 

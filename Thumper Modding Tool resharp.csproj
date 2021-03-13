@@ -108,6 +108,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="templates\LEVEL DETAILS.txt" />
+    <Content Include="text assets\footer - Copy.txt" />
+    <Content Include="text assets\footer.txt" />
     <Content Include="Thumper-resharp.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
