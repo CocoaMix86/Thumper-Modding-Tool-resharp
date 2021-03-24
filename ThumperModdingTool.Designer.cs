@@ -363,7 +363,7 @@ namespace Thumper_Modding_Tool_resharp
 			this.MainMenuStrip = this.menuStrip1;
 			this.MaximizeBox = false;
 			this.Name = "ThumperModdingTool";
-			this.Text = "Thumper Modding Tool resharp v1.0.0";
+			this.Text = "Thumper Modding Tool resharp v1.0.2";
 			this.Load += new System.EventHandler(this.Form1_Load);
 			this.menuStrip1.ResumeLayout(false);
 			this.menuStrip1.PerformLayout();
