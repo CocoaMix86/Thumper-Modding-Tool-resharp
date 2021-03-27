@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Forms;
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
@@ -106,14 +107,21 @@ namespace Thumper_Modding_Tool_resharp
 				dynamic level_config = null;
 				var objs = new List<dynamic>();
 				var obj_count = 0;
-				dynamic new_objs;
+				dynamic new_objs = null;
+				string errorlist = "";
 
 				//iterate over each file in the custom level directory
 				//filter out files that do not match the <file_types> list
 				foreach (string filename in Directory.GetFiles(level_name.path)) {
 					if (file_types.Contains(Path.GetFileName(filename).Split('_')[0])) {
 						//read file and store JSON in dynamic object
-						new_objs = JObject.Parse(Regex.Replace(File.ReadAllText(filename), @"#.*", ""), jo);
+						try {
+							new_objs = JObject.Parse(Regex.Replace(File.ReadAllText(filename), @"#.*", ""), jo);
+						}
+						catch (Exception ex) { 
+							errorlist += $"error parsing:\n{ex.Message} in file \"{Path.GetFileName(filename)}\" in level \"{level_name.name}\"\n\n";
+							continue;
+						}
 						//LevelLib contains important info for where the final level files go, so it gets put into its own object
 						if (new_objs.obj_type == "LevelLib") {
 							level_config = new_objs;
@@ -124,13 +132,24 @@ namespace Thumper_Modding_Tool_resharp
 					}
 					//these file types require different processing to get the data
 					else if (file_special.Contains(Path.GetFileName(filename).Split('_')[0])) {
-						new_objs = JsonConvert.DeserializeObject(File.ReadAllText(filename));
+						try {
+							new_objs = JsonConvert.DeserializeObject(File.ReadAllText(filename));
+						}
+						catch (Exception ex) {
+							errorlist += $"error parsing:\n{ex.Message} in file \"{Path.GetFileName(filename)}\" in level \"{level_name.name}\"\n\n";
+							continue;
+						}
 						//spn_ and samp_ files contain multiple entries, inside the "multi":[] list
 						foreach (var _v in new_objs.items) {
 							objs.Add(_v);
 							obj_count++;
 						}
 					}
+				}
+				//if errors exist, show the error, then return to stop further processing
+				if (errorlist.Contains("error parsing")) {
+					MessageBox.Show(errorlist + "CUSTOM LEVELS NOT UPDATED", "Level load error");
+					return;
 				}
 
 				//var cache_filename = $@"out\{level_name.folder_name}\{level_config["cache_filename"]}";

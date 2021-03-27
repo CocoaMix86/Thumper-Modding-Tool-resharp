@@ -89,7 +89,14 @@ Author: {LoadedLevels[e.RowIndex].author}";
 					//this allows me to call each value further down
 					if (File.Exists($@"{_path}\LEVEL DETAILS.txt")) {
 						_leveldata = JsonConvert.DeserializeObject(File.ReadAllText($@"{_path}\LEVEL DETAILS.txt"));
-						_levelmaster = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText($@"{_path}\master_sequin.txt"), @"#.*", "")); 
+						//try-catch block on parsing master, in case it has issues
+						try {
+							_levelmaster = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText($@"{_path}\master_sequin.txt"), @"#.*", ""));
+						}
+						catch (Exception ex) { 
+							MessageBox.Show($"error parsing:\n{ex.Message} in file \"master_sequin.txt\" for the selected level\n\nLEVEL NOT ADDED");
+							return;
+						}
 					}
 					else {
 						//if LEVEL DETAILS.txt does not exist, return. Do not add level
