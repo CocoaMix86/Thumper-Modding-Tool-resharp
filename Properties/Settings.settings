@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="game_dir" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">none</Value>
     </Setting>
     <Setting Name="mod_mode" Type="System.String" Scope="User">
       <Value Profile="(Default)">OFF</Value>

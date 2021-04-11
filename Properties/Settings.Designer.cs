@@ -25,7 +25,7 @@ namespace Thumper_Modding_Tool_resharp.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("none")]
         public string game_dir {
             get {
                 return ((string)(this["game_dir"]));

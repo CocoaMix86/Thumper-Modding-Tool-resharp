@@ -25,14 +25,14 @@ namespace Thumper_Modding_Tool_resharp
 		private void Read_Config(bool skip)
 		{
 			string _S = Properties.Settings.Default.game_dir;
-			if (skip && Properties.Settings.Default.game_dir != "")
+			if (skip && Properties.Settings.Default.game_dir != "none")
 				return;
 			using (var fbd = new FolderBrowserDialog()) {
 				fbd.Description = "Select the folder where Thumper is installed";
 				fbd.RootFolder = Environment.SpecialFolder.MyComputer;
 				//check if the game_dir has been set before. It'll be empty if starting for the first time
-				if (Properties.Settings.Default.game_dir == "")
-					fbd.SelectedPath = @"C:/Program Files (x86)/Steam/steamapps/common/Thumper";
+				if (Properties.Settings.Default.game_dir == "none")
+					fbd.SelectedPath = @"C:\Program Files (x86)\Steam\steamapps\common\Thumper";
 				//if it's not empty, initialize the FolderBrowser to be whatever was selected last
 				else
 					fbd.SelectedPath = Properties.Settings.Default.game_dir;

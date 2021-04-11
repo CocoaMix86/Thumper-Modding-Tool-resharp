@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Text;
 
 namespace Thumper_Modding_Tool_resharp
 {
@@ -96,7 +97,11 @@ namespace Thumper_Modding_Tool_resharp
 		/// 
 		private void Make_Custom_Levels(string game_dir)
 		{
+			int menulength = 2112;
 			List<string> src_filenames = new List<string>() { "lib/2e7b0500.pc", "lib/e0c51024.pc", "lib/f78b7d78.pc" };
+			//these hashes are literally "customlevel#" hashed
+			List<string> menu_hashes = new List<string>() { "1DCB06CE", "2D5C3C41", "273EA275", "EBA1CBD7", "1F8AD438", "DDF57F91", "9402A958", "FB3C6A42", "D4F0FAD2" };
+			List<string> menu_names = new List<string>();
 			//clear \out\ directory so that old level data is not stored anymore
 			DirectoryInfo _out = new DirectoryInfo(@"out");
 			foreach (string file in Directory.EnumerateFiles(@"out", "*.*", SearchOption.AllDirectories)) File.Delete(file);
@@ -189,7 +194,8 @@ namespace Thumper_Modding_Tool_resharp
 						}
 					}
 
-					bytes = File.ReadAllBytes($@"lib/obj_def_customlevel{LoadedLevels.IndexOf(level_name) + 1}.objlib");
+					//bytes = File.ReadAllBytes($@"lib/obj_def_customlevel{LoadedLevels.IndexOf(level_name) + 1}.objlib");
+					bytes = File.ReadAllBytes($@"lib/obj_def_customlevel.objlib");
 					f.Write(bytes, 0, bytes.Length);
 					//iterate over every loaded object, and write its data to .pc file in specific formats.
 					//format is different per object. I myself am not exactly sure how it works, but this is how it's done
@@ -243,6 +249,42 @@ namespace Thumper_Modding_Tool_resharp
 					Write_Color(f, level_config["joy_color"]);
 
 					src_filenames.Add(config_cache_filename);
+				}
+				menu_names.Add(level_name.name);
+				menulength += level_name.name.Length + 1;
+			}
+
+			//Update menu names
+			using (FileStream f = File.Open(@"lib\2e7b0500.pc", FileMode.Create, FileAccess.Write, FileShare.None)) {
+				byte[] bytes;
+				int pos = 2112;
+				//write menu headers/pointers
+				Write_Int(f, 6);
+				Write_Int(f, 174);
+				Write_Int(f, menulength + ((9 - menu_names.Count) * ("no level".Length + 1)));
+				//write all menu strings. Don't edit this
+				bytes = File.ReadAllBytes(@"lib/menu1.objlib");
+				f.Write(bytes, 0, bytes.Length);
+				//user set level names
+				for (int x = 0; x < 9; x++) {
+					if (x < menu_names.Count)
+						f.Write(Encoding.ASCII.GetBytes(menu_names[x]), 0, menu_names[x].Length);
+					else
+						f.Write(Encoding.ASCII.GetBytes("no level"), 0, "no level".Length);
+					f.Write(new byte[] { 0x00 }, 0, 1);
+				}
+				//write menu hashes and positions. Don't edit this
+				bytes = File.ReadAllBytes(@"lib/menu2.objlib");
+				f.Write(bytes, 0, bytes.Length);
+
+				//write custom hashes and string position in file.
+				for (int x = 0; x < 9; x++) {
+					Write_Hex(f, menu_hashes[x]);
+					Write_Int(f, pos);
+					if (x < menu_names.Count)
+						pos += menu_names[x].Length + 1;
+					else
+						pos += "no level".Length + 1;
 				}
 			}
 
