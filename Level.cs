@@ -597,15 +597,27 @@ namespace Thumper_Modding_Tool_resharp
 			Write_String(f, (string)obj["intro_lvl_name"]);
 
 			//lvl/.gate groupings
-			Write_Int(f, obj["groupings"].Count);
+			int isolated = 0;
+			foreach (var grouping in obj["groupings"])
+			{
+				if (grouping["isolate"] == obj["isolate_tracks"])
+					isolated++;
+			}
+			//Write_Int(f, obj["groupings"].Count);
+			Write_Int(f, isolated);
 			foreach (var grouping in obj["groupings"]) {
-				Write_String(f, (string)grouping["lvl_name"]);
-				Write_String(f, (string)grouping["gate_name"]);
-				Write_Bool(f, (string)grouping["checkpoint"]);
-				Write_String(f, (string)grouping["checkpoint_leader_lvl_name"]);
-				Write_String(f, (string)grouping["rest_lvl_name"]);
-				Write_Hex(f, "01000100000001");
-				Write_Bool(f, (string)grouping["play_plus"]);
+				//If track isolation is enabled, only add the isolated tracks to the level.
+				//If it's off, isolate_tracks will be False, and so will all instances grouping["isolate"]
+				if (grouping["isolate"] == obj["isolate_tracks"])
+				{
+					Write_String(f, (string)grouping["lvl_name"]);
+					Write_String(f, (string)grouping["gate_name"]);
+					Write_Bool(f, (string)grouping["checkpoint"]);
+					Write_String(f, (string)grouping["checkpoint_leader_lvl_name"]);
+					Write_String(f, (string)grouping["rest_lvl_name"]);
+					Write_Hex(f, "01000100000001");
+					Write_Bool(f, (string)grouping["play_plus"]);
+				}
 			}
 
 			///footer

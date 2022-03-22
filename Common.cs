@@ -32,7 +32,7 @@ namespace Thumper_Modding_Tool_resharp
 
 		private void Write_Bool(FileStream f, string val)
 		{
-			byte bytes = val == "1" || val == "True" ? 1 : 0;
+			byte bytes = val == "1" || val == "True" ? (byte)1 : (byte)0;
 			f.WriteByte(bytes);
 		}
 
