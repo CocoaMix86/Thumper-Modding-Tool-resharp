@@ -34,8 +34,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>
-    </ApplicationIcon>
+    <ApplicationIcon>Thumper Modding Tool resharp.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>false</SignAssembly>
@@ -114,6 +113,9 @@
     <Content Include="templates\LEVEL DETAILS.txt" />
     <Content Include="text assets\footer - Copy.txt" />
     <Content Include="text assets\footer.txt" />
+    <Content Include="Thumper Modding Tool resharp.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
