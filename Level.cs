@@ -97,10 +97,10 @@ namespace Thumper_Modding_Tool_resharp
 		/// 
 		private void Make_Custom_Levels(string game_dir)
 		{
-			int menulength = 2112;
+			int menulength = 2548;
 			List<string> src_filenames = new List<string>() { "lib/2e7b0500.pc", "lib/e0c51024.pc", "lib/f78b7d78.pc" };
 			//these hashes are literally "customlevel#" hashed
-			List<string> menu_hashes = new List<string>() { "1DCB06CE", "2D5C3C41", "273EA275", "EBA1CBD7", "1F8AD438", "DDF57F91", "9402A958", "FB3C6A42", "D4F0FAD2" };
+			List<string> menu_hashes = new List<string>() { "1DCB06CE", "2D5C3C41", /*"273EA275",*/ "EBA1CBD7", "1F8AD438", "DDF57F91", "9402A958", "FB3C6A42", "85E4559B" };
 			List<string> menu_names = new List<string>();
 			//clear \out\ directory so that old level data is not stored anymore
 			DirectoryInfo _out = new DirectoryInfo(@"out");
@@ -257,10 +257,10 @@ namespace Thumper_Modding_Tool_resharp
 			//Update menu names
 			using (FileStream f = File.Open(@"lib\2e7b0500.pc", FileMode.Create, FileAccess.Write, FileShare.None)) {
 				byte[] bytes;
-				int pos = 2112;
+				int pos = 2548;
 				//write menu headers/pointers
 				Write_Int(f, 6);
-				Write_Int(f, 174);
+				Write_Int(f, 183);
 				Write_Int(f, menulength + ((9 - menu_names.Count) * ("no level".Length + 1)));
 				//write all menu strings. Don't edit this
 				bytes = File.ReadAllBytes(@"lib/menu1.objlib");
@@ -270,7 +270,7 @@ namespace Thumper_Modding_Tool_resharp
 					if (x < menu_names.Count)
 						f.Write(Encoding.ASCII.GetBytes(menu_names[x]), 0, menu_names[x].Length);
 					else
-						f.Write(Encoding.ASCII.GetBytes("no level"), 0, "no level".Length);
+						f.Write(Encoding.ASCII.GetBytes($@"no level"), 0, "no level".Length);
 					f.Write(new byte[] { 0x00 }, 0, 1);
 				}
 				//write menu hashes and positions. Don't edit this
@@ -278,7 +278,7 @@ namespace Thumper_Modding_Tool_resharp
 				f.Write(bytes, 0, bytes.Length);
 
 				//write custom hashes and string position in file.
-				for (int x = 0; x < 9; x++) {
+				for (int x = 0; x < 8; x++) {
 					Write_Hex(f, menu_hashes[x]);
 					Write_Int(f, pos);
 					if (x < menu_names.Count)
