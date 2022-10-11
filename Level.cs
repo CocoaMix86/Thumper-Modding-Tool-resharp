@@ -100,7 +100,7 @@ namespace Thumper_Modding_Tool_resharp
 			int menulength = 2548;
 			List<string> src_filenames = new List<string>() { "lib/2e7b0500.pc", "lib/e0c51024.pc", "lib/f78b7d78.pc" };
 			//these hashes are literally "customlevel#" hashed
-			List<string> menu_hashes = new List<string>() { "1DCB06CE", "2D5C3C41", /*"273EA275",*/ "EBA1CBD7", "1F8AD438", "DDF57F91", "9402A958", "FB3C6A42", "85E4559B" };
+			List<string> menu_hashes = new List<string>() { "1DCB06CE", "2D5C3C41", "273EA275", "EBA1CBD7", "1F8AD438", "DDF57F91", "9402A958", "FB3C6A42", "85E4559B" };
 			List<string> menu_names = new List<string>();
 			//clear \out\ directory so that old level data is not stored anymore
 			DirectoryInfo _out = new DirectoryInfo(@"out");
@@ -278,7 +278,7 @@ namespace Thumper_Modding_Tool_resharp
 				f.Write(bytes, 0, bytes.Length);
 
 				//write custom hashes and string position in file.
-				for (int x = 0; x < 8; x++) {
+				for (int x = 0; x < 9; x++) {
 					Write_Hex(f, menu_hashes[x]);
 					Write_Int(f, pos);
 					if (x < menu_names.Count)
@@ -286,6 +286,38 @@ namespace Thumper_Modding_Tool_resharp
 					else
 						pos += "no level".Length + 1;
 				}
+			}
+			
+			//Update this file to adjust how the menu looks
+			using (FileStream f = File.Open(@"lib\f78b7d78.pc", FileMode.Create, FileAccess.Write, FileShare.None)) {
+				byte[] bytes;
+				Write_Int(f, 16);
+				Write_Int(f, menu_names.Count + 1);
+				//write blocks of each level
+				for (int x = 0; x < menu_names.Count; x++) {
+					Write_String(f, $@"customlevel{x + 1}");
+					Write_Int(f, 0);
+					Write_String(f, $@"levels/custom/level{x + 1}.objlib");
+					if (x == menu_names.Count - 1)
+						Write_String(f, "level3");
+					else
+						Write_String(f, $@"customlevel{x + 2}");
+					Write_Bool(f, "True");
+					Write_Bool(f, "True");
+					Write_Bool(f, "False");
+					Write_Int(f, x);
+					Write_Int(f, x + 10);
+				}
+				//write level 3 data. This is required to make the menu NOT crash
+				Write_String(f, "level3");
+				Write_Int(f, 0);
+				Write_String(f, "levels/level3/level_3a.objlib");
+				Write_Int(f, 0);
+				Write_Bool(f, "True");
+				Write_Bool(f, "True");
+				Write_Bool(f, "True");
+				Write_Int(f, menu_names.Count);
+				Write_Int(f, menu_names.Count + 10);
 			}
 
 			//copy new .pc files to game directory

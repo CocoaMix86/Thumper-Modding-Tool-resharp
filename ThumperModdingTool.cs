@@ -188,7 +188,7 @@ Author: {LoadedLevels[e.RowIndex].author}";
 			if (Properties.Settings.Default.mod_mode == "OFF") {
 				Backup_SaveData(Properties.Settings.Default.game_dir);
 				Make_Custom_Levels(Properties.Settings.Default.game_dir);
-				//Make_Custom_Savedata(Properties.Settings.Default.game_dir);
+				Make_Custom_Savedata(Properties.Settings.Default.game_dir);
 				//set mod mode property in exe and save it
 				Properties.Settings.Default.mod_mode = "ON";
 				Properties.Settings.Default.Save();
