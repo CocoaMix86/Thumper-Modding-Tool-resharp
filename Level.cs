@@ -76,7 +76,7 @@ namespace Thumper_Modding_Tool_resharp
 		/// 
 		private void Restore_Levels(string game_dir)
 		{
-			List<string> src_filenames = new List<string>() { "lib/original/2e7b0500.pc", "lib/original/e0c51024.pc", "lib/original/f78b7d78.pc" };
+			List<string> src_filenames = new List<string>() { "lib/original/2e7b0500.pc", "lib/original/e0c51024.pc", "lib/original/f78b7d78.pc", "lib/original/d0d6149c.pc", "lib/original/aefa4352.pc", "lib/original/b868db07.pc" };
 			List<string> custom_filenames = new List<string>();
 
 			foreach (string file in Directory.EnumerateFiles(@"out", "*.*", SearchOption.AllDirectories))
@@ -98,7 +98,7 @@ namespace Thumper_Modding_Tool_resharp
 		private void Make_Custom_Levels(string game_dir)
 		{
 			int menulength = 2548;
-			List<string> src_filenames = new List<string>() { "lib/2e7b0500.pc", "lib/e0c51024.pc", "lib/f78b7d78.pc" };
+			List<string> src_filenames = new List<string>() { "lib/2e7b0500.pc", "lib/e0c51024.pc", "lib/f78b7d78.pc", "lib/d0d6149c.pc", "lib/aefa4352.pc", "lib/b868db07.pc" };
 			//these hashes are literally "customlevel#" hashed
 			List<string> menu_hashes = new List<string>() { "1DCB06CE", "2D5C3C41", "273EA275", "EBA1CBD7", "1F8AD438", "DDF57F91", "9402A958", "FB3C6A42", "85E4559B" };
 			List<string> menu_names = new List<string>();

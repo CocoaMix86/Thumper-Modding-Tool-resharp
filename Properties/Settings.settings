@@ -8,5 +8,8 @@
     <Setting Name="mod_mode" Type="System.String" Scope="User">
       <Value Profile="(Default)">OFF</Value>
     </Setting>
+    <Setting Name="loaded_levels" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>
