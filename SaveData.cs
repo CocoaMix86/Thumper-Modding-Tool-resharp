@@ -67,7 +67,7 @@ namespace Thumper_Modding_Tool_resharp
 
         private void Restore_Savedata(string game_dir)
         {
-            string last_backup_time = new DirectoryInfo(@"backup").GetDirectories().OrderByDescending(d => d.LastWriteTimeUtc).First().ToString().Replace(":", "").Replace("\\", "-");
+            string last_backup_time = new DirectoryInfo(@"backup").GetDirectories().OrderByDescending(d => d.LastWriteTimeUtc).First().ToString();
             DirectoryCopy($@"backup/{last_backup_time}", $@"{game_dir}/savedata", true);
         }
     }

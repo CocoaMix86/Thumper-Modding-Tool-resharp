@@ -122,7 +122,7 @@
     <value>..\savedata\data.index;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="data_0" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\savedata\data_0.sav;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>..\bin\Debug\lib\original\save data\data_0.sav;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="footer" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\text assets\footer.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>

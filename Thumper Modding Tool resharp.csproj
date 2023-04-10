@@ -94,6 +94,8 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="bin\Debug\data_0.sav" />
+    <None Include="bin\Debug\lib\original\save data\data_0.sav" />
+    <None Include="bin\Debug\lib\original\save data\data_0_og.sav" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

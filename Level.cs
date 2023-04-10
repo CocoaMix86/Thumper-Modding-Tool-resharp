@@ -90,6 +90,12 @@ namespace Thumper_Modding_Tool_resharp
 				if (File.Exists($@"{game_dir}/cache/{dst_filename}"))
 					File.Delete($@"{game_dir}/cache/{dst_filename}");
 			}
+			//delete extra audio files added previously
+			foreach (string audio_filename in Properties.Settings.Default.loaded_files) {
+				var dst_filename = Path.GetFileName(audio_filename);
+				if (File.Exists($@"{game_dir}/cache/{dst_filename}"))
+					File.Delete($@"{game_dir}/cache/{dst_filename}");
+			}
 		}
 
 		///
@@ -115,6 +121,17 @@ namespace Thumper_Modding_Tool_resharp
 				dynamic new_objs = null;
 				string errorlist = "";
 
+				//check if the custom level folder contains custom audio. This needs to be put into Thumper's cache folder
+				if (Directory.Exists(@$"{level_name.path}\extras")) {
+					List<string> audiofiles = new List<string>();
+					foreach (string filename in Directory.GetFiles(@$"{level_name.path}\extras")) {
+						File.Copy(filename, $@"{game_dir}\cache\{Path.GetFileName(filename)}", true);
+						audiofiles.Add(filename);
+						//Properties.Settings.Default.loaded_files.Add(filename);
+					}
+					Properties.Settings.Default.loaded_files = audiofiles;
+					Properties.Settings.Default.Save();
+				}
 				//iterate over each file in the custom level directory
 				//filter out files that do not match the <file_types> list
 				foreach (string filename in Directory.GetFiles(level_name.path)) {

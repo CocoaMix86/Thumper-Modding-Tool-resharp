@@ -107,8 +107,8 @@ Author: {LoadedLevels[e.RowIndex].author}";
 					foreach (LevelTraits lt in LoadedLevels) {
 						//if exists, tell user, then return and do not add level
 						if (lt.name == (string)_leveldata.level_name) {
-							MessageBox.Show("That level has already been added");
-							return;
+							//MessageBox.Show("That level has already been added");
+							//return;
 						}
 					}
 					//check which sublevels have checkpoint enabled. This determines how many sublevels exist
