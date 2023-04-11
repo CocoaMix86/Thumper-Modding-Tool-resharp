@@ -438,7 +438,7 @@ namespace Thumper_Modding_Tool_resharp
 				Write_Int(f, 0);
 
 				///footer of object
-				JArray _footer = JArray.FromObject(((string)_obj["footer"]).Split(','));
+				JArray _footer = _obj["footer"].GetType() == typeof(JArray) ? _obj["footer"] : JArray.FromObject(((string)_obj["footer"]).Replace("[", "").Replace("]", "").Replace("'", "").Split(','));
 				Write_Int(f, (int)_footer[0]);
 				Write_Int(f, (int)_footer[1]);
 				Write_Int(f, (int)_footer[2]);
