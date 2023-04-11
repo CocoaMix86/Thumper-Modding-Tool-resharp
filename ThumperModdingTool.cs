@@ -272,5 +272,10 @@ Author: {LoadedLevels[e.RowIndex].author}";
 			if (textBox2.Text[0] == '0')
 				textBox2.Text = textBox2.Text.Substring(1);
 		}
-	}
+
+        private void hashPanelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+			panelHash.Visible = hashPanelToolStripMenuItem.Checked;
+        }
+    }
 }

@@ -54,8 +54,11 @@ namespace Thumper_Modding_Tool_resharp
             this.button1 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
+            this.panelHash = new System.Windows.Forms.Panel();
+            this.hashPanelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLevels)).BeginInit();
+            this.panelHash.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -72,7 +75,8 @@ namespace Thumper_Modding_Tool_resharp
             // optionsToolStripMenuItem1
             // 
             this.optionsToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.changeGameDirToolStripMenuItem1});
+            this.changeGameDirToolStripMenuItem1,
+            this.hashPanelToolStripMenuItem});
             this.optionsToolStripMenuItem1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.optionsToolStripMenuItem1.ForeColor = System.Drawing.Color.White;
             this.optionsToolStripMenuItem1.Name = "optionsToolStripMenuItem1";
@@ -84,7 +88,7 @@ namespace Thumper_Modding_Tool_resharp
             this.changeGameDirToolStripMenuItem1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.changeGameDirToolStripMenuItem1.ForeColor = System.Drawing.Color.White;
             this.changeGameDirToolStripMenuItem1.Name = "changeGameDirToolStripMenuItem1";
-            this.changeGameDirToolStripMenuItem1.Size = new System.Drawing.Size(171, 22);
+            this.changeGameDirToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.changeGameDirToolStripMenuItem1.Text = "Change Game Dir";
             this.changeGameDirToolStripMenuItem1.Click += new System.EventHandler(this.changeGameDirToolStripMenuItem_Click);
             // 
@@ -315,7 +319,7 @@ namespace Thumper_Modding_Tool_resharp
             this.button1.BackColor = System.Drawing.Color.MediumPurple;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(459, 24);
+            this.button1.Location = new System.Drawing.Point(3, 3);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(83, 28);
             this.button1.TabIndex = 44;
@@ -325,7 +329,7 @@ namespace Thumper_Modding_Tool_resharp
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(459, 52);
+            this.textBox1.Location = new System.Drawing.Point(3, 37);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(217, 20);
             this.textBox1.TabIndex = 45;
@@ -333,10 +337,32 @@ namespace Thumper_Modding_Tool_resharp
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(459, 73);
+            this.textBox2.Location = new System.Drawing.Point(3, 63);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(217, 20);
             this.textBox2.TabIndex = 46;
+            // 
+            // panelHash
+            // 
+            this.panelHash.BackColor = System.Drawing.Color.Maroon;
+            this.panelHash.Controls.Add(this.textBox2);
+            this.panelHash.Controls.Add(this.button1);
+            this.panelHash.Controls.Add(this.textBox1);
+            this.panelHash.Location = new System.Drawing.Point(452, 26);
+            this.panelHash.Name = "panelHash";
+            this.panelHash.Size = new System.Drawing.Size(222, 91);
+            this.panelHash.TabIndex = 47;
+            this.panelHash.Visible = false;
+            // 
+            // hashPanelToolStripMenuItem
+            // 
+            this.hashPanelToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.hashPanelToolStripMenuItem.CheckOnClick = true;
+            this.hashPanelToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.hashPanelToolStripMenuItem.Name = "hashPanelToolStripMenuItem";
+            this.hashPanelToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.hashPanelToolStripMenuItem.Text = "Hash Panel";
+            this.hashPanelToolStripMenuItem.Click += new System.EventHandler(this.hashPanelToolStripMenuItem_Click);
             // 
             // ThumperModdingTool
             // 
@@ -344,9 +370,7 @@ namespace Thumper_Modding_Tool_resharp
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.ClientSize = new System.Drawing.Size(676, 349);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.panelHash);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.richDescript);
             this.Controls.Add(this.dgvLevels);
@@ -368,6 +392,8 @@ namespace Thumper_Modding_Tool_resharp
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLevels)).EndInit();
+            this.panelHash.ResumeLayout(false);
+            this.panelHash.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -397,6 +423,8 @@ namespace Thumper_Modding_Tool_resharp
 		private System.Windows.Forms.Button button1;
 		private System.Windows.Forms.TextBox textBox1;
 		private System.Windows.Forms.TextBox textBox2;
-	}
+        private System.Windows.Forms.Panel panelHash;
+        private System.Windows.Forms.ToolStripMenuItem hashPanelToolStripMenuItem;
+    }
 }
 
