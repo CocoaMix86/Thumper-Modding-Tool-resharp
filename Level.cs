@@ -438,9 +438,7 @@ namespace Thumper_Modding_Tool_resharp
 				Write_Int(f, 0);
 
 				///footer of object
-				JArray _footer = _obj["footer"];
-				//JArray _footerarray = JArray.Parse(footers.Find(x => x.Contains(((string)_obj["obj_name"]).Replace((string)obj["obj_name"], "leafname")) && x.Contains(Regex.Replace((string)_obj["param_path"], "[.].*", ""))).Split(';')[2]);
-				//string[] _footer = _tempjarray.ToObject<string[]>();
+				JArray _footer = JArray.FromObject(((string)_obj["footer"]).Split(','));
 				Write_Int(f, (int)_footer[0]);
 				Write_Int(f, (int)_footer[1]);
 				Write_Int(f, (int)_footer[2]);
