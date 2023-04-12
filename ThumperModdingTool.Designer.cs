@@ -35,6 +35,7 @@ namespace Thumper_Modding_Tool_resharp
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.optionsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.changeGameDirToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.hashPanelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changeGameDirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
@@ -55,7 +56,6 @@ namespace Thumper_Modding_Tool_resharp
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.panelHash = new System.Windows.Forms.Panel();
-            this.hashPanelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLevels)).BeginInit();
             this.panelHash.SuspendLayout();
@@ -88,9 +88,19 @@ namespace Thumper_Modding_Tool_resharp
             this.changeGameDirToolStripMenuItem1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.changeGameDirToolStripMenuItem1.ForeColor = System.Drawing.Color.White;
             this.changeGameDirToolStripMenuItem1.Name = "changeGameDirToolStripMenuItem1";
-            this.changeGameDirToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.changeGameDirToolStripMenuItem1.Size = new System.Drawing.Size(171, 22);
             this.changeGameDirToolStripMenuItem1.Text = "Change Game Dir";
             this.changeGameDirToolStripMenuItem1.Click += new System.EventHandler(this.changeGameDirToolStripMenuItem_Click);
+            // 
+            // hashPanelToolStripMenuItem
+            // 
+            this.hashPanelToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.hashPanelToolStripMenuItem.CheckOnClick = true;
+            this.hashPanelToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.hashPanelToolStripMenuItem.Name = "hashPanelToolStripMenuItem";
+            this.hashPanelToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.hashPanelToolStripMenuItem.Text = "Hash Panel";
+            this.hashPanelToolStripMenuItem.Click += new System.EventHandler(this.hashPanelToolStripMenuItem_Click);
             // 
             // optionsToolStripMenuItem
             // 
@@ -354,16 +364,6 @@ namespace Thumper_Modding_Tool_resharp
             this.panelHash.TabIndex = 47;
             this.panelHash.Visible = false;
             // 
-            // hashPanelToolStripMenuItem
-            // 
-            this.hashPanelToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.hashPanelToolStripMenuItem.CheckOnClick = true;
-            this.hashPanelToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.hashPanelToolStripMenuItem.Name = "hashPanelToolStripMenuItem";
-            this.hashPanelToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.hashPanelToolStripMenuItem.Text = "Hash Panel";
-            this.hashPanelToolStripMenuItem.Click += new System.EventHandler(this.hashPanelToolStripMenuItem_Click);
-            // 
             // ThumperModdingTool
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -387,7 +387,7 @@ namespace Thumper_Modding_Tool_resharp
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.Name = "ThumperModdingTool";
-            this.Text = "Thumper Modding Tool resharp v1.3.0";
+            this.Text = "Thumper Modding Tool resharp v1.4.0";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
