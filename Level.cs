@@ -7,6 +7,7 @@ using Newtonsoft.Json.Linq;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Text;
+using System.Drawing;
 
 namespace Thumper_Modding_Tool_resharp
 {
@@ -307,7 +308,6 @@ namespace Thumper_Modding_Tool_resharp
 			
 			//Update this file to adjust how the menu looks
 			using (FileStream f = File.Open(@"lib\f78b7d78.pc", FileMode.Create, FileAccess.Write, FileShare.None)) {
-				byte[] bytes;
 				Write_Int(f, 16);
 				Write_Int(f, menu_names.Count + 1);
 				//write blocks of each level
@@ -388,6 +388,14 @@ namespace Thumper_Modding_Tool_resharp
 				Write_Bool(f, val);
 			else if (trait_type == "kTraitFloat")
 				Write_Float(f, float.Parse(val));
+			else if (trait_type == "kTraitColor") {
+				Color _c = Color.FromArgb(int.Parse(val));
+				Write_Float(f, _c.R != 0 ? _c.R / 255f : 0);
+				Write_Float(f, _c.G != 0 ? _c.G / 255f : 0);
+				Write_Float(f, _c.B != 0 ? _c.B / 255f : 0);
+				Write_Float(f, _c.A != 0 ? _c.A / 255f : 0);
+				//Write_Float(f, 4278190335);
+			}
 		}
 
 		private void Write_Sequencer_Objects(FileStream f, dynamic obj)
@@ -406,6 +414,8 @@ namespace Thumper_Modding_Tool_resharp
 				///data points of object
 				//
 				var interp = _obj.ContainsKey("default_interp") ? (string)_obj["default_interp"] : "kTraitInterpLinear";
+				if (interp == null)
+					interp = "kTraitInterpLinear";
 				var ease = _obj.ContainsKey("default_ease") ? (string)_obj["default_ease"] : "kEaseInOut";
 				//Data points written different depending on STEP
 				if (_obj["step"] == "True") {
