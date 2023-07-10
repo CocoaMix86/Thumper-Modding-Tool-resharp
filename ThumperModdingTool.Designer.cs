@@ -68,7 +68,7 @@ namespace Thumper_Modding_Tool_resharp
             this.optionsToolStripMenuItem1});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(670, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(529, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -281,9 +281,11 @@ namespace Thumper_Modding_Tool_resharp
             this.dgvLevels.RowTemplate.Height = 200;
             this.dgvLevels.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvLevels.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvLevels.Size = new System.Drawing.Size(431, 225);
+            this.dgvLevels.Size = new System.Drawing.Size(290, 181);
             this.dgvLevels.TabIndex = 41;
             this.dgvLevels.SelectionChanged += new System.EventHandler(this.dgvLevels_SelectionChanged);
+            this.dgvLevels.DragEnter += new System.Windows.Forms.DragEventHandler(this.dgvLevels_DragEnter);
+            this.dgvLevels.DragDrop += new System.Windows.Forms.DragEventHandler(this.dgvLevels_DragDrop);
             // 
             // richDescript
             // 
@@ -291,9 +293,9 @@ namespace Thumper_Modding_Tool_resharp
             | System.Windows.Forms.AnchorStyles.Right)));
             this.richDescript.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
             this.richDescript.ForeColor = System.Drawing.Color.White;
-            this.richDescript.Location = new System.Drawing.Point(453, 141);
+            this.richDescript.Location = new System.Drawing.Point(312, 141);
             this.richDescript.Name = "richDescript";
-            this.richDescript.Size = new System.Drawing.Size(205, 202);
+            this.richDescript.Size = new System.Drawing.Size(205, 158);
             this.richDescript.TabIndex = 42;
             this.richDescript.Text = "";
             // 
@@ -303,7 +305,7 @@ namespace Thumper_Modding_Tool_resharp
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(449, 118);
+            this.label3.Location = new System.Drawing.Point(308, 118);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(147, 20);
             this.label3.TabIndex = 43;
@@ -344,7 +346,7 @@ namespace Thumper_Modding_Tool_resharp
             this.panelHash.Controls.Add(this.textBox2);
             this.panelHash.Controls.Add(this.button1);
             this.panelHash.Controls.Add(this.textBox1);
-            this.panelHash.Location = new System.Drawing.Point(446, 26);
+            this.panelHash.Location = new System.Drawing.Point(305, 26);
             this.panelHash.Name = "panelHash";
             this.panelHash.Size = new System.Drawing.Size(222, 89);
             this.panelHash.TabIndex = 47;
@@ -382,7 +384,7 @@ namespace Thumper_Modding_Tool_resharp
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.ClientSize = new System.Drawing.Size(670, 355);
+            this.ClientSize = new System.Drawing.Size(529, 311);
             this.Controls.Add(this.panelHash);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.richDescript);
@@ -399,6 +401,7 @@ namespace Thumper_Modding_Tool_resharp
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.Name = "ThumperModdingTool";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Thumper Modding Tool resharp v1.4.0";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);

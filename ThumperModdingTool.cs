@@ -88,60 +88,72 @@ namespace Thumper_Modding_Tool_resharp
 				MessageBox.Show("Max levels reached already.");
 				return;
 			}
-			dynamic _leveldata;
-			dynamic _levelmaster;
-			int sublevels = 0;
             //initialize the FolderBrowser to start where the app is launched
             cfd_lvl.Title = "Select the Level Folder";
             cfd_lvl.InitialDirectory = Application.StartupPath;
-			if (cfd_lvl.ShowDialog() == CommonFileDialogResult.Ok) {
-				var _path = cfd_lvl.FileName;
-				//create dynamic object from parsed JSON
-				//this allows me to call each value further down
-				if (File.Exists($@"{_path}\LEVEL DETAILS.txt")) {
-					_leveldata = JsonConvert.DeserializeObject(File.ReadAllText($@"{_path}\LEVEL DETAILS.txt"));
-					//try-catch block on parsing master, in case it has issues
-					try {
-						_levelmaster = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText($@"{_path}\master_sequin.txt"), @"#.*", ""));
-					}
-					catch (Exception ex) { 
-						MessageBox.Show($"error parsing:\n{ex.Message} in file \"master_sequin.txt\" for the selected level\n\nLEVEL NOT ADDED");
-						return;
-					}
-				}
-				else {
-					//if LEVEL DETAILS.txt does not exist, return. Do not add level
-					MessageBox.Show("\"LEVEL DETAILS.txt\" for the selected level could not be found.");
-					return;
-				}
-				//check if the level has already been added
-				foreach (LevelTraits lt in LoadedLevels) {
-					//if exists, tell user, then return and do not add level
-					if (lt.name == (string)_leveldata.level_name) {
-						//MessageBox.Show("That level has already been added");
-						//return;
-					}
-				}
-				//check which sublevels have checkpoint enabled. This determines how many sublevels exist
-				foreach (var lvl in _levelmaster["groupings"]) {
-					if ((string)lvl["checkpoint"] == "True")
-						sublevels++;
-				}
-				//add level to the List, initializing each value from parsed JSON
-				LoadedLevels.Add(new LevelTraits() {
-					name = _leveldata.level_name,
-					difficulty = _leveldata.difficulty,
-					descript = _leveldata.description,
-					path = _path,
-					folder_name = Path.GetFileName(_path),
-					author = _leveldata.author,
-					sublevels = sublevels
-				});
-				dgvLevels.Rows[dgvLevels.Rows.Count - 1].Selected = true;
-
-                btnLevelRemove.Enabled = true;
-			}
+			if (cfd_lvl.ShowDialog() == CommonFileDialogResult.Ok)
+				AddLevel(cfd_lvl.FileName);
 		}
+
+		private void AddLevel(string dir)
+		{
+            dynamic _leveldata;
+            dynamic _levelmaster;
+            int sublevels = 0;
+            var _path = dir;
+            //create dynamic object from parsed JSON
+            //this allows me to call each value further down
+            if (File.Exists($@"{_path}\LEVEL DETAILS.txt"))
+            {
+                _leveldata = JsonConvert.DeserializeObject(File.ReadAllText($@"{_path}\LEVEL DETAILS.txt"));
+                //try-catch block on parsing master, in case it has issues
+                try
+                {
+                    _levelmaster = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText($@"{_path}\master_sequin.txt"), @"#.*", ""));
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"error parsing:\n{ex.Message} in file \"master_sequin.txt\" for the selected level\n\nLEVEL NOT ADDED");
+                    return;
+                }
+            }
+            else
+            {
+                //if LEVEL DETAILS.txt does not exist, return. Do not add level
+                MessageBox.Show("\"LEVEL DETAILS.txt\" for the selected level could not be found.");
+                return;
+            }
+            //check if the level has already been added
+            foreach (LevelTraits lt in LoadedLevels)
+            {
+                //if exists, tell user, then return and do not add level
+                if (lt.name == (string)_leveldata.level_name)
+                {
+                    //MessageBox.Show("That level has already been added");
+                    //return;
+                }
+            }
+            //check which sublevels have checkpoint enabled. This determines how many sublevels exist
+            foreach (var lvl in _levelmaster["groupings"])
+            {
+                if ((string)lvl["checkpoint"] == "True")
+                    sublevels++;
+            }
+            //add level to the List, initializing each value from parsed JSON
+            LoadedLevels.Add(new LevelTraits()
+            {
+                name = _leveldata.level_name,
+                difficulty = _leveldata.difficulty,
+                descript = _leveldata.description,
+                path = _path,
+                folder_name = Path.GetFileName(_path),
+                author = _leveldata.author,
+                sublevels = sublevels
+            });
+            dgvLevels.Rows[dgvLevels.Rows.Count - 1].Selected = true;
+
+            btnLevelRemove.Enabled = true;
+        }
 
 		private void btnLevelRemove_Click(object sender, EventArgs e)
 		{
@@ -294,6 +306,35 @@ namespace Thumper_Modding_Tool_resharp
 			Properties.Settings.Default.Reset();
 			Properties.Settings.Default.Save();
 			Application.Restart();
+        }
+
+		private void dgvLevels_DragEnter(object sender, DragEventArgs e)
+		{
+			if (e.Data.GetDataPresent(DataFormats.FileDrop))
+			{
+				string[] data = (string[])e.Data.GetData(DataFormats.FileDrop);
+				if (Directory.Exists(data[0]))
+				{
+					e.Effect = DragDropEffects.Copy;
+					return;
+				}
+			}
+			e.Effect = DragDropEffects.None;
+		}
+        private void dgvLevels_DragDrop(object sender, DragEventArgs e)
+        {
+			if (!e.Data.GetDataPresent(DataFormats.FileDrop)) return;
+            string[] data = (string[])e.Data.GetData(DataFormats.FileDrop);
+			if (data.Length + LoadedLevels.Count > 8)
+			{
+				MessageBox.Show("There can only be a total of 8 custom levels at any one time.", "Level Limit Reached");
+				return;
+			}
+			foreach (string dir in data)
+			{
+				if (Directory.Exists(dir))
+					AddLevel(dir);
+            }
         }
     }
 }
