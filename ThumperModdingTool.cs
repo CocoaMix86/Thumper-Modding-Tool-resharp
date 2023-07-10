@@ -6,13 +6,15 @@ using System.IO;
 using System.Collections.ObjectModel;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using Microsoft.WindowsAPICodePack.Dialogs;
 
 namespace Thumper_Modding_Tool_resharp
 {
 	public partial class ThumperModdingTool : Form
 	{
+		private readonly CommonOpenFileDialog cfd_lvl = new CommonOpenFileDialog() { IsFolderPicker = true, Multiselect = false };
 		public ThumperModdingTool()
-		{
+        {
 			InitializeComponent();
 		}
 
@@ -76,59 +78,57 @@ Author: {LoadedLevels[e.RowIndex].author}";
 				MessageBox.Show("Max levels reached already.");
 				return;
 			}
-			using (var fbd = new FolderBrowserDialog()) {
-				dynamic _leveldata;
-				dynamic _levelmaster;
-				int sublevels = 0;
-				//initialize the FolderBrowser to start where the app is launched
-				fbd.RootFolder = Environment.SpecialFolder.MyComputer;
-				fbd.SelectedPath = Application.StartupPath;
-				if (fbd.ShowDialog() == DialogResult.OK) {
-					var _path = fbd.SelectedPath;
-					//create dynamic object from parsed JSON
-					//this allows me to call each value further down
-					if (File.Exists($@"{_path}\LEVEL DETAILS.txt")) {
-						_leveldata = JsonConvert.DeserializeObject(File.ReadAllText($@"{_path}\LEVEL DETAILS.txt"));
-						//try-catch block on parsing master, in case it has issues
-						try {
-							_levelmaster = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText($@"{_path}\master_sequin.txt"), @"#.*", ""));
-						}
-						catch (Exception ex) { 
-							MessageBox.Show($"error parsing:\n{ex.Message} in file \"master_sequin.txt\" for the selected level\n\nLEVEL NOT ADDED");
-							return;
-						}
+			dynamic _leveldata;
+			dynamic _levelmaster;
+			int sublevels = 0;
+            //initialize the FolderBrowser to start where the app is launched
+            cfd_lvl.Title = "Select the Level Folder";
+            cfd_lvl.InitialDirectory = Application.StartupPath;
+			if (cfd_lvl.ShowDialog() == CommonFileDialogResult.Ok) {
+				var _path = cfd_lvl.FileName;
+				//create dynamic object from parsed JSON
+				//this allows me to call each value further down
+				if (File.Exists($@"{_path}\LEVEL DETAILS.txt")) {
+					_leveldata = JsonConvert.DeserializeObject(File.ReadAllText($@"{_path}\LEVEL DETAILS.txt"));
+					//try-catch block on parsing master, in case it has issues
+					try {
+						_levelmaster = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText($@"{_path}\master_sequin.txt"), @"#.*", ""));
 					}
-					else {
-						//if LEVEL DETAILS.txt does not exist, return. Do not add level
-						MessageBox.Show("\"LEVEL DETAILS.txt\" for the selected level could not be found.");
+					catch (Exception ex) { 
+						MessageBox.Show($"error parsing:\n{ex.Message} in file \"master_sequin.txt\" for the selected level\n\nLEVEL NOT ADDED");
 						return;
 					}
-					//check if the level has already been added
-					foreach (LevelTraits lt in LoadedLevels) {
-						//if exists, tell user, then return and do not add level
-						if (lt.name == (string)_leveldata.level_name) {
-							//MessageBox.Show("That level has already been added");
-							//return;
-						}
-					}
-					//check which sublevels have checkpoint enabled. This determines how many sublevels exist
-					foreach (var lvl in _levelmaster["groupings"]) {
-						if ((string)lvl["checkpoint"] == "True")
-							sublevels++;
-					}
-					//add level to the List, initializing each value from parsed JSON
-					LoadedLevels.Add(new LevelTraits() {
-						name = _leveldata.level_name,
-						difficulty = _leveldata.difficulty,
-						descript = _leveldata.description,
-						path = _path,
-						folder_name = Path.GetFileName(_path),
-						author = _leveldata.author,
-						sublevels = sublevels
-					});
-
-					btnLevelRemove.Enabled = true;
 				}
+				else {
+					//if LEVEL DETAILS.txt does not exist, return. Do not add level
+					MessageBox.Show("\"LEVEL DETAILS.txt\" for the selected level could not be found.");
+					return;
+				}
+				//check if the level has already been added
+				foreach (LevelTraits lt in LoadedLevels) {
+					//if exists, tell user, then return and do not add level
+					if (lt.name == (string)_leveldata.level_name) {
+						//MessageBox.Show("That level has already been added");
+						//return;
+					}
+				}
+				//check which sublevels have checkpoint enabled. This determines how many sublevels exist
+				foreach (var lvl in _levelmaster["groupings"]) {
+					if ((string)lvl["checkpoint"] == "True")
+						sublevels++;
+				}
+				//add level to the List, initializing each value from parsed JSON
+				LoadedLevels.Add(new LevelTraits() {
+					name = _leveldata.level_name,
+					difficulty = _leveldata.difficulty,
+					descript = _leveldata.description,
+					path = _path,
+					folder_name = Path.GetFileName(_path),
+					author = _leveldata.author,
+					sublevels = sublevels
+				});
+
+				btnLevelRemove.Enabled = true;
 			}
 		}
 
@@ -276,6 +276,13 @@ Author: {LoadedLevels[e.RowIndex].author}";
         private void hashPanelToolStripMenuItem_Click(object sender, EventArgs e)
         {
 			panelHash.Visible = hashPanelToolStripMenuItem.Checked;
+        }
+
+        private void resetSettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+			Properties.Settings.Default.Reset();
+			Properties.Settings.Default.Save();
+			Application.Restart();
         }
     }
 }

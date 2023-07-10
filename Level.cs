@@ -8,6 +8,7 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Text;
 using System.Drawing;
+using System.Windows.Navigation;
 
 namespace Thumper_Modding_Tool_resharp
 {
@@ -92,6 +93,9 @@ namespace Thumper_Modding_Tool_resharp
 					File.Delete($@"{game_dir}/cache/{dst_filename}");
 			}
 			//delete extra audio files added previously
+			if (Properties.Settings.Default.loaded_files is null)
+				return;
+
 			foreach (string audio_filename in Properties.Settings.Default.loaded_files) {
 				var dst_filename = Path.GetFileName(audio_filename);
 				if (File.Exists($@"{game_dir}/cache/{dst_filename}"))
@@ -124,14 +128,14 @@ namespace Thumper_Modding_Tool_resharp
 
 				//check if the custom level folder contains custom audio. This needs to be put into Thumper's cache folder
 				if (Directory.Exists(@$"{level_name.path}\extras")) {
-					List<string> audiofiles = new List<string>();
-					foreach (string filename in Directory.GetFiles(@$"{level_name.path}\extras")) {
+                    Properties.Settings.Default.loaded_files = new List<string>();
+                    foreach (string filename in Directory.GetFiles(@$"{level_name.path}\extras")) {
 						File.Copy(filename, $@"{game_dir}\cache\{Path.GetFileName(filename)}", true);
-						audiofiles.Add(filename);
-						//Properties.Settings.Default.loaded_files.Add(filename);
+						//audiofiles.Add(filename);
+						Properties.Settings.Default.loaded_files.Add(filename);
 					}
-					Properties.Settings.Default.loaded_files = audiofiles;
-					Properties.Settings.Default.Save();
+
+                    Properties.Settings.Default.Save();
 				}
 				//iterate over each file in the custom level directory
 				//filter out files that do not match the <file_types> list

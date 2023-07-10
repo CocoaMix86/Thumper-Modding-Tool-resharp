@@ -56,6 +56,7 @@ namespace Thumper_Modding_Tool_resharp
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.panelHash = new System.Windows.Forms.Panel();
+            this.resetSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLevels)).BeginInit();
             this.panelHash.SuspendLayout();
@@ -76,7 +77,8 @@ namespace Thumper_Modding_Tool_resharp
             // 
             this.optionsToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.changeGameDirToolStripMenuItem1,
-            this.hashPanelToolStripMenuItem});
+            this.hashPanelToolStripMenuItem,
+            this.resetSettingsToolStripMenuItem});
             this.optionsToolStripMenuItem1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.optionsToolStripMenuItem1.ForeColor = System.Drawing.Color.White;
             this.optionsToolStripMenuItem1.Name = "optionsToolStripMenuItem1";
@@ -88,7 +90,7 @@ namespace Thumper_Modding_Tool_resharp
             this.changeGameDirToolStripMenuItem1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.changeGameDirToolStripMenuItem1.ForeColor = System.Drawing.Color.White;
             this.changeGameDirToolStripMenuItem1.Name = "changeGameDirToolStripMenuItem1";
-            this.changeGameDirToolStripMenuItem1.Size = new System.Drawing.Size(171, 22);
+            this.changeGameDirToolStripMenuItem1.Size = new System.Drawing.Size(201, 22);
             this.changeGameDirToolStripMenuItem1.Text = "Change Game Dir";
             this.changeGameDirToolStripMenuItem1.Click += new System.EventHandler(this.changeGameDirToolStripMenuItem_Click);
             // 
@@ -98,7 +100,7 @@ namespace Thumper_Modding_Tool_resharp
             this.hashPanelToolStripMenuItem.CheckOnClick = true;
             this.hashPanelToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.hashPanelToolStripMenuItem.Name = "hashPanelToolStripMenuItem";
-            this.hashPanelToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.hashPanelToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
             this.hashPanelToolStripMenuItem.Text = "Hash Panel";
             this.hashPanelToolStripMenuItem.Click += new System.EventHandler(this.hashPanelToolStripMenuItem_Click);
             // 
@@ -124,22 +126,22 @@ namespace Thumper_Modding_Tool_resharp
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Miriam CLM", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(5, 27);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(183, 41);
+            this.label1.Size = new System.Drawing.Size(205, 42);
             this.label1.TabIndex = 1;
             this.label1.Text = "Mod Mode:";
             // 
             // lblModMode
             // 
             this.lblModMode.AutoSize = true;
-            this.lblModMode.Font = new System.Drawing.Font("Miriam CLM", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.lblModMode.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.lblModMode.ForeColor = System.Drawing.Color.Crimson;
-            this.lblModMode.Location = new System.Drawing.Point(178, 27);
+            this.lblModMode.Location = new System.Drawing.Point(192, 27);
             this.lblModMode.Name = "lblModMode";
-            this.lblModMode.Size = new System.Drawing.Size(87, 41);
+            this.lblModMode.Size = new System.Drawing.Size(96, 42);
             this.lblModMode.TabIndex = 2;
             this.lblModMode.Text = "OFF";
             // 
@@ -148,7 +150,7 @@ namespace Thumper_Modding_Tool_resharp
             this.btnModMode.BackColor = System.Drawing.Color.YellowGreen;
             this.btnModMode.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnModMode.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnModMode.Location = new System.Drawing.Point(258, 27);
+            this.btnModMode.Location = new System.Drawing.Point(283, 29);
             this.btnModMode.Name = "btnModMode";
             this.btnModMode.Size = new System.Drawing.Size(154, 28);
             this.btnModMode.TabIndex = 3;
@@ -162,7 +164,7 @@ namespace Thumper_Modding_Tool_resharp
             this.btnUpdate.Enabled = false;
             this.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUpdate.Location = new System.Drawing.Point(258, 55);
+            this.btnUpdate.Location = new System.Drawing.Point(283, 57);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(154, 28);
             this.btnUpdate.TabIndex = 4;
@@ -364,6 +366,13 @@ namespace Thumper_Modding_Tool_resharp
             this.panelHash.TabIndex = 47;
             this.panelHash.Visible = false;
             // 
+            // resetSettingsToolStripMenuItem
+            // 
+            this.resetSettingsToolStripMenuItem.Name = "resetSettingsToolStripMenuItem";
+            this.resetSettingsToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
+            this.resetSettingsToolStripMenuItem.Text = "[!!!] Reset Settings [!!!]";
+            this.resetSettingsToolStripMenuItem.Click += new System.EventHandler(this.resetSettingsToolStripMenuItem_Click);
+            // 
             // ThumperModdingTool
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -425,6 +434,7 @@ namespace Thumper_Modding_Tool_resharp
 		private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Panel panelHash;
         private System.Windows.Forms.ToolStripMenuItem hashPanelToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem resetSettingsToolStripMenuItem;
     }
 }
 

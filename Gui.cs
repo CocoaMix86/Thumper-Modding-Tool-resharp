@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.Diagnostics;
+using Microsoft.WindowsAPICodePack.Dialogs;
 
 namespace Thumper_Modding_Tool_resharp
 {
 	public partial class ThumperModdingTool
 	{
+		private readonly CommonOpenFileDialog cfd_game = new CommonOpenFileDialog() { IsFolderPicker = true, Multiselect = false };
 		private bool Thumper_Running()
-		{
+        {
 			//get list of current running processes
 			Process[] processlist = Process.GetProcesses();
 			//iterate over each to see if Thumper is running at all
@@ -27,20 +29,16 @@ namespace Thumper_Modding_Tool_resharp
 			string _S = Properties.Settings.Default.game_dir;
 			if (skip && Properties.Settings.Default.game_dir != "none")
 				return;
-			using (var fbd = new FolderBrowserDialog()) {
-				fbd.Description = "Select the folder where Thumper is installed";
-				fbd.RootFolder = Environment.SpecialFolder.MyComputer;
-				//check if the game_dir has been set before. It'll be empty if starting for the first time
-				if (Properties.Settings.Default.game_dir == "none")
-					fbd.SelectedPath = @"C:\Program Files (x86)\Steam\steamapps\common\Thumper";
-				//if it's not empty, initialize the FolderBrowser to be whatever was selected last
-				else
-					fbd.SelectedPath = Properties.Settings.Default.game_dir;
-				//show FolderBrowser, and then set "game_dir" to whatever is chosen
-				if (fbd.ShowDialog() == DialogResult.OK) {
-					Properties.Settings.Default.game_dir = fbd.SelectedPath;
-				}
-			}
+
+            cfd_game.Title = "Select your Thumper Installation Directory";
+            if (Properties.Settings.Default.game_dir == "none")
+                cfd_game.InitialDirectory = @"C:\Program Files (x86)\Steam\steamapps\common\Thumper";
+            //if it's not empty, initialize the FolderBrowser to be whatever was selected last
+            else
+                cfd_game.InitialDirectory = Properties.Settings.Default.game_dir;
+            //show FolderBrowser, and then set "game_dir" to whatever is chosen
+            if (cfd_game.ShowDialog() == CommonFileDialogResult.Ok)
+                Properties.Settings.Default.game_dir = cfd_game.FileName;
 
 			Properties.Settings.Default.Save();
 		}
