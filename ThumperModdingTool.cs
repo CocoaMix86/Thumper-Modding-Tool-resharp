@@ -33,17 +33,15 @@ namespace Thumper_Modding_Tool_resharp
 
 			if (Properties.Settings.Default.mod_mode == "OFF") {
 				//update visual elements on the form
-				btnModMode.BackColor = Color.YellowGreen;
-				btnModMode.Text = "Turn ON Mod Mode";
-				lblModMode.ForeColor = Color.Crimson;
-				lblModMode.Text = "OFF";
+				btnModMode.BackColor = Color.FromArgb(64,0,0);
+                btnModMode.ForeColor = Color.Crimson;
+                btnModMode.Text = "OFF";
 			}
 			else {
 				//update visual elements on the form
-				btnModMode.BackColor = Color.Crimson;
-				btnModMode.Text = "Turn OFF Mod Mode";
-				lblModMode.ForeColor = Color.YellowGreen;
-				lblModMode.Text = "ON";
+				btnModMode.BackColor = Color.YellowGreen;
+                btnModMode.ForeColor = Color.White;
+                btnModMode.Text = "ON";
 				btnUpdate.Enabled = true;
 				btnUpdate.Visible = true;
 			}
@@ -59,12 +57,24 @@ namespace Thumper_Modding_Tool_resharp
 			}
 		}
 
-		private void dgvLevels_RowEnter(object sender, DataGridViewCellEventArgs e)
+		private void dgvLevels_SelectionChanged(object sender, EventArgs e)
 		{
-			//load selected level's description
-			richDescript.Text = $@"{LoadedLevels[e.RowIndex].descript}
+            //load selected level's description
+			if (dgvLevels.SelectedCells.Count <= 0)
+            {
+				richDescript.Text = string.Empty;
+				return;
+			}
 
-Author: {LoadedLevels[e.RowIndex].author}";
+			int i = dgvLevels.SelectedCells[0].OwningRow.Index;
+			string s = string.Empty;
+			if (!string.IsNullOrWhiteSpace(LoadedLevels[i].descript))
+			{
+				s = LoadedLevels[i].descript;
+				s += Environment.NewLine + Environment.NewLine;
+            }
+            s += $"Author: {LoadedLevels[i].author}";
+			richDescript.Text = s;
 		}
 
 
@@ -127,8 +137,9 @@ Author: {LoadedLevels[e.RowIndex].author}";
 					author = _leveldata.author,
 					sublevels = sublevels
 				});
+				dgvLevels.Rows[dgvLevels.Rows.Count - 1].Selected = true;
 
-				btnLevelRemove.Enabled = true;
+                btnLevelRemove.Enabled = true;
 			}
 		}
 
@@ -150,6 +161,7 @@ Author: {LoadedLevels[e.RowIndex].author}";
 				LevelTraits selectedTrack = LoadedLevels[rowIndex];
 				LoadedLevels.Remove(selectedTrack);
 				LoadedLevels.Insert(rowIndex - 1, selectedTrack);
+				dgvLevels.Rows[rowIndex - 1].Selected = true;
 			}
 			catch { }
 		}
@@ -166,8 +178,9 @@ Author: {LoadedLevels[e.RowIndex].author}";
 				LevelTraits selectedLevel = LoadedLevels[rowIndex];
 				LoadedLevels.Remove(selectedLevel);
 				LoadedLevels.Insert(rowIndex + 1, selectedLevel);
-			}
-			catch { }
+                dgvLevels.Rows[rowIndex + 1].Selected = true;
+            }
+            catch { }
 		}
 
 		private void btnModMode_Click(object sender, EventArgs e)
@@ -193,10 +206,9 @@ Author: {LoadedLevels[e.RowIndex].author}";
 				Properties.Settings.Default.mod_mode = "ON";
 				Properties.Settings.Default.Save();
 				//update visual elements on the form
-				btnModMode.BackColor = Color.Crimson;
-				btnModMode.Text = "Turn OFF Mod Mode";
-				lblModMode.ForeColor = Color.YellowGreen;
-				lblModMode.Text = "ON";
+				btnModMode.BackColor = Color.YellowGreen;
+				btnModMode.ForeColor = Color.White;
+                btnModMode.Text = "ON";
 				btnUpdate.Enabled = true;
 				btnUpdate.Visible = true;
 			}
@@ -207,10 +219,9 @@ Author: {LoadedLevels[e.RowIndex].author}";
 				Properties.Settings.Default.mod_mode = "OFF";
 				Properties.Settings.Default.Save();
 				//update visual elements on the form
-				btnModMode.BackColor = Color.YellowGreen;
-				btnModMode.Text = "Turn ON Mod Mode";
-				lblModMode.ForeColor = Color.Crimson;
-				lblModMode.Text = "OFF";
+				btnModMode.BackColor = Color.FromArgb(64,0,0);
+                btnModMode.ForeColor = Color.Crimson;
+                btnModMode.Text = "OFF";
 				btnUpdate.Enabled = false;
 				btnUpdate.Visible = false;
 			}
