@@ -6,13 +6,15 @@ using System.IO;
 using System.Collections.ObjectModel;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using Microsoft.WindowsAPICodePack.Dialogs;
 
 namespace Thumper_Modding_Tool_resharp
 {
 	public partial class ThumperModdingTool : Form
 	{
+		private readonly CommonOpenFileDialog cfd_lvl = new CommonOpenFileDialog() { IsFolderPicker = true, Multiselect = false };
 		public ThumperModdingTool()
-		{
+        {
 			InitializeComponent();
 		}
 
@@ -31,17 +33,15 @@ namespace Thumper_Modding_Tool_resharp
 
 			if (Properties.Settings.Default.mod_mode == "OFF") {
 				//update visual elements on the form
-				btnModMode.BackColor = Color.YellowGreen;
-				btnModMode.Text = "Turn ON Mod Mode";
-				lblModMode.ForeColor = Color.Crimson;
-				lblModMode.Text = "OFF";
+				btnModMode.BackColor = Color.FromArgb(64,0,0);
+                btnModMode.ForeColor = Color.Crimson;
+                btnModMode.Text = "OFF";
 			}
 			else {
 				//update visual elements on the form
-				btnModMode.BackColor = Color.Crimson;
-				btnModMode.Text = "Turn OFF Mod Mode";
-				lblModMode.ForeColor = Color.YellowGreen;
-				lblModMode.Text = "ON";
+				btnModMode.BackColor = Color.YellowGreen;
+                btnModMode.ForeColor = Color.White;
+                btnModMode.Text = "ON";
 				btnUpdate.Enabled = true;
 				btnUpdate.Visible = true;
 			}
@@ -57,12 +57,24 @@ namespace Thumper_Modding_Tool_resharp
 			}
 		}
 
-		private void dgvLevels_RowEnter(object sender, DataGridViewCellEventArgs e)
+		private void dgvLevels_SelectionChanged(object sender, EventArgs e)
 		{
-			//load selected level's description
-			richDescript.Text = $@"{LoadedLevels[e.RowIndex].descript}
+            //load selected level's description
+			if (dgvLevels.SelectedCells.Count <= 0)
+            {
+				richDescript.Text = string.Empty;
+				return;
+			}
 
-Author: {LoadedLevels[e.RowIndex].author}";
+			int i = dgvLevels.SelectedCells[0].OwningRow.Index;
+			string s = string.Empty;
+			if (!string.IsNullOrWhiteSpace(LoadedLevels[i].descript))
+			{
+				s = LoadedLevels[i].descript;
+				s += Environment.NewLine + Environment.NewLine;
+            }
+            s += $"Author: {LoadedLevels[i].author}";
+			richDescript.Text = s;
 		}
 
 
@@ -76,61 +88,72 @@ Author: {LoadedLevels[e.RowIndex].author}";
 				MessageBox.Show("Max levels reached already.");
 				return;
 			}
-			using (var fbd = new FolderBrowserDialog()) {
-				dynamic _leveldata;
-				dynamic _levelmaster;
-				int sublevels = 0;
-				//initialize the FolderBrowser to start where the app is launched
-				fbd.RootFolder = Environment.SpecialFolder.MyComputer;
-				fbd.SelectedPath = Application.StartupPath;
-				if (fbd.ShowDialog() == DialogResult.OK) {
-					var _path = fbd.SelectedPath;
-					//create dynamic object from parsed JSON
-					//this allows me to call each value further down
-					if (File.Exists($@"{_path}\LEVEL DETAILS.txt")) {
-						_leveldata = JsonConvert.DeserializeObject(File.ReadAllText($@"{_path}\LEVEL DETAILS.txt"));
-						//try-catch block on parsing master, in case it has issues
-						try {
-							_levelmaster = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText($@"{_path}\master_sequin.txt"), @"#.*", ""));
-						}
-						catch (Exception ex) { 
-							MessageBox.Show($"error parsing:\n{ex.Message} in file \"master_sequin.txt\" for the selected level\n\nLEVEL NOT ADDED");
-							return;
-						}
-					}
-					else {
-						//if LEVEL DETAILS.txt does not exist, return. Do not add level
-						MessageBox.Show("\"LEVEL DETAILS.txt\" for the selected level could not be found.");
-						return;
-					}
-					//check if the level has already been added
-					foreach (LevelTraits lt in LoadedLevels) {
-						//if exists, tell user, then return and do not add level
-						if (lt.name == (string)_leveldata.level_name) {
-							//MessageBox.Show("That level has already been added");
-							//return;
-						}
-					}
-					//check which sublevels have checkpoint enabled. This determines how many sublevels exist
-					foreach (var lvl in _levelmaster["groupings"]) {
-						if ((string)lvl["checkpoint"] == "True")
-							sublevels++;
-					}
-					//add level to the List, initializing each value from parsed JSON
-					LoadedLevels.Add(new LevelTraits() {
-						name = _leveldata.level_name,
-						difficulty = _leveldata.difficulty,
-						descript = _leveldata.description,
-						path = _path,
-						folder_name = Path.GetFileName(_path),
-						author = _leveldata.author,
-						sublevels = sublevels
-					});
-
-					btnLevelRemove.Enabled = true;
-				}
-			}
+            //initialize the FolderBrowser to start where the app is launched
+            cfd_lvl.Title = "Select the Level Folder";
+            cfd_lvl.InitialDirectory = Application.StartupPath;
+			if (cfd_lvl.ShowDialog() == CommonFileDialogResult.Ok)
+				AddLevel(cfd_lvl.FileName);
 		}
+
+		private void AddLevel(string dir)
+		{
+            dynamic _leveldata;
+            dynamic _levelmaster;
+            int sublevels = 0;
+            var _path = dir;
+            //create dynamic object from parsed JSON
+            //this allows me to call each value further down
+            if (File.Exists($@"{_path}\LEVEL DETAILS.txt"))
+            {
+                _leveldata = JsonConvert.DeserializeObject(File.ReadAllText($@"{_path}\LEVEL DETAILS.txt"));
+                //try-catch block on parsing master, in case it has issues
+                try
+                {
+                    _levelmaster = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText($@"{_path}\master_sequin.txt"), @"#.*", ""));
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"error parsing:\n{ex.Message} in file \"master_sequin.txt\" for the selected level\n\nLEVEL NOT ADDED");
+                    return;
+                }
+            }
+            else
+            {
+                //if LEVEL DETAILS.txt does not exist, return. Do not add level
+                MessageBox.Show("\"LEVEL DETAILS.txt\" for the selected level could not be found.");
+                return;
+            }
+            //check if the level has already been added
+            foreach (LevelTraits lt in LoadedLevels)
+            {
+                //if exists, tell user, then return and do not add level
+                if (lt.name == (string)_leveldata.level_name)
+                {
+                    //MessageBox.Show("That level has already been added");
+                    //return;
+                }
+            }
+            //check which sublevels have checkpoint enabled. This determines how many sublevels exist
+            foreach (var lvl in _levelmaster["groupings"])
+            {
+                if ((string)lvl["checkpoint"] == "True")
+                    sublevels++;
+            }
+            //add level to the List, initializing each value from parsed JSON
+            LoadedLevels.Add(new LevelTraits()
+            {
+                name = _leveldata.level_name,
+                difficulty = _leveldata.difficulty,
+                descript = _leveldata.description,
+                path = _path,
+                folder_name = Path.GetFileName(_path),
+                author = _leveldata.author,
+                sublevels = sublevels
+            });
+            dgvLevels.Rows[dgvLevels.Rows.Count - 1].Selected = true;
+
+            btnLevelRemove.Enabled = true;
+        }
 
 		private void btnLevelRemove_Click(object sender, EventArgs e)
 		{
@@ -150,6 +173,7 @@ Author: {LoadedLevels[e.RowIndex].author}";
 				LevelTraits selectedTrack = LoadedLevels[rowIndex];
 				LoadedLevels.Remove(selectedTrack);
 				LoadedLevels.Insert(rowIndex - 1, selectedTrack);
+				dgvLevels.Rows[rowIndex - 1].Selected = true;
 			}
 			catch { }
 		}
@@ -166,8 +190,9 @@ Author: {LoadedLevels[e.RowIndex].author}";
 				LevelTraits selectedLevel = LoadedLevels[rowIndex];
 				LoadedLevels.Remove(selectedLevel);
 				LoadedLevels.Insert(rowIndex + 1, selectedLevel);
-			}
-			catch { }
+                dgvLevels.Rows[rowIndex + 1].Selected = true;
+            }
+            catch { }
 		}
 
 		private void btnModMode_Click(object sender, EventArgs e)
@@ -193,10 +218,9 @@ Author: {LoadedLevels[e.RowIndex].author}";
 				Properties.Settings.Default.mod_mode = "ON";
 				Properties.Settings.Default.Save();
 				//update visual elements on the form
-				btnModMode.BackColor = Color.Crimson;
-				btnModMode.Text = "Turn OFF Mod Mode";
-				lblModMode.ForeColor = Color.YellowGreen;
-				lblModMode.Text = "ON";
+				btnModMode.BackColor = Color.YellowGreen;
+				btnModMode.ForeColor = Color.White;
+                btnModMode.Text = "ON";
 				btnUpdate.Enabled = true;
 				btnUpdate.Visible = true;
 			}
@@ -207,10 +231,9 @@ Author: {LoadedLevels[e.RowIndex].author}";
 				Properties.Settings.Default.mod_mode = "OFF";
 				Properties.Settings.Default.Save();
 				//update visual elements on the form
-				btnModMode.BackColor = Color.YellowGreen;
-				btnModMode.Text = "Turn ON Mod Mode";
-				lblModMode.ForeColor = Color.Crimson;
-				lblModMode.Text = "OFF";
+				btnModMode.BackColor = Color.FromArgb(64,0,0);
+                btnModMode.ForeColor = Color.Crimson;
+                btnModMode.Text = "OFF";
 				btnUpdate.Enabled = false;
 				btnUpdate.Visible = false;
 			}
@@ -276,6 +299,42 @@ Author: {LoadedLevels[e.RowIndex].author}";
         private void hashPanelToolStripMenuItem_Click(object sender, EventArgs e)
         {
 			panelHash.Visible = hashPanelToolStripMenuItem.Checked;
+        }
+
+        private void resetSettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+			Properties.Settings.Default.Reset();
+			Properties.Settings.Default.Save();
+			Application.Restart();
+        }
+
+		private void dgvLevels_DragEnter(object sender, DragEventArgs e)
+		{
+			if (e.Data.GetDataPresent(DataFormats.FileDrop))
+			{
+				string[] data = (string[])e.Data.GetData(DataFormats.FileDrop);
+				if (Directory.Exists(data[0]))
+				{
+					e.Effect = DragDropEffects.Copy;
+					return;
+				}
+			}
+			e.Effect = DragDropEffects.None;
+		}
+        private void dgvLevels_DragDrop(object sender, DragEventArgs e)
+        {
+			if (!e.Data.GetDataPresent(DataFormats.FileDrop)) return;
+            string[] data = (string[])e.Data.GetData(DataFormats.FileDrop);
+			if (data.Length + LoadedLevels.Count > 8)
+			{
+				MessageBox.Show("There can only be a total of 8 custom levels at any one time.", "Level Limit Reached");
+				return;
+			}
+			foreach (string dir in data)
+			{
+				if (Directory.Exists(dir))
+					AddLevel(dir);
+            }
         }
     }
 }
