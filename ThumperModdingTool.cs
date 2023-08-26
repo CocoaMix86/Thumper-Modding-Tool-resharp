@@ -45,6 +45,12 @@ namespace Thumper_Modding_Tool_resharp
 				btnUpdate.Enabled = true;
 				btnUpdate.Visible = true;
 			}
+
+			///Load all previously loaded levels
+			if (Properties.Settings.Default.level_paths == null)
+				Properties.Settings.Default.level_paths = new System.Collections.Generic.List<string>();
+			foreach (string s in Properties.Settings.Default.level_paths)
+				AddLevel(s, true);
 		}
 
 		private void LoadedLevels_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
@@ -92,10 +98,10 @@ namespace Thumper_Modding_Tool_resharp
             cfd_lvl.Title = "Select the Level Folder";
             cfd_lvl.InitialDirectory = Application.StartupPath;
 			if (cfd_lvl.ShowDialog() == CommonFileDialogResult.Ok)
-				AddLevel(cfd_lvl.FileName);
+				AddLevel(cfd_lvl.FileName, false);
 		}
 
-		private void AddLevel(string dir)
+		private void AddLevel(string dir, bool startup)
 		{
             dynamic _leveldata;
             dynamic _levelmaster;
@@ -151,13 +157,24 @@ namespace Thumper_Modding_Tool_resharp
                 sublevels = sublevels
             });
             dgvLevels.Rows[dgvLevels.Rows.Count - 1].Selected = true;
+			///Add level to apps internal list of loaded levels
+			///It uses this to repopulate the list next time it closes/opens
+			if (!startup) {
+				Properties.Settings.Default.level_paths.Add(_path);
+				Properties.Settings.Default.Save();
+			}
 
             btnLevelRemove.Enabled = true;
         }
 
 		private void btnLevelRemove_Click(object sender, EventArgs e)
 		{
-			LoadedLevels.RemoveAt(dgvLevels.CurrentRow.Index);
+			var _levelToRemove = LoadedLevels[dgvLevels.CurrentRow.Index];
+			LoadedLevels.Remove(_levelToRemove);
+			///Remove the path from the apps internal list so it doesn't load at reload
+			Properties.Settings.Default.level_paths.Remove(_levelToRemove.path);
+			Properties.Settings.Default.Save();
+			//disable remove button if no levels are left
 			btnLevelRemove.Enabled = LoadedLevels.Count != 0;
 		}
 
@@ -333,7 +350,7 @@ namespace Thumper_Modding_Tool_resharp
 			foreach (string dir in data)
 			{
 				if (Directory.Exists(dir))
-					AddLevel(dir);
+					AddLevel(dir, false);
             }
         }
     }

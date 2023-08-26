@@ -69,5 +69,16 @@ namespace Thumper_Modding_Tool_resharp.Properties {
                 this["loaded_files"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Collections.Generic.List<string> level_paths {
+            get {
+                return ((global::System.Collections.Generic.List<string>)(this["level_paths"]));
+            }
+            set {
+                this["level_paths"] = value;
+            }
+        }
     }
 }

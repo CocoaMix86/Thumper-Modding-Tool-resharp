@@ -14,5 +14,8 @@
     <Setting Name="loaded_files" Type="System.Collections.Generic.List&lt;string&gt;" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="level_paths" Type="System.Collections.Generic.List&lt;string&gt;" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>
