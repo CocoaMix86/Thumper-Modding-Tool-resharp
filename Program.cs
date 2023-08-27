@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -16,7 +18,32 @@ namespace Thumper_Modding_Tool_resharp
 		{
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new ThumperModdingTool());
+            AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(CurrentDomain_AssemblyResolve);
+            Application.Run(new ThumperModdingTool());
 		}
-	}
+
+        static Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
+        {
+            Assembly thisAssembly = Assembly.GetExecutingAssembly();
+            var name = args.Name.Substring(0, args.Name.IndexOf(',')) + ".dll";
+            var resources = thisAssembly.GetManifestResourceNames().Where(s => s.EndsWith(name));
+
+            if (resources.Count() > 0)
+            {
+                var resourceName = resources.First();
+
+                using (Stream stream = thisAssembly.GetManifestResourceStream(resourceName))
+                {
+                    if (stream == null)
+                        return null;
+                    var block = new byte[stream.Length - 1 + 1];
+                    stream.Read(block, 0, block.Length);
+                    return Assembly.Load(block);
+                }
+            }
+
+            return null;
+        }
+
+    }
 }

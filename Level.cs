@@ -78,6 +78,13 @@ namespace Thumper_Modding_Tool_resharp
 		/// 
 		private void Restore_Levels(string game_dir)
 		{
+			// in order of appearance (0 through 6 in the array)
+			// level text
+			// level 4 (nulls it out? why?)
+			// level list file
+			// title screen
+			// drool logo () [these are DDS images, just remove first 4 bytes to view]
+			// drool logo (startup)
 			List<string> src_filenames = new List<string>() { "lib/original/2e7b0500.pc", "lib/original/e0c51024.pc", "lib/original/f78b7d78.pc", "lib/original/d0d6149c.pc", "lib/original/aefa4352.pc", "lib/original/b868db07.pc" };
 			List<string> custom_filenames = new List<string>();
 
@@ -108,7 +115,26 @@ namespace Thumper_Modding_Tool_resharp
 		/// 
 		private void Make_Custom_Levels(string game_dir)
 		{
-			int menulength = 2548;
+			//string[] out_files = Directory.GetFiles("C:\\Users\\booge\\Documents\\GitHub\\Thumper-Modding-Tool-resharp\\bin\\Debug\\full_out\\cache");
+			//List<string> gfiles = Directory.GetFiles(Path.Combine(game_dir, "cache")).ToList();
+			//List<string> gf = new List<string>();
+			//foreach (var f in gfiles)
+			//{
+			//	gf.Add(Path.GetFileName(f));
+			//}
+
+   //         foreach (var f in out_files)
+			//{
+			//	if (gf.Contains(Path.GetFileName(f)))
+			//	{
+   //                 File.Copy(f, $"{new FileInfo(f).Directory.FullName}\\important\\{Path.GetFileName(f)}");
+   //             }
+			//}
+
+			//MessageBox.Show("Finished");
+			//return;
+
+            int menulength = 2548;
 			List<string> src_filenames = new List<string>() { "lib/2e7b0500.pc", "lib/e0c51024.pc", "lib/f78b7d78.pc", "lib/d0d6149c.pc", "lib/aefa4352.pc", "lib/b868db07.pc" };
 			//these hashes are literally "customlevel#" hashed
 			List<string> menu_hashes = new List<string>() { "1DCB06CE", "2D5C3C41", "273EA275", "EBA1CBD7", "1F8AD438", "DDF57F91", "9402A958", "FB3C6A42", "85E4559B" };
@@ -126,6 +152,11 @@ namespace Thumper_Modding_Tool_resharp
 				dynamic new_objs = null;
 				string errorlist = "";
 
+				if (!Directory.Exists(level_name.path))
+				{
+					MessageBox.Show($"The level \"{level_name.name}\" no longer exists, please add it again and update.");
+					return;
+				}
 				//check if the custom level folder contains custom audio. This needs to be put into Thumper's cache folder
 				if (Directory.Exists(@$"{level_name.path}\extras")) {
                     Properties.Settings.Default.loaded_files = new List<string>();

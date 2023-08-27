@@ -7,22 +7,39 @@ using System.Collections.ObjectModel;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using Microsoft.WindowsAPICodePack.Dialogs;
+using System.Linq;
+using System.Collections.Generic;
+using DDS;
+using System.Diagnostics.Eventing.Reader;
+using System.Windows.Markup;
 
 namespace Thumper_Modding_Tool_resharp
 {
 	public partial class ThumperModdingTool : Form
 	{
 		private readonly CommonOpenFileDialog cfd_lvl = new CommonOpenFileDialog() { IsFolderPicker = true, Multiselect = false };
+		private readonly OpenFileDialog ofd_img = new OpenFileDialog() { Title = "Choose Image", Filter = "DDS files(*.DDS)|*.DDS" };
 		public ThumperModdingTool()
         {
 			InitializeComponent();
 		}
 
-		ObservableCollection<LevelTraits> LoadedLevels = new ObservableCollection<LevelTraits>();
+		public ObservableCollection<LevelTraits> LoadedLevels = new ObservableCollection<LevelTraits>();
 
 		///         ///
 		/// EVENTS  ///
 		///         ///
+
+		private bool _ChangesMade = false;
+		public bool ChangesMade
+		{
+			get { return _ChangesMade; }
+			set
+			{
+				_ChangesMade = value;
+				btnUpdate.Visible = btnModMode.Text == "ON" && _ChangesMade;
+			}
+		}
 
 		private void Form1_Load(object sender, EventArgs e)
 		{
@@ -31,7 +48,7 @@ namespace Thumper_Modding_Tool_resharp
 
 			Read_Config(true);
 
-			if (Properties.Settings.Default.mod_mode == "OFF") {
+			if (!Properties.Settings.Default.mod_mode) {
 				//update visual elements on the form
 				btnModMode.BackColor = Color.FromArgb(64,0,0);
                 btnModMode.ForeColor = Color.Crimson;
@@ -43,7 +60,7 @@ namespace Thumper_Modding_Tool_resharp
                 btnModMode.ForeColor = Color.White;
                 btnModMode.Text = "ON";
 				btnUpdate.Enabled = true;
-				btnUpdate.Visible = true;
+				//btnUpdate.Visible = true;
 			}
 
 			///Load all previously loaded levels
@@ -51,9 +68,26 @@ namespace Thumper_Modding_Tool_resharp
 				Properties.Settings.Default.level_paths = new System.Collections.Generic.List<string>();
 			foreach (string s in Properties.Settings.Default.level_paths)
 				AddLevel(s, true);
-		}
 
-		private void LoadedLevels_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+			// load custom logo
+			//picSplashScreen.AllowDrop = true;
+			LoadSplashScreen();
+
+        }
+       
+
+        void LoadSplashScreen()
+		{
+            List<byte> data = File.ReadAllBytes("lib/b868db07.pc").ToList();
+            data.RemoveRange(0, 4);
+            DDSImage img = DDSImage.Load(data.ToArray());
+            if (img.Images.Length > 0)
+            {
+                picSplashScreen.Image = img.Images[0];
+            }
+        }
+
+        private void LoadedLevels_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
 		{
 			//clear and reload level list DGV whenever this collection updates
 			dgvLevels.RowCount = 0;
@@ -101,7 +135,7 @@ namespace Thumper_Modding_Tool_resharp
 				AddLevel(cfd_lvl.FileName, false);
 		}
 
-		private void AddLevel(string dir, bool startup)
+		public void AddLevel(string dir, bool startup)
 		{
             dynamic _leveldata;
             dynamic _levelmaster;
@@ -165,6 +199,7 @@ namespace Thumper_Modding_Tool_resharp
 			}
 
             btnLevelRemove.Enabled = true;
+			ChangesMade = true;
         }
 
 		private void btnLevelRemove_Click(object sender, EventArgs e)
@@ -176,7 +211,8 @@ namespace Thumper_Modding_Tool_resharp
 			Properties.Settings.Default.Save();
 			//disable remove button if no levels are left
 			btnLevelRemove.Enabled = LoadedLevels.Count != 0;
-		}
+			ChangesMade = true;
+        }
 
 		private void btnLevelUp_Click(object sender, EventArgs e)
 		{
@@ -191,7 +227,9 @@ namespace Thumper_Modding_Tool_resharp
 				LoadedLevels.Remove(selectedTrack);
 				LoadedLevels.Insert(rowIndex - 1, selectedTrack);
 				dgvLevels.Rows[rowIndex - 1].Selected = true;
-			}
+				ChangesMade = true;
+
+            }
 			catch { }
 		}
 
@@ -208,6 +246,7 @@ namespace Thumper_Modding_Tool_resharp
 				LoadedLevels.Remove(selectedLevel);
 				LoadedLevels.Insert(rowIndex + 1, selectedLevel);
                 dgvLevels.Rows[rowIndex + 1].Selected = true;
+				ChangesMade = true;
             }
             catch { }
 		}
@@ -217,50 +256,69 @@ namespace Thumper_Modding_Tool_resharp
 			if (Thumper_Running())
 				return;
 			if (Properties.Settings.Default.game_dir == "") {
-				MessageBox.Show("Please select a game directory before enabling mods. You can do so from the OPTIONS menu.");
+				MessageBox.Show("Please select a game directory before enabling mods. You can do so from the OPTIONS menu.", "Error");
 				return;
 			}
-			if (LoadedLevels.Count == 0 && Properties.Settings.Default.mod_mode == "OFF") {
-				MessageBox.Show("No levels loaded. Please add one first.");
+			if (LoadedLevels.Count == 0 && !Properties.Settings.Default.mod_mode ) {
+				MessageBox.Show("No levels loaded. Please add one first.", "Error");
 				return;
 			}
 
 			btnModMode.Text = "Please Wait...";
 
-			if (Properties.Settings.Default.mod_mode == "OFF") {
-				Backup_SaveData(Properties.Settings.Default.game_dir);
-				Make_Custom_Levels(Properties.Settings.Default.game_dir);
-				Make_Custom_Savedata(Properties.Settings.Default.game_dir);
-				//set mod mode property in exe and save it
-				Properties.Settings.Default.mod_mode = "ON";
-				Properties.Settings.Default.Save();
-				//update visual elements on the form
-				btnModMode.BackColor = Color.YellowGreen;
-				btnModMode.ForeColor = Color.White;
-                btnModMode.Text = "ON";
-				btnUpdate.Enabled = true;
-				btnUpdate.Visible = true;
-			}
+			// turn it on
+			if (!Properties.Settings.Default.mod_mode) {
+				ModModeON();
+            }
+			// turn it off
 			else {
-				Restore_Levels(Properties.Settings.Default.game_dir);
-				Restore_Savedata(Properties.Settings.Default.game_dir);
-				//set mod mode property in exe and save it
-				Properties.Settings.Default.mod_mode = "OFF";
-				Properties.Settings.Default.Save();
-				//update visual elements on the form
-				btnModMode.BackColor = Color.FromArgb(64,0,0);
-                btnModMode.ForeColor = Color.Crimson;
-                btnModMode.Text = "OFF";
-				btnUpdate.Enabled = false;
-				btnUpdate.Visible = false;
-			}
+				ModModeOFF();
+            }
 		}
+
+		void ModModeOFF()
+		{
+            Restore_Levels(Properties.Settings.Default.game_dir);
+            Restore_Savedata(Properties.Settings.Default.game_dir);
+            //set mod mode property in exe and save it
+            Properties.Settings.Default.mod_mode = false;
+            Properties.Settings.Default.Save();
+            //update visual elements on the form
+            btnModMode.BackColor = Color.FromArgb(64, 0, 0);
+            btnModMode.ForeColor = Color.Crimson;
+            btnModMode.Text = "OFF";
+            btnUpdate.Enabled = false;
+            btnUpdate.Visible = false;
+        }
+		void ModModeON()
+		{
+            Backup_SaveData(Properties.Settings.Default.game_dir);
+            Make_Custom_Levels(Properties.Settings.Default.game_dir);
+            Make_Custom_Savedata(Properties.Settings.Default.game_dir);
+            //set mod mode property in exe and save it
+            Properties.Settings.Default.mod_mode = true;
+            Properties.Settings.Default.Save();
+            //update visual elements on the form
+            btnModMode.BackColor = Color.YellowGreen;
+            btnModMode.ForeColor = Color.White;
+            btnModMode.Text = "ON";
+            btnUpdate.Enabled = true;
+            //btnUpdate.Visible = true;
+            ChangesMade = false;
+        }
 
 		private void btnUpdate_Click(object sender, EventArgs e)
 		{
-			Make_Custom_Levels(Properties.Settings.Default.game_dir);
-			Make_Custom_Savedata(Properties.Settings.Default.game_dir);
-		}
+			if (dgvLevels.Rows.Count > 0)
+			{
+                Make_Custom_Levels(Properties.Settings.Default.game_dir);
+                Make_Custom_Savedata(Properties.Settings.Default.game_dir);
+                
+            }
+			else if (Properties.Settings.Default.mod_mode) ModModeOFF();
+
+			ChangesMade = false;
+        }
 
 		private void changeGameDirToolStripMenuItem_Click(object sender, EventArgs e) => Read_Config(false);
 
@@ -351,6 +409,61 @@ namespace Thumper_Modding_Tool_resharp
 			{
 				if (Directory.Exists(dir))
 					AddLevel(dir, false);
+            }
+        }
+
+		private ThumpNet tnet = null;
+        private void thumpNetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+			if (tnet == null || tnet.IsDisposed) tnet = new ThumpNet(this);
+			tnet.Show();
+			tnet.SetDesktopLocation(Location.X + Width, Location.Y);
+			tnet.Select();
+        }
+
+        private void btnSplashScreen_Click(object sender, EventArgs e)
+        {
+			if (ofd_img.ShowDialog() == DialogResult.OK)
+			{
+				try
+				{
+                    DDSImage img = DDSImage.Load(ofd_img.FileName);
+                    if (img.Images.Length > 0)
+                    {
+                        List<byte> data = new List<byte>();
+                        data.AddRange(new byte[] { 14, 0, 0, 0 });
+                        data.AddRange(File.ReadAllBytes(ofd_img.FileName));
+						File.WriteAllBytes("lib/b868db07.pc", data.ToArray());
+						LoadSplashScreen();
+						ChangesMade = true;
+                        return;
+                    }
+                }
+
+				catch { }
+
+                MessageBox.Show("Failed to load this DDS image.", "Error");
+               
+			}
+        }
+
+        private void btnSplashScreenReset_Click(object sender, EventArgs e)
+        {
+            File.Copy("lib/original/b868db07.pc", "lib/b868db07.pc", true);
+            LoadSplashScreen();
+			ChangesMade = true;
+        }
+
+        private void picSplashScreen_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+			{
+                var filename = "image.jpg";
+                var path = Path.Combine(Path.GetTempPath(), filename);
+                picSplashScreen.Image.Save(path);
+                var paths = new[] { path };
+                picSplashScreen.DoDragDrop(new DataObject(DataFormats.FileDrop, paths), DragDropEffects.Copy);
+                File.Delete(path);
             }
         }
     }
