@@ -7,7 +7,16 @@ namespace Thumper_Modding_Tool_resharp
 {
 	public partial class ThumperModdingTool
 	{
-		private uint Hash32(string s)
+        public static byte[] StringToByteArray(string hex)
+        {
+            int NumberChars = hex.Length;
+            byte[] bytes = new byte[NumberChars / 2];
+            for (int i = 0; i < NumberChars; i += 2)
+                bytes[i / 2] = Convert.ToByte(hex.Substring(i, 2), 16);
+            return bytes;
+        }
+
+        private uint Hash32(string s)
 		{
 			//this hashes stuff. Don't know why it does it this why.
 			//this is ripped directly from the game's code

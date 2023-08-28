@@ -72,6 +72,17 @@ namespace Thumper_Modding_Tool_resharp.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Collections.Generic.List<string> level_paths {
+            get {
+                return ((global::System.Collections.Generic.List<string>)(this["level_paths"]));
+            }
+            set {
+                this["level_paths"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool thumpnet_compactview {
             get {
@@ -84,12 +95,13 @@ namespace Thumper_Modding_Tool_resharp.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public global::System.Collections.Generic.List<string> level_paths {
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool UpgradeSettings {
             get {
-                return ((global::System.Collections.Generic.List<string>)(this["level_paths"]));
+                return ((bool)(this["UpgradeSettings"]));
             }
             set {
-                this["level_paths"] = value;
+                this["UpgradeSettings"] = value;
             }
         }
     }

@@ -120,6 +120,7 @@
     </Compile>
     <EmbeddedResource Include="ThumperModdingTool.resx">
       <DependentUpon>ThumperModdingTool.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

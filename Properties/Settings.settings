@@ -16,9 +16,12 @@
     </Setting>
     <Setting Name="level_paths" Type="System.Collections.Generic.List&lt;string&gt;" Scope="User">
       <Value Profile="(Default)" />
-	</Setting>
+    </Setting>
     <Setting Name="thumpnet_compactview" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="UpgradeSettings" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>
 </SettingsFile>
