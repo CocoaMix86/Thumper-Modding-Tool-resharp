@@ -5,8 +5,8 @@
     <Setting Name="game_dir" Type="System.String" Scope="User">
       <Value Profile="(Default)">none</Value>
     </Setting>
-    <Setting Name="mod_mode" Type="System.String" Scope="User">
-      <Value Profile="(Default)">OFF</Value>
+    <Setting Name="mod_mode" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="loaded_levels" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
@@ -16,6 +16,12 @@
     </Setting>
     <Setting Name="level_paths" Type="System.Collections.Generic.List&lt;string&gt;" Scope="User">
       <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="thumpnet_compactview" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="UpgradeSettings" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>
 </SettingsFile>

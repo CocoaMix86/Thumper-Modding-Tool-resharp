@@ -12,7 +12,7 @@ namespace Thumper_Modding_Tool_resharp.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.1.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.5.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -37,10 +37,10 @@ namespace Thumper_Modding_Tool_resharp.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("OFF")]
-        public string mod_mode {
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool mod_mode {
             get {
-                return ((string)(this["mod_mode"]));
+                return ((bool)(this["mod_mode"]));
             }
             set {
                 this["mod_mode"] = value;
@@ -78,6 +78,30 @@ namespace Thumper_Modding_Tool_resharp.Properties {
             }
             set {
                 this["level_paths"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool thumpnet_compactview {
+            get {
+                return ((bool)(this["thumpnet_compactview"]));
+            }
+            set {
+                this["thumpnet_compactview"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool UpgradeSettings {
+            get {
+                return ((bool)(this["UpgradeSettings"]));
+            }
+            set {
+                this["UpgradeSettings"] = value;
             }
         }
     }

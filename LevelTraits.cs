@@ -2,7 +2,7 @@
 
 namespace Thumper_Modding_Tool_resharp
 {
-	class LevelTraits
+	public class LevelTraits
 	{
 		public string name { get; set; }
 		public string difficulty { get; set; }
