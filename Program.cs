@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace Thumper_Modding_Tool_resharp
@@ -16,7 +16,12 @@ namespace Thumper_Modding_Tool_resharp
 		[STAThread]
 		static void Main()
 		{
-			Application.EnableVisualStyles();
+            // Force culture info, ensures periods . for decimals
+            var ci = new CultureInfo("en-US");
+            Thread.CurrentThread.CurrentCulture = ci;
+            Thread.CurrentThread.CurrentUICulture = ci;
+
+            Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
             AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(CurrentDomain_AssemblyResolve);
             Application.Run(new ThumperModdingTool());
