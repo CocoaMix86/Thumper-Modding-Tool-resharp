@@ -229,24 +229,30 @@ namespace Thumper_Modding_Tool_resharp
 
         private void LoadedLevels_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
 		{
-			//clear and reload level list DGV whenever this collection updates
-			dgvLevels.RowCount = 0;
+
+            int i = 0;
+            if (dgvLevels.GetCellCount(DataGridViewElementStates.Selected) > 0) i = dgvLevels.SelectedCells[0].RowIndex;
+
+            //clear and reload level list DGV whenever this collection updates
+            dgvLevels.RowCount = 0;
 			foreach (var _level in LoadedLevels) {
 				//populate rows with level name, and difficulty strings
 				dgvLevels.Rows.Add(new object[] { _level.name, _level.difficulty, _level.sublevels });
 			}
-		}
+
+            if (i - 1 >= 0) dgvLevels.Rows[i - 1].Selected = true;
+        }
 
 		private void dgvLevels_SelectionChanged(object sender, EventArgs e)
 		{
-            //load selected level's description
+            // load selected level's description
 			if (dgvLevels.SelectedCells.Count <= 0)
             {
 				richDescript.Text = string.Empty;
 				return;
 			}
 
-			int i = dgvLevels.SelectedCells[0].OwningRow.Index;
+			int i = dgvLevels.SelectedCells[0].RowIndex;
 			string s = string.Empty;
 			if (!string.IsNullOrWhiteSpace(LoadedLevels[i].descript))
 			{
@@ -319,13 +325,24 @@ namespace Thumper_Modding_Tool_resharp
 
 		private void btnLevelRemove_Click(object sender, EventArgs e)
 		{
-			var _levelToRemove = LoadedLevels[dgvLevels.CurrentRow.Index];
-			LoadedLevels.Remove(_levelToRemove);
+            // get selected row index
+            if (dgvLevels.GetCellCount(DataGridViewElementStates.Selected) == 0) return;
+            int i = dgvLevels.SelectedCells[0].RowIndex;
+
+            // get level traits
+            var Level = LoadedLevels[i];
+
+            // remove from loaded levels
+			LoadedLevels.Remove(Level);
+
 			///Remove the path from the apps internal list so it doesn't load at reload
-			Properties.Settings.Default.level_paths.Remove(_levelToRemove.path);
+			Properties.Settings.Default.level_paths.Remove(Level.path);
 			Properties.Settings.Default.Save();
-			//disable remove button if no levels are left
+
+			// disable remove button if no levels are left
 			btnLevelRemove.Enabled = LoadedLevels.Count != 0;
+
+            // changes made
 			ChangesMade = true;
         }
 
