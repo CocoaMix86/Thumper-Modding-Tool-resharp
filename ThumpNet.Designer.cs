@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ThumpNet));
             this.pnl_levels = new System.Windows.Forms.FlowLayoutPanel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -36,10 +37,13 @@
             this.sortToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newestFirstToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.oldestFirstToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.alphabeticalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearCacheToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.searchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.txtSearch = new System.Windows.Forms.ToolStripTextBox();
+            this.difficultyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -90,7 +94,9 @@
             // 
             this.sortToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newestFirstToolStripMenuItem,
-            this.oldestFirstToolStripMenuItem});
+            this.oldestFirstToolStripMenuItem,
+            this.alphabeticalToolStripMenuItem,
+            this.difficultyToolStripMenuItem});
             this.sortToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.sortToolStripMenuItem.Name = "sortToolStripMenuItem";
             this.sortToolStripMenuItem.Size = new System.Drawing.Size(40, 23);
@@ -98,19 +104,29 @@
             // 
             // newestFirstToolStripMenuItem
             // 
-            this.newestFirstToolStripMenuItem.Checked = true;
-            this.newestFirstToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.newestFirstToolStripMenuItem.CheckOnClick = true;
             this.newestFirstToolStripMenuItem.Name = "newestFirstToolStripMenuItem";
-            this.newestFirstToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.newestFirstToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.newestFirstToolStripMenuItem.Text = "Newest first";
             this.newestFirstToolStripMenuItem.Click += new System.EventHandler(this.newestFirstToolStripMenuItem_Click);
             // 
             // oldestFirstToolStripMenuItem
             // 
+            this.oldestFirstToolStripMenuItem.CheckOnClick = true;
             this.oldestFirstToolStripMenuItem.Name = "oldestFirstToolStripMenuItem";
-            this.oldestFirstToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.oldestFirstToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.oldestFirstToolStripMenuItem.Text = "Oldest first";
             this.oldestFirstToolStripMenuItem.Click += new System.EventHandler(this.oldestFirstToolStripMenuItem_Click);
+            // 
+            // alphabeticalToolStripMenuItem
+            // 
+            this.alphabeticalToolStripMenuItem.Checked = true;
+            this.alphabeticalToolStripMenuItem.CheckOnClick = true;
+            this.alphabeticalToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.alphabeticalToolStripMenuItem.Name = "alphabeticalToolStripMenuItem";
+            this.alphabeticalToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.alphabeticalToolStripMenuItem.Text = "Alphabetical";
+            this.alphabeticalToolStripMenuItem.Click += new System.EventHandler(this.alphabeticalToolStripMenuItem_Click);
             // 
             // optionsToolStripMenuItem
             // 
@@ -142,6 +158,17 @@
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(150, 23);
             this.txtSearch.TextChanged += new System.EventHandler(this.searchToolStripMenuItem_Click);
+            // 
+            // difficultyToolStripMenuItem
+            // 
+            this.difficultyToolStripMenuItem.Name = "difficultyToolStripMenuItem";
+            this.difficultyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.difficultyToolStripMenuItem.Text = "Difficulty";
+            this.difficultyToolStripMenuItem.Click += new System.EventHandler(this.difficultyToolStripMenuItem_Click);
+            // 
+            // toolTip1
+            // 
+            this.toolTip1.AutomaticDelay = 0;
             // 
             // ThumpNet
             // 
@@ -176,5 +203,8 @@
         private System.Windows.Forms.ToolStripMenuItem clearCacheToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem searchToolStripMenuItem;
         private System.Windows.Forms.ToolStripTextBox txtSearch;
+        private System.Windows.Forms.ToolStripMenuItem alphabeticalToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem difficultyToolStripMenuItem;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

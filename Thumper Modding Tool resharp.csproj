@@ -158,6 +158,13 @@
     <EmbeddedResource Include="DLLs\Microsoft.WindowsAPICodePack.dll" />
     <EmbeddedResource Include="DLLs\Microsoft.WindowsAPICodePack.Shell.dll" />
     <EmbeddedResource Include="DLLs\Newtonsoft.Json.dll" />
+    <Content Include="image assets\d1.png" />
+    <Content Include="image assets\d2.png" />
+    <Content Include="image assets\d3.png" />
+    <Content Include="image assets\d4.png" />
+    <Content Include="image assets\d5.png" />
+    <Content Include="image assets\d6.png" />
+    <Content Include="image assets\d7.png" />
     <Content Include="templates\LEVEL DETAILS.txt" />
     <Content Include="text assets\footer - Copy.txt" />
     <Content Include="text assets\footer.txt" />
@@ -177,5 +184,6 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
