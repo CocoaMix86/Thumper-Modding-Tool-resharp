@@ -34,7 +34,8 @@ namespace Thumper_Modding_Tool_resharp
         WebClient wc;
         BackgroundWorker bgw;
         Action bgw_cb;
-        List<ThumpNetLevel> Levels;
+        List<ThumpNetLevel> GlobalLevels;
+        List<ThumpNetLevel> SearchLevels;
         bool oldest_first = false;
         void LoadThumpNetAsync()
         {
@@ -84,7 +85,7 @@ namespace Thumper_Modding_Tool_resharp
             string db = wc.DownloadString(db_url);
             string[] rows = db.Split(new string[] { Environment.NewLine }, StringSplitOptions.None)
                 .Skip(1).ToArray();
-            Levels = new List<ThumpNetLevel>();
+            GlobalLevels = new List<ThumpNetLevel>();
             foreach (string row in rows)
             {
                 string[] data = row.Split('\t');
@@ -103,7 +104,7 @@ namespace Thumper_Modding_Tool_resharp
                 Level.ThumbnailURL = data[6];
                 Level.DownloadURL = data[7];
                 if (string.IsNullOrWhiteSpace(Level.DownloadURL)) continue;
-                Levels.Add(Level);
+                GlobalLevels.Add(Level);
             }
             
             if (bgw.CancellationPending)
@@ -111,10 +112,16 @@ namespace Thumper_Modding_Tool_resharp
                 e.Cancel = true;
                 return;
             }
-            Invoke(new Action(() => { try { UpdateLevelList(); reloadToolStripMenuItem.Enabled = true; } catch { } }));
+            Invoke(new Action(() => { 
+                try { 
+                    UpdateLevelList(GlobalLevels);
+                    reloadToolStripMenuItem.Enabled = true;
+                    SearchLevels = new List<ThumpNetLevel>(GlobalLevels);
+                } catch { } 
+            }));
         }
 
-        void UpdateLevelList()
+        void UpdateLevelList(List<ThumpNetLevel> Levels)
         {
             pnl_levels.Controls.Clear();
             if (Levels == null) return;
@@ -219,6 +226,8 @@ namespace Thumper_Modding_Tool_resharp
                         else
                         {
                             load.Text = "Add to List";
+                            load.ForeColor = Color.Crimson;
+                            load.BackColor = Color.FromArgb(64, 0, 0);
                             download = false;
                             if (info.Length < 2 || info[1] == "0")
                             {
@@ -231,6 +240,8 @@ namespace Thumper_Modding_Tool_resharp
                                     if (l.path == fn)
                                     {
                                         load.Text = "Already Added";
+                                        load.ForeColor = Color.White;
+                                        load.BackColor = Color.Green;
                                         download = false;
                                         break;
                                     }
@@ -370,14 +381,14 @@ namespace Thumper_Modding_Tool_resharp
                 Settings.Default.thumpnet_compactview = false;
                 Settings.Default.Save();
                 compactViewToolStripMenuItem.Text = "Compact View";
-                UpdateLevelList();
+                UpdateLevelList(SearchLevels);
             }
             else
             {
                 Settings.Default.thumpnet_compactview = true;
                 Settings.Default.Save();
                 compactViewToolStripMenuItem.Text = "Detailed View";
-                UpdateLevelList();
+                UpdateLevelList(SearchLevels);
             }
         }
 
@@ -386,7 +397,7 @@ namespace Thumper_Modding_Tool_resharp
             newestFirstToolStripMenuItem.Checked = true;
             oldestFirstToolStripMenuItem.Checked = false;
             oldest_first = false;
-            UpdateLevelList();
+            UpdateLevelList(SearchLevels);
         }
 
         private void oldestFirstToolStripMenuItem_Click(object sender, EventArgs e)
@@ -394,7 +405,7 @@ namespace Thumper_Modding_Tool_resharp
             newestFirstToolStripMenuItem.Checked = false;
             oldestFirstToolStripMenuItem.Checked = true;
             oldest_first = true;
-            UpdateLevelList();
+            UpdateLevelList(SearchLevels);
         }
 
         private void clearCacheToolStripMenuItem_Click(object sender, EventArgs e)
@@ -421,6 +432,24 @@ namespace Thumper_Modding_Tool_resharp
                     }
                 }
             }
+        }
+
+        private void searchToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SearchLevels.Clear();
+
+            if (txtSearch.Text == "") {
+                SearchLevels = new List<ThumpNetLevel>(GlobalLevels);
+                UpdateLevelList(GlobalLevels);
+                return;
+            }
+
+            foreach (ThumpNetLevel lvl in GlobalLevels) {
+                if (lvl.Name.ToLower().Contains(txtSearch.Text.ToLower())) {
+                    SearchLevels.Add(lvl);
+                }
+            }
+            UpdateLevelList(SearchLevels);
         }
     }
 }

@@ -61,9 +61,9 @@ namespace Thumper_Modding_Tool_resharp
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.picSplashScreen = new System.Windows.Forms.PictureBox();
             this.btnSplashScreen = new System.Windows.Forms.Button();
+            this.btnSplashScreenReset = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.btnSplashScreenReset = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLevels)).BeginInit();
@@ -447,6 +447,21 @@ namespace Thumper_Modding_Tool_resharp
             this.btnSplashScreen.UseVisualStyleBackColor = false;
             this.btnSplashScreen.Click += new System.EventHandler(this.btnSplashScreen_Click);
             // 
+            // btnSplashScreenReset
+            // 
+            this.btnSplashScreenReset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSplashScreenReset.BackColor = System.Drawing.Color.Crimson;
+            this.btnSplashScreenReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSplashScreenReset.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSplashScreenReset.Location = new System.Drawing.Point(350, 158);
+            this.btnSplashScreenReset.Name = "btnSplashScreenReset";
+            this.btnSplashScreenReset.Size = new System.Drawing.Size(50, 25);
+            this.btnSplashScreenReset.TabIndex = 52;
+            this.btnSplashScreenReset.Text = "Reset";
+            this.toolTip1.SetToolTip(this.btnSplashScreenReset, "Reset splash screen to the original Drool logo");
+            this.btnSplashScreenReset.UseVisualStyleBackColor = false;
+            this.btnSplashScreenReset.Click += new System.EventHandler(this.btnSplashScreenReset_Click);
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -469,21 +484,6 @@ namespace Thumper_Modding_Tool_resharp
             this.label4.Size = new System.Drawing.Size(107, 22);
             this.label4.TabIndex = 51;
             this.label4.Text = "Splash Screen";
-            // 
-            // btnSplashScreenReset
-            // 
-            this.btnSplashScreenReset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSplashScreenReset.BackColor = System.Drawing.Color.Crimson;
-            this.btnSplashScreenReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSplashScreenReset.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSplashScreenReset.Location = new System.Drawing.Point(350, 158);
-            this.btnSplashScreenReset.Name = "btnSplashScreenReset";
-            this.btnSplashScreenReset.Size = new System.Drawing.Size(50, 25);
-            this.btnSplashScreenReset.TabIndex = 52;
-            this.btnSplashScreenReset.Text = "Reset";
-            this.toolTip1.SetToolTip(this.btnSplashScreenReset, "Reset splash screen to the original Drool logo");
-            this.btnSplashScreenReset.UseVisualStyleBackColor = false;
-            this.btnSplashScreenReset.Click += new System.EventHandler(this.btnSplashScreenReset_Click);
             // 
             // label5
             // 
