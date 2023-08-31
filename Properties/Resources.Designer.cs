@@ -63,6 +63,16 @@ namespace Thumper_Modding_Tool_resharp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap d0 {
+            get {
+                object obj = ResourceManager.GetObject("d0", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap d1 {
             get {
                 object obj = ResourceManager.GetObject("d1", resourceCulture);
