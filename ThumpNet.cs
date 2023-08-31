@@ -123,7 +123,7 @@ namespace Thumper_Modding_Tool_resharp
                 if (string.IsNullOrWhiteSpace(data[7])) continue;
 
                 // setup utc datetime
-                DateTime dt = DateTime.ParseExact(data[0], "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                DateTime dt = DateTime.ParseExact(data[0], "yyyy/MM/dd-HH:mm:ss", CultureInfo.InvariantCulture);
                 dt = DateTime.SpecifyKind(dt, DateTimeKind.Utc);
 ;
                 // add data
