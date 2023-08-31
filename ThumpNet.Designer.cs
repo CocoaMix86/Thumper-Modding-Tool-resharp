@@ -38,11 +38,11 @@
             this.newestFirstToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.oldestFirstToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.alphabeticalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.difficultyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearCacheToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.searchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.txtSearch = new System.Windows.Forms.ToolStripTextBox();
-            this.difficultyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -106,7 +106,7 @@
             // 
             this.newestFirstToolStripMenuItem.CheckOnClick = true;
             this.newestFirstToolStripMenuItem.Name = "newestFirstToolStripMenuItem";
-            this.newestFirstToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.newestFirstToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.newestFirstToolStripMenuItem.Text = "Newest first";
             this.newestFirstToolStripMenuItem.Click += new System.EventHandler(this.newestFirstToolStripMenuItem_Click);
             // 
@@ -114,7 +114,7 @@
             // 
             this.oldestFirstToolStripMenuItem.CheckOnClick = true;
             this.oldestFirstToolStripMenuItem.Name = "oldestFirstToolStripMenuItem";
-            this.oldestFirstToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.oldestFirstToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.oldestFirstToolStripMenuItem.Text = "Oldest first";
             this.oldestFirstToolStripMenuItem.Click += new System.EventHandler(this.oldestFirstToolStripMenuItem_Click);
             // 
@@ -124,9 +124,16 @@
             this.alphabeticalToolStripMenuItem.CheckOnClick = true;
             this.alphabeticalToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.alphabeticalToolStripMenuItem.Name = "alphabeticalToolStripMenuItem";
-            this.alphabeticalToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.alphabeticalToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.alphabeticalToolStripMenuItem.Text = "Alphabetical";
             this.alphabeticalToolStripMenuItem.Click += new System.EventHandler(this.alphabeticalToolStripMenuItem_Click);
+            // 
+            // difficultyToolStripMenuItem
+            // 
+            this.difficultyToolStripMenuItem.Name = "difficultyToolStripMenuItem";
+            this.difficultyToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
+            this.difficultyToolStripMenuItem.Text = "Difficulty";
+            this.difficultyToolStripMenuItem.Click += new System.EventHandler(this.difficultyToolStripMenuItem_Click);
             // 
             // optionsToolStripMenuItem
             // 
@@ -154,19 +161,14 @@
             // 
             // txtSearch
             // 
-            this.txtSearch.BackColor = System.Drawing.Color.DimGray;
-            this.txtSearch.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtSearch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.txtSearch.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.txtSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtSearch.ForeColor = System.Drawing.Color.White;
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(150, 23);
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
-            // 
-            // difficultyToolStripMenuItem
-            // 
-            this.difficultyToolStripMenuItem.Name = "difficultyToolStripMenuItem";
-            this.difficultyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.difficultyToolStripMenuItem.Text = "Difficulty";
-            this.difficultyToolStripMenuItem.Click += new System.EventHandler(this.difficultyToolStripMenuItem_Click);
             // 
             // toolTip1
             // 

@@ -123,7 +123,7 @@ namespace Thumper_Modding_Tool_resharp
                 if (string.IsNullOrWhiteSpace(data[7])) continue;
 
                 // setup utc datetime
-                DateTime dt = DateTime.ParseExact(data[0], "yyyy/MM/dd HH:mm", CultureInfo.InvariantCulture);
+                DateTime dt = DateTime.ParseExact(data[0], "dd/MM/yyyy", CultureInfo.InvariantCulture);
                 dt = DateTime.SpecifyKind(dt, DateTimeKind.Utc);
 ;
                 // add data
@@ -460,7 +460,7 @@ namespace Thumper_Modding_Tool_resharp
             alphabeticalToolStripMenuItem.Checked = false;
             difficultyToolStripMenuItem.Checked = false;
             sortorder = "newest";
-            UpdateLevelList(SearchLevels);
+            UpdateLevelList();
         }
 
         private void oldestFirstToolStripMenuItem_Click(object sender, EventArgs e)
@@ -469,7 +469,7 @@ namespace Thumper_Modding_Tool_resharp
             alphabeticalToolStripMenuItem.Checked = false;
             difficultyToolStripMenuItem.Checked = false;
             sortorder = "oldest";
-            UpdateLevelList(SearchLevels);
+            UpdateLevelList();
         }
 
         private void alphabeticalToolStripMenuItem_Click(object sender, EventArgs e)
@@ -478,7 +478,7 @@ namespace Thumper_Modding_Tool_resharp
             oldestFirstToolStripMenuItem.Checked = false;
             difficultyToolStripMenuItem.Checked = false;
             sortorder = "alpha";
-            UpdateLevelList(SearchLevels);
+            UpdateLevelList();
         }
 
         private void difficultyToolStripMenuItem_Click(object sender, EventArgs e)
@@ -487,7 +487,7 @@ namespace Thumper_Modding_Tool_resharp
             oldestFirstToolStripMenuItem.Checked = false;
             alphabeticalToolStripMenuItem.Checked = false;
             sortorder = "difficulty";
-            UpdateLevelList(SearchLevels);
+            UpdateLevelList();
         }
 
         private void clearCacheToolStripMenuItem_Click(object sender, EventArgs e)
