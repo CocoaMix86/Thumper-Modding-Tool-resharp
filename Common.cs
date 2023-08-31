@@ -129,12 +129,12 @@ namespace Thumper_Modding_Tool_resharp
             if (delta < 12 * MONTH)
             {
                 int months = Convert.ToInt32(Math.Floor((double)ts.Days / 30));
-                return months <= 1 ? "one month ago" : months + " months ago";
+                return months <= 1 ? "1 month ago" : months + " months ago";
             }
             else
             {
                 int years = Convert.ToInt32(Math.Floor((double)ts.Days / 365));
-                return years <= 1 ? "one year ago" : years + " years ago";
+                return years <= 1 ? "1 year ago" : years + " years ago";
             }
         }
 	}

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -19,47 +20,56 @@ namespace Thumper_Modding_Tool_resharp
             ThumperModdingTool = _ThumperModdingTool;
         }
 
-        private void ThumpNet_Load(object sender, EventArgs e)
+        public class ThumpNetLevel
         {
-            LoadThumpNetAsync();
-            if (Settings.Default.thumpnet_compactview)
-            {
-                compactViewToolStripMenuItem.Text = "Detailed View";
-            }
-            else
-            {
-                compactViewToolStripMenuItem.Text = "Compact View";
-            }
+            public DateTime DateUTC;
+            public string Name, Author, Song, Description, ThumbnailURL, DownloadURL;
+            public int Difficulty;
         }
+
         WebClient wc;
         BackgroundWorker bgw;
         Action bgw_cb;
-        List<ThumpNetLevel> GlobalLevels;
-        List<ThumpNetLevel> SearchLevels;
+
+        List<ThumpNetLevel> Levels;
         string sortorder = "alpha";
         List<Image> rankicons = new List<Image> { Resources.d0, Resources.d1, Resources.d2, Resources.d3, Resources.d4, Resources.d5, Resources.d6, Resources.d7 };
 
+        private void ThumpNet_Load(object sender, EventArgs e)
+        {
+            LoadThumpNetAsync();
+            if (Settings.Default.thumpnet_compactview) compactViewToolStripMenuItem.Text = "Detailed View";
+            else compactViewToolStripMenuItem.Text = "Compact View";
+        }
+
+        #region METHODS
+
+
         void LoadThumpNetAsync()
         {
+            // disable reload button, clear list and update text
+            reloadToolStripMenuItem.Enabled = false;
             pnl_levels.Controls.Clear();
             Text = "ThumpNet [Loading...]";
+
+            // validate bgw
             if (bgw != null)
             {
+                // if theres already a bgw and its running, cancel it first and then run this function afterwards
                 if (bgw.IsBusy)
                 {
                     bgw_cb = LoadThumpNetAsync;
                     bgw.CancelAsync();
                     return;
                 }
-                else
-                {
-                    bgw.Dispose();
-                }
+                else bgw.Dispose();
             }
-            bgw = new BackgroundWorker();
-            bgw.WorkerSupportsCancellation = true;
+
+            // setup bgw
+            bgw = new BackgroundWorker() { WorkerSupportsCancellation = true };
             bgw.RunWorkerCompleted += (object sender, RunWorkerCompletedEventArgs e) =>
             {
+                // if the bgw was cancelled and there is a callback, call it
                 if (e.Cancelled)
                 {
                     if (bgw_cb != null)
@@ -67,68 +77,85 @@ namespace Thumper_Modding_Tool_resharp
                         bgw_cb();
                         bgw_cb = null;
                     }
+                   
+                    return;
                 }
 
                 Text = "ThumpNet";
+                UpdateLevelList();
+                reloadToolStripMenuItem.Enabled = true;
             };
-            bgw.DoWork += (object sender, DoWorkEventArgs e) =>
-            {
-                LoadThumpNet(sender, e);
-            };
+            bgw.DoWork += (object sender, DoWorkEventArgs e) => LoadThumpNet(sender, e);
+
+            // run bgw
             bgw.RunWorkerAsync();
         }
 
         void LoadThumpNet(object sender, DoWorkEventArgs e)
         {
-            Invoke(new Action(() => { reloadToolStripMenuItem.Enabled = false; }));
+            // download level database
             string db_url = "https://docs.google.com/spreadsheets/d/19SbuARLhHfxTcZXDEGzxeQIdpJR0acTPTNtwrnwUtUI/export?format=tsv";
-            if (wc != null) wc.Dispose();
+            wc?.Dispose();
             wc = new WebClient();
-            string db = wc.DownloadString(db_url);
-            string[] rows = db.Split(new string[] { Environment.NewLine }, StringSplitOptions.None)
-                .Skip(1).ToArray();
-            GlobalLevels = new List<ThumpNetLevel>();
-            foreach (string row in rows)
+            string db;
+            try { db = wc.DownloadString(db_url); }
+            catch
             {
-                string[] data = row.Split('\t');
-                if (data.Length != 8) continue;
-                ThumpNetLevel Level = new ThumpNetLevel();
-                string date_time = data[0];
-                int[] date_values = date_time.Split('/').Select(int.Parse).ToArray();
-                //int[] time_values = date_time[1].Split(':').Select(int.Parse).ToArray();
-                Level.DateUTC = new DateTime(date_values[2], date_values[1], date_values[0], 0, 0, 0);
-                Level.Name = data[1];
-                Level.Author = data[2];
-                Level.Difficulty = int.Parse(data[3]);
-                Level.Song = data[4];
-                Level.Description = data[5];
-                Level.ThumbnailURL = data[6];
-                Level.DownloadURL = data[7];
-                if (string.IsNullOrWhiteSpace(Level.DownloadURL)) continue;
-                GlobalLevels.Add(Level);
-            }
-            
-            if (bgw.CancellationPending)
-            {
-                e.Cancel = true;
+                MessageBox.Show("Failed to download latest levels. Are you connected to the internet?", "Error");
+                Invoke(new Action(() => Close()));
                 return;
             }
-            Invoke(new Action(() => { 
-                try { 
-                    UpdateLevelList(GlobalLevels);
-                    reloadToolStripMenuItem.Enabled = true;
-                    SearchLevels = new List<ThumpNetLevel>(GlobalLevels);
-                } catch { } 
-            }));
+
+             // split by new line and remove the header
+            string[] rows = db.Split(new string[] { Environment.NewLine }, StringSplitOptions.None)
+                .Skip(1).ToArray();
+
+            // init global levels
+            Levels = new List<ThumpNetLevel>();
+
+            // add each level from database
+            foreach (string row in rows)
+            {
+                // validate 8 columns + make sure has download url
+                string[] data = row.Split('\t');
+                if (data.Length != 8) continue;
+
+                if (string.IsNullOrWhiteSpace(data[7])) continue;
+
+                // setup utc datetime
+                DateTime dt = DateTime.ParseExact(data[0], "yyyy/MM/dd HH:mm", CultureInfo.InvariantCulture);
+                dt = DateTime.SpecifyKind(dt, DateTimeKind.Utc);
+;
+                // add data
+                ThumpNetLevel Level = new()
+                {
+                    DateUTC = dt,
+                    Name = data[1],
+                    Author = data[2],
+                    Difficulty = int.Parse(data[3]),
+                    Song = data[4],
+                    Description = data[5],
+                    ThumbnailURL = data[6],
+                    DownloadURL = data[7]
+                };
+
+                // add to global levels
+                Levels.Add(Level);
+            }
+            
+            // if trying to cancel
+            if (bgw.CancellationPending) e.Cancel = true;
         }
 
-        void UpdateLevelList(List<ThumpNetLevel> Levels)
+        void UpdateLevelList()
         {
             pnl_levels.Controls.Clear();
             if (Levels == null) return;
             Directory.CreateDirectory($@"ThumpNet\Cache\");
             bool cmpct = Settings.Default.thumpnet_compactview;
 
+
+            // sort by oldest or newest datetime
             if (sortorder == "oldest")
             {
                 Levels.Sort((x, y) => DateTime.Compare(x.DateUTC, y.DateUTC));
@@ -143,9 +170,12 @@ namespace Thumper_Modding_Tool_resharp
                 Levels.Sort((x, y) => y.Difficulty.CompareTo(x.Difficulty));
             }
 
+            int i = 0;
             foreach (ThumpNetLevel Level in Levels)
             {
                 Panel panel = new Panel();
+                panel.Tag = i;
+                panel.Visible = TitleAuthorContainsSearch(Level);
                 panel.Size = new Size(256, cmpct ? 80 : 224);
                 //panel.BackColor = Color.FromArgb(32, 0, 0);
 
@@ -212,7 +242,7 @@ namespace Thumper_Modding_Tool_resharp
                 name.Location = new Point(20, 3+offset);
                 //author name
                 Label author = new Label();
-                author.Text = $"{Level.Author} • {ThumperModdingTool.DateTime_Ago(Level.DateUTC.ToLocalTime())}";
+                author.Text = $"{Level.Author} • {ThumperModdingTool.DateTime_Ago(Level.DateUTC)}";
                 author.AutoSize = true;
                 author.ForeColor = Color.White;
                 author.Font = new Font("Trebuchet MS", 10, FontStyle.Regular);
@@ -375,16 +405,24 @@ namespace Thumper_Modding_Tool_resharp
 
 
                 pnl_levels.Controls.Add(panel);
+
+                i++;
             }
         }
 
-        public class ThumpNetLevel
+        bool TitleAuthorContainsSearch(ThumpNetLevel lvl)
         {
-            public DateTime DateUTC;
-            public string Name, Author, Song, Description, ThumbnailURL, DownloadURL;
-            public int Difficulty;
-        }
+            if (txtSearch.Text == "") return true;
 
+            if (lvl.Name.ToLower().Contains(txtSearch.Text.ToLower()) ||
+                lvl.Author.ToLower().Contains(txtSearch.Text.ToLower()))
+                return true;
+
+            return false;
+        }
+        #endregion
+
+        #region EVENTS
         private void ThumpNet_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (bgw != null && bgw.IsBusy)
@@ -405,14 +443,14 @@ namespace Thumper_Modding_Tool_resharp
                 Settings.Default.thumpnet_compactview = false;
                 Settings.Default.Save();
                 compactViewToolStripMenuItem.Text = "Compact View";
-                UpdateLevelList(SearchLevels);
+                UpdateLevelList();
             }
             else
             {
                 Settings.Default.thumpnet_compactview = true;
                 Settings.Default.Save();
                 compactViewToolStripMenuItem.Text = "Detailed View";
-                UpdateLevelList(SearchLevels);
+                UpdateLevelList();
             }
         }
 
@@ -478,22 +516,16 @@ namespace Thumper_Modding_Tool_resharp
             }
         }
 
-        private void searchToolStripMenuItem_Click(object sender, EventArgs e)
+        private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            SearchLevels.Clear();
+            // make sure theres > 0 levels, and also its the same as our level object
+            if (pnl_levels.Controls.Count == 0) return;
+            if (pnl_levels.Controls.Count != Levels.Count) return;
 
-            if (txtSearch.Text == "") {
-                SearchLevels = new List<ThumpNetLevel>(GlobalLevels);
-                UpdateLevelList(GlobalLevels);
-                return;
-            }
-
-            foreach (ThumpNetLevel lvl in GlobalLevels) {
-                if (lvl.Name.ToLower().Contains(txtSearch.Text.ToLower())) {
-                    SearchLevels.Add(lvl);
-                }
-            }
-            UpdateLevelList(SearchLevels);
+            // make each panel visible depending on the search query
+            foreach (Panel lvl in pnl_levels.Controls)
+                lvl.Visible = TitleAuthorContainsSearch(Levels[(int)lvl.Tag]);
         }
+        #endregion
     }
 }
