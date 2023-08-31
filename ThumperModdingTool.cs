@@ -82,6 +82,10 @@ namespace Thumper_Modding_Tool_resharp
             var _path = dir;
             //create dynamic object from parsed JSON
             //this allows me to call each value further down
+            if (!Directory.Exists(dir)) {
+                MessageBox.Show($@"Could not find level folder {dir}");
+                return;
+            }
             if (File.Exists($@"{_path}\LEVEL DETAILS.txt"))
             {
                 _leveldata = JsonConvert.DeserializeObject(File.ReadAllText($@"{_path}\LEVEL DETAILS.txt"));
@@ -99,7 +103,7 @@ namespace Thumper_Modding_Tool_resharp
             else
             {
                 //if LEVEL DETAILS.txt does not exist, return. Do not add level
-                MessageBox.Show("\"LEVEL DETAILS.txt\" for the selected level could not be found.");
+                MessageBox.Show("\"LEVEL DETAILS.txt\" for the selected level could not be found." + dir);
                 return;
             }
             //check if the level has already been added
@@ -490,6 +494,15 @@ namespace Thumper_Modding_Tool_resharp
         private void hashPanelToolStripMenuItem_Click(object sender, EventArgs e)
         {
             panelHash.Visible = hashPanelToolStripMenuItem.Checked;
+        }
+
+        private void ThumperModdingTool_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Properties.Settings.Default.level_paths.Clear();
+            foreach (LevelTraits lt in LoadedLevels) {
+                    Properties.Settings.Default.level_paths.Add(lt.path);
+            }
+            Properties.Settings.Default.Save();
         }
     }
 }

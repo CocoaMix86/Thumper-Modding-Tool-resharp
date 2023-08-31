@@ -527,6 +527,7 @@ namespace Thumper_Modding_Tool_resharp
             this.Name = "ThumperModdingTool";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Thumper Mod Loader";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ThumperModdingTool_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
