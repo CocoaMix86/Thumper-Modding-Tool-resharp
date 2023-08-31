@@ -37,7 +37,7 @@ namespace Thumper_Modding_Tool_resharp
         List<ThumpNetLevel> GlobalLevels;
         List<ThumpNetLevel> SearchLevels;
         string sortorder = "alpha";
-        List<Image> rankicons = new List<Image> { Resources.d1, Resources.d2, Resources.d3, Resources.d4, Resources.d5, Resources.d6, Resources.d7 };
+        List<Image> rankicons = new List<Image> { Resources.d0, Resources.d1, Resources.d2, Resources.d3, Resources.d4, Resources.d5, Resources.d6, Resources.d7 };
 
         void LoadThumpNetAsync()
         {
@@ -201,7 +201,7 @@ namespace Thumper_Modding_Tool_resharp
                 rankicon.SizeMode = PictureBoxSizeMode.Zoom;
                 rankicon.Size = new Size(25, 25);
                 rankicon.Location = new Point(-2, 2+offset);
-                rankicon.Image = rankicons[Level.Difficulty - 1];
+                rankicon.Image = rankicons[Level.Difficulty];
                 toolTip1.SetToolTip(rankicon, $@"Difficulty: {"".PadLeft(Level.Difficulty, '◆').PadRight(7, '◇')}");
                 //level name
                 Label name = new Label();

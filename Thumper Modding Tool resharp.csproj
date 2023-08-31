@@ -158,6 +158,7 @@
     <EmbeddedResource Include="DLLs\Microsoft.WindowsAPICodePack.dll" />
     <EmbeddedResource Include="DLLs\Microsoft.WindowsAPICodePack.Shell.dll" />
     <EmbeddedResource Include="DLLs\Newtonsoft.Json.dll" />
+    <Content Include="image assets\d0.png" />
     <Content Include="image assets\d1.png" />
     <Content Include="image assets\d2.png" />
     <Content Include="image assets\d3.png" />
