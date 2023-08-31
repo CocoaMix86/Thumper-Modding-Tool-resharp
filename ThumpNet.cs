@@ -123,7 +123,7 @@ namespace Thumper_Modding_Tool_resharp
                 if (string.IsNullOrWhiteSpace(data[7])) continue;
 
                 // setup utc datetime
-                DateTime dt = DateTime.ParseExact(data[0], "yyyy/MM/dd-HH:mm:ss", CultureInfo.InvariantCulture);
+                DateTime dt = DateTime.ParseExact(data[0], "yyyy/MM/dd HH:mm:ss", CultureInfo.InvariantCulture);
                 dt = DateTime.SpecifyKind(dt, DateTimeKind.Utc);
 ;
                 // add data
@@ -170,6 +170,7 @@ namespace Thumper_Modding_Tool_resharp
                 Levels.Sort((x, y) => y.Difficulty.CompareTo(x.Difficulty));
             }
 
+            //id per panel. Helps with search
             int i = 0;
             foreach (ThumpNetLevel Level in Levels)
             {
@@ -247,6 +248,8 @@ namespace Thumper_Modding_Tool_resharp
                 author.ForeColor = Color.White;
                 author.Font = new Font("Trebuchet MS", 10, FontStyle.Regular);
                 author.Location = new Point(0, 25+offset);
+                author.Cursor = Cursors.Hand;
+                author.Click += (sender, e) => { txtSearch.Text = (sender as Label).Text.Split(new string[] { " • " }, StringSplitOptions.None)[0]; };
                 //add controls to panel so they're visible
                 panel.Controls.Add(author);
                 panel.Controls.Add(name);
