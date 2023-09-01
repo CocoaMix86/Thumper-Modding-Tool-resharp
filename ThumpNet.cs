@@ -18,6 +18,7 @@ namespace Thumper_Modding_Tool_resharp
         {
             InitializeComponent();
             ThumperModdingTool = _ThumperModdingTool;
+            menuStrip1.Renderer = new MyRenderer();
         }
 
         public class ThumpNetLevel

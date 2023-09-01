@@ -62,7 +62,7 @@
             // 
             // menuStrip1
             // 
-            this.menuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.menuStrip1.BackColor = System.Drawing.Color.Maroon;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.reloadToolStripMenuItem,
             this.compactViewToolStripMenuItem,
@@ -95,7 +95,6 @@
             // 
             // sortToolStripMenuItem
             // 
-            this.sortToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.sortToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newestFirstToolStripMenuItem,
             this.oldestFirstToolStripMenuItem,

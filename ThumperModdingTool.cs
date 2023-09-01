@@ -20,7 +20,8 @@ namespace Thumper_Modding_Tool_resharp
 		public ThumperModdingTool()
         {
 			InitializeComponent();
-		}
+            menuStrip1.Renderer = new MyRenderer();
+        }
 
         private readonly string Title = $"Thumper Mod Loader v{Application.ProductVersion}";
         private readonly CommonOpenFileDialog cfd_lvl = new CommonOpenFileDialog() { IsFolderPicker = true, Multiselect = false };

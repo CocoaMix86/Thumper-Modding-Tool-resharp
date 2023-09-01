@@ -73,7 +73,7 @@ namespace Thumper_Modding_Tool_resharp
             // 
             // menuStrip1
             // 
-            this.menuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.menuStrip1.BackColor = System.Drawing.Color.Maroon;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.optionsToolStripMenuItem1,
             this.thumpNetToolStripMenuItem});

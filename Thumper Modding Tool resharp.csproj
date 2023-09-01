@@ -99,6 +99,7 @@
     <Compile Include="Level.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="MyRenderer.cs" />
     <Compile Include="ObjLib.cs" />
     <Compile Include="SaveData.cs">
       <SubType>Form</SubType>
