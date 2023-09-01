@@ -431,7 +431,8 @@ namespace Thumper_Modding_Tool_resharp
             this.picSplashScreen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picSplashScreen.TabIndex = 48;
             this.picSplashScreen.TabStop = false;
-            this.toolTip1.SetToolTip(this.picSplashScreen, "Splash screen. Save by dragging to a folder or your desktop");
+            this.toolTip1.SetToolTip(this.picSplashScreen, "Splash screen. Save by dragging to a folder or your desktop.\r\n\r\n***Accepts .DDS i" +
+        "mages only.***\r\nUse conversion tools if you need to.");
             this.picSplashScreen.MouseMove += new System.Windows.Forms.MouseEventHandler(this.picSplashScreen_MouseMove);
             // 
             // btnSplashScreen
