@@ -148,18 +148,6 @@ namespace Thumper_Modding_Tool_resharp
 
         public void InitializeTracks(DataGridView grid)
         {
-            //track editor cell formatting
-            grid.DefaultCellStyle.Font = new Font(new FontFamily("Arial"), 10);
-            grid.DefaultCellStyle.ForeColor = Color.White;
-            grid.DefaultCellStyle.SelectionBackColor = Color.FromName("Highlight");
-            grid.DefaultCellStyle.SelectionForeColor = Color.FromName("HighlightText");
-            grid.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            grid.DefaultCellStyle.WrapMode = DataGridViewTriState.False;
-            grid.RowHeadersVisible = false;
-            grid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            grid.ReadOnly = false;
-            grid.RowTemplate.Height = 20;
-
             //double buffering for DGV, found here: https://10tec.com/articles/why-datagridview-slow.aspx
             //used to significantly improve rendering performance
             if (!SystemInformation.TerminalServerSession)
