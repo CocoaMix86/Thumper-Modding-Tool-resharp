@@ -8,7 +8,6 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Linq;
-using System.Configuration;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using Newtonsoft.Json;
 using DDS;
