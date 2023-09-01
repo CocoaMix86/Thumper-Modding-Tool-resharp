@@ -454,7 +454,7 @@ namespace Thumper_Modding_Tool_resharp
 
         private void btnSplashScreenReset_Click(object sender, EventArgs e)
         {
-            File.Copy("lib/original/b868db07.pc", "lib/b868db07.pc", true);
+            File.Copy("lib/cocoasplash.pc", "lib/b868db07.pc", true);
             LoadSplashScreen();
             ChangesMade = true;
         }

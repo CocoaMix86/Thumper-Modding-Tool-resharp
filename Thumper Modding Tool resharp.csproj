@@ -168,9 +168,7 @@
     <Content Include="image assets\d5.png" />
     <Content Include="image assets\d6.png" />
     <Content Include="image assets\d7.png" />
-    <Content Include="image assets\Thumper Modding Tool resharp.ico">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <EmbeddedResource Include="image assets\Thumper Modding Tool resharp.ico" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
