@@ -44,20 +44,4 @@ namespace Thumper_Modding_Tool_resharp
 			Properties.Settings.Default.Save();
 		}
 	}
-
-	public class MenuColorTable : ProfessionalColorTable
-	{
-		// Top menu item, before selected
-        public override Color MenuItemSelectedGradientBegin => Color.FromArgb(12, 0, 0);
-        public override Color MenuItemSelectedGradientEnd => Color.FromArgb(12, 0, 0);
-        public override Color MenuItemBorder => Color.FromArgb(100, 0, 0);
-		// Top menu item, selected
-        public override Color MenuItemPressedGradientBegin => Color.FromArgb(12, 0, 0);
-        public override Color MenuItemPressedGradientMiddle => Color.FromArgb(12, 0, 0);
-        public override Color MenuItemPressedGradientEnd => Color.FromArgb(12, 0, 0);
-		// Drop down items
-        public override Color MenuItemSelected => Color.FromArgb(12, 0, 0);
-        public override Color MenuBorder => Color.FromArgb(100, 0, 0);
-        public override Color ToolStripDropDownBackground => Color.FromArgb(40,40,40);
-    }
 }

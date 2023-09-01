@@ -226,9 +226,6 @@ namespace Thumper_Modding_Tool_resharp
 
             // Update title to reflect version number
 			Text = Title;
-
-            // Custom color table for the menu bar
-            menuStrip1.Renderer = new ToolStripProfessionalRenderer(new MenuColorTable());
         }
 
         private void LoadedLevels_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
