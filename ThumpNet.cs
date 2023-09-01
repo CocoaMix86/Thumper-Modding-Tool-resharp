@@ -169,6 +169,9 @@ namespace Thumper_Modding_Tool_resharp
             else if (sortorder == "difficulty") {
                 Levels.Sort((x, y) => y.Difficulty.CompareTo(x.Difficulty));
             }
+            else if (sortorder == "author") {
+                Levels.Sort((x, y) => x.Author.CompareTo(y.Author));
+            }
 
             //id per panel. Helps with search
             int i = 0;
@@ -459,40 +462,67 @@ namespace Thumper_Modding_Tool_resharp
 
         private void newestFirstToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            oldestFirstToolStripMenuItem.Checked = false;
-            alphabeticalToolStripMenuItem.Checked = false;
-            difficultyToolStripMenuItem.Checked = false;
+            UncheckSortButtons(sender);
             sortorder = "newest";
             UpdateLevelList();
         }
 
         private void oldestFirstToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            newestFirstToolStripMenuItem.Checked = false;
-            alphabeticalToolStripMenuItem.Checked = false;
-            difficultyToolStripMenuItem.Checked = false;
+            UncheckSortButtons(sender);
             sortorder = "oldest";
             UpdateLevelList();
         }
 
         private void alphabeticalToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            newestFirstToolStripMenuItem.Checked = false;
-            oldestFirstToolStripMenuItem.Checked = false;
-            difficultyToolStripMenuItem.Checked = false;
+            UncheckSortButtons(sender);
             sortorder = "alpha";
             UpdateLevelList();
         }
 
         private void difficultyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            newestFirstToolStripMenuItem.Checked = false;
-            oldestFirstToolStripMenuItem.Checked = false;
-            alphabeticalToolStripMenuItem.Checked = false;
+            UncheckSortButtons(sender);
             sortorder = "difficulty";
             UpdateLevelList();
         }
 
+        private void authorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            UncheckSortButtons(sender);
+            sortorder = "author";
+            UpdateLevelList();
+        }
+
+        private void UncheckSortButtons(object sender)
+        {
+            //uncheck all the sort buttons
+            newestFirstToolStripMenuItem.Checked = false;
+            oldestFirstToolStripMenuItem.Checked = false;
+            alphabeticalToolStripMenuItem.Checked = false;
+            difficultyToolStripMenuItem.Checked = false;
+            authorToolStripMenuItem.Checked = false;
+            //then check just the one selected
+            (sender as ToolStripMenuItem).Checked = true;
+        }
+
+        //Clicking Options will total the cache in MB and then display it on the clear cache button
+        private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Get array of all file names.
+            string[] files = Directory.GetFiles($@"ThumpNet\Cache\", "*.*", SearchOption.AllDirectories);
+
+            // Calculate total bytes of all files in a loop.
+            long foldersize = 0;
+            foreach (string name in files) {
+                // Use FileInfo to get length of each file.
+                FileInfo info = new FileInfo(name);
+                foldersize += info.Length;
+            }
+
+            clearCacheToolStripMenuItem.Text = $@"Clear Cache ({(foldersize/1024/1024).ToString()}MB)";
+        }
         private void clearCacheToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (Directory.Exists($@"ThumpNet\Cache\"))
@@ -519,6 +549,16 @@ namespace Thumper_Modding_Tool_resharp
             }
         }
 
+        private void openCacheFolderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Directory.Exists($@"ThumpNet\Cache\")) {
+                System.Diagnostics.Process.Start("explorer.exe", $@"ThumpNet\Cache\");
+            }
+            else {
+                MessageBox.Show($@"Could not locate ThumpNet\Cache\");
+            }
+        }
+
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             // make sure theres > 0 levels, and also its the same as our level object
@@ -530,5 +570,10 @@ namespace Thumper_Modding_Tool_resharp
                 lvl.Visible = TitleAuthorContainsSearch(Levels[(int)lvl.Tag]);
         }
         #endregion
+
+        private void btnTxtSearchClear_Click(object sender, EventArgs e)
+        {
+            txtSearch.Text = "";
+        }
     }
 }
