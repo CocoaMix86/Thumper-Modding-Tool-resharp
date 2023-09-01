@@ -49,7 +49,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Thumper Modding Tool resharp.ico</ApplicationIcon>
+    <ApplicationIcon>image assets\Thumper Modding Tool resharp.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>false</SignAssembly>
@@ -89,37 +89,37 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common.cs">
+    <Compile Include="Forms\Common.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DDSImage.cs" />
-    <Compile Include="Gui.cs">
+    <Compile Include="Classes\DDSImage.cs" />
+    <Compile Include="Forms\Gui.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Level.cs">
+    <Compile Include="Forms\Level.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MyRenderer.cs" />
-    <Compile Include="ObjLib.cs" />
-    <Compile Include="SaveData.cs">
+    <Compile Include="Classes\MyRenderer.cs" />
+    <Compile Include="Classes\ObjLib.cs" />
+    <Compile Include="Forms\SaveData.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ThumperModdingTool.cs">
+    <Compile Include="Forms\ThumperModdingTool.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ThumperModdingTool.Designer.cs">
+    <Compile Include="Forms\ThumperModdingTool.Designer.cs">
       <DependentUpon>ThumperModdingTool.cs</DependentUpon>
     </Compile>
-    <Compile Include="LevelTraits.cs" />
+    <Compile Include="Classes\LevelTraits.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ThumpNet.cs">
+    <Compile Include="Forms\ThumpNet.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ThumpNet.Designer.cs">
+    <Compile Include="Forms\ThumpNet.Designer.cs">
       <DependentUpon>ThumpNet.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="ThumperModdingTool.resx">
+    <EmbeddedResource Include="Forms\ThumperModdingTool.resx">
       <DependentUpon>ThumperModdingTool.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -133,7 +133,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="ThumpNet.resx">
+    <EmbeddedResource Include="Forms\ThumpNet.resx">
       <DependentUpon>ThumpNet.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="bin\Debug\data_0.sav" />
@@ -167,10 +167,7 @@
     <Content Include="image assets\d5.png" />
     <Content Include="image assets\d6.png" />
     <Content Include="image assets\d7.png" />
-    <Content Include="templates\LEVEL DETAILS.txt" />
-    <Content Include="text assets\footer - Copy.txt" />
-    <Content Include="text assets\footer.txt" />
-    <Content Include="Thumper Modding Tool resharp.ico">
+    <Content Include="image assets\Thumper Modding Tool resharp.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

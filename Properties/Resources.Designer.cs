@@ -159,19 +159,5 @@ namespace Thumper_Modding_Tool_resharp.Properties {
                 return ((byte[])(obj));
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to leafname;pitch;[4,1,2,1,2,&apos;kIntensityScale&apos;,&apos;kIntensityScale&apos;,1,0,1,1,1,1,1,1,0,0,0];
-        ///leafname;roll;[4,1,2,1,2,&apos;kIntensityScale&apos;,&apos;kIntensityScale&apos;,1,0,1,1,1,1,1,1,0,0,0];
-        ///leafname;turn;[4,1,2,1,2,&apos;kIntensityScale&apos;,&apos;kIntensityScale&apos;,1,0,1,1,1,1,1,1,0,0,0];
-        ///leafname;turn_auto;[4,1,2,1,2,&apos;kIntensityScale&apos;,&apos;kIntensityScale&apos;,1,0,1,1,1,1,1,1,0,0,0];
-        ///leafname;scale_x;[4,1,2,1,2,&apos;kIntensityScale&apos;,&apos;kIntensityScale&apos;,1,0,1,1,1,1,1,1,0,0,0];
-        ///leafname;scale_y;[4,1,2,1,2,&apos;kIntensityScale&apos;,&apos;kIntensityScale&apos;,1,0,1,1,1 [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string footer {
-            get {
-                return ResourceManager.GetString("footer", resourceCulture);
-            }
-        }
     }
 }

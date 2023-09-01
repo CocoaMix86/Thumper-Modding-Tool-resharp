@@ -1,6 +1,0 @@
-﻿{
-	"level_name": "the name of the level",
-	"difficulty": "the difficulty 'division'",
-	"description": "a long or short description of the level"
-	"author": "name"
-}

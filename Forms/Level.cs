@@ -15,7 +15,6 @@ namespace Thumper_Modding_Tool_resharp
 	public partial class ThumperModdingTool
 	{
 		JsonLoadSettings jo = new JsonLoadSettings() { CommentHandling = CommentHandling.Load};
-		List<string> footers = Properties.Resources.footer.Split('\n').ToList();
 
 		List<string> file_types = new List<string>() { "gate", "leaf", "lvl", "master", "xfm", "config" };
 		List<string> file_special = new List<string>() { "spn", "samp" };
