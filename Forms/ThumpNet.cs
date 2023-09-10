@@ -267,6 +267,7 @@ namespace Thumper_Modding_Tool_resharp
                 load.FlatStyle = FlatStyle.Flat;
                 load.BackColor = Color.FromArgb(64, 0, 0);
                 load.Location = new Point(0, 45+offset);
+                load.Paint += Button1_Paint;
 
                 string fn = $@"ThumpNet\Cache\{Level.Author}_{Level.Name}";
                 string info_fn = $"{fn}.info";
@@ -575,6 +576,20 @@ namespace Thumper_Modding_Tool_resharp
         private void btnTxtSearchClear_Click(object sender, EventArgs e)
         {
             txtSearch.Text = "";
+        }
+
+        private void Button1_Paint(object sender, PaintEventArgs e)
+        {
+            dynamic btn = (Button)sender;
+            dynamic drawBrush = new SolidBrush(btn.ForeColor);
+            dynamic sf = new StringFormat {
+                Alignment = StringAlignment.Center,
+                LineAlignment = StringAlignment.Center
+            };
+            if (btn.Text.Contains("%"))
+                e.Graphics.DrawString(btn.Text, btn.Font, drawBrush, e.ClipRectangle, sf);
+            drawBrush.Dispose();
+            sf.Dispose();
         }
     }
 }
