@@ -33,7 +33,7 @@ namespace Thumper_Modding_Tool_resharp
         Action bgw_cb;
 
         List<ThumpNetLevel> Levels;
-        string sortorder = "alpha";
+        string sortorder = "newest";
         List<Image> rankicons = new List<Image> { Resources.d0, Resources.d1, Resources.d2, Resources.d3, Resources.d4, Resources.d5, Resources.d6, Resources.d7 };
 
         private void ThumpNet_Load(object sender, EventArgs e)

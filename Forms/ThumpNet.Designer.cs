@@ -39,14 +39,14 @@
             this.oldestFirstToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.alphabeticalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.difficultyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.authorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearCacheToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openCacheFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.searchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.txtSearch = new System.Windows.Forms.ToolStripTextBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.btnTxtSearchClear = new System.Windows.Forms.Label();
-            this.authorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openCacheFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -109,7 +109,9 @@
             // newestFirstToolStripMenuItem
             // 
             this.newestFirstToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.newestFirstToolStripMenuItem.Checked = true;
             this.newestFirstToolStripMenuItem.CheckOnClick = true;
+            this.newestFirstToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.newestFirstToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.newestFirstToolStripMenuItem.Name = "newestFirstToolStripMenuItem";
             this.newestFirstToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
@@ -129,9 +131,7 @@
             // alphabeticalToolStripMenuItem
             // 
             this.alphabeticalToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.alphabeticalToolStripMenuItem.Checked = true;
             this.alphabeticalToolStripMenuItem.CheckOnClick = true;
-            this.alphabeticalToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.alphabeticalToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.alphabeticalToolStripMenuItem.Name = "alphabeticalToolStripMenuItem";
             this.alphabeticalToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
@@ -146,6 +146,16 @@
             this.difficultyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.difficultyToolStripMenuItem.Text = "Difficulty";
             this.difficultyToolStripMenuItem.Click += new System.EventHandler(this.difficultyToolStripMenuItem_Click);
+            // 
+            // authorToolStripMenuItem
+            // 
+            this.authorToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.authorToolStripMenuItem.CheckOnClick = true;
+            this.authorToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.authorToolStripMenuItem.Name = "authorToolStripMenuItem";
+            this.authorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.authorToolStripMenuItem.Text = "Author";
+            this.authorToolStripMenuItem.Click += new System.EventHandler(this.authorToolStripMenuItem_Click);
             // 
             // optionsToolStripMenuItem
             // 
@@ -163,9 +173,18 @@
             this.clearCacheToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.clearCacheToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.clearCacheToolStripMenuItem.Name = "clearCacheToolStripMenuItem";
-            this.clearCacheToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.clearCacheToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.clearCacheToolStripMenuItem.Text = "Clear Cache";
             this.clearCacheToolStripMenuItem.Click += new System.EventHandler(this.clearCacheToolStripMenuItem_Click);
+            // 
+            // openCacheFolderToolStripMenuItem
+            // 
+            this.openCacheFolderToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.openCacheFolderToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.openCacheFolderToolStripMenuItem.Name = "openCacheFolderToolStripMenuItem";
+            this.openCacheFolderToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.openCacheFolderToolStripMenuItem.Text = "Open Cache Folder";
+            this.openCacheFolderToolStripMenuItem.Click += new System.EventHandler(this.openCacheFolderToolStripMenuItem_Click);
             // 
             // searchToolStripMenuItem
             // 
@@ -181,6 +200,7 @@
             this.txtSearch.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.txtSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtSearch.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtSearch.ForeColor = System.Drawing.Color.White;
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(150, 23);
@@ -204,25 +224,6 @@
             this.btnTxtSearchClear.Text = "x";
             this.toolTip1.SetToolTip(this.btnTxtSearchClear, "clear search");
             this.btnTxtSearchClear.Click += new System.EventHandler(this.btnTxtSearchClear_Click);
-            // 
-            // authorToolStripMenuItem
-            // 
-            this.authorToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.authorToolStripMenuItem.CheckOnClick = true;
-            this.authorToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.authorToolStripMenuItem.Name = "authorToolStripMenuItem";
-            this.authorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.authorToolStripMenuItem.Text = "Author";
-            this.authorToolStripMenuItem.Click += new System.EventHandler(this.authorToolStripMenuItem_Click);
-            // 
-            // openCacheFolderToolStripMenuItem
-            // 
-            this.openCacheFolderToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.openCacheFolderToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.openCacheFolderToolStripMenuItem.Name = "openCacheFolderToolStripMenuItem";
-            this.openCacheFolderToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.openCacheFolderToolStripMenuItem.Text = "Open Cache Folder";
-            this.openCacheFolderToolStripMenuItem.Click += new System.EventHandler(this.openCacheFolderToolStripMenuItem_Click);
             // 
             // ThumpNet
             // 
