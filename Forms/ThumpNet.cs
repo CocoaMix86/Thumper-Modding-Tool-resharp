@@ -39,7 +39,7 @@ namespace Thumper_Modding_Tool_resharp
 
             // Local copy not found
             if (responseObject == null) {
-                urlBase = "http://thumpnet.anthofoxo.xyz";
+                urlBase = "https://thumpnet.anthofoxo.xyz";
                 Console.WriteLine("Attempting remote thumpnet connection");
                 responseObject = MakeLevelPostRequest(countRequestBody);
 
