@@ -33,13 +33,13 @@ namespace Thumper_Modding_Tool_resharp
             countRequestBody.offset = 0;
             countRequestBody.limit = 0;
 
-            baseUrl = "http://127.0.0.2";
+            urlBase = "http://127.0.0.2";
             Console.WriteLine("Attempting local thumpnet connection");
             var responseObject = MakeLevelPostRequest(countRequestBody);
 
             // Local copy not found
             if (responseObject == null) {
-                baseUrl = "http://thumpnet.anthofoxo.xyz";
+                urlBase = "http://thumpnet.anthofoxo.xyz";
                 Console.WriteLine("Attempting remote thumpnet connection");
                 responseObject = MakeLevelPostRequest(countRequestBody);
 
@@ -49,6 +49,7 @@ namespace Thumper_Modding_Tool_resharp
             } else Console.WriteLine("Using local thumpnet");
 
             numLevels = responseObject.count;
+            urlDl = urlBase + "/cdn/";
         }
 
         public class ThumpNetLevel
@@ -68,7 +69,8 @@ namespace Thumper_Modding_Tool_resharp
         List<Image> rankicons = new List<Image> { Resources.d0, Resources.d1, Resources.d2, Resources.d3, Resources.d4, Resources.d5, Resources.d6, Resources.d7 };
 
         int numLevels;
-        string baseUrl;
+        string urlBase;
+        string urlDl;
 
         private void ThumpNet_Load(object sender, EventArgs e)
         {
@@ -174,7 +176,7 @@ namespace Thumper_Modding_Tool_resharp
                 string jsonRequestBody = JsonConvert.SerializeObject(requestBody);
 
                 using var client = new HttpClient();
-                HttpResponseMessage httpResponse = client.PostAsync($"{baseUrl}/api/v1/level/", new StringContent(jsonRequestBody, Encoding.UTF8, "application/json")).Result;
+                HttpResponseMessage httpResponse = client.PostAsync($"{urlBase}/api/v1/level/", new StringContent(jsonRequestBody, Encoding.UTF8, "application/json")).Result;
 
                 if (httpResponse.StatusCode != HttpStatusCode.OK) return null;
 
@@ -223,8 +225,11 @@ namespace Thumper_Modding_Tool_resharp
                     Difficulty = level.difficulty ?? 0,
                     Song = level.song ?? "",
                     Description = level.description ?? "",
-                    ThumbnailURL = level.thumbnail != null ? ($"{baseUrl}/cdn/" + level.thumbnail) : null,
-                    DownloadURL = $"{baseUrl}/cdn/" + level.content
+                    ThumbnailURL = level.thumbnail,
+
+                    // Important, thumbails are updated to use uuid names, this ensures thumbnails will work for all level names
+                    // Downloaded content/zip files do not do this, please fix :>
+                    DownloadURL = (level.content == null) ? "" : $"{urlDl}{level.content}"
                 };
 
                 // add to global levels
@@ -298,28 +303,29 @@ namespace Thumper_Modding_Tool_resharp
                     //if thumbnail URL is found, download image
                     else
                     {
-                        string cache_fn = $@"ThumpNet\Cache\{Level.Author}_{Level.Name}.thumb";
-                        if (!File.Exists(cache_fn))
+                        //string cache_fn = $@"ThumpNet\Cache\{Level.Author}_{Level.Name}.thumb";
+                        string cache_filename = $@"ThumpNet\Cache\{Level.ThumbnailURL}.thumb";
+                        if (!File.Exists(cache_filename))
                         {
                             WebClient wc_thumb = new WebClient();
                             wc_thumb.DownloadFileCompleted += (sender, e) =>
                             {
                                 try
                                 {
-                                    thumbnail.Image = Image.FromFile(cache_fn);
+                                    thumbnail.Image = Image.FromFile(cache_filename);
                                     wc_thumb.Dispose();
                                 } catch(Exception e2) {
                                     Console.WriteLine(e2.Message);
                                 }
                             };
-                            Uri uri = new Uri(Level.ThumbnailURL);
-                            wc_thumb.DownloadFileAsync(uri, cache_fn);
+                            Uri uri = new Uri($"{urlDl}{Level.ThumbnailURL}");
+                            wc_thumb.DownloadFileAsync(uri, cache_filename);
                         }
                         else
                         {
                             try
                             {
-                                thumbnail.Image = Image.FromFile(cache_fn);
+                                thumbnail.Image = Image.FromFile(cache_filename);
                             } catch (OutOfMemoryException e2) {
                                 Console.WriteLine(e2.Message);
                             }
