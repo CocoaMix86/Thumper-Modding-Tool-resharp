@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -6,8 +7,13 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
+using System.Text;
+using System.Windows.Documents;
 using System.Windows.Forms;
+using System.Windows.Input;
 using Thumper_Modding_Tool_resharp.Properties;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
 
 namespace Thumper_Modding_Tool_resharp
 {
@@ -19,12 +25,38 @@ namespace Thumper_Modding_Tool_resharp
             InitializeComponent();
             ThumperModdingTool = _ThumperModdingTool;
             menuStrip1.Renderer = new MyRenderer();
+
+            // Check for a local copy of thumpnet
+            // If a local version is accessable, use it
+            // Otherwise use the main
+            LevelRequestBody countRequestBody = new LevelRequestBody();
+            countRequestBody.offset = 0;
+            countRequestBody.limit = 0;
+
+            urlBase = "http://127.0.0.2";
+            Console.WriteLine("Attempting local thumpnet connection");
+            var responseObject = MakeLevelPostRequest(countRequestBody);
+
+            // Local copy not found
+            if (responseObject == null) {
+                urlBase = "http://thumpnet.anthofoxo.xyz";
+                Console.WriteLine("Attempting remote thumpnet connection");
+                responseObject = MakeLevelPostRequest(countRequestBody);
+
+                if (responseObject == null) throw new ApplicationException("ThumpNet is not accessable");
+                else Console.WriteLine("Using remote thumpnet");
+
+            } else Console.WriteLine("Using local thumpnet");
+
+            numLevels = responseObject.count;
+            urlDl = urlBase + "/cdn/";
         }
 
         public class ThumpNetLevel
         {
             public DateTime DateUTC;
-            public string Name, Author, Song, Description, ThumbnailURL, DownloadURL;
+            public string? ThumbnailURL;
+            public string Name, Author, Song, Description, DownloadURL;
             public int Difficulty;
         }
 
@@ -35,6 +67,10 @@ namespace Thumper_Modding_Tool_resharp
         List<ThumpNetLevel> Levels;
         string sortorder = "newest";
         List<Image> rankicons = new List<Image> { Resources.d0, Resources.d1, Resources.d2, Resources.d3, Resources.d4, Resources.d5, Resources.d6, Resources.d7 };
+
+        int numLevels;
+        string urlBase;
+        string urlDl;
 
         private void ThumpNet_Load(object sender, EventArgs e)
         {
@@ -92,58 +128,114 @@ namespace Thumper_Modding_Tool_resharp
             bgw.RunWorkerAsync();
         }
 
+
+        public class LevelRequestBody
+        {
+            public int? offset;
+            public int? limit;
+            public List<string> expand = new();
+        }
+
+        public class ExpandedUser
+        {
+            public int id;
+            public string username;
+
+            public override string ToString()
+            {
+                return username;
+            }
+        }
+
+        public class LevelResponseBodyLevel
+        {
+            public int id;
+            public string name;
+            public string? content;
+            public string? thumbnail;
+            public string? description;
+            public int? difficulty;
+            public int? bpm;
+            public int? sublevels;
+            public string? song;
+            public string timestamp;
+            public ExpandedUser uploader;
+            public IList<ExpandedUser>? authors;
+        }
+
+        public class LevelResponseBody
+        {
+            public int count;
+            public IList<LevelResponseBodyLevel> levels;
+        }
+
+        LevelResponseBody? MakeLevelPostRequest(LevelRequestBody requestBody)
+        {
+            try
+            {
+                string jsonRequestBody = JsonConvert.SerializeObject(requestBody);
+
+                using var client = new HttpClient();
+                HttpResponseMessage httpResponse = client.PostAsync($"{urlBase}/api/v1/level/", new StringContent(jsonRequestBody, Encoding.UTF8, "application/json")).Result;
+
+                if (httpResponse.StatusCode != HttpStatusCode.OK) return null;
+
+                string responseBody = httpResponse.Content.ReadAsStringAsync().Result;
+
+                return JsonConvert.DeserializeObject<LevelResponseBody>(responseBody);
+            } catch(Exception e) {
+                return null;
+            }
+        }
+
         void LoadThumpNet(object sender, DoWorkEventArgs e)
         {
-            // download level database
-            string db_url = "https://docs.google.com/spreadsheets/d/19SbuARLhHfxTcZXDEGzxeQIdpJR0acTPTNtwrnwUtUI/export?format=tsv";
-            wc?.Dispose();
-            wc = new WebClient();
-            string db;
-            try { db = wc.DownloadString(db_url); }
-            catch
-            {
-                MessageBox.Show("Failed to download latest levels. Are you connected to the internet?", "Error");
-                Invoke(new Action(() => Close()));
-                return;
-            }
-
-             // split by new line and remove the header
-            string[] rows = db.Split(new string[] { Environment.NewLine }, StringSplitOptions.None)
-                .Skip(1).ToArray();
-
             // init global levels
             Levels = new List<ThumpNetLevel>();
 
-            // add each level from database
-            foreach (string row in rows)
-            {
-                // validate 8 columns + make sure has download url
-                string[] data = row.Split('\t');
-                if (data.Length != 8) continue;
+            LevelRequestBody requestBody = new LevelRequestBody();
+            requestBody.expand.Add("level");
+            requestBody.expand.Add("user");
+            requestBody.offset = 0;
+            requestBody.limit = numLevels;
 
-                if (string.IsNullOrWhiteSpace(data[7])) continue;
+            LevelResponseBody levels = MakeLevelPostRequest(requestBody);
+
+            // add each level from database
+            foreach (var level in levels.levels)
+            {
+                if(level.content == null) continue;
 
                 // setup utc datetime
-                DateTime dt = DateTime.ParseExact(data[0], "yyyy/MM/dd HH:mm:ss", CultureInfo.InvariantCulture);
+                DateTime dt = DateTime.ParseExact(level.timestamp, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
                 dt = DateTime.SpecifyKind(dt, DateTimeKind.Utc);
-;
+
+                var authorsIList = level.authors ?? new List<ExpandedUser>();
+
+                string authorString;
+                if (authorsIList.Count == 0) authorString = level.uploader.username;
+                else authorString = string.Join(", ", authorsIList);
+
                 // add data
                 ThumpNetLevel Level = new()
                 {
                     DateUTC = dt,
-                    Name = data[1],
-                    Author = data[2],
-                    Difficulty = int.Parse(data[3]),
-                    Song = data[4],
-                    Description = data[5],
-                    ThumbnailURL = data[6],
-                    DownloadURL = data[7]
+                    Name = level.name,
+                    Author = authorString,
+                    Difficulty = level.difficulty ?? 0,
+                    Song = level.song ?? "",
+                    Description = level.description ?? "",
+                    ThumbnailURL = level.thumbnail,
+
+                    // Important, thumbails are updated to use uuid names, this ensures thumbnails will work for all level names
+                    // Downloaded content/zip files do not do this, please fix :>
+                    DownloadURL = (level.content == null) ? "" : $"{urlDl}{level.content}"
                 };
 
                 // add to global levels
                 Levels.Add(Level);
             }
-            
+
             // if trying to cancel
             if (bgw.CancellationPending) e.Cancel = true;
         }
@@ -196,7 +288,7 @@ namespace Thumper_Modding_Tool_resharp
                     thumbnail.Size = new Size(256,144);
                     thumbnail.Location = new Point(0, 0);
                     //if no thumbnail URL found, write level name on black background
-                    if (string.IsNullOrWhiteSpace(Level.ThumbnailURL))
+                    if (Level.ThumbnailURL == null)
                     {
                         Bitmap bmp = new Bitmap(256, 144);
                         Graphics g = Graphics.FromImage(bmp);
@@ -211,20 +303,32 @@ namespace Thumper_Modding_Tool_resharp
                     //if thumbnail URL is found, download image
                     else
                     {
-                        string cache_fn = $@"ThumpNet\Cache\{Level.Author}_{Level.Name}.thumb";
-                        if (!File.Exists(cache_fn))
+                        //string cache_fn = $@"ThumpNet\Cache\{Level.Author}_{Level.Name}.thumb";
+                        string cache_filename = $@"ThumpNet\Cache\{Level.ThumbnailURL}.thumb";
+                        if (!File.Exists(cache_filename))
                         {
                             WebClient wc_thumb = new WebClient();
                             wc_thumb.DownloadFileCompleted += (sender, e) =>
                             {
-                                thumbnail.Image = Image.FromFile(cache_fn);
-                                wc_thumb.Dispose();
+                                try
+                                {
+                                    thumbnail.Image = Image.FromFile(cache_filename);
+                                    wc_thumb.Dispose();
+                                } catch(Exception e2) {
+                                    Console.WriteLine(e2.Message);
+                                }
                             };
-                            wc_thumb.DownloadFileAsync(new Uri(Level.ThumbnailURL), cache_fn);
+                            Uri uri = new Uri($"{urlDl}{Level.ThumbnailURL}");
+                            wc_thumb.DownloadFileAsync(uri, cache_filename);
                         }
                         else
                         {
-                            thumbnail.Image = Image.FromFile(cache_fn);
+                            try
+                            {
+                                thumbnail.Image = Image.FromFile(cache_filename);
+                            } catch (OutOfMemoryException e2) {
+                                Console.WriteLine(e2.Message);
+                            }
                         }
                     }
                     //add thumbail to panel so it displays on top
@@ -252,7 +356,7 @@ namespace Thumper_Modding_Tool_resharp
                 author.ForeColor = Color.White;
                 author.Font = new Font("Trebuchet MS", 10, FontStyle.Regular);
                 author.Location = new Point(0, 25+offset);
-                author.Cursor = Cursors.Hand;
+                author.Cursor = System.Windows.Forms.Cursors.Hand;
                 author.Click += (sender, e) => { txtSearch.Text = (sender as Label).Text.Split(new string[] { " • " }, StringSplitOptions.None)[0]; };
                 //add controls to panel so they're visible
                 panel.Controls.Add(author);
