@@ -25,6 +25,30 @@ namespace Thumper_Modding_Tool_resharp
             InitializeComponent();
             ThumperModdingTool = _ThumperModdingTool;
             menuStrip1.Renderer = new MyRenderer();
+
+            // Check for a local copy of thumpnet
+            // If a local version is accessable, use it
+            // Otherwise use the main
+            LevelRequestBody countRequestBody = new LevelRequestBody();
+            countRequestBody.offset = 0;
+            countRequestBody.limit = 0;
+
+            baseUrl = "http://127.0.0.2";
+            Console.WriteLine("Attempting local thumpnet connection");
+            var responseObject = MakeLevelPostRequest(countRequestBody);
+
+            // Local copy not found
+            if (responseObject == null) {
+                baseUrl = "http://thumpnet.anthofoxo.xyz";
+                Console.WriteLine("Attempting remote thumpnet connection");
+                responseObject = MakeLevelPostRequest(countRequestBody);
+
+                if (responseObject == null) throw new ApplicationException("ThumpNet is not accessable");
+                else Console.WriteLine("Using remote thumpnet");
+
+            } else Console.WriteLine("Using local thumpnet");
+
+            numLevels = responseObject.count;
         }
 
         public class ThumpNetLevel
@@ -43,8 +67,8 @@ namespace Thumper_Modding_Tool_resharp
         string sortorder = "newest";
         List<Image> rankicons = new List<Image> { Resources.d0, Resources.d1, Resources.d2, Resources.d3, Resources.d4, Resources.d5, Resources.d6, Resources.d7 };
 
-        string baseUrl = "http://127.0.0.2";
-
+        int numLevels;
+        string baseUrl;
 
         private void ThumpNet_Load(object sender, EventArgs e)
         {
@@ -107,7 +131,7 @@ namespace Thumper_Modding_Tool_resharp
         {
             public int? offset;
             public int? limit;
-            public List<string> resolve = new();
+            public List<string> expand = new();
         }
 
         public class ExpandedUser
@@ -143,40 +167,37 @@ namespace Thumper_Modding_Tool_resharp
             public IList<LevelResponseBodyLevel> levels;
         }
 
-        LevelResponseBody MakeLevelPostRequest(LevelRequestBody requestBody)
+        LevelResponseBody? MakeLevelPostRequest(LevelRequestBody requestBody)
         {
-            string jsonRequestBody = JsonConvert.SerializeObject(requestBody);
+            try
+            {
+                string jsonRequestBody = JsonConvert.SerializeObject(requestBody);
 
-            using var client = new HttpClient();
-            HttpResponseMessage httpResponse = client.PostAsync($"{baseUrl}/api/v1/level/", new StringContent(jsonRequestBody, Encoding.UTF8, "application/json")).Result;
+                using var client = new HttpClient();
+                HttpResponseMessage httpResponse = client.PostAsync($"{baseUrl}/api/v1/level/", new StringContent(jsonRequestBody, Encoding.UTF8, "application/json")).Result;
 
-            string responseBody = httpResponse.Content.ReadAsStringAsync().Result;
+                if (httpResponse.StatusCode != HttpStatusCode.OK) return null;
 
-            return JsonConvert.DeserializeObject<LevelResponseBody>(responseBody);
+                string responseBody = httpResponse.Content.ReadAsStringAsync().Result;
+
+                return JsonConvert.DeserializeObject<LevelResponseBody>(responseBody);
+            } catch(Exception e) {
+                return null;
+            }
         }
 
         void LoadThumpNet(object sender, DoWorkEventArgs e)
         {
-            int numLevels;
-
-            // Fetch level count
-            {
-                LevelRequestBody countRequestBody = new LevelRequestBody();
-                countRequestBody.offset = 0;
-                countRequestBody.limit = 0;
-                numLevels = MakeLevelPostRequest(countRequestBody).count;
-            }
+            // init global levels
+            Levels = new List<ThumpNetLevel>();
 
             LevelRequestBody requestBody = new LevelRequestBody();
-            requestBody.resolve.Add("level");
-            requestBody.resolve.Add("user");
+            requestBody.expand.Add("level");
+            requestBody.expand.Add("user");
             requestBody.offset = 0;
             requestBody.limit = numLevels;
 
             LevelResponseBody levels = MakeLevelPostRequest(requestBody);
-
-            // init global levels
-            Levels = new List<ThumpNetLevel>();
 
             // add each level from database
             foreach (var level in levels.levels)
