@@ -58,6 +58,7 @@ namespace Thumper_Modding_Tool_resharp
             public string? ThumbnailURL;
             public string Name, Author, Song, Description, DownloadURL;
             public int Difficulty;
+            public Panel LevelPanel;
         }
 
         WebClient wc;
@@ -67,6 +68,7 @@ namespace Thumper_Modding_Tool_resharp
         List<ThumpNetLevel> Levels;
         string sortorder = "newest";
         List<Image> rankicons = new List<Image> { Resources.d0, Resources.d1, Resources.d2, Resources.d3, Resources.d4, Resources.d5, Resources.d6, Resources.d7 };
+        List<Panel> levelpanels = new List<Panel>();
 
         int numLevels;
         string urlBase;
@@ -120,7 +122,10 @@ namespace Thumper_Modding_Tool_resharp
 
                 Text = "ThumpNet";
                 UpdateLevelList();
+                LevelPanelSort();
                 reloadToolStripMenuItem.Enabled = true;
+                if (Settings.Default.thumpnet_compactview)
+                    SetPanelCompact();
             };
             bgw.DoWork += (object sender, DoWorkEventArgs e) => LoadThumpNet(sender, e);
 
@@ -242,48 +247,34 @@ namespace Thumper_Modding_Tool_resharp
 
         void UpdateLevelList()
         {
-            pnl_levels.Controls.Clear();
             if (Levels == null) return;
             Directory.CreateDirectory($@"ThumpNet\Cache\");
-            bool cmpct = Settings.Default.thumpnet_compactview;
 
-
-            // sort by oldest or newest datetime
-            if (sortorder == "oldest")
-            {
-                Levels.Sort((x, y) => DateTime.Compare(x.DateUTC, y.DateUTC));
-            }
-            else if (sortorder == "newest") {
-                Levels.Sort((x, y) => DateTime.Compare(y.DateUTC, x.DateUTC));
-            }
-            else if (sortorder == "alpha") {
-                Levels.Sort((x, y) => x.Name.CompareTo(y.Name));
-            }
-            else if (sortorder == "difficulty") {
-                Levels.Sort((x, y) => y.Difficulty.CompareTo(x.Difficulty));
-            }
-            else if (sortorder == "author") {
-                Levels.Sort((x, y) => x.Author.CompareTo(y.Author));
-            }
-
+            levelpanels.Clear();
             //id per panel. Helps with search
             int i = 0;
             foreach (ThumpNetLevel Level in Levels)
             {
-                Panel panel = new Panel();
+                Level.LevelPanel = new Panel();
+                Panel panel = Level.LevelPanel;
                 panel.Tag = i;
                 panel.Visible = TitleAuthorContainsSearch(Level);
-                panel.Size = new Size(256, cmpct ? 80 : 224);
+                panel.Size = new Size(256, /*cmpct ? 80 :*/ 224);
+                panel.BorderStyle = BorderStyle.FixedSingle;
+                panel.MouseEnter += levelpanel_MouseEnter;
+                panel.MouseLeave += levelpanel_MouseLeave;
                 //panel.BackColor = Color.FromArgb(32, 0, 0);
 
                 //offset is for where to display the author and level name
                 //compact mode is 0 since no thumbnail is displayed
                 int offset = 0;
-                if (!cmpct)
+                //if (!cmpct)
                 {
                     offset = 144;
                     //This pciturebox contains the level thumbnail
                     PictureBox thumbnail = new PictureBox();
+                    thumbnail.Tag = "thumbnail";
+                    thumbnail.Name = "thumbnail";
                     thumbnail.SizeMode = PictureBoxSizeMode.Zoom;
                     thumbnail.Size = new Size(256,144);
                     thumbnail.Location = new Point(0, 0);
@@ -341,6 +332,7 @@ namespace Thumper_Modding_Tool_resharp
                 rankicon.Size = new Size(25, 25);
                 rankicon.Location = new Point(-2, 2+offset);
                 rankicon.Image = rankicons[Level.Difficulty];
+                rankicon.Anchor = AnchorStyles.Bottom;
                 toolTip1.SetToolTip(rankicon, $@"Difficulty: {"".PadLeft(Level.Difficulty, '◆').PadRight(7, '◇')}");
                 //level name
                 Label name = new Label();
@@ -349,6 +341,7 @@ namespace Thumper_Modding_Tool_resharp
                 name.ForeColor = Color.White;
                 name.Font = new Font("Trebuchet MS", 12, FontStyle.Bold);
                 name.Location = new Point(20, 3+offset);
+                name.Anchor = AnchorStyles.Bottom;
                 //author name
                 Label author = new Label();
                 author.Text = $"{Level.Author} • {ThumperModdingTool.DateTime_Ago(Level.DateUTC)}";
@@ -358,6 +351,7 @@ namespace Thumper_Modding_Tool_resharp
                 author.Location = new Point(0, 25+offset);
                 author.Cursor = System.Windows.Forms.Cursors.Hand;
                 author.Click += (sender, e) => { txtSearch.Text = (sender as Label).Text.Split(new string[] { " • " }, StringSplitOptions.None)[0]; };
+                author.Anchor = AnchorStyles.Bottom;
                 //add controls to panel so they're visible
                 panel.Controls.Add(author);
                 panel.Controls.Add(name);
@@ -366,12 +360,13 @@ namespace Thumper_Modding_Tool_resharp
                 Button load = new Button();
                 load.Text = "Download";
                 load.Font = new Font("Trebuchet MS", 10, FontStyle.Bold);
-                load.Size = new Size(256, 32);
+                load.Size = new Size(252, 32);
                 load.ForeColor = Color.Crimson;
                 load.FlatStyle = FlatStyle.Flat;
                 load.BackColor = Color.FromArgb(64, 0, 0);
-                load.Location = new Point(0, 45+offset);
+                load.Location = new Point(2, 45+offset);
                 load.Paint += Button1_Paint;
+                load.Anchor = AnchorStyles.Bottom;
 
                 string fn = $@"ThumpNet\Cache\{Level.Author}_{Level.Name}";
                 string info_fn = $"{fn}.info";
@@ -489,37 +484,56 @@ namespace Thumper_Modding_Tool_resharp
                     };
 
                     if (download)
-                    {
                         do_download();
-                    }
                     else
                     {
                         if (!Directory.Exists(fn) || extract)
                         {
                             if (File.Exists(zip_fn))
-                            {
                                 load_zip();
-                            }
                             else
-                            {
                                 do_download();
-                            }
                         }
                         else
-                        {
                             load_folder();
-                        }
                     }
-                    
                 };
 
                 panel.Controls.Add(load);
-
-
-                pnl_levels.Controls.Add(panel);
+                levelpanels.Add(panel);
 
                 i++;
             }
+        }
+
+        void LevelPanelSort()
+        {
+            pnl_levels.Controls.Clear();
+            bool cmpct = Settings.Default.thumpnet_compactview;
+
+
+            // sort by oldest or newest datetime
+            if (sortorder == "oldest") {
+                Levels.Sort((x, y) => DateTime.Compare(x.DateUTC, y.DateUTC));
+            }
+            else if (sortorder == "newest") {
+                Levels.Sort((x, y) => DateTime.Compare(y.DateUTC, x.DateUTC));
+            }
+            else if (sortorder == "alpha") {
+                Levels.Sort((x, y) => x.Name.CompareTo(y.Name));
+            }
+            else if (sortorder == "difficulty") {
+                Levels.Sort((x, y) => y.Difficulty.CompareTo(x.Difficulty));
+            }
+            else if (sortorder == "author") {
+                Levels.Sort((x, y) => x.Author.CompareTo(y.Author));
+            }
+
+            foreach (ThumpNetLevel Level in Levels) {
+
+                pnl_levels.Controls.Add(Level.LevelPanel);
+            }
+
         }
 
         bool TitleAuthorContainsSearch(ThumpNetLevel lvl)
@@ -555,14 +569,27 @@ namespace Thumper_Modding_Tool_resharp
                 Settings.Default.thumpnet_compactview = false;
                 Settings.Default.Save();
                 compactViewToolStripMenuItem.Text = "Compact View";
-                UpdateLevelList();
+                //LevelPanelSort();
+                foreach (ThumpNetLevel Level in Levels) {
+                    Level.LevelPanel.Height = 224;
+                    Level.LevelPanel.Controls.Find("thumbnail", true)[0].Visible = true;
+                }
             }
             else
             {
                 Settings.Default.thumpnet_compactview = true;
                 Settings.Default.Save();
                 compactViewToolStripMenuItem.Text = "Detailed View";
-                UpdateLevelList();
+                //LevelPanelSort();
+                SetPanelCompact();
+            }
+        }
+
+        private void SetPanelCompact()
+        {
+            foreach (ThumpNetLevel Level in Levels) {
+                Level.LevelPanel.Height = 80;
+                Level.LevelPanel.Controls.Find("thumbnail", true)[0].Visible = false;
             }
         }
 
@@ -570,35 +597,35 @@ namespace Thumper_Modding_Tool_resharp
         {
             UncheckSortButtons(sender);
             sortorder = "newest";
-            UpdateLevelList();
+            LevelPanelSort();
         }
 
         private void oldestFirstToolStripMenuItem_Click(object sender, EventArgs e)
         {
             UncheckSortButtons(sender);
             sortorder = "oldest";
-            UpdateLevelList();
+            LevelPanelSort();
         }
 
         private void alphabeticalToolStripMenuItem_Click(object sender, EventArgs e)
         {
             UncheckSortButtons(sender);
             sortorder = "alpha";
-            UpdateLevelList();
+            LevelPanelSort();
         }
 
         private void difficultyToolStripMenuItem_Click(object sender, EventArgs e)
         {
             UncheckSortButtons(sender);
             sortorder = "difficulty";
-            UpdateLevelList();
+            LevelPanelSort();
         }
 
         private void authorToolStripMenuItem_Click(object sender, EventArgs e)
         {
             UncheckSortButtons(sender);
             sortorder = "author";
-            UpdateLevelList();
+            LevelPanelSort();
         }
 
         private void UncheckSortButtons(object sender)
@@ -667,13 +694,15 @@ namespace Thumper_Modding_Tool_resharp
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            // make sure theres > 0 levels, and also its the same as our level object
-            if (pnl_levels.Controls.Count == 0) return;
-            if (pnl_levels.Controls.Count != Levels.Count) return;
-
             // make each panel visible depending on the search query
-            foreach (Panel lvl in pnl_levels.Controls)
-                lvl.Visible = TitleAuthorContainsSearch(Levels[(int)lvl.Tag]);
+            foreach (ThumpNetLevel Level in Levels) {
+                if (TitleAuthorContainsSearch(Level)) {
+                    Level.LevelPanel.Visible = true;
+                }
+                else
+                    Level.LevelPanel.Visible = false;
+                //Level.LevelPanel.Visible = TitleAuthorContainsSearch(Level);
+            }
         }
         #endregion
 
@@ -694,6 +723,15 @@ namespace Thumper_Modding_Tool_resharp
                 e.Graphics.DrawString(btn.Text, btn.Font, drawBrush, e.ClipRectangle, sf);
             drawBrush.Dispose();
             sf.Dispose();
+        }
+
+        private void levelpanel_MouseEnter(object sender, EventArgs e)
+        {
+            (sender as Panel).BackColor = Color.FromArgb(60, 60, 60);
+        }
+        private void levelpanel_MouseLeave(object sender, EventArgs e)
+        {
+            (sender as Panel).BackColor = Color.FromArgb(40, 40, 40);
         }
     }
 }
