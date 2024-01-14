@@ -59,6 +59,7 @@ namespace Thumper_Modding_Tool_resharp
             public string Name, Author, Song, Description, DownloadURL;
             public int Difficulty;
             public Panel LevelPanel;
+            public bool DescriptionExpanded;
         }
 
         WebClient wc;
@@ -234,7 +235,9 @@ namespace Thumper_Modding_Tool_resharp
 
                     // Important, thumbails are updated to use uuid names, this ensures thumbnails will work for all level names
                     // Downloaded content/zip files do not do this, please fix :>
-                    DownloadURL = (level.content == null) ? "" : $"{urlDl}{level.content}"
+                    DownloadURL = (level.content == null) ? "" : $"{urlDl}{level.content}",
+                    //
+                    DescriptionExpanded = false
                 };
 
                 // add to global levels
@@ -257,7 +260,7 @@ namespace Thumper_Modding_Tool_resharp
             {
                 Level.LevelPanel = new Panel();
                 Panel panel = Level.LevelPanel;
-                panel.Tag = i;
+                panel.Name = i.ToString();
                 panel.Visible = TitleAuthorContainsSearch(Level);
                 panel.Size = new Size(256, /*cmpct ? 80 :*/ 224);
                 panel.BorderStyle = BorderStyle.FixedSingle;
@@ -334,6 +337,15 @@ namespace Thumper_Modding_Tool_resharp
                 rankicon.Image = rankicons[Level.Difficulty];
                 rankicon.Anchor = AnchorStyles.Bottom;
                 toolTip1.SetToolTip(rankicon, $@"Difficulty: {"".PadLeft(Level.Difficulty, '◆').PadRight(7, '◇')}");
+                //info/description button
+                PictureBox infoicon = new PictureBox();
+                infoicon.SizeMode = PictureBoxSizeMode.Zoom;
+                infoicon.Size = new Size(15, 15);
+                infoicon.Location = new Point(panel.Width - 17, 2 + offset);
+                infoicon.Image = Resources.icon_info_32;
+                infoicon.Anchor = AnchorStyles.Bottom;
+                infoicon.Click += infoicon_Click;
+                infoicon.Cursor = System.Windows.Forms.Cursors.Hand;
                 //level name
                 Label name = new Label();
                 name.Text = Level.Name;
@@ -356,6 +368,7 @@ namespace Thumper_Modding_Tool_resharp
                 panel.Controls.Add(author);
                 panel.Controls.Add(name);
                 panel.Controls.Add(rankicon);
+                panel.Controls.Add(infoicon);
                 //download and add level button
                 Button load = new Button();
                 load.Text = "Download";
@@ -732,6 +745,32 @@ namespace Thumper_Modding_Tool_resharp
         private void levelpanel_MouseLeave(object sender, EventArgs e)
         {
             (sender as Panel).BackColor = Color.FromArgb(40, 40, 40);
+        }
+
+        private void infoicon_Click(object sender, EventArgs e)
+        {
+            Control c = sender as Control;
+            Panel panel = (Panel)c.Parent;
+            ThumpNetLevel Level = Levels.First(x => x.LevelPanel.Name == panel.Name);
+            if (!Level.DescriptionExpanded) {
+                Label description = new Label();
+                description.Text = Level.Description;
+                description.MaximumSize = new Size(256, 1000);
+                description.Location = new Point(1, 144);
+                description.Name = "description";
+                description.Font = new Font("Trebuchet MS", 8, FontStyle.Italic);
+                description.ForeColor = Color.White;
+                description.AutoSize = true;
+                panel.Controls.Add(description);
+                panel.Height += description.Height;
+                Level.DescriptionExpanded = true;
+            }
+            else {
+                Control toremove = panel.Controls.Find("description", true)[0];
+                panel.Height -= toremove.Height;
+                panel.Controls.Remove(toremove);
+                Level.DescriptionExpanded = false;
+            }
         }
     }
 }
