@@ -25,6 +25,7 @@ namespace Thumper_Modding_Tool_resharp
             InitializeComponent();
             ThumperModdingTool = _ThumperModdingTool;
             menuStrip1.Renderer = new MyRenderer();
+            compactView = Settings.Default.thumpnet_compactview;
 
             // Check for a local copy of thumpnet
             // If a local version is accessable, use it
@@ -70,6 +71,7 @@ namespace Thumper_Modding_Tool_resharp
         string sortorder = "newest";
         List<Image> rankicons = new List<Image> { Resources.d0, Resources.d1, Resources.d2, Resources.d3, Resources.d4, Resources.d5, Resources.d6, Resources.d7 };
         List<Panel> levelpanels = new List<Panel>();
+        bool compactView;
 
         int numLevels;
         string urlBase;
@@ -522,7 +524,6 @@ namespace Thumper_Modding_Tool_resharp
         void LevelPanelSort()
         {
             pnl_levels.Controls.Clear();
-            bool cmpct = Settings.Default.thumpnet_compactview;
 
 
             // sort by oldest or newest datetime
@@ -577,20 +578,22 @@ namespace Thumper_Modding_Tool_resharp
 
         private void compactViewToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (Settings.Default.thumpnet_compactview)
+            if (compactView)
             {
                 Settings.Default.thumpnet_compactview = false;
+                compactView = false;
                 Settings.Default.Save();
                 compactViewToolStripMenuItem.Text = "Compact View";
                 //LevelPanelSort();
                 foreach (ThumpNetLevel Level in Levels) {
-                    Level.LevelPanel.Height = 224;
+                    Level.LevelPanel.Height += 144;
                     Level.LevelPanel.Controls.Find("thumbnail", true)[0].Visible = true;
                 }
             }
             else
             {
                 Settings.Default.thumpnet_compactview = true;
+                compactView = true;
                 Settings.Default.Save();
                 compactViewToolStripMenuItem.Text = "Detailed View";
                 //LevelPanelSort();
@@ -601,7 +604,7 @@ namespace Thumper_Modding_Tool_resharp
         private void SetPanelCompact()
         {
             foreach (ThumpNetLevel Level in Levels) {
-                Level.LevelPanel.Height = 80;
+                Level.LevelPanel.Height -= 144;
                 Level.LevelPanel.Controls.Find("thumbnail", true)[0].Visible = false;
             }
         }
@@ -756,13 +759,14 @@ namespace Thumper_Modding_Tool_resharp
                 Label description = new Label();
                 description.Text = Level.Description;
                 description.MaximumSize = new Size(256, 1000);
-                description.Location = new Point(1, 144);
+                description.Location = new Point(1, compactView ? 0 : 144);
                 description.Name = "description";
                 description.Font = new Font("Trebuchet MS", 8, FontStyle.Italic);
                 description.ForeColor = Color.White;
                 description.AutoSize = true;
                 panel.Controls.Add(description);
                 panel.Height += description.Height;
+                description.Anchor = AnchorStyles.Bottom;
                 Level.DescriptionExpanded = true;
             }
             else {
