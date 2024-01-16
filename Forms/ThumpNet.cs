@@ -65,7 +65,8 @@ namespace Thumper_Modding_Tool_resharp
         Action bgw_cb;
 
         List<ThumpNetLevel> Levels;
-        string sortorder = "newest";
+        string sortorder = "time";
+        bool sortdirection = true;
         List<Image> rankicons = new List<Image> { Resources.d0, Resources.d1, Resources.d2, Resources.d3, Resources.d4, Resources.d5, Resources.d6, Resources.d7 };
         bool compactView;
 
@@ -361,6 +362,7 @@ namespace Thumper_Modding_Tool_resharp
                 author.Cursor = System.Windows.Forms.Cursors.Hand;
                 author.Click += (sender, e) => { txtSearch.Text = (sender as Label).Text.Split(new string[] { " • " }, StringSplitOptions.None)[0]; };
                 author.Anchor = AnchorStyles.Bottom;
+                //toolTip1.SetToolTip(author, $"Uploaded: {Level.DateUTC}");
                 //add controls to panel so they're visible
                 panel.Controls.Add(author);
                 panel.Controls.Add(name);
@@ -520,13 +522,10 @@ namespace Thumper_Modding_Tool_resharp
 
 
             // sort by oldest or newest datetime
-            if (sortorder == "oldest") {
+            if (sortorder == "time") {
                 Levels.Sort((x, y) => DateTime.Compare(x.DateUTC, y.DateUTC));
             }
-            else if (sortorder == "newest") {
-                Levels.Sort((x, y) => DateTime.Compare(y.DateUTC, x.DateUTC));
-            }
-            else if (sortorder == "alpha") {
+            else if (sortorder == "alphabetical") {
                 Levels.Sort((x, y) => x.Name.CompareTo(y.Name));
             }
             else if (sortorder == "difficulty") {
@@ -536,8 +535,10 @@ namespace Thumper_Modding_Tool_resharp
                 Levels.Sort((x, y) => x.Author.CompareTo(y.Author));
             }
 
-            foreach (ThumpNetLevel Level in Levels) {
+            if (!sortdirection)
+                Levels.Reverse();
 
+            foreach (ThumpNetLevel Level in Levels) {
                 pnl_levels.Controls.Add(Level.LevelPanel);
             }
 
@@ -602,27 +603,15 @@ namespace Thumper_Modding_Tool_resharp
             }
         }
 
-        private void newestFirstToolStripMenuItem_Click(object sender, EventArgs e)
+        private void toolstripSort_Click(object sender, EventArgs e)
         {
-            sortorder = "newest";
+            sortorder = (sender as ToolStripButton).Tag.ToString();
             LevelPanelSort();
         }
 
-        private void alphabeticalToolStripMenuItem_Click(object sender, EventArgs e)
+        private void toolstripSortDirection_Click(object sender, EventArgs e)
         {
-            sortorder = "alpha";
-            LevelPanelSort();
-        }
-
-        private void difficultyToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            sortorder = "difficulty";
-            LevelPanelSort();
-        }
-
-        private void authorToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            sortorder = "author";
+            sortdirection = !sortdirection;
             LevelPanelSort();
         }
 

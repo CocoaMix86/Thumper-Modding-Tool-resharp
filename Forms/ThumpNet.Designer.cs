@@ -48,7 +48,7 @@
             this.toolstripSortAlpha = new System.Windows.Forms.ToolStripButton();
             this.toolstripSortDif = new System.Windows.Forms.ToolStripButton();
             this.toolstripSortAuthor = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
+            this.toolstripSortDirection = new System.Windows.Forms.ToolStripButton();
             this.menuStrip1.SuspendLayout();
             this.toolstripSortButtons.SuspendLayout();
             this.SuspendLayout();
@@ -110,7 +110,7 @@
             this.clearCacheToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.clearCacheToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.clearCacheToolStripMenuItem.Name = "clearCacheToolStripMenuItem";
-            this.clearCacheToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.clearCacheToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.clearCacheToolStripMenuItem.Text = "Clear Cache";
             this.clearCacheToolStripMenuItem.Click += new System.EventHandler(this.clearCacheToolStripMenuItem_Click);
             // 
@@ -119,7 +119,7 @@
             this.openCacheFolderToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.openCacheFolderToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.openCacheFolderToolStripMenuItem.Name = "openCacheFolderToolStripMenuItem";
-            this.openCacheFolderToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openCacheFolderToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.openCacheFolderToolStripMenuItem.Text = "Open Cache Folder";
             this.openCacheFolderToolStripMenuItem.Click += new System.EventHandler(this.openCacheFolderToolStripMenuItem_Click);
             // 
@@ -179,7 +179,7 @@
             this.toolstripSortDif,
             this.toolstripSortAuthor,
             this.toolStripSeparator1,
-            this.toolStripButton5});
+            this.toolstripSortDirection});
             this.toolstripSortButtons.Location = new System.Drawing.Point(0, 24);
             this.toolstripSortButtons.Name = "toolstripSortButtons";
             this.toolstripSortButtons.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -206,8 +206,9 @@
             this.toolstripSortTime.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolstripSortTime.Name = "toolstripSortTime";
             this.toolstripSortTime.Size = new System.Drawing.Size(23, 22);
+            this.toolstripSortTime.Tag = "time";
             this.toolstripSortTime.ToolTipText = "Time uploaded";
-            this.toolstripSortTime.Click += new System.EventHandler(this.newestFirstToolStripMenuItem_Click);
+            this.toolstripSortTime.Click += new System.EventHandler(this.toolstripSort_Click);
             // 
             // toolstripSortAlpha
             // 
@@ -216,8 +217,9 @@
             this.toolstripSortAlpha.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolstripSortAlpha.Name = "toolstripSortAlpha";
             this.toolstripSortAlpha.Size = new System.Drawing.Size(23, 22);
+            this.toolstripSortAlpha.Tag = "alphabetical";
             this.toolstripSortAlpha.ToolTipText = "Alphabetical";
-            this.toolstripSortAlpha.Click += new System.EventHandler(this.alphabeticalToolStripMenuItem_Click);
+            this.toolstripSortAlpha.Click += new System.EventHandler(this.toolstripSort_Click);
             // 
             // toolstripSortDif
             // 
@@ -226,8 +228,9 @@
             this.toolstripSortDif.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolstripSortDif.Name = "toolstripSortDif";
             this.toolstripSortDif.Size = new System.Drawing.Size(23, 22);
+            this.toolstripSortDif.Tag = "difficulty";
             this.toolstripSortDif.ToolTipText = "Difficulty";
-            this.toolstripSortDif.Click += new System.EventHandler(this.difficultyToolStripMenuItem_Click);
+            this.toolstripSortDif.Click += new System.EventHandler(this.toolstripSort_Click);
             // 
             // toolstripSortAuthor
             // 
@@ -236,17 +239,19 @@
             this.toolstripSortAuthor.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolstripSortAuthor.Name = "toolstripSortAuthor";
             this.toolstripSortAuthor.Size = new System.Drawing.Size(23, 22);
+            this.toolstripSortAuthor.Tag = "author";
             this.toolstripSortAuthor.ToolTipText = "Author Name";
-            this.toolstripSortAuthor.Click += new System.EventHandler(this.authorToolStripMenuItem_Click);
+            this.toolstripSortAuthor.Click += new System.EventHandler(this.toolstripSort_Click);
             // 
-            // toolStripButton5
+            // toolstripSortDirection
             // 
-            this.toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton5.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton5.Image")));
-            this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton5.Name = "toolStripButton5";
-            this.toolStripButton5.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton5.Text = "toolStripButton5";
+            this.toolstripSortDirection.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolstripSortDirection.Image = global::Thumper_Modding_Tool_resharp.Properties.Resources.icon_sort_32;
+            this.toolstripSortDirection.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolstripSortDirection.Name = "toolstripSortDirection";
+            this.toolstripSortDirection.Size = new System.Drawing.Size(23, 22);
+            this.toolstripSortDirection.ToolTipText = "Reverse  sort order";
+            this.toolstripSortDirection.Click += new System.EventHandler(this.toolstripSortDirection_Click);
             // 
             // ThumpNet
             // 
@@ -292,7 +297,7 @@
         private System.Windows.Forms.ToolStripButton toolstripSortDif;
         private System.Windows.Forms.ToolStripButton toolstripSortAuthor;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripButton toolStripButton5;
+        private System.Windows.Forms.ToolStripButton toolstripSortDirection;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
     }
 }

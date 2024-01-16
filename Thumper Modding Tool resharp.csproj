@@ -158,6 +158,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="image assets\icon-sort-32.png" />
     <None Include="image assets\icon-person-32.png" />
     <None Include="image assets\icon-alpha-32.png" />
     <None Include="image assets\icon_difficulty.png" />
