@@ -55,8 +55,10 @@
             // 
             // pnl_levels
             // 
+            this.pnl_levels.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pnl_levels.AutoScroll = true;
-            this.pnl_levels.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pnl_levels.Location = new System.Drawing.Point(0, 46);
             this.pnl_levels.Name = "pnl_levels";
             this.pnl_levels.Padding = new System.Windows.Forms.Padding(5);
