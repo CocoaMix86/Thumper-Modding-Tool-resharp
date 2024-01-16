@@ -8,7 +8,6 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Text;
 using System.Drawing;
-using System.Windows.Navigation;
 
 namespace Thumper_Modding_Tool_resharp
 {

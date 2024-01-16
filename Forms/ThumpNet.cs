@@ -9,11 +9,8 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
-using System.Windows.Documents;
 using System.Windows.Forms;
-using System.Windows.Input;
 using Thumper_Modding_Tool_resharp.Properties;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
 
 namespace Thumper_Modding_Tool_resharp
 {
