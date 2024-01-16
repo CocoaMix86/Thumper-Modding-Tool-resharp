@@ -355,6 +355,7 @@ namespace Thumper_Modding_Tool_resharp
                 //author name
                 Label author = new Label();
                 author.Text = $"{Level.Author} • {ThumperModdingTool.DateTime_Ago(Level.DateUTC)}";
+                author.Name = "labelAuthor";
                 author.AutoSize = true;
                 author.ForeColor = Color.White;
                 author.Font = new Font("Trebuchet MS", 10, FontStyle.Regular);
@@ -364,10 +365,10 @@ namespace Thumper_Modding_Tool_resharp
                 author.Anchor = AnchorStyles.Bottom;
                 //toolTip1.SetToolTip(author, $"Uploaded: {Level.DateUTC}");
                 //add controls to panel so they're visible
+                panel.Controls.Add(infoicon);
                 panel.Controls.Add(author);
                 panel.Controls.Add(name);
                 panel.Controls.Add(rankicon);
-                panel.Controls.Add(infoicon);
                 //download and add level button
                 Button load = new Button();
                 load.Text = "Download";
@@ -727,12 +728,18 @@ namespace Thumper_Modding_Tool_resharp
                 panel.Height += description.Height;
                 description.Anchor = AnchorStyles.Bottom;
                 Level.DescriptionExpanded = true;
+
+                Label author = (Label)panel.Controls.Find("labelAuthor", true)[0];
+                author.Text = $"{Level.Author} • {Level.DateUTC.ToShortDateString()}";
             }
             else {
                 Control toremove = panel.Controls.Find("description", true)[0];
                 panel.Height -= toremove.Height;
                 panel.Controls.Remove(toremove);
                 Level.DescriptionExpanded = false;
+
+                Label author = (Label)panel.Controls.Find("labelAuthor", true)[0];
+                author.Text = $"{Level.Author} • {ThumperModdingTool.DateTime_Ago(Level.DateUTC)}";
             }
         }
 
