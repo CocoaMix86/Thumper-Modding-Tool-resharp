@@ -63,14 +63,12 @@ namespace Thumper_Modding_Tool_resharp
             public bool DescriptionExpanded;
         }
 
-        WebClient wc;
         BackgroundWorker bgw;
         Action bgw_cb;
 
         List<ThumpNetLevel> Levels;
         string sortorder = "newest";
         List<Image> rankicons = new List<Image> { Resources.d0, Resources.d1, Resources.d2, Resources.d3, Resources.d4, Resources.d5, Resources.d6, Resources.d7 };
-        List<Panel> levelpanels = new List<Panel>();
         bool compactView;
 
         int numLevels;
@@ -191,7 +189,7 @@ namespace Thumper_Modding_Tool_resharp
                 string responseBody = httpResponse.Content.ReadAsStringAsync().Result;
 
                 return JsonConvert.DeserializeObject<LevelResponseBody>(responseBody);
-            } catch(Exception e) {
+            } catch(Exception) {
                 return null;
             }
         }
@@ -255,7 +253,6 @@ namespace Thumper_Modding_Tool_resharp
             if (Levels == null) return;
             Directory.CreateDirectory($@"ThumpNet\Cache\");
 
-            levelpanels.Clear();
             //id per panel. Helps with search
             int i = 0;
             foreach (ThumpNetLevel Level in Levels)
@@ -513,9 +510,7 @@ namespace Thumper_Modding_Tool_resharp
                             load_folder();
                     }
                 };
-
                 panel.Controls.Add(load);
-                levelpanels.Add(panel);
 
                 i++;
             }
