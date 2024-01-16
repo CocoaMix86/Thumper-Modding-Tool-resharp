@@ -22,6 +22,7 @@ namespace Thumper_Modding_Tool_resharp
             InitializeComponent();
             ThumperModdingTool = _ThumperModdingTool;
             menuStrip1.Renderer = new MyRenderer();
+            toolstripSortButtons.Renderer = new ToolStripOverride();
             compactView = Settings.Default.thumpnet_compactview;
 
             // Check for a local copy of thumpnet
@@ -603,49 +604,26 @@ namespace Thumper_Modding_Tool_resharp
 
         private void newestFirstToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            UncheckSortButtons(sender);
             sortorder = "newest";
-            LevelPanelSort();
-        }
-
-        private void oldestFirstToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            UncheckSortButtons(sender);
-            sortorder = "oldest";
             LevelPanelSort();
         }
 
         private void alphabeticalToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            UncheckSortButtons(sender);
             sortorder = "alpha";
             LevelPanelSort();
         }
 
         private void difficultyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            UncheckSortButtons(sender);
             sortorder = "difficulty";
             LevelPanelSort();
         }
 
         private void authorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            UncheckSortButtons(sender);
             sortorder = "author";
             LevelPanelSort();
-        }
-
-        private void UncheckSortButtons(object sender)
-        {
-            //uncheck all the sort buttons
-            newestFirstToolStripMenuItem.Checked = false;
-            oldestFirstToolStripMenuItem.Checked = false;
-            alphabeticalToolStripMenuItem.Checked = false;
-            difficultyToolStripMenuItem.Checked = false;
-            authorToolStripMenuItem.Checked = false;
-            //then check just the one selected
-            (sender as ToolStripMenuItem).Checked = true;
         }
 
         //Clicking Options will total the cache in MB and then display it on the clear cache button
@@ -767,6 +745,11 @@ namespace Thumper_Modding_Tool_resharp
                 panel.Controls.Remove(toremove);
                 Level.DescriptionExpanded = false;
             }
+        }
+
+        private void toolStripLabel1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

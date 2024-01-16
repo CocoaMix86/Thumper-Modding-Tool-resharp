@@ -163,9 +163,49 @@ namespace Thumper_Modding_Tool_resharp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icon_alpha_32 {
+            get {
+                object obj = ResourceManager.GetObject("icon_alpha_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icon_difficulty {
+            get {
+                object obj = ResourceManager.GetObject("icon_difficulty", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icon_info_32 {
             get {
                 object obj = ResourceManager.GetObject("icon_info_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icon_person_32 {
+            get {
+                object obj = ResourceManager.GetObject("icon_person_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icon_time_32 {
+            get {
+                object obj = ResourceManager.GetObject("icon_time_32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

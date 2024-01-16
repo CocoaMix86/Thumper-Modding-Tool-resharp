@@ -32,4 +32,19 @@ namespace Thumper_Modding_Tool_resharp
         public override Color MenuItemPressedGradientBegin { get { return Color.DarkRed; } }
         public override Color MenuItemPressedGradientEnd { get { return Color.Red; } }
     }
+
+    public class ToolStripOverride : ToolStripProfessionalRenderer
+    {
+        public ToolStripOverride() { }
+        protected override void OnRenderToolStripBorder(ToolStripRenderEventArgs e) { }
+        protected override void OnRenderButtonBackground(ToolStripItemRenderEventArgs e)
+        {
+            var btn = e.Item as ToolStripButton;
+            if (btn != null && btn.CheckOnClick && btn.Checked) {
+                Rectangle bounds = new Rectangle(Point.Empty, e.Item.Size);
+                e.Graphics.FillRectangle(Brushes.PaleTurquoise, bounds);
+            }
+            else base.OnRenderButtonBackground(e);
+        }
+    }
 }

@@ -158,6 +158,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="image assets\icon-person-32.png" />
+    <None Include="image assets\icon-alpha-32.png" />
+    <None Include="image assets\icon_difficulty.png" />
+    <None Include="image assets\icon-time-32.png" />
     <None Include="image assets\icon-info-32.png" />
     <EmbeddedResource Include="DLLs\Microsoft.WindowsAPICodePack.dll" />
     <EmbeddedResource Include="DLLs\Microsoft.WindowsAPICodePack.Shell.dll" />

@@ -34,12 +34,6 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.reloadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.compactViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sortToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.newestFirstToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.oldestFirstToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.alphabeticalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.difficultyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.authorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearCacheToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openCacheFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -47,17 +41,26 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.btnTxtSearchClear = new System.Windows.Forms.Label();
             this.txtSearch = new System.Windows.Forms.TextBox();
+            this.toolstripSortButtons = new System.Windows.Forms.ToolStrip();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            this.toolstripSortTime = new System.Windows.Forms.ToolStripButton();
+            this.toolstripSortAlpha = new System.Windows.Forms.ToolStripButton();
+            this.toolstripSortDif = new System.Windows.Forms.ToolStripButton();
+            this.toolstripSortAuthor = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
             this.menuStrip1.SuspendLayout();
+            this.toolstripSortButtons.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnl_levels
             // 
             this.pnl_levels.AutoScroll = true;
-            this.pnl_levels.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnl_levels.Location = new System.Drawing.Point(0, 24);
+            this.pnl_levels.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnl_levels.Location = new System.Drawing.Point(0, 46);
             this.pnl_levels.Name = "pnl_levels";
             this.pnl_levels.Padding = new System.Windows.Forms.Padding(5);
-            this.pnl_levels.Size = new System.Drawing.Size(814, 477);
+            this.pnl_levels.Size = new System.Drawing.Size(814, 455);
             this.pnl_levels.TabIndex = 0;
             // 
             // menuStrip1
@@ -66,7 +69,6 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.reloadToolStripMenuItem,
             this.compactViewToolStripMenuItem,
-            this.sortToolStripMenuItem,
             this.optionsToolStripMenuItem,
             this.searchToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -92,70 +94,6 @@
             this.compactViewToolStripMenuItem.Text = "Compact View";
             this.compactViewToolStripMenuItem.Click += new System.EventHandler(this.compactViewToolStripMenuItem_Click);
             // 
-            // sortToolStripMenuItem
-            // 
-            this.sortToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newestFirstToolStripMenuItem,
-            this.oldestFirstToolStripMenuItem,
-            this.alphabeticalToolStripMenuItem,
-            this.difficultyToolStripMenuItem,
-            this.authorToolStripMenuItem});
-            this.sortToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.sortToolStripMenuItem.Name = "sortToolStripMenuItem";
-            this.sortToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
-            this.sortToolStripMenuItem.Text = "Sort";
-            // 
-            // newestFirstToolStripMenuItem
-            // 
-            this.newestFirstToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.newestFirstToolStripMenuItem.Checked = true;
-            this.newestFirstToolStripMenuItem.CheckOnClick = true;
-            this.newestFirstToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.newestFirstToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.newestFirstToolStripMenuItem.Name = "newestFirstToolStripMenuItem";
-            this.newestFirstToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
-            this.newestFirstToolStripMenuItem.Text = "Newest first";
-            this.newestFirstToolStripMenuItem.Click += new System.EventHandler(this.newestFirstToolStripMenuItem_Click);
-            // 
-            // oldestFirstToolStripMenuItem
-            // 
-            this.oldestFirstToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.oldestFirstToolStripMenuItem.CheckOnClick = true;
-            this.oldestFirstToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.oldestFirstToolStripMenuItem.Name = "oldestFirstToolStripMenuItem";
-            this.oldestFirstToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
-            this.oldestFirstToolStripMenuItem.Text = "Oldest first";
-            this.oldestFirstToolStripMenuItem.Click += new System.EventHandler(this.oldestFirstToolStripMenuItem_Click);
-            // 
-            // alphabeticalToolStripMenuItem
-            // 
-            this.alphabeticalToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.alphabeticalToolStripMenuItem.CheckOnClick = true;
-            this.alphabeticalToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.alphabeticalToolStripMenuItem.Name = "alphabeticalToolStripMenuItem";
-            this.alphabeticalToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
-            this.alphabeticalToolStripMenuItem.Text = "Alphabetical";
-            this.alphabeticalToolStripMenuItem.Click += new System.EventHandler(this.alphabeticalToolStripMenuItem_Click);
-            // 
-            // difficultyToolStripMenuItem
-            // 
-            this.difficultyToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.difficultyToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.difficultyToolStripMenuItem.Name = "difficultyToolStripMenuItem";
-            this.difficultyToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
-            this.difficultyToolStripMenuItem.Text = "Difficulty";
-            this.difficultyToolStripMenuItem.Click += new System.EventHandler(this.difficultyToolStripMenuItem_Click);
-            // 
-            // authorToolStripMenuItem
-            // 
-            this.authorToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.authorToolStripMenuItem.CheckOnClick = true;
-            this.authorToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.authorToolStripMenuItem.Name = "authorToolStripMenuItem";
-            this.authorToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
-            this.authorToolStripMenuItem.Text = "Author";
-            this.authorToolStripMenuItem.Click += new System.EventHandler(this.authorToolStripMenuItem_Click);
-            // 
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -172,7 +110,7 @@
             this.clearCacheToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.clearCacheToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.clearCacheToolStripMenuItem.Name = "clearCacheToolStripMenuItem";
-            this.clearCacheToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.clearCacheToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.clearCacheToolStripMenuItem.Text = "Clear Cache";
             this.clearCacheToolStripMenuItem.Click += new System.EventHandler(this.clearCacheToolStripMenuItem_Click);
             // 
@@ -181,7 +119,7 @@
             this.openCacheFolderToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.openCacheFolderToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.openCacheFolderToolStripMenuItem.Name = "openCacheFolderToolStripMenuItem";
-            this.openCacheFolderToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.openCacheFolderToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.openCacheFolderToolStripMenuItem.Text = "Open Cache Folder";
             this.openCacheFolderToolStripMenuItem.Click += new System.EventHandler(this.openCacheFolderToolStripMenuItem_Click);
             // 
@@ -205,8 +143,8 @@
             this.btnTxtSearchClear.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnTxtSearchClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTxtSearchClear.ForeColor = System.Drawing.Color.Red;
-            this.btnTxtSearchClear.Location = new System.Drawing.Point(309, 1);
-            this.btnTxtSearchClear.MinimumSize = new System.Drawing.Size(0, 22);
+            this.btnTxtSearchClear.Location = new System.Drawing.Point(269, 1);
+            this.btnTxtSearchClear.MinimumSize = new System.Drawing.Size(2, 22);
             this.btnTxtSearchClear.Name = "btnTxtSearchClear";
             this.btnTxtSearchClear.Size = new System.Drawing.Size(15, 22);
             this.btnTxtSearchClear.TabIndex = 2;
@@ -223,12 +161,92 @@
             this.txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSearch.ForeColor = System.Drawing.Color.White;
-            this.txtSearch.Location = new System.Drawing.Point(323, 1);
+            this.txtSearch.Location = new System.Drawing.Point(283, 1);
             this.txtSearch.MaxLength = 100;
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(464, 22);
             this.txtSearch.TabIndex = 0;
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
+            // 
+            // toolstripSortButtons
+            // 
+            this.toolstripSortButtons.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.toolstripSortButtons.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolstripSortButtons.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripLabel1,
+            this.toolstripSortTime,
+            this.toolstripSortAlpha,
+            this.toolstripSortDif,
+            this.toolstripSortAuthor,
+            this.toolStripSeparator1,
+            this.toolStripButton5});
+            this.toolstripSortButtons.Location = new System.Drawing.Point(0, 24);
+            this.toolstripSortButtons.Name = "toolstripSortButtons";
+            this.toolstripSortButtons.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.toolstripSortButtons.Size = new System.Drawing.Size(814, 25);
+            this.toolstripSortButtons.TabIndex = 3;
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripLabel1
+            // 
+            this.toolStripLabel1.ForeColor = System.Drawing.Color.White;
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            this.toolStripLabel1.Size = new System.Drawing.Size(65, 22);
+            this.toolStripLabel1.Text = "Sort Mode:";
+            this.toolStripLabel1.Click += new System.EventHandler(this.toolStripLabel1_Click);
+            // 
+            // toolstripSortTime
+            // 
+            this.toolstripSortTime.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolstripSortTime.Image = global::Thumper_Modding_Tool_resharp.Properties.Resources.icon_time_32;
+            this.toolstripSortTime.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolstripSortTime.Name = "toolstripSortTime";
+            this.toolstripSortTime.Size = new System.Drawing.Size(23, 22);
+            this.toolstripSortTime.ToolTipText = "Time uploaded";
+            this.toolstripSortTime.Click += new System.EventHandler(this.newestFirstToolStripMenuItem_Click);
+            // 
+            // toolstripSortAlpha
+            // 
+            this.toolstripSortAlpha.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolstripSortAlpha.Image = global::Thumper_Modding_Tool_resharp.Properties.Resources.icon_alpha_32;
+            this.toolstripSortAlpha.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolstripSortAlpha.Name = "toolstripSortAlpha";
+            this.toolstripSortAlpha.Size = new System.Drawing.Size(23, 22);
+            this.toolstripSortAlpha.ToolTipText = "Alphabetical";
+            this.toolstripSortAlpha.Click += new System.EventHandler(this.alphabeticalToolStripMenuItem_Click);
+            // 
+            // toolstripSortDif
+            // 
+            this.toolstripSortDif.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolstripSortDif.Image = global::Thumper_Modding_Tool_resharp.Properties.Resources.icon_difficulty;
+            this.toolstripSortDif.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolstripSortDif.Name = "toolstripSortDif";
+            this.toolstripSortDif.Size = new System.Drawing.Size(23, 22);
+            this.toolstripSortDif.ToolTipText = "Difficulty";
+            this.toolstripSortDif.Click += new System.EventHandler(this.difficultyToolStripMenuItem_Click);
+            // 
+            // toolstripSortAuthor
+            // 
+            this.toolstripSortAuthor.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolstripSortAuthor.Image = global::Thumper_Modding_Tool_resharp.Properties.Resources.icon_person_32;
+            this.toolstripSortAuthor.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolstripSortAuthor.Name = "toolstripSortAuthor";
+            this.toolstripSortAuthor.Size = new System.Drawing.Size(23, 22);
+            this.toolstripSortAuthor.ToolTipText = "Author Name";
+            this.toolstripSortAuthor.Click += new System.EventHandler(this.authorToolStripMenuItem_Click);
+            // 
+            // toolStripButton5
+            // 
+            this.toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton5.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton5.Image")));
+            this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton5.Name = "toolStripButton5";
+            this.toolStripButton5.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton5.Text = "toolStripButton5";
             // 
             // ThumpNet
             // 
@@ -236,6 +254,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.ClientSize = new System.Drawing.Size(814, 501);
+            this.Controls.Add(this.toolstripSortButtons);
             this.Controls.Add(this.btnTxtSearchClear);
             this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.pnl_levels);
@@ -247,6 +266,8 @@
             this.Load += new System.EventHandler(this.ThumpNet_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.toolstripSortButtons.ResumeLayout(false);
+            this.toolstripSortButtons.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -258,18 +279,20 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem reloadToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem compactViewToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem sortToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem newestFirstToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem oldestFirstToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem clearCacheToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem searchToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem alphabeticalToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem difficultyToolStripMenuItem;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Label btnTxtSearchClear;
-        private System.Windows.Forms.ToolStripMenuItem authorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openCacheFolderToolStripMenuItem;
         private System.Windows.Forms.TextBox txtSearch;
+        private System.Windows.Forms.ToolStrip toolstripSortButtons;
+        private System.Windows.Forms.ToolStripButton toolstripSortTime;
+        private System.Windows.Forms.ToolStripButton toolstripSortAlpha;
+        private System.Windows.Forms.ToolStripButton toolstripSortDif;
+        private System.Windows.Forms.ToolStripButton toolstripSortAuthor;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripButton toolStripButton5;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
     }
 }
