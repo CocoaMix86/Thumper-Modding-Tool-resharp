@@ -32,20 +32,20 @@ namespace Thumper_Modding_Tool_resharp
             countRequestBody.offset = 0;
             countRequestBody.limit = 0;
 
-            urlBase = "http://127.0.0.2";
-            Console.WriteLine("Attempting local thumpnet connection");
-            var responseObject = MakeLevelPostRequest(countRequestBody);
+            //urlBase = "http://127.0.0.2";
+            //Console.WriteLine("Attempting local thumpnet connection");
+            //var responseObject = MakeLevelPostRequest(countRequestBody);
 
             // Local copy not found
-            if (responseObject == null) {
+            //if (responseObject == null) {
                 urlBase = "https://thumpnet.anthofoxo.xyz";
                 Console.WriteLine("Attempting remote thumpnet connection");
-                responseObject = MakeLevelPostRequest(countRequestBody);
+                var responseObject = MakeLevelPostRequest(countRequestBody);
 
                 if (responseObject == null) throw new ApplicationException("ThumpNet is not accessable");
                 else Console.WriteLine("Using remote thumpnet");
 
-            } else Console.WriteLine("Using local thumpnet");
+            //} else Console.WriteLine("Using local thumpnet");
 
             numLevels = responseObject.count;
             urlDl = urlBase + "/cdn/";
