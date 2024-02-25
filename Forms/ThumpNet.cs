@@ -8,8 +8,10 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Security.Policy;
 using System.Text;
 using System.Windows.Forms;
+using System.Windows.Shapes;
 using Thumper_Modding_Tool_resharp.Properties;
 
 namespace Thumper_Modding_Tool_resharp
@@ -32,20 +34,26 @@ namespace Thumper_Modding_Tool_resharp
             countRequestBody.offset = 0;
             countRequestBody.limit = 0;
 
-            //urlBase = "http://127.0.0.2";
-            //Console.WriteLine("Attempting local thumpnet connection");
-            //var responseObject = MakeLevelPostRequest(countRequestBody);
+            LevelResponseBody? responseObject = null;
+            bool attemptLocalConnections = true; // Make sure this is false for public releases
+
+            if (attemptLocalConnections)
+            {
+                urlBase = "http://127.0.0.2";
+                Console.WriteLine("Attempting local thumpnet connection");
+                responseObject = MakeLevelPostRequest(countRequestBody);
+            }
 
             // Local copy not found
-            //if (responseObject == null) {
+            if (responseObject == null) {
                 urlBase = "https://thumpnet.anthofoxo.xyz";
                 Console.WriteLine("Attempting remote thumpnet connection");
-                var responseObject = MakeLevelPostRequest(countRequestBody);
+                responseObject = MakeLevelPostRequest(countRequestBody);
 
                 if (responseObject == null) throw new ApplicationException("ThumpNet is not accessable");
                 else Console.WriteLine("Using remote thumpnet");
 
-            //} else Console.WriteLine("Using local thumpnet");
+            } else Console.WriteLine("Using local thumpnet");
 
             numLevels = responseObject.count;
             urlDl = urlBase + "/cdn/";
@@ -54,6 +62,7 @@ namespace Thumper_Modding_Tool_resharp
         public class ThumpNetLevel
         {
             public DateTime DateUTC;
+            public string? CdnRef;
             public string? ThumbnailURL;
             public string Name, Author, Song, Description, DownloadURL;
             public int Difficulty;
@@ -156,8 +165,7 @@ namespace Thumper_Modding_Tool_resharp
         {
             public int id;
             public string name;
-            public string? content;
-            public string? thumbnail;
+            public string? cdn;
             public string? description;
             public int? difficulty;
             public int? bpm;
@@ -209,7 +217,7 @@ namespace Thumper_Modding_Tool_resharp
             // add each level from database
             foreach (var level in levels.levels)
             {
-                if(level.content == null) continue;
+                if(level.cdn == null) continue;
 
                 // setup utc datetime
                 DateTime dt = DateTime.ParseExact(level.timestamp, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
@@ -230,11 +238,12 @@ namespace Thumper_Modding_Tool_resharp
                     Difficulty = level.difficulty ?? 0,
                     Song = level.song ?? "",
                     Description = level.description ?? "",
-                    ThumbnailURL = level.thumbnail,
+                    CdnRef = level.cdn,
+                    ThumbnailURL = (level.cdn == null) ? "" : $"{urlDl}{level.cdn}/thumb.png",
 
                     // Important, thumbails are updated to use uuid names, this ensures thumbnails will work for all level names
                     // Downloaded content/zip files do not do this, please fix :>
-                    DownloadURL = (level.content == null) ? "" : $"{urlDl}{level.content}",
+                    DownloadURL = (level.cdn == null) ? "" : $"{urlDl}{level.cdn}/content.zip",
                     //
                     DescriptionExpanded = false
                 };
@@ -280,7 +289,17 @@ namespace Thumper_Modding_Tool_resharp
                     thumbnail.Size = new Size(256,144);
                     thumbnail.Location = new Point(0, 0);
                     //if no thumbnail URL found, write level name on black background
-                    if (Level.ThumbnailURL == null)
+
+                    // The api doesnt tell you if a thumbnail exists, you must check for the resource
+
+                    //string cache_fn = $@"ThumpNet\Cache\{Level.Author}_{Level.Name}.thumb";
+                    string cache_filename = $@"ThumpNet\Cache\{Level.CdnRef}.thumb";
+
+                    // if (Level.ThumbnailURL == null)
+                    // API Doesnt tell us if a thumbnail exists
+                    // WebClient.DownloadFileAsync saves a 0 byte file on failure,
+                    // simply first check this filesize, if 0, no thumbnail exists
+                    if (new System.IO.FileInfo($@"ThumpNet\Cache\{Level.CdnRef}.thumb").Length == 0)
                     {
                         Bitmap bmp = new Bitmap(256, 144);
                         Graphics g = Graphics.FromImage(bmp);
@@ -295,8 +314,6 @@ namespace Thumper_Modding_Tool_resharp
                     //if thumbnail URL is found, download image
                     else
                     {
-                        //string cache_fn = $@"ThumpNet\Cache\{Level.Author}_{Level.Name}.thumb";
-                        string cache_filename = $@"ThumpNet\Cache\{Level.ThumbnailURL}.thumb";
                         if (!File.Exists(cache_filename))
                         {
                             WebClient wc_thumb = new WebClient();
@@ -306,11 +323,15 @@ namespace Thumper_Modding_Tool_resharp
                                 {
                                     thumbnail.Image = Image.FromFile(cache_filename);
                                     wc_thumb.Dispose();
-                                } catch(Exception e2) {
+                                }
+                                catch (Exception e2)
+                                {
                                     Console.WriteLine(e2.Message);
                                 }
+                                
                             };
-                            Uri uri = new Uri($"{urlDl}{Level.ThumbnailURL}");
+
+                            Uri uri = new Uri(Level.ThumbnailURL);
                             wc_thumb.DownloadFileAsync(uri, cache_filename);
                         }
                         else
