@@ -66,6 +66,7 @@ namespace Thumper_Modding_Tool_resharp
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.lblCustomDiffHelp = new System.Windows.Forms.Label();
+            this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLevels)).BeginInit();
             this.panelHash.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picSplashScreen)).BeginInit();
@@ -73,13 +74,12 @@ namespace Thumper_Modding_Tool_resharp
             // 
             // menuStrip1
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-                this.optionsToolStripMenuItem1
-            });
             this.menuStrip1.BackColor = System.Drawing.Color.Maroon;
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.optionsToolStripMenuItem1});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(519, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(519, 26);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -173,6 +173,7 @@ namespace Thumper_Modding_Tool_resharp
             this.btnModMode.Size = new System.Drawing.Size(105, 45);
             this.btnModMode.TabIndex = 3;
             this.btnModMode.Text = "is OFF";
+            this.toolTip1.SetToolTip(this.btnModMode, "Click to change state");
             this.btnModMode.UseVisualStyleBackColor = false;
             this.btnModMode.Click += new System.EventHandler(this.btnModMode_Click);
             // 
@@ -551,6 +552,8 @@ namespace Thumper_Modding_Tool_resharp
             this.Text = "Thumper Mod Loader";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ThumperModdingTool_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLevels)).EndInit();
             this.panelHash.ResumeLayout(false);
             this.panelHash.PerformLayout();
