@@ -23,10 +23,10 @@ namespace Thumper_Modding_Tool_resharp
         }
 
         private readonly string Title = $"Thumper Mod Loader v{Application.ProductVersion}";
-        private readonly CommonOpenFileDialog cfd_lvl = new CommonOpenFileDialog() { IsFolderPicker = true, Multiselect = false };
-        private readonly OpenFileDialog ofd_img = new OpenFileDialog() { Title = "Choose Image", Filter = "DDS files(*.DDS)|*.DDS" };
+        private readonly CommonOpenFileDialog cfd_lvl = new() { IsFolderPicker = true, Multiselect = false };
+        private readonly OpenFileDialog ofd_img = new() { Title = "Choose Image", Filter = "DDS files(*.DDS)|*.DDS" };
 		private ThumpNet tnet = null;
-        public ObservableCollection<LevelTraits> LoadedLevels = new ObservableCollection<LevelTraits>();
+        public ObservableCollection<LevelTraits> LoadedLevels = new();
         private bool _ChangesMade = false;
         public bool ChangesMade
         {
@@ -430,7 +430,7 @@ namespace Thumper_Modding_Tool_resharp
             }
 
             // write dds to splash screen file
-            List<byte> data = new List<byte>();
+            List<byte> data = new();
             data.AddRange(new byte[] { 14, 0, 0, 0 });
             data.AddRange(File.ReadAllBytes(ofd_img.FileName));
             File.WriteAllBytes("lib/b868db07.pc", data.ToArray());

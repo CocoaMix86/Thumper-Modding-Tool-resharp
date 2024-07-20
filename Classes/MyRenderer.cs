@@ -39,9 +39,8 @@ namespace Thumper_Modding_Tool_resharp
         protected override void OnRenderToolStripBorder(ToolStripRenderEventArgs e) { }
         protected override void OnRenderButtonBackground(ToolStripItemRenderEventArgs e)
         {
-            var btn = e.Item as ToolStripButton;
-            if (btn != null && btn.CheckOnClick && btn.Checked) {
-                Rectangle bounds = new Rectangle(Point.Empty, e.Item.Size);
+            if (e.Item is ToolStripButton btn && btn.CheckOnClick && btn.Checked) {
+                Rectangle bounds = new(Point.Empty, e.Item.Size);
                 e.Graphics.FillRectangle(Brushes.PaleTurquoise, bounds);
             }
             else base.OnRenderButtonBackground(e);

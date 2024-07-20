@@ -13,12 +13,12 @@ namespace Thumper_Modding_Tool_resharp
 {
 	public partial class ThumperModdingTool
 	{
-		JsonLoadSettings jo = new JsonLoadSettings() { CommentHandling = CommentHandling.Load};
+		JsonLoadSettings jo = new() { CommentHandling = CommentHandling.Load};
 
-		List<string> file_types = new List<string>() { "gate", "leaf", "lvl", "master", "xfm", "config" };
-		List<string> file_special = new List<string>() { "spn", "samp" };
+		List<string> file_types = new() { "gate", "leaf", "lvl", "master", "xfm", "config" };
+		List<string> file_special = new() { "spn", "samp" };
 
-		List<string> list_cache_filename = new List<string>() { 
+		List<string> list_cache_filename = new() { 
 			"23490781.pc", 
 			"8b497b8b.pc", 
 			"feac0d77.pc", 
@@ -28,7 +28,7 @@ namespace Thumper_Modding_Tool_resharp
 			"4c3c80cf.pc", 
 			"7394d1b7.pc" };
 
-		List<string> list_config_cache_filename = new List<string>() { 
+		List<string> list_config_cache_filename = new() { 
 			"f296f3ab.pc", 
 			"c2b80908.pc", 
 			"a9045489.pc", 
@@ -38,7 +38,7 @@ namespace Thumper_Modding_Tool_resharp
 			"7b0b72e8.pc", 
 			"f9ac5eb5.pc" };
 
-		List<string> trait_types = new List<string> {
+		List<string> trait_types = new() {
 			"kTraitInt",
 			"kTraitBool",
 			"kTraitFloat",
@@ -61,7 +61,7 @@ namespace Thumper_Modding_Tool_resharp
 			"kNumTraitTypes"
 		};
 
-		List<string> obj_types = new List<string> {
+		List<string> obj_types = new() {
 			"SequinLeaf",
 			"SequinLevel",
 			"SequinGate",
@@ -83,8 +83,8 @@ namespace Thumper_Modding_Tool_resharp
 			// title screen
 			// drool logo () [these are DDS images, just remove first 4 bytes to view]
 			// drool logo (startup)
-			List<string> src_filenames = new List<string>() { "lib/original/2e7b0500.pc", "lib/original/e0c51024.pc", "lib/original/f78b7d78.pc", "lib/original/d0d6149c.pc", "lib/original/aefa4352.pc", "lib/original/b868db07.pc" };
-			List<string> custom_filenames = new List<string>();
+			List<string> src_filenames = new() { "lib/original/2e7b0500.pc", "lib/original/e0c51024.pc", "lib/original/f78b7d78.pc", "lib/original/d0d6149c.pc", "lib/original/aefa4352.pc", "lib/original/b868db07.pc" };
+			List<string> custom_filenames = new();
 
 			foreach (string file in Directory.EnumerateFiles(@"out", "*.*", SearchOption.AllDirectories))
 				custom_filenames.Add(file);
@@ -133,12 +133,12 @@ namespace Thumper_Modding_Tool_resharp
 			//return;
 
             int menulength = 2548;
-			List<string> src_filenames = new List<string>() { "lib/2e7b0500.pc", "lib/e0c51024.pc", "lib/f78b7d78.pc", "lib/d0d6149c.pc", "lib/aefa4352.pc", "lib/b868db07.pc" };
+			List<string> src_filenames = new() { "lib/2e7b0500.pc", "lib/e0c51024.pc", "lib/f78b7d78.pc", "lib/d0d6149c.pc", "lib/aefa4352.pc", "lib/b868db07.pc" };
 			//these hashes are literally "customlevel#" hashed
-			List<string> menu_hashes = new List<string>() { "1DCB06CE", "2D5C3C41", "273EA275", "EBA1CBD7", "1F8AD438", "DDF57F91", "9402A958", "FB3C6A42", "85E4559B" };
-			List<string> menu_names = new List<string>();
+			List<string> menu_hashes = new() { "1DCB06CE", "2D5C3C41", "273EA275", "EBA1CBD7", "1F8AD438", "DDF57F91", "9402A958", "FB3C6A42", "85E4559B" };
+			List<string> menu_names = new();
 			//clear \out\ directory so that old level data is not stored anymore
-			DirectoryInfo _out = new DirectoryInfo(@"out");
+			DirectoryInfo _out = new(@"out");
 			foreach (string file in Directory.EnumerateFiles(@"out", "*.*", SearchOption.AllDirectories)) File.Delete(file);
 			foreach (DirectoryInfo dir in _out.GetDirectories()) dir.Delete();
 

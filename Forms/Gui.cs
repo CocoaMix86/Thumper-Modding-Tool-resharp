@@ -8,7 +8,7 @@ namespace Thumper_Modding_Tool_resharp
 {
 	public partial class ThumperModdingTool
 	{
-		private readonly CommonOpenFileDialog cfd_game = new CommonOpenFileDialog() { IsFolderPicker = true, Multiselect = false };
+		private readonly CommonOpenFileDialog cfd_game = new() { IsFolderPicker = true, Multiselect = false };
 		private bool Thumper_Running()
         {
 			//get list of current running processes
@@ -27,7 +27,6 @@ namespace Thumper_Modding_Tool_resharp
 
 		private void Read_Config(bool skip)
 		{
-			string _S = Properties.Settings.Default.game_dir;
 			if (skip && Properties.Settings.Default.game_dir != "none")
 				return;
 

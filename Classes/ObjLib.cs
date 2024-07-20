@@ -44,7 +44,7 @@ namespace Thumper_Modding_Tool_resharp
         }
         public byte[] ToBytes()
         {
-            List<byte> bytes = new List<byte>();
+            List<byte> bytes = new();
 
             bytes.AddRange(BitConverter.GetBytes(8));
             bytes.AddRange(BitConverter.GetBytes(type));

@@ -30,7 +30,7 @@ namespace Thumper_Modding_Tool_resharp
             // Check for a local copy of thumpnet
             // If a local version is accessable, use it
             // Otherwise use the main
-            LevelRequestBody countRequestBody = new LevelRequestBody();
+            LevelRequestBody countRequestBody = new();
             countRequestBody.offset = 0;
             countRequestBody.limit = 0;
 
@@ -76,7 +76,7 @@ namespace Thumper_Modding_Tool_resharp
         List<ThumpNetLevel> Levels;
         string sortorder = "time";
         bool sortdirection = true;
-        List<Image> rankicons = new List<Image> { Resources.d0, Resources.d1, Resources.d2, Resources.d3, Resources.d4, Resources.d5, Resources.d6, Resources.d7 };
+        List<Image> rankicons = new() { Resources.d0, Resources.d1, Resources.d2, Resources.d3, Resources.d4, Resources.d5, Resources.d6, Resources.d7 };
         bool compactView;
 
         int numLevels;
@@ -206,7 +206,7 @@ namespace Thumper_Modding_Tool_resharp
             // init global levels
             Levels = new List<ThumpNetLevel>();
 
-            LevelRequestBody requestBody = new LevelRequestBody();
+            LevelRequestBody requestBody = new();
             requestBody.expand.Add("level");
             requestBody.expand.Add("user");
             requestBody.offset = 0;
@@ -282,7 +282,7 @@ namespace Thumper_Modding_Tool_resharp
                 {
                     offset = 144;
                     //This pciturebox contains the level thumbnail
-                    PictureBox thumbnail = new PictureBox();
+                    PictureBox thumbnail = new();
                     thumbnail.Tag = "thumbnail";
                     thumbnail.Name = "thumbnail";
                     thumbnail.SizeMode = PictureBoxSizeMode.Zoom;
@@ -301,11 +301,11 @@ namespace Thumper_Modding_Tool_resharp
                     // simply first check this filesize, if 0, no thumbnail exists
                     if (File.Exists(cache_filename) && new FileInfo($@"ThumpNet\Cache\{Level.CdnRef}.thumb").Length == 0)
                     {
-                        Bitmap bmp = new Bitmap(256, 144);
+                        Bitmap bmp = new(256, 144);
                         Graphics g = Graphics.FromImage(bmp);
-                        using SolidBrush b = new SolidBrush(Color.Black);
-                        using SolidBrush w = new SolidBrush(Color.White);
-                        using Font f = new Font("Trebuchet MS", 12, FontStyle.Bold);
+                        using SolidBrush b = new(Color.Black);
+                        using SolidBrush w = new(Color.White);
+                        using Font f = new("Trebuchet MS", 12, FontStyle.Bold);
                         Size txtsz = TextRenderer.MeasureText(Level.Name, f);
                         g.FillRectangle(b, g.ClipBounds);
                         g.DrawString(Level.Name, f, w, 128 - txtsz.Width / 2, 72 - txtsz.Height / 2);
@@ -316,7 +316,7 @@ namespace Thumper_Modding_Tool_resharp
                     {
                         if (!File.Exists(cache_filename))
                         {
-                            WebClient wc_thumb = new WebClient();
+                            WebClient wc_thumb = new();
                             wc_thumb.DownloadFileCompleted += (sender, e) =>
                             {
                                 try
@@ -331,7 +331,7 @@ namespace Thumper_Modding_Tool_resharp
                                 
                             };
 
-                            Uri uri = new Uri(Level.ThumbnailURL);
+                            Uri uri = new(Level.ThumbnailURL);
                             wc_thumb.DownloadFileAsync(uri, cache_filename);
                         }
                         else
@@ -349,7 +349,7 @@ namespace Thumper_Modding_Tool_resharp
                 }
 
                 //contains the rank icon
-                PictureBox rankicon = new PictureBox();
+                PictureBox rankicon = new();
                 rankicon.SizeMode = PictureBoxSizeMode.Zoom;
                 rankicon.Size = new Size(25, 25);
                 rankicon.Location = new Point(-2, 2+offset);
@@ -357,7 +357,7 @@ namespace Thumper_Modding_Tool_resharp
                 rankicon.Anchor = AnchorStyles.Bottom;
                 toolTip1.SetToolTip(rankicon, $@"Difficulty: {"".PadLeft(Level.Difficulty, '◆').PadRight(7, '◇')}");
                 //info/description button
-                PictureBox infoicon = new PictureBox();
+                PictureBox infoicon = new();
                 infoicon.SizeMode = PictureBoxSizeMode.Zoom;
                 infoicon.Size = new Size(15, 15);
                 infoicon.Location = new Point(panel.Width - 17, 2 + offset);
@@ -366,7 +366,7 @@ namespace Thumper_Modding_Tool_resharp
                 infoicon.Click += infoicon_Click;
                 infoicon.Cursor = System.Windows.Forms.Cursors.Hand;
                 //level name
-                Label name = new Label();
+                Label name = new();
                 name.Text = Level.Name;
                 name.AutoSize = true;
                 name.ForeColor = Color.White;
@@ -374,7 +374,7 @@ namespace Thumper_Modding_Tool_resharp
                 name.Location = new Point(20, 3+offset);
                 name.Anchor = AnchorStyles.Bottom;
                 //author name
-                Label author = new Label();
+                Label author = new();
                 author.Text = $"{Level.Author} • {ThumperModdingTool.DateTime_Ago(Level.DateUTC)}";
                 author.Name = "labelAuthor";
                 author.AutoSize = true;
@@ -391,7 +391,7 @@ namespace Thumper_Modding_Tool_resharp
                 panel.Controls.Add(name);
                 panel.Controls.Add(rankicon);
                 //download and add level button
-                Button load = new Button();
+                Button load = new();
                 load.Text = "Download";
                 load.Font = new Font("Trebuchet MS", 10, FontStyle.Bold);
                 load.Size = new Size(252, 32);
@@ -481,7 +481,7 @@ namespace Thumper_Modding_Tool_resharp
                     Action load_zip = () =>
                     {
                         load.Text = "Extracting...";
-                        BackgroundWorker bgw_extract = new BackgroundWorker();
+                        BackgroundWorker bgw_extract = new();
                         bgw_extract.DoWork += (object sender, DoWorkEventArgs e) =>
                         {
                             if (Directory.Exists(fn)) Directory.Delete(fn, true);
@@ -501,7 +501,7 @@ namespace Thumper_Modding_Tool_resharp
                     Action do_download = () =>
                     {
                         // this cant be cancelled right now, need to implement that but too lazy right now.
-                        WebClient wc_dl = new WebClient();
+                        WebClient wc_dl = new();
                         wc_dl.Proxy = null;
                         wc_dl.DownloadFileCompleted += (sender, e) =>
                         {
@@ -647,11 +647,11 @@ namespace Thumper_Modding_Tool_resharp
             long foldersize = 0;
             foreach (string name in files) {
                 // Use FileInfo to get length of each file.
-                FileInfo info = new FileInfo(name);
+                FileInfo info = new(name);
                 foldersize += info.Length;
             }
 
-            clearCacheToolStripMenuItem.Text = $@"Clear Cache ({(foldersize/1024/1024).ToString()}MB)";
+            clearCacheToolStripMenuItem.Text = $@"Clear Cache ({foldersize/1024/1024}MB)";
         }
         private void clearCacheToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -737,7 +737,7 @@ namespace Thumper_Modding_Tool_resharp
             Panel panel = (Panel)c.Parent;
             ThumpNetLevel Level = Levels.First(x => x.LevelPanel.Name == panel.Name);
             if (!Level.DescriptionExpanded) {
-                Label description = new Label();
+                Label description = new();
                 description.Text = Level.Description;
                 description.MaximumSize = new Size(256, 1000);
                 description.Location = new Point(1, compactView ? 0 : 144);

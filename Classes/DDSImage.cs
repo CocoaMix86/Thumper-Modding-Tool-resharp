@@ -37,11 +37,8 @@ namespace DDS
         private const uint MAGIC_NUMBER = 0x20534444;
 
         private const uint DDPF_ALPHAPIXELS = 0x00000001;
-        private const uint DDPF_ALPHA = 0x00000002; // Alpha channel only. Deprecated.
         private const uint DDPF_FOURCC = 0x00000004;
         private const uint DDPF_RGB = 0x00000040;
-        private const uint DDPF_YUV = 0x00000200;
-        private const uint DDPF_LUMINANCE = 0x00020000;
 
         private const int DDSD_CAPS = 0x00000001;
         private const int DDSD_HEIGHT = 0x00000002;
@@ -49,21 +46,10 @@ namespace DDS
         private const int DDSD_PITCH = 0x00000008;
         private const int DDSD_PIXELFORMAT = 0x00001000;
         private const int DDSD_MIPMAPCOUNT = 0x00020000;
-        private const int DDSD_LINEARSIZE = 0x00080000;
-        private const int DDSD_DEPTH = 0x00800000;
 
         private const int DDSCAPS_COMPLEX = 0x00000008;
         private const int DDSCAPS_TEXTURE = 0x00001000;
         private const int DDSCAPS_MIPMAP = 0x00400000;
-
-        private const int DDSCAPS2_CUBEMAP = 0x00000200;
-        private const int DDSCAPS2_CUBEMAP_POSITIVEX = 0x00000400;
-        private const int DDSCAPS2_CUBEMAP_NEGATIVEX = 0x00000800;
-        private const int DDSCAPS2_CUBEMAP_POSITIVEY = 0x00001000;
-        private const int DDSCAPS2_CUBEMAP_NEGATIVEY = 0x00002000;
-        private const int DDSCAPS2_CUBEMAP_POSITIVEZ = 0x00004000;
-        private const int DDSCAPS2_CUBEMAP_NEGATIVEZ = 0x00008000;
-        private const int DDSCAPS2_VOLUME = 0x00200000;
 
         private const uint FOURCC_DXT1 = 0x31545844;
         private const uint FOURCC_DXT2 = 0x32545844;
@@ -125,12 +111,12 @@ namespace DDS
         public DDSImage() { }
 
         public static DDSImage Load(string Filename) { using (FileStream _stream = File.OpenRead(Filename)) { return Load(_stream); } }
-        public static DDSImage Load(byte[] FileContents) { using (MemoryStream _stream = new MemoryStream(FileContents)) { return Load(_stream); } }
+        public static DDSImage Load(byte[] FileContents) { using (MemoryStream _stream = new(FileContents)) { return Load(_stream); } }
         public static DDSImage Load(Stream Source)
         {
-            DDSImage _dds = new DDSImage();
+            DDSImage _dds = new();
 
-            using (BinaryReader _data = new BinaryReader(Source))
+            using (BinaryReader _data = new(Source))
             {
                 if (_data.ReadInt32() != DDSImage.MAGIC_NUMBER)
                 {
@@ -332,7 +318,7 @@ namespace DDS
         {
             public static Bitmap Image(byte[] Data, int W, int H, uint CompressionMode)
             {
-                Bitmap _img = new Bitmap((W < 4) ? 4 : W, (H < 4) ? 4 : H);
+                Bitmap _img = new((W < 4) ? 4 : W, (H < 4) ? 4 : H);
 
                 switch (CompressionMode)
                 {
@@ -717,7 +703,7 @@ namespace DDS
 
             private static Bitmap Linear(byte[] Data, int W, int H, uint bpp)
             {
-                Bitmap _img = new Bitmap(W, H);
+                Bitmap _img = new(W, H);
 
                 int _a, _r, _g, _b, _c, _pos;
 
@@ -773,7 +759,7 @@ namespace DDS
                     case 24: // R8G8B8
                         _a = 0xFF << 24;
 
-                        using (BinaryReader _reader = new BinaryReader(new MemoryStream(Data)))
+                        using (BinaryReader _reader = new(new MemoryStream(Data)))
                         {
                             _reader.BaseStream.Seek(0, SeekOrigin.Begin);
 
@@ -881,9 +867,7 @@ namespace DDS
                     return false;
             }
 
-            uint _bpp = (uint)Format;
-
-            List<Bitmap> _mipMaps = new List<Bitmap>();
+            List<Bitmap> _mipMaps = new();
             _mipMaps.Add(Picture);
 
             try
@@ -898,13 +882,13 @@ namespace DDS
                         break;
                     }
 
-                    Bitmap _map = new Bitmap(_w, _h);
+                    Bitmap _map = new(_w, _h);
 
                     using (Graphics _blitter = Graphics.FromImage(_map))
                     {
                         _blitter.InterpolationMode = InterpolationMode.HighQualityBicubic;
 
-                        using (ImageAttributes _wrapMode = new System.Drawing.Imaging.ImageAttributes())
+                        using (ImageAttributes _wrapMode = new())
                         {
                             _wrapMode.SetWrapMode(WrapMode.TileFlipXY);
 
@@ -918,7 +902,7 @@ namespace DDS
                 DDS_HEADER _header;
                 DDS_PIXELFORMAT _format;
 
-                using (BinaryWriter _stream = new BinaryWriter(Stream))
+                using (BinaryWriter _stream = new(Stream))
                 {
                     _stream.Write(0x20534444); // Magic Number ("DDS ")
 

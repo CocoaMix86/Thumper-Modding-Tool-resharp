@@ -26,7 +26,7 @@ namespace Thumper_Modding_Tool_resharp
         private static void DirectoryCopy(string sourceDirName, string destDirName, bool copySubDirs)
         {
             // Get the subdirectories for the specified directory.
-            DirectoryInfo dir = new DirectoryInfo(sourceDirName);
+            DirectoryInfo dir = new(sourceDirName);
 
             if (!dir.Exists) 
                 throw new DirectoryNotFoundException("Source directory does not exist or could not be found: "+ sourceDirName);
