@@ -226,7 +226,7 @@ namespace Thumper_Modding_Tool_resharp
             dgvLevels.RowCount = 0;
 			foreach (var _level in LoadedLevels) {
 				//populate rows with level name, and difficulty strings
-				dgvLevels.Rows.Add(new object[] { _level.name, _level.difficulty, _level.sublevels });
+				dgvLevels.Rows.Add(new object[] { _level.name, Properties.Resources.ResourceManager.GetObject(_level.difficulty.ToLower()), _level.sublevels });
 			}
 
             if (i - 1 >= 0) dgvLevels.Rows[i - 1].Selected = true;
@@ -488,6 +488,11 @@ namespace Thumper_Modding_Tool_resharp
                     Properties.Settings.Default.level_paths.Add(lt.path);
             }
             Properties.Settings.Default.Save();
+        }
+
+        private void lblCustomDiffHelp_Click(object sender, EventArgs e)
+        {
+            new ImageMessageBox("difficultyhelp").Show();
         }
     }
 }

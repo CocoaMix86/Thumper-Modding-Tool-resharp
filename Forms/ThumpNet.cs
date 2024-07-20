@@ -299,7 +299,7 @@ namespace Thumper_Modding_Tool_resharp
                     // API Doesnt tell us if a thumbnail exists
                     // WebClient.DownloadFileAsync saves a 0 byte file on failure,
                     // simply first check this filesize, if 0, no thumbnail exists
-                    if (new System.IO.FileInfo($@"ThumpNet\Cache\{Level.CdnRef}.thumb").Length == 0)
+                    if (File.Exists(cache_filename) && new FileInfo($@"ThumpNet\Cache\{Level.CdnRef}.thumb").Length == 0)
                     {
                         Bitmap bmp = new Bitmap(256, 144);
                         Graphics g = Graphics.FromImage(bmp);

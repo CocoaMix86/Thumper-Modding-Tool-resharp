@@ -97,6 +97,12 @@
     <Compile Include="Forms\Gui.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\ImageMessageBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ImageMessageBox.Designer.cs">
+      <DependentUpon>ImageMessageBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Level.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -120,6 +126,9 @@
     <Compile Include="Forms\ThumpNet.Designer.cs">
       <DependentUpon>ThumpNet.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Forms\ImageMessageBox.resx">
+      <DependentUpon>ImageMessageBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\ThumperModdingTool.resx">
       <DependentUpon>ThumperModdingTool.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -158,6 +167,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="image assets\difficultyhelp.png" />
     <None Include="image assets\icon-sort-32.png" />
     <None Include="image assets\icon-person-32.png" />
     <None Include="image assets\icon-alpha-32.png" />

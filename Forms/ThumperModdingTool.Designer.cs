@@ -49,9 +49,6 @@ namespace Thumper_Modding_Tool_resharp
             this.btnLevelUp = new System.Windows.Forms.Button();
             this.btnLevelDown = new System.Windows.Forms.Button();
             this.dgvLevels = new System.Windows.Forms.DataGridView();
-            this.LevelName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Difficulty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Sublevels = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.richDescript = new System.Windows.Forms.RichTextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.BtnHash = new System.Windows.Forms.Button();
@@ -65,7 +62,10 @@ namespace Thumper_Modding_Tool_resharp
             this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.menuStrip1.SuspendLayout();
+            this.LevelName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Difficulty = new System.Windows.Forms.DataGridViewImageColumn();
+            this.Sublevels = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lblCustomDiffHelp = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLevels)).BeginInit();
             this.panelHash.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picSplashScreen)).BeginInit();
@@ -74,12 +74,9 @@ namespace Thumper_Modding_Tool_resharp
             // menuStrip1
             // 
             this.menuStrip1.BackColor = System.Drawing.Color.Maroon;
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.optionsToolStripMenuItem1,
-            this.thumpNetToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(519, 26);
+            this.menuStrip1.Size = new System.Drawing.Size(519, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -310,7 +307,7 @@ namespace Thumper_Modding_Tool_resharp
             this.dgvLevels.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvLevels.RowHeadersVisible = false;
             this.dgvLevels.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.dgvLevels.RowTemplate.Height = 20;
+            this.dgvLevels.RowTemplate.Height = 40;
             this.dgvLevels.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvLevels.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvLevels.Size = new System.Drawing.Size(280, 192);
@@ -318,33 +315,6 @@ namespace Thumper_Modding_Tool_resharp
             this.dgvLevels.SelectionChanged += new System.EventHandler(this.dgvLevels_SelectionChanged);
             this.dgvLevels.DragDrop += new System.Windows.Forms.DragEventHandler(this.dgvLevels_DragDrop);
             this.dgvLevels.DragEnter += new System.Windows.Forms.DragEventHandler(this.dgvLevels_DragEnter);
-            // 
-            // LevelName
-            // 
-            this.LevelName.HeaderText = "Level Name";
-            this.LevelName.Name = "LevelName";
-            this.LevelName.ReadOnly = true;
-            this.LevelName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Difficulty
-            // 
-            this.Difficulty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.Difficulty.FillWeight = 40F;
-            this.Difficulty.HeaderText = "Difficulty";
-            this.Difficulty.Name = "Difficulty";
-            this.Difficulty.ReadOnly = true;
-            this.Difficulty.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Difficulty.Width = 59;
-            // 
-            // Sublevels
-            // 
-            this.Sublevels.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.Sublevels.FillWeight = 40F;
-            this.Sublevels.HeaderText = "Sublevels";
-            this.Sublevels.Name = "Sublevels";
-            this.Sublevels.ReadOnly = true;
-            this.Sublevels.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Sublevels.Width = 66;
             // 
             // richDescript
             // 
@@ -501,12 +471,56 @@ namespace Thumper_Modding_Tool_resharp
             this.label5.TabIndex = 53;
             this.label5.Text = "Recommended: 512x512";
             // 
+            // LevelName
+            // 
+            this.LevelName.HeaderText = "Level Name";
+            this.LevelName.Name = "LevelName";
+            this.LevelName.ReadOnly = true;
+            this.LevelName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Difficulty
+            // 
+            this.Difficulty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.Difficulty.FillWeight = 40F;
+            this.Difficulty.HeaderText = "Difficulty";
+            this.Difficulty.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.Difficulty.Name = "Difficulty";
+            this.Difficulty.ReadOnly = true;
+            this.Difficulty.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Difficulty.Width = 59;
+            // 
+            // Sublevels
+            // 
+            this.Sublevels.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.Sublevels.FillWeight = 40F;
+            this.Sublevels.HeaderText = "Sublevels";
+            this.Sublevels.Name = "Sublevels";
+            this.Sublevels.ReadOnly = true;
+            this.Sublevels.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Sublevels.Width = 66;
+            // 
+            // lblCustomDiffHelp
+            // 
+            this.lblCustomDiffHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCustomDiffHelp.AutoSize = true;
+            this.lblCustomDiffHelp.BackColor = System.Drawing.Color.Transparent;
+            this.lblCustomDiffHelp.Cursor = System.Windows.Forms.Cursors.Help;
+            this.lblCustomDiffHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCustomDiffHelp.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.lblCustomDiffHelp.Location = new System.Drawing.Point(186, 86);
+            this.lblCustomDiffHelp.Name = "lblCustomDiffHelp";
+            this.lblCustomDiffHelp.Size = new System.Drawing.Size(15, 16);
+            this.lblCustomDiffHelp.TabIndex = 126;
+            this.lblCustomDiffHelp.Text = "?";
+            this.lblCustomDiffHelp.Click += new System.EventHandler(this.lblCustomDiffHelp_Click);
+            // 
             // ThumperModdingTool
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.ClientSize = new System.Drawing.Size(519, 333);
+            this.Controls.Add(this.lblCustomDiffHelp);
             this.Controls.Add(this.btnSplashScreenReset);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label2);
@@ -533,8 +547,6 @@ namespace Thumper_Modding_Tool_resharp
             this.Text = "Thumper Mod Loader";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ThumperModdingTool_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLevels)).EndInit();
             this.panelHash.ResumeLayout(false);
             this.panelHash.PerformLayout();
@@ -567,9 +579,6 @@ namespace Thumper_Modding_Tool_resharp
         private System.Windows.Forms.Panel panelHash;
         private System.Windows.Forms.ToolStripMenuItem hashPanelToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem resetSettingsToolStripMenuItem;
-        private System.Windows.Forms.DataGridViewTextBoxColumn LevelName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Difficulty;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Sublevels;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.ToolStripMenuItem thumpNetToolStripMenuItem;
         private System.Windows.Forms.PictureBox picSplashScreen;
@@ -578,6 +587,10 @@ namespace Thumper_Modding_Tool_resharp
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnSplashScreenReset;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LevelName;
+        private System.Windows.Forms.DataGridViewImageColumn Difficulty;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Sublevels;
+        private System.Windows.Forms.Label lblCustomDiffHelp;
     }
 }
 
