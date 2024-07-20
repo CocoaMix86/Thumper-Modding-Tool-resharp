@@ -49,6 +49,9 @@ namespace Thumper_Modding_Tool_resharp
             this.btnLevelUp = new System.Windows.Forms.Button();
             this.btnLevelDown = new System.Windows.Forms.Button();
             this.dgvLevels = new System.Windows.Forms.DataGridView();
+            this.LevelName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Difficulty = new System.Windows.Forms.DataGridViewImageColumn();
+            this.Sublevels = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.richDescript = new System.Windows.Forms.RichTextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.BtnHash = new System.Windows.Forms.Button();
@@ -62,9 +65,6 @@ namespace Thumper_Modding_Tool_resharp
             this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.LevelName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Difficulty = new System.Windows.Forms.DataGridViewImageColumn();
-            this.Sublevels = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblCustomDiffHelp = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLevels)).BeginInit();
             this.panelHash.SuspendLayout();
@@ -73,6 +73,9 @@ namespace Thumper_Modding_Tool_resharp
             // 
             // menuStrip1
             // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+                this.optionsToolStripMenuItem1
+            });
             this.menuStrip1.BackColor = System.Drawing.Color.Maroon;
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -163,13 +166,13 @@ namespace Thumper_Modding_Tool_resharp
             // 
             this.btnModMode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnModMode.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnModMode.Font = new System.Drawing.Font("Trebuchet MS", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnModMode.Font = new System.Drawing.Font("Trebuchet MS", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnModMode.ForeColor = System.Drawing.Color.Crimson;
             this.btnModMode.Location = new System.Drawing.Point(187, 27);
             this.btnModMode.Name = "btnModMode";
             this.btnModMode.Size = new System.Drawing.Size(105, 45);
             this.btnModMode.TabIndex = 3;
-            this.btnModMode.Text = "OFF";
+            this.btnModMode.Text = "is OFF";
             this.btnModMode.UseVisualStyleBackColor = false;
             this.btnModMode.Click += new System.EventHandler(this.btnModMode_Click);
             // 
@@ -195,7 +198,7 @@ namespace Thumper_Modding_Tool_resharp
             this.btnLevelAdd.BackColor = System.Drawing.Color.YellowGreen;
             this.btnLevelAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLevelAdd.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLevelAdd.Location = new System.Drawing.Point(12, 296);
+            this.btnLevelAdd.Location = new System.Drawing.Point(12, 382);
             this.btnLevelAdd.Name = "btnLevelAdd";
             this.btnLevelAdd.Size = new System.Drawing.Size(74, 25);
             this.btnLevelAdd.TabIndex = 6;
@@ -211,7 +214,7 @@ namespace Thumper_Modding_Tool_resharp
             this.btnLevelRemove.Enabled = false;
             this.btnLevelRemove.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLevelRemove.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLevelRemove.Location = new System.Drawing.Point(86, 296);
+            this.btnLevelRemove.Location = new System.Drawing.Point(86, 382);
             this.btnLevelRemove.Name = "btnLevelRemove";
             this.btnLevelRemove.Size = new System.Drawing.Size(74, 25);
             this.btnLevelRemove.TabIndex = 7;
@@ -225,7 +228,7 @@ namespace Thumper_Modding_Tool_resharp
             this.btnLevelUp.BackColor = System.Drawing.Color.Cyan;
             this.btnLevelUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLevelUp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLevelUp.Location = new System.Drawing.Point(166, 296);
+            this.btnLevelUp.Location = new System.Drawing.Point(166, 382);
             this.btnLevelUp.Name = "btnLevelUp";
             this.btnLevelUp.Size = new System.Drawing.Size(23, 25);
             this.btnLevelUp.TabIndex = 8;
@@ -241,7 +244,7 @@ namespace Thumper_Modding_Tool_resharp
             this.btnLevelDown.BackColor = System.Drawing.Color.Cyan;
             this.btnLevelDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLevelDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLevelDown.Location = new System.Drawing.Point(189, 296);
+            this.btnLevelDown.Location = new System.Drawing.Point(189, 382);
             this.btnLevelDown.Name = "btnLevelDown";
             this.btnLevelDown.Size = new System.Drawing.Size(22, 25);
             this.btnLevelDown.TabIndex = 9;
@@ -310,11 +313,39 @@ namespace Thumper_Modding_Tool_resharp
             this.dgvLevels.RowTemplate.Height = 40;
             this.dgvLevels.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvLevels.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvLevels.Size = new System.Drawing.Size(280, 192);
+            this.dgvLevels.Size = new System.Drawing.Size(280, 278);
             this.dgvLevels.TabIndex = 41;
             this.dgvLevels.SelectionChanged += new System.EventHandler(this.dgvLevels_SelectionChanged);
             this.dgvLevels.DragDrop += new System.Windows.Forms.DragEventHandler(this.dgvLevels_DragDrop);
             this.dgvLevels.DragEnter += new System.Windows.Forms.DragEventHandler(this.dgvLevels_DragEnter);
+            // 
+            // LevelName
+            // 
+            this.LevelName.HeaderText = "Level Name";
+            this.LevelName.Name = "LevelName";
+            this.LevelName.ReadOnly = true;
+            this.LevelName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Difficulty
+            // 
+            this.Difficulty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.Difficulty.FillWeight = 40F;
+            this.Difficulty.HeaderText = "Difficulty";
+            this.Difficulty.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.Difficulty.Name = "Difficulty";
+            this.Difficulty.ReadOnly = true;
+            this.Difficulty.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Difficulty.Width = 59;
+            // 
+            // Sublevels
+            // 
+            this.Sublevels.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.Sublevels.FillWeight = 40F;
+            this.Sublevels.HeaderText = "Sublevels";
+            this.Sublevels.Name = "Sublevels";
+            this.Sublevels.ReadOnly = true;
+            this.Sublevels.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Sublevels.Width = 66;
             // 
             // richDescript
             // 
@@ -324,7 +355,7 @@ namespace Thumper_Modding_Tool_resharp
             this.richDescript.ForeColor = System.Drawing.Color.White;
             this.richDescript.Location = new System.Drawing.Point(302, 211);
             this.richDescript.Name = "richDescript";
-            this.richDescript.Size = new System.Drawing.Size(205, 110);
+            this.richDescript.Size = new System.Drawing.Size(205, 196);
             this.richDescript.TabIndex = 42;
             this.richDescript.Text = "";
             // 
@@ -362,6 +393,7 @@ namespace Thumper_Modding_Tool_resharp
             this.textBox1.Size = new System.Drawing.Size(95, 20);
             this.textBox1.TabIndex = 45;
             this.textBox1.Text = "input";
+            this.textBox1.TextChanged += new System.EventHandler(this.BtnHash_Click);
             // 
             // textBox2
             // 
@@ -471,34 +503,6 @@ namespace Thumper_Modding_Tool_resharp
             this.label5.TabIndex = 53;
             this.label5.Text = "Recommended: 512x512";
             // 
-            // LevelName
-            // 
-            this.LevelName.HeaderText = "Level Name";
-            this.LevelName.Name = "LevelName";
-            this.LevelName.ReadOnly = true;
-            this.LevelName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Difficulty
-            // 
-            this.Difficulty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.Difficulty.FillWeight = 40F;
-            this.Difficulty.HeaderText = "Difficulty";
-            this.Difficulty.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            this.Difficulty.Name = "Difficulty";
-            this.Difficulty.ReadOnly = true;
-            this.Difficulty.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Difficulty.Width = 59;
-            // 
-            // Sublevels
-            // 
-            this.Sublevels.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.Sublevels.FillWeight = 40F;
-            this.Sublevels.HeaderText = "Sublevels";
-            this.Sublevels.Name = "Sublevels";
-            this.Sublevels.ReadOnly = true;
-            this.Sublevels.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Sublevels.Width = 66;
-            // 
             // lblCustomDiffHelp
             // 
             this.lblCustomDiffHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -519,7 +523,7 @@ namespace Thumper_Modding_Tool_resharp
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.ClientSize = new System.Drawing.Size(519, 333);
+            this.ClientSize = new System.Drawing.Size(519, 419);
             this.Controls.Add(this.lblCustomDiffHelp);
             this.Controls.Add(this.btnSplashScreenReset);
             this.Controls.Add(this.label4);
