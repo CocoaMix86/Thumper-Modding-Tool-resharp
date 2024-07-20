@@ -13,7 +13,7 @@ namespace Thumper_Modding_Tool_resharp
 {
 	public partial class ThumperModdingTool
 	{
-		JsonLoadSettings jo = new() { CommentHandling = CommentHandling.Load};
+		public JsonLoadSettings jo = new() { CommentHandling = CommentHandling.Load};
 
 		List<string> file_types = new() { "gate", "leaf", "lvl", "master", "xfm", "config" };
 		List<string> file_special = new() { "spn", "samp" };
@@ -172,7 +172,8 @@ namespace Thumper_Modding_Tool_resharp
 					if (file_types.Contains(Path.GetFileName(filename).Split('_')[0])) {
 						//read file and store JSON in dynamic object
 						try {
-							new_objs = JObject.Parse(Regex.Replace(File.ReadAllText(filename), @"#.*", ""), jo);
+							//new_objs = JObject.Parse(Regex.Replace(File.ReadAllText(filename), @"#.*", ""), jo);
+							new_objs = LoadFileLock(filename);
 						}
 						catch (Exception ex) { 
 							errorlist += $"error parsing:\n{ex.Message} in file \"{Path.GetFileName(filename)}\" in level \"{level_name.name}\"\n\n";
@@ -189,7 +190,8 @@ namespace Thumper_Modding_Tool_resharp
 					//these file types require different processing to get the data
 					else if (file_special.Contains(Path.GetFileName(filename).Split('_')[0])) {
 						try {
-							new_objs = JsonConvert.DeserializeObject(File.ReadAllText(filename));
+							//new_objs = JsonConvert.DeserializeObject(File.ReadAllText(filename));
+							new_objs = LoadFileLock(filename);
 						}
 						catch (Exception ex) {
 							errorlist += $"error parsing:\n{ex.Message} in file \"{Path.GetFileName(filename)}\" in level \"{level_name.name}\"\n\n";

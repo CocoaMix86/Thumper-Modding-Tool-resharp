@@ -2,6 +2,8 @@
 using System.Linq;
 using System.Text;
 using System.IO;
+using System.Text.RegularExpressions;
+using Newtonsoft.Json;
 
 namespace Thumper_Modding_Tool_resharp
 {
@@ -137,5 +139,18 @@ namespace Thumper_Modding_Tool_resharp
                 return years <= 1 ? "1 year ago" : years + " years ago";
             }
         }
+
+		public dynamic LoadFileLock(string _selectedfilename)
+		{
+			dynamic _load;
+			///reference:
+			///https://stackoverflow.com/questions/1389155/easiest-way-to-read-text-file-which-is-locked-by-another-application
+			using (var fileStream = new FileStream(_selectedfilename, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+			using (var textReader = new StreamReader(fileStream)) {
+				_load = JsonConvert.DeserializeObject(Regex.Replace(textReader.ReadToEnd(), "#.*", ""));
+			}
+
+			return _load;
+		}
 	}
 }

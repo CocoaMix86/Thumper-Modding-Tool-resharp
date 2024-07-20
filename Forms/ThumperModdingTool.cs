@@ -88,11 +88,11 @@ namespace Thumper_Modding_Tool_resharp
             }
             if (File.Exists($@"{_path}\LEVEL DETAILS.txt"))
             {
-                _leveldata = JsonConvert.DeserializeObject(File.ReadAllText($@"{_path}\LEVEL DETAILS.txt"));
+                _leveldata = LoadFileLock($@"{_path}\LEVEL DETAILS.txt");
                 //try-catch block on parsing master, in case it has issues
                 try
                 {
-                    _levelmaster = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText($@"{_path}\master_sequin.txt"), @"#.*", ""));
+                    _levelmaster = LoadFileLock($@"{_path}\master_sequin.txt");
                 }
                 catch (Exception ex)
                 {
