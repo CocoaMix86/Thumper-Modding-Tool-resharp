@@ -253,12 +253,13 @@ namespace Thumper_Modding_Tool_resharp
             this.btnUpdate.Enabled = false;
             this.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUpdate.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUpdate.Location = new System.Drawing.Point(63, 77);
+            this.btnUpdate.Location = new System.Drawing.Point(63, 73);
             this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(75, 25);
+            this.btnUpdate.Size = new System.Drawing.Size(111, 29);
             this.btnUpdate.TabIndex = 4;
-            this.btnUpdate.Text = "Update";
-            this.toolTip1.SetToolTip(this.btnUpdate, "Update Thumper with these levels and splash screen");
+            this.btnUpdate.Text = "Update Levels";
+            this.toolTip1.SetToolTip(this.btnUpdate, "Update Thumper with these levels and splash screen.\r\nAdding or removing levels re" +
+        "quires a re-launch of the game.");
             this.btnUpdate.UseVisualStyleBackColor = false;
             this.btnUpdate.Visible = false;
             this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
@@ -269,7 +270,7 @@ namespace Thumper_Modding_Tool_resharp
             this.btnLevelAdd.BackColor = System.Drawing.Color.YellowGreen;
             this.btnLevelAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLevelAdd.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLevelAdd.Location = new System.Drawing.Point(12, 382);
+            this.btnLevelAdd.Location = new System.Drawing.Point(12, 425);
             this.btnLevelAdd.Name = "btnLevelAdd";
             this.btnLevelAdd.Size = new System.Drawing.Size(74, 25);
             this.btnLevelAdd.TabIndex = 6;
@@ -285,7 +286,7 @@ namespace Thumper_Modding_Tool_resharp
             this.btnLevelRemove.Enabled = false;
             this.btnLevelRemove.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLevelRemove.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLevelRemove.Location = new System.Drawing.Point(86, 382);
+            this.btnLevelRemove.Location = new System.Drawing.Point(86, 425);
             this.btnLevelRemove.Name = "btnLevelRemove";
             this.btnLevelRemove.Size = new System.Drawing.Size(74, 25);
             this.btnLevelRemove.TabIndex = 7;
@@ -299,7 +300,7 @@ namespace Thumper_Modding_Tool_resharp
             this.btnLevelUp.BackColor = System.Drawing.Color.Cyan;
             this.btnLevelUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLevelUp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLevelUp.Location = new System.Drawing.Point(166, 382);
+            this.btnLevelUp.Location = new System.Drawing.Point(166, 425);
             this.btnLevelUp.Name = "btnLevelUp";
             this.btnLevelUp.Size = new System.Drawing.Size(23, 25);
             this.btnLevelUp.TabIndex = 8;
@@ -315,7 +316,7 @@ namespace Thumper_Modding_Tool_resharp
             this.btnLevelDown.BackColor = System.Drawing.Color.Cyan;
             this.btnLevelDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLevelDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLevelDown.Location = new System.Drawing.Point(189, 382);
+            this.btnLevelDown.Location = new System.Drawing.Point(189, 425);
             this.btnLevelDown.Name = "btnLevelDown";
             this.btnLevelDown.Size = new System.Drawing.Size(22, 25);
             this.btnLevelDown.TabIndex = 9;
@@ -384,7 +385,7 @@ namespace Thumper_Modding_Tool_resharp
             this.dgvLevels.RowTemplate.Height = 40;
             this.dgvLevels.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvLevels.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvLevels.Size = new System.Drawing.Size(280, 278);
+            this.dgvLevels.Size = new System.Drawing.Size(280, 321);
             this.dgvLevels.TabIndex = 41;
             this.dgvLevels.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLevels_SelectionChanged);
             this.dgvLevels.SelectionChanged += new System.EventHandler(this.dgvLevels_SelectionChanged);
@@ -428,7 +429,7 @@ namespace Thumper_Modding_Tool_resharp
             this.richDescript.ForeColor = System.Drawing.Color.White;
             this.richDescript.Location = new System.Drawing.Point(302, 268);
             this.richDescript.Name = "richDescript";
-            this.richDescript.Size = new System.Drawing.Size(205, 139);
+            this.richDescript.Size = new System.Drawing.Size(205, 182);
             this.richDescript.TabIndex = 42;
             this.richDescript.Text = "";
             // 
@@ -617,7 +618,7 @@ namespace Thumper_Modding_Tool_resharp
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.ClientSize = new System.Drawing.Size(519, 419);
+            this.ClientSize = new System.Drawing.Size(519, 462);
             this.Controls.Add(this.lblCreator);
             this.Controls.Add(this.lblCustomDiffHelp);
             this.Controls.Add(this.btnSplashScreenReset);
