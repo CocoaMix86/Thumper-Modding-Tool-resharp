@@ -619,7 +619,6 @@ namespace Thumper_Modding_Tool_resharp
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.ClientSize = new System.Drawing.Size(519, 419);
             this.Controls.Add(this.lblCreator);
-            this.Controls.Add(this.pictureDifficulty);
             this.Controls.Add(this.lblCustomDiffHelp);
             this.Controls.Add(this.btnSplashScreenReset);
             this.Controls.Add(this.label4);
@@ -639,6 +638,7 @@ namespace Thumper_Modding_Tool_resharp
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label3);
+            this.Controls.Add(this.pictureDifficulty);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
