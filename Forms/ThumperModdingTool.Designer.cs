@@ -102,8 +102,8 @@ namespace Thumper_Modding_Tool_resharp
             this.optionsToolStripMenuItem1.Font = new System.Drawing.Font("Trebuchet MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.optionsToolStripMenuItem1.ForeColor = System.Drawing.Color.White;
             this.optionsToolStripMenuItem1.Name = "optionsToolStripMenuItem1";
-            this.optionsToolStripMenuItem1.Size = new System.Drawing.Size(63, 25);
-            this.optionsToolStripMenuItem1.Text = "Options";
+            this.optionsToolStripMenuItem1.Size = new System.Drawing.Size(69, 25);
+            this.optionsToolStripMenuItem1.Text = "OPTIONS";
             // 
             // changeGameDirToolStripMenuItem1
             // 
@@ -145,8 +145,8 @@ namespace Thumper_Modding_Tool_resharp
             this.helpToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Padding = new System.Windows.Forms.Padding(3, 5, 3, 0);
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 25);
-            this.helpToolStripMenuItem.Text = "Help";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(46, 25);
+            this.helpToolStripMenuItem.Text = "HELP";
             // 
             // toolStripMenuItem10
             // 
@@ -594,6 +594,7 @@ namespace Thumper_Modding_Tool_resharp
             // 
             // pictureDifficulty
             // 
+            this.pictureDifficulty.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureDifficulty.BackColor = System.Drawing.Color.Transparent;
             this.pictureDifficulty.Location = new System.Drawing.Point(443, 204);
             this.pictureDifficulty.Name = "pictureDifficulty";
