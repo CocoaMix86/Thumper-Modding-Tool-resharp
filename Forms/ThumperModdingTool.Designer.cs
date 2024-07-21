@@ -464,7 +464,7 @@ namespace Thumper_Modding_Tool_resharp
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox1.Location = new System.Drawing.Point(3, 37);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(95, 20);
+            this.textBox1.Size = new System.Drawing.Size(110, 20);
             this.textBox1.TabIndex = 45;
             this.textBox1.Text = "type input here";
             this.textBox1.TextChanged += new System.EventHandler(this.BtnHash_Click);
@@ -475,7 +475,7 @@ namespace Thumper_Modding_Tool_resharp
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox2.Location = new System.Drawing.Point(3, 63);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(95, 20);
+            this.textBox2.Size = new System.Drawing.Size(110, 20);
             this.textBox2.TabIndex = 46;
             // 
             // panelHash
@@ -485,9 +485,9 @@ namespace Thumper_Modding_Tool_resharp
             this.panelHash.Controls.Add(this.textBox2);
             this.panelHash.Controls.Add(this.BtnHash);
             this.panelHash.Controls.Add(this.textBox1);
-            this.panelHash.Location = new System.Drawing.Point(406, 79);
+            this.panelHash.Location = new System.Drawing.Point(403, 79);
             this.panelHash.Name = "panelHash";
-            this.panelHash.Size = new System.Drawing.Size(101, 89);
+            this.panelHash.Size = new System.Drawing.Size(116, 89);
             this.panelHash.TabIndex = 47;
             this.panelHash.Visible = false;
             // 
