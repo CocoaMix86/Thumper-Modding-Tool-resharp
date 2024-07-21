@@ -242,7 +242,8 @@ namespace Thumper_Modding_Tool_resharp
 			}
 
 			int i = dgvLevels.CurrentRow.Index;
-            richDescript.Text = $"{LoadedLevels[i].descript}\n\nAuthor: {LoadedLevels[i].author}";
+            lblCreator.Text = $"Creator: {LoadedLevels[i].author}";
+            richDescript.Text = $"{LoadedLevels[i].descript}";
             pictureDifficulty.Image = (Image)Properties.Resources.ResourceManager.GetObject(LoadedLevels[i].difficulty.ToLower());
 
         }
