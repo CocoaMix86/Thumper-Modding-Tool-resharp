@@ -65,23 +65,30 @@ namespace Thumper_Modding_Tool_resharp
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.lblCustomDiffHelp = new System.Windows.Forms.Label();
-            this.picSplashScreen = new System.Windows.Forms.PictureBox();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem10 = new System.Windows.Forms.ToolStripSeparator();
+            this.donateTipToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureDifficulty = new System.Windows.Forms.PictureBox();
+            this.picSplashScreen = new System.Windows.Forms.PictureBox();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.discordServerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.githubToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLevels)).BeginInit();
             this.panelHash.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picSplashScreen)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureDifficulty)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picSplashScreen)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
             this.menuStrip1.BackColor = System.Drawing.Color.Maroon;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.optionsToolStripMenuItem1});
+            this.optionsToolStripMenuItem1,
+            this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(519, 26);
+            this.menuStrip1.Size = new System.Drawing.Size(519, 29);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -94,7 +101,7 @@ namespace Thumper_Modding_Tool_resharp
             this.optionsToolStripMenuItem1.Font = new System.Drawing.Font("Trebuchet MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.optionsToolStripMenuItem1.ForeColor = System.Drawing.Color.White;
             this.optionsToolStripMenuItem1.Name = "optionsToolStripMenuItem1";
-            this.optionsToolStripMenuItem1.Size = new System.Drawing.Size(63, 22);
+            this.optionsToolStripMenuItem1.Size = new System.Drawing.Size(63, 25);
             this.optionsToolStripMenuItem1.Text = "Options";
             // 
             // changeGameDirToolStripMenuItem1
@@ -508,6 +515,45 @@ namespace Thumper_Modding_Tool_resharp
             this.lblCustomDiffHelp.Text = "?";
             this.lblCustomDiffHelp.Click += new System.EventHandler(this.lblCustomDiffHelp_Click);
             // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem10,
+            this.aboutToolStripMenuItem,
+            this.discordServerToolStripMenuItem,
+            this.githubToolStripMenuItem,
+            this.donateTipToolStripMenuItem});
+            this.helpToolStripMenuItem.Font = new System.Drawing.Font("Gadugi", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.helpToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Padding = new System.Windows.Forms.Padding(3, 5, 3, 0);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 25);
+            this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // toolStripMenuItem10
+            // 
+            this.toolStripMenuItem10.Name = "toolStripMenuItem10";
+            this.toolStripMenuItem10.Size = new System.Drawing.Size(187, 6);
+            // 
+            // donateTipToolStripMenuItem
+            // 
+            this.donateTipToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.donateTipToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.donateTipToolStripMenuItem.Image = global::Thumper_Modding_Tool_resharp.Properties.Resources.kofi_logo;
+            this.donateTipToolStripMenuItem.Name = "donateTipToolStripMenuItem";
+            this.donateTipToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.donateTipToolStripMenuItem.Text = "Donate && Tip (ko-fi)";
+            this.donateTipToolStripMenuItem.Click += new System.EventHandler(this.donateTipToolStripMenuItem_Click);
+            // 
+            // pictureDifficulty
+            // 
+            this.pictureDifficulty.BackColor = System.Drawing.Color.Transparent;
+            this.pictureDifficulty.Location = new System.Drawing.Point(443, 182);
+            this.pictureDifficulty.Name = "pictureDifficulty";
+            this.pictureDifficulty.Size = new System.Drawing.Size(64, 64);
+            this.pictureDifficulty.TabIndex = 127;
+            this.pictureDifficulty.TabStop = false;
+            // 
             // picSplashScreen
             // 
             this.picSplashScreen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -521,14 +567,35 @@ namespace Thumper_Modding_Tool_resharp
         "mages only.***\r\nUse conversion tools if you need to.");
             this.picSplashScreen.MouseMove += new System.Windows.Forms.MouseEventHandler(this.picSplashScreen_MouseMove);
             // 
-            // pictureDifficulty
+            // aboutToolStripMenuItem
             // 
-            this.pictureDifficulty.BackColor = System.Drawing.Color.Transparent;
-            this.pictureDifficulty.Location = new System.Drawing.Point(443, 182);
-            this.pictureDifficulty.Name = "pictureDifficulty";
-            this.pictureDifficulty.Size = new System.Drawing.Size(64, 64);
-            this.pictureDifficulty.TabIndex = 127;
-            this.pictureDifficulty.TabStop = false;
+            this.aboutToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.aboutToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.aboutToolStripMenuItem.Image = global::Thumper_Modding_Tool_resharp.Properties.Resources.icon_info;
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.aboutToolStripMenuItem.Text = "About...";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
+            // discordServerToolStripMenuItem
+            // 
+            this.discordServerToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.discordServerToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.discordServerToolStripMenuItem.Image = global::Thumper_Modding_Tool_resharp.Properties.Resources.discord32x;
+            this.discordServerToolStripMenuItem.Name = "discordServerToolStripMenuItem";
+            this.discordServerToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.discordServerToolStripMenuItem.Text = "Discord Server";
+            this.discordServerToolStripMenuItem.Click += new System.EventHandler(this.discordServerToolStripMenuItem_Click);
+            // 
+            // githubToolStripMenuItem
+            // 
+            this.githubToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.githubToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.githubToolStripMenuItem.Image = global::Thumper_Modding_Tool_resharp.Properties.Resources.github48;
+            this.githubToolStripMenuItem.Name = "githubToolStripMenuItem";
+            this.githubToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.githubToolStripMenuItem.Text = "Github";
+            this.githubToolStripMenuItem.Click += new System.EventHandler(this.githubToolStripMenuItem_Click);
             // 
             // ThumperModdingTool
             // 
@@ -569,8 +636,8 @@ namespace Thumper_Modding_Tool_resharp
             ((System.ComponentModel.ISupportInitialize)(this.dgvLevels)).EndInit();
             this.panelHash.ResumeLayout(false);
             this.panelHash.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picSplashScreen)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureDifficulty)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picSplashScreen)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -612,6 +679,12 @@ namespace Thumper_Modding_Tool_resharp
         private System.Windows.Forms.DataGridViewTextBoxColumn Sublevels;
         private System.Windows.Forms.Label lblCustomDiffHelp;
         private System.Windows.Forms.PictureBox pictureDifficulty;
+        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem10;
+        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem discordServerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem githubToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem donateTipToolStripMenuItem;
     }
 }
 

@@ -489,5 +489,25 @@ namespace Thumper_Modding_Tool_resharp
         {
             new ImageMessageBox("difficultyhelp").Show();
         }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new AboutBox1().Show();
+        }
+
+        private void discordServerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://discord.com/invite/gTQbquY");
+        }
+
+        private void githubToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/CocoaMix86/Thumper-Custom-Level-Editor");
+        }
+
+        private void donateTipToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://ko-fi.com/I2I5ZZBRH");
+        }
     }
 }

@@ -151,13 +151,28 @@
   <data name="difficultyhelp" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\image assets\difficultyhelp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="discord32x" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\discord32x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="github32x" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\github32x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="github48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\github48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="icon_alpha_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\image assets\icon-alpha-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon_difficulty" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\image assets\icon_difficulty.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="icon_info" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icon-info.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="icon_info_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icon-info-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_info_321" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\image assets\icon-info-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon_person_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -168,5 +183,11 @@
   </data>
   <data name="icon_time_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\image assets\icon-time-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="kofi_logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\kofi-logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="thumper_modding_tool" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\thumper_modding_tool.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

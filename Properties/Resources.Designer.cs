@@ -173,6 +173,36 @@ namespace Thumper_Modding_Tool_resharp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap discord32x {
+            get {
+                object obj = ResourceManager.GetObject("discord32x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap github32x {
+            get {
+                object obj = ResourceManager.GetObject("github32x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap github48 {
+            get {
+                object obj = ResourceManager.GetObject("github48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icon_alpha_32 {
             get {
                 object obj = ResourceManager.GetObject("icon_alpha_32", resourceCulture);
@@ -193,9 +223,29 @@ namespace Thumper_Modding_Tool_resharp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icon_info {
+            get {
+                object obj = ResourceManager.GetObject("icon_info", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icon_info_32 {
             get {
                 object obj = ResourceManager.GetObject("icon_info_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icon_info_321 {
+            get {
+                object obj = ResourceManager.GetObject("icon_info_321", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -226,6 +276,26 @@ namespace Thumper_Modding_Tool_resharp.Properties {
         internal static System.Drawing.Bitmap icon_time_32 {
             get {
                 object obj = ResourceManager.GetObject("icon_time_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap kofi_logo {
+            get {
+                object obj = ResourceManager.GetObject("kofi_logo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap thumper_modding_tool {
+            get {
+                object obj = ResourceManager.GetObject("thumper_modding_tool", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
