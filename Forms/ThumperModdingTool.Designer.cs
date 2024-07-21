@@ -177,7 +177,7 @@ namespace Thumper_Modding_Tool_resharp
             this.btnModMode.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnModMode.Font = new System.Drawing.Font("Trebuchet MS", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnModMode.ForeColor = System.Drawing.Color.Crimson;
-            this.btnModMode.Location = new System.Drawing.Point(187, 27);
+            this.btnModMode.Location = new System.Drawing.Point(182, 27);
             this.btnModMode.Name = "btnModMode";
             this.btnModMode.Size = new System.Drawing.Size(105, 45);
             this.btnModMode.TabIndex = 3;
