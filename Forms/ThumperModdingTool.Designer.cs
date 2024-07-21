@@ -376,12 +376,12 @@ namespace Thumper_Modding_Tool_resharp
             // 
             this.BtnHash.BackColor = System.Drawing.Color.MediumPurple;
             this.BtnHash.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnHash.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnHash.Location = new System.Drawing.Point(3, 3);
+            this.BtnHash.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnHash.Location = new System.Drawing.Point(3, 4);
             this.BtnHash.Name = "BtnHash";
-            this.BtnHash.Size = new System.Drawing.Size(83, 28);
+            this.BtnHash.Size = new System.Drawing.Size(95, 27);
             this.BtnHash.TabIndex = 44;
-            this.BtnHash.Text = "Hash";
+            this.BtnHash.Text = "Hash Panel";
             this.BtnHash.UseVisualStyleBackColor = false;
             this.BtnHash.Click += new System.EventHandler(this.BtnHash_Click);
             // 
@@ -393,7 +393,7 @@ namespace Thumper_Modding_Tool_resharp
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(95, 20);
             this.textBox1.TabIndex = 45;
-            this.textBox1.Text = "input";
+            this.textBox1.Text = "type input here";
             this.textBox1.TextChanged += new System.EventHandler(this.BtnHash_Click);
             // 
             // textBox2
@@ -412,7 +412,7 @@ namespace Thumper_Modding_Tool_resharp
             this.panelHash.Controls.Add(this.textBox2);
             this.panelHash.Controls.Add(this.BtnHash);
             this.panelHash.Controls.Add(this.textBox1);
-            this.panelHash.Location = new System.Drawing.Point(406, 61);
+            this.panelHash.Location = new System.Drawing.Point(406, 77);
             this.panelHash.Name = "panelHash";
             this.panelHash.Size = new System.Drawing.Size(101, 89);
             this.panelHash.TabIndex = 47;
