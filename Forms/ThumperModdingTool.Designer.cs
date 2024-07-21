@@ -67,12 +67,12 @@ namespace Thumper_Modding_Tool_resharp
             this.lblCustomDiffHelp = new System.Windows.Forms.Label();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem10 = new System.Windows.Forms.ToolStripSeparator();
-            this.donateTipToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureDifficulty = new System.Windows.Forms.PictureBox();
             this.picSplashScreen = new System.Windows.Forms.PictureBox();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.discordServerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.githubToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.donateTipToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLevels)).BeginInit();
             this.panelHash.SuspendLayout();
@@ -421,7 +421,7 @@ namespace Thumper_Modding_Tool_resharp
             this.panelHash.Controls.Add(this.textBox2);
             this.panelHash.Controls.Add(this.BtnHash);
             this.panelHash.Controls.Add(this.textBox1);
-            this.panelHash.Location = new System.Drawing.Point(406, 77);
+            this.panelHash.Location = new System.Drawing.Point(406, 79);
             this.panelHash.Name = "panelHash";
             this.panelHash.Size = new System.Drawing.Size(101, 89);
             this.panelHash.TabIndex = 47;
@@ -482,7 +482,7 @@ namespace Thumper_Modding_Tool_resharp
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Trebuchet MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(298, 27);
+            this.label4.Location = new System.Drawing.Point(298, 30);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(107, 22);
             this.label4.TabIndex = 51;
@@ -494,7 +494,7 @@ namespace Thumper_Modding_Tool_resharp
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(299, 46);
+            this.label5.Location = new System.Drawing.Point(299, 48);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(131, 32);
             this.label5.TabIndex = 53;
@@ -534,16 +534,6 @@ namespace Thumper_Modding_Tool_resharp
             // 
             this.toolStripMenuItem10.Name = "toolStripMenuItem10";
             this.toolStripMenuItem10.Size = new System.Drawing.Size(187, 6);
-            // 
-            // donateTipToolStripMenuItem
-            // 
-            this.donateTipToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.donateTipToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.donateTipToolStripMenuItem.Image = global::Thumper_Modding_Tool_resharp.Properties.Resources.kofi_logo;
-            this.donateTipToolStripMenuItem.Name = "donateTipToolStripMenuItem";
-            this.donateTipToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
-            this.donateTipToolStripMenuItem.Text = "Donate && Tip (ko-fi)";
-            this.donateTipToolStripMenuItem.Click += new System.EventHandler(this.donateTipToolStripMenuItem_Click);
             // 
             // pictureDifficulty
             // 
@@ -596,6 +586,16 @@ namespace Thumper_Modding_Tool_resharp
             this.githubToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.githubToolStripMenuItem.Text = "Github";
             this.githubToolStripMenuItem.Click += new System.EventHandler(this.githubToolStripMenuItem_Click);
+            // 
+            // donateTipToolStripMenuItem
+            // 
+            this.donateTipToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.donateTipToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.donateTipToolStripMenuItem.Image = global::Thumper_Modding_Tool_resharp.Properties.Resources.kofi_logo;
+            this.donateTipToolStripMenuItem.Name = "donateTipToolStripMenuItem";
+            this.donateTipToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.donateTipToolStripMenuItem.Text = "Donate && Tip (ko-fi)";
+            this.donateTipToolStripMenuItem.Click += new System.EventHandler(this.donateTipToolStripMenuItem_Click);
             // 
             // ThumperModdingTool
             // 
