@@ -241,16 +241,11 @@ namespace Thumper_Modding_Tool_resharp
 				return;
 			}
 
-			int i = dgvLevels.SelectedCells[0].RowIndex;
-			string s = string.Empty;
-			if (!string.IsNullOrWhiteSpace(LoadedLevels[i].descript))
-			{
-				s = LoadedLevels[i].descript;
-				s += Environment.NewLine + Environment.NewLine;
-            }
-            s += $"Author: {LoadedLevels[i].author}";
-			richDescript.Text = s;
-		}
+			int i = dgvLevels.CurrentRow.Index;
+            richDescript.Text = $"{LoadedLevels[i].descript}\n\nAuthor: {LoadedLevels[i].author}";
+            pictureDifficulty.Image = (Image)Properties.Resources.ResourceManager.GetObject(LoadedLevels[i].difficulty.ToLower());
+
+        }
 
         private void dgvLevels_DragEnter(object sender, DragEventArgs e)
         {

@@ -29,9 +29,9 @@ namespace Thumper_Modding_Tool_resharp
 		private void InitializeComponent()
 		{
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ThumperModdingTool));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.optionsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -59,17 +59,19 @@ namespace Thumper_Modding_Tool_resharp
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.panelHash = new System.Windows.Forms.Panel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.picSplashScreen = new System.Windows.Forms.PictureBox();
             this.btnSplashScreen = new System.Windows.Forms.Button();
             this.btnSplashScreenReset = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.lblCustomDiffHelp = new System.Windows.Forms.Label();
+            this.picSplashScreen = new System.Windows.Forms.PictureBox();
+            this.pictureDifficulty = new System.Windows.Forms.PictureBox();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLevels)).BeginInit();
             this.panelHash.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picSplashScreen)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureDifficulty)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -270,29 +272,29 @@ namespace Thumper_Modding_Tool_resharp
             this.dgvLevels.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvLevels.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.dgvLevels.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Silver;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvLevels.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Silver;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvLevels.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvLevels.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvLevels.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.LevelName,
             this.Difficulty,
             this.Sublevels});
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.Format = "N0";
-            dataGridViewCellStyle5.NullValue = null;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvLevels.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.Format = "N0";
+            dataGridViewCellStyle2.NullValue = null;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvLevels.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvLevels.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvLevels.EnableHeadersVisualStyles = false;
             this.dgvLevels.GridColor = System.Drawing.Color.Black;
@@ -301,14 +303,14 @@ namespace Thumper_Modding_Tool_resharp
             this.dgvLevels.Name = "dgvLevels";
             this.dgvLevels.ReadOnly = true;
             this.dgvLevels.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvLevels.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvLevels.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvLevels.RowHeadersVisible = false;
             this.dgvLevels.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvLevels.RowTemplate.Height = 40;
@@ -354,9 +356,9 @@ namespace Thumper_Modding_Tool_resharp
             | System.Windows.Forms.AnchorStyles.Right)));
             this.richDescript.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
             this.richDescript.ForeColor = System.Drawing.Color.White;
-            this.richDescript.Location = new System.Drawing.Point(302, 227);
+            this.richDescript.Location = new System.Drawing.Point(302, 246);
             this.richDescript.Name = "richDescript";
-            this.richDescript.Size = new System.Drawing.Size(205, 180);
+            this.richDescript.Size = new System.Drawing.Size(205, 161);
             this.richDescript.TabIndex = 42;
             this.richDescript.Text = "";
             // 
@@ -366,7 +368,7 @@ namespace Thumper_Modding_Tool_resharp
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Trebuchet MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(298, 204);
+            this.label3.Location = new System.Drawing.Point(298, 224);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(135, 22);
             this.label3.TabIndex = 43;
@@ -425,19 +427,6 @@ namespace Thumper_Modding_Tool_resharp
             this.toolTip1.InitialDelay = 0;
             this.toolTip1.ReshowDelay = 100;
             // 
-            // picSplashScreen
-            // 
-            this.picSplashScreen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.picSplashScreen.Location = new System.Drawing.Point(302, 79);
-            this.picSplashScreen.Name = "picSplashScreen";
-            this.picSplashScreen.Size = new System.Drawing.Size(98, 98);
-            this.picSplashScreen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picSplashScreen.TabIndex = 48;
-            this.picSplashScreen.TabStop = false;
-            this.toolTip1.SetToolTip(this.picSplashScreen, "Splash screen. Save by dragging to a folder or your desktop.\r\n\r\n***Accepts .DDS i" +
-        "mages only.***\r\nUse conversion tools if you need to.");
-            this.picSplashScreen.MouseMove += new System.Windows.Forms.MouseEventHandler(this.picSplashScreen_MouseMove);
-            // 
             // btnSplashScreen
             // 
             this.btnSplashScreen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -471,6 +460,7 @@ namespace Thumper_Modding_Tool_resharp
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.Cursor = System.Windows.Forms.Cursors.Default;
             this.label2.Font = new System.Drawing.Font("Trebuchet MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.White;
             this.label2.Location = new System.Drawing.Point(8, 79);
@@ -508,6 +498,7 @@ namespace Thumper_Modding_Tool_resharp
             this.lblCustomDiffHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCustomDiffHelp.AutoSize = true;
             this.lblCustomDiffHelp.BackColor = System.Drawing.Color.Transparent;
+            this.lblCustomDiffHelp.Cursor = System.Windows.Forms.Cursors.Help;
             this.lblCustomDiffHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCustomDiffHelp.ForeColor = System.Drawing.Color.DodgerBlue;
             this.lblCustomDiffHelp.Location = new System.Drawing.Point(186, 86);
@@ -517,12 +508,35 @@ namespace Thumper_Modding_Tool_resharp
             this.lblCustomDiffHelp.Text = "?";
             this.lblCustomDiffHelp.Click += new System.EventHandler(this.lblCustomDiffHelp_Click);
             // 
+            // picSplashScreen
+            // 
+            this.picSplashScreen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.picSplashScreen.Location = new System.Drawing.Point(302, 79);
+            this.picSplashScreen.Name = "picSplashScreen";
+            this.picSplashScreen.Size = new System.Drawing.Size(98, 98);
+            this.picSplashScreen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picSplashScreen.TabIndex = 48;
+            this.picSplashScreen.TabStop = false;
+            this.toolTip1.SetToolTip(this.picSplashScreen, "Splash screen. Save by dragging to a folder or your desktop.\r\n\r\n***Accepts .DDS i" +
+        "mages only.***\r\nUse conversion tools if you need to.");
+            this.picSplashScreen.MouseMove += new System.Windows.Forms.MouseEventHandler(this.picSplashScreen_MouseMove);
+            // 
+            // pictureDifficulty
+            // 
+            this.pictureDifficulty.BackColor = System.Drawing.Color.Transparent;
+            this.pictureDifficulty.Location = new System.Drawing.Point(443, 182);
+            this.pictureDifficulty.Name = "pictureDifficulty";
+            this.pictureDifficulty.Size = new System.Drawing.Size(64, 64);
+            this.pictureDifficulty.TabIndex = 127;
+            this.pictureDifficulty.TabStop = false;
+            // 
             // ThumperModdingTool
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.ClientSize = new System.Drawing.Size(519, 419);
+            this.Controls.Add(this.pictureDifficulty);
             this.Controls.Add(this.lblCustomDiffHelp);
             this.Controls.Add(this.btnSplashScreenReset);
             this.Controls.Add(this.label4);
@@ -556,6 +570,7 @@ namespace Thumper_Modding_Tool_resharp
             this.panelHash.ResumeLayout(false);
             this.panelHash.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picSplashScreen)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureDifficulty)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -596,6 +611,7 @@ namespace Thumper_Modding_Tool_resharp
         private System.Windows.Forms.DataGridViewImageColumn Difficulty;
         private System.Windows.Forms.DataGridViewTextBoxColumn Sublevels;
         private System.Windows.Forms.Label lblCustomDiffHelp;
+        private System.Windows.Forms.PictureBox pictureDifficulty;
     }
 }
 
