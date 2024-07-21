@@ -138,6 +138,7 @@
       <DependentUpon>ThumpNet.cs</DependentUpon>
     </EmbeddedResource>
     <None Include=".editorconfig" />
+    <None Include="bin\Debug\data.index" />
     <None Include="bin\Debug\data_0.sav" />
     <None Include="bin\Debug\lib\original\save data\data_0.sav" />
     <None Include="bin\Debug\lib\original\save data\data_0_og.sav" />

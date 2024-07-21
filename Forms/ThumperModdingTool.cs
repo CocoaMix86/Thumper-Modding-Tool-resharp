@@ -191,13 +191,13 @@ namespace Thumper_Modding_Tool_resharp
 				// update visual elements on the form
 				btnModMode.BackColor = Color.FromArgb(64,0,0);
                 btnModMode.ForeColor = Color.Crimson;
-                btnModMode.Text = "OFF";
+                btnModMode.Text = "is OFF";
 			}
 			else {
 				// update visual elements on the form
 				btnModMode.BackColor = Color.YellowGreen;
                 btnModMode.ForeColor = Color.White;
-                btnModMode.Text = "ON";
+                btnModMode.Text = "is ON";
 				btnUpdate.Enabled = true;
 				btnUpdate.Visible = true;
 			}
