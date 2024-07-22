@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Thumper Modding Tool resharp")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("A tool used for building custom levels for the game Thumper.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("CocoaMix Inc.")]
 [assembly: AssemblyProduct("Thumper Modding Tool resharp")]
-[assembly: AssemblyCopyright("Copyright © CocoaMix and bigphish 2023")]
+[assembly: AssemblyCopyright("Copyright © 2081")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
