@@ -133,9 +133,10 @@ namespace Thumper_Modding_Tool_resharp
 			//return;
 
             int menulength = 2548;
-			List<string> src_filenames = new() { "lib/2e7b0500.pc", "lib/e0c51024.pc", "lib/f78b7d78.pc", "lib/d0d6149c.pc", "lib/aefa4352.pc", "lib/b868db07.pc" };
+			List<string> src_filenames = new() { "lib/2e7b0500.pc", "lib/e0c51024.pc", "lib/f78b7d78.pc", "lib/d0d6149c.pc", "lib/aefa4352.pc", "lib/b868db07.pc",
+				"lib/ae685f16.pc" };
 			//these hashes are literally "customlevel#" hashed
-			List<string> menu_hashes = new() { "1DCB06CE", "2D5C3C41", "273EA275", "EBA1CBD7", "1F8AD438", "DDF57F91", "9402A958", "FB3C6A42", "85E4559B" };
+				List<string> menu_hashes = new() { "1DCB06CE", "2D5C3C41", "273EA275", "EBA1CBD7", "1F8AD438", "DDF57F91", "9402A958", "FB3C6A42", "85E4559B" };
 			List<string> menu_names = new();
 			//clear \out\ directory so that old level data is not stored anymore
 			DirectoryInfo _out = new(@"out");
