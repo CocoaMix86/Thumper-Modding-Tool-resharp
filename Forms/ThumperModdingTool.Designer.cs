@@ -88,7 +88,7 @@ namespace Thumper_Modding_Tool_resharp
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(519, 29);
+            this.menuStrip1.Size = new System.Drawing.Size(519, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -98,10 +98,11 @@ namespace Thumper_Modding_Tool_resharp
             this.changeGameDirToolStripMenuItem1,
             this.hashPanelToolStripMenuItem,
             this.resetSettingsToolStripMenuItem});
-            this.optionsToolStripMenuItem1.Font = new System.Drawing.Font("Trebuchet MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.optionsToolStripMenuItem1.Font = new System.Drawing.Font("Gadugi", 9.75F);
             this.optionsToolStripMenuItem1.ForeColor = System.Drawing.Color.White;
             this.optionsToolStripMenuItem1.Name = "optionsToolStripMenuItem1";
-            this.optionsToolStripMenuItem1.Size = new System.Drawing.Size(69, 25);
+            this.optionsToolStripMenuItem1.Padding = new System.Windows.Forms.Padding(0);
+            this.optionsToolStripMenuItem1.Size = new System.Drawing.Size(65, 20);
             this.optionsToolStripMenuItem1.Text = "OPTIONS";
             // 
             // changeGameDirToolStripMenuItem1
@@ -110,7 +111,7 @@ namespace Thumper_Modding_Tool_resharp
             this.changeGameDirToolStripMenuItem1.Font = new System.Drawing.Font("Gadugi", 9.75F);
             this.changeGameDirToolStripMenuItem1.ForeColor = System.Drawing.Color.White;
             this.changeGameDirToolStripMenuItem1.Name = "changeGameDirToolStripMenuItem1";
-            this.changeGameDirToolStripMenuItem1.Size = new System.Drawing.Size(205, 22);
+            this.changeGameDirToolStripMenuItem1.Size = new System.Drawing.Size(204, 22);
             this.changeGameDirToolStripMenuItem1.Text = "Change Game Dir";
             this.changeGameDirToolStripMenuItem1.Click += new System.EventHandler(this.changeGameDirToolStripMenuItem_Click);
             // 
@@ -121,7 +122,7 @@ namespace Thumper_Modding_Tool_resharp
             this.hashPanelToolStripMenuItem.Font = new System.Drawing.Font("Gadugi", 9.75F);
             this.hashPanelToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.hashPanelToolStripMenuItem.Name = "hashPanelToolStripMenuItem";
-            this.hashPanelToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.hashPanelToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
             this.hashPanelToolStripMenuItem.Text = "Hash Panel";
             this.hashPanelToolStripMenuItem.Click += new System.EventHandler(this.hashPanelToolStripMenuItem_Click);
             // 
@@ -131,7 +132,7 @@ namespace Thumper_Modding_Tool_resharp
             this.resetSettingsToolStripMenuItem.Font = new System.Drawing.Font("Gadugi", 9.75F);
             this.resetSettingsToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.resetSettingsToolStripMenuItem.Name = "resetSettingsToolStripMenuItem";
-            this.resetSettingsToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.resetSettingsToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
             this.resetSettingsToolStripMenuItem.Text = "[!!!] Reset Settings [!!!]";
             this.resetSettingsToolStripMenuItem.Click += new System.EventHandler(this.resetSettingsToolStripMenuItem_Click);
             // 
@@ -145,8 +146,8 @@ namespace Thumper_Modding_Tool_resharp
             this.helpToolStripMenuItem.Font = new System.Drawing.Font("Gadugi", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.helpToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Padding = new System.Windows.Forms.Padding(3, 5, 3, 0);
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(46, 25);
+            this.helpToolStripMenuItem.Padding = new System.Windows.Forms.Padding(0);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
             this.helpToolStripMenuItem.Text = "HELP";
             // 
             // thumpNetToolStripMenuItem
