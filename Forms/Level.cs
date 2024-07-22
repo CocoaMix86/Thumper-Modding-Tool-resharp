@@ -139,9 +139,11 @@ namespace Thumper_Modding_Tool_resharp
 				List<string> menu_hashes = new() { "1DCB06CE", "2D5C3C41", "273EA275", "EBA1CBD7", "1F8AD438", "DDF57F91", "9402A958", "FB3C6A42", "85E4559B" };
 			List<string> menu_names = new();
 			//clear \out\ directory so that old level data is not stored anymore
-			DirectoryInfo _out = new(@"out");
-			foreach (string file in Directory.EnumerateFiles(@"out", "*.*", SearchOption.AllDirectories)) File.Delete(file);
-			foreach (DirectoryInfo dir in _out.GetDirectories()) dir.Delete();
+			if (Directory.Exists(@"out")) {
+				DirectoryInfo _out = new(@"out");
+				foreach (string file in Directory.EnumerateFiles(@"out", "*.*", SearchOption.AllDirectories)) File.Delete(file);
+				foreach (DirectoryInfo dir in _out.GetDirectories()) dir.Delete();
+			}
 
 			//loop over each selected level
 			foreach (LevelTraits level_name in LoadedLevels) {
