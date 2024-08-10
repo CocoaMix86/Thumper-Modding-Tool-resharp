@@ -1,4 +1,4 @@
-﻿namespace Thumper_Modding_Tool_resharp
+﻿namespace Thumper_Mod_Loader
 {
     partial class AboutBox1
     {
@@ -66,7 +66,7 @@
             // logoPictureBox
             // 
             this.logoPictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.logoPictureBox.Image = global::Thumper_Modding_Tool_resharp.Properties.Resources.thumper_modding_tool;
+            this.logoPictureBox.Image = global::Thumper_Mod_Loader.Properties.Resources.thumper_modding_tool;
             this.logoPictureBox.Location = new System.Drawing.Point(3, 3);
             this.logoPictureBox.Name = "logoPictureBox";
             this.tableLayoutPanel.SetRowSpan(this.logoPictureBox, 6);

@@ -6,7 +6,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Thumper_Modding_Tool_resharp
+namespace Thumper_Mod_Loader
 {
     public class ObjLib
     {

@@ -1,5 +1,5 @@
 ﻿
-namespace Thumper_Modding_Tool_resharp
+namespace Thumper_Mod_Loader
 {
 	partial class ThumperModdingTool
 	{
@@ -565,7 +565,7 @@ namespace Thumper_Modding_Tool_resharp
             // 
             this.aboutToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.aboutToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.aboutToolStripMenuItem.Image = global::Thumper_Modding_Tool_resharp.Properties.Resources.icon_info;
+            this.aboutToolStripMenuItem.Image = global::Thumper_Mod_Loader.Properties.Resources.icon_info;
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.aboutToolStripMenuItem.Text = "About...";
@@ -575,7 +575,7 @@ namespace Thumper_Modding_Tool_resharp
             // 
             this.discordServerToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.discordServerToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.discordServerToolStripMenuItem.Image = global::Thumper_Modding_Tool_resharp.Properties.Resources.discord32x;
+            this.discordServerToolStripMenuItem.Image = global::Thumper_Mod_Loader.Properties.Resources.discord32x;
             this.discordServerToolStripMenuItem.Name = "discordServerToolStripMenuItem";
             this.discordServerToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.discordServerToolStripMenuItem.Text = "Discord Server";
@@ -585,7 +585,7 @@ namespace Thumper_Modding_Tool_resharp
             // 
             this.githubToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.githubToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.githubToolStripMenuItem.Image = global::Thumper_Modding_Tool_resharp.Properties.Resources.github48;
+            this.githubToolStripMenuItem.Image = global::Thumper_Mod_Loader.Properties.Resources.github48;
             this.githubToolStripMenuItem.Name = "githubToolStripMenuItem";
             this.githubToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.githubToolStripMenuItem.Text = "Github";
@@ -595,7 +595,7 @@ namespace Thumper_Modding_Tool_resharp
             // 
             this.donateTipToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.donateTipToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.donateTipToolStripMenuItem.Image = global::Thumper_Modding_Tool_resharp.Properties.Resources.kofi_logo;
+            this.donateTipToolStripMenuItem.Image = global::Thumper_Mod_Loader.Properties.Resources.kofi_logo;
             this.donateTipToolStripMenuItem.Name = "donateTipToolStripMenuItem";
             this.donateTipToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.donateTipToolStripMenuItem.Text = "Donate && Tip (ko-fi)";

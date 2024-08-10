@@ -1,4 +1,4 @@
-﻿namespace Thumper_Modding_Tool_resharp
+﻿namespace Thumper_Mod_Loader
 {
     partial class ThumpNet
     {
@@ -204,7 +204,7 @@
             // toolstripSortTime
             // 
             this.toolstripSortTime.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolstripSortTime.Image = global::Thumper_Modding_Tool_resharp.Properties.Resources.icon_time_32;
+            this.toolstripSortTime.Image = global::Thumper_Mod_Loader.Properties.Resources.icon_time_32;
             this.toolstripSortTime.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolstripSortTime.Name = "toolstripSortTime";
             this.toolstripSortTime.Size = new System.Drawing.Size(23, 22);
@@ -215,7 +215,7 @@
             // toolstripSortAlpha
             // 
             this.toolstripSortAlpha.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolstripSortAlpha.Image = global::Thumper_Modding_Tool_resharp.Properties.Resources.icon_alpha_32;
+            this.toolstripSortAlpha.Image = global::Thumper_Mod_Loader.Properties.Resources.icon_alpha_32;
             this.toolstripSortAlpha.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolstripSortAlpha.Name = "toolstripSortAlpha";
             this.toolstripSortAlpha.Size = new System.Drawing.Size(23, 22);
@@ -226,7 +226,7 @@
             // toolstripSortDif
             // 
             this.toolstripSortDif.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolstripSortDif.Image = global::Thumper_Modding_Tool_resharp.Properties.Resources.icon_difficulty;
+            this.toolstripSortDif.Image = global::Thumper_Mod_Loader.Properties.Resources.icon_difficulty;
             this.toolstripSortDif.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolstripSortDif.Name = "toolstripSortDif";
             this.toolstripSortDif.Size = new System.Drawing.Size(23, 22);
@@ -237,7 +237,7 @@
             // toolstripSortAuthor
             // 
             this.toolstripSortAuthor.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolstripSortAuthor.Image = global::Thumper_Modding_Tool_resharp.Properties.Resources.icon_person_32;
+            this.toolstripSortAuthor.Image = global::Thumper_Mod_Loader.Properties.Resources.icon_person_32;
             this.toolstripSortAuthor.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolstripSortAuthor.Name = "toolstripSortAuthor";
             this.toolstripSortAuthor.Size = new System.Drawing.Size(23, 22);
@@ -248,7 +248,7 @@
             // toolstripSortDirection
             // 
             this.toolstripSortDirection.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolstripSortDirection.Image = global::Thumper_Modding_Tool_resharp.Properties.Resources.icon_sort_32;
+            this.toolstripSortDirection.Image = global::Thumper_Mod_Loader.Properties.Resources.icon_sort_32;
             this.toolstripSortDirection.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolstripSortDirection.Name = "toolstripSortDirection";
             this.toolstripSortDirection.Size = new System.Drawing.Size(23, 22);

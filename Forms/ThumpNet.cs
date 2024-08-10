@@ -12,9 +12,9 @@ using System.Security.Policy;
 using System.Text;
 using System.Windows.Forms;
 using System.Windows.Shapes;
-using Thumper_Modding_Tool_resharp.Properties;
+using Thumper_Mod_Loader.Properties;
 
-namespace Thumper_Modding_Tool_resharp
+namespace Thumper_Mod_Loader
 {
     public partial class ThumpNet : Form
     {

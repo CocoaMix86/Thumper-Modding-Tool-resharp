@@ -3,7 +3,7 @@ using System.Data;
 using System.Linq;
 using System.IO;
 
-namespace Thumper_Modding_Tool_resharp
+namespace Thumper_Mod_Loader
 {
 	public partial class ThumperModdingTool
 	{

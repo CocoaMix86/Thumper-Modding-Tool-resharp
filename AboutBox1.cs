@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Thumper_Modding_Tool_resharp
+namespace Thumper_Mod_Loader
 {
     partial class AboutBox1 : Form
     {

@@ -7,11 +7,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{2CA545D9-BD51-41F8-888B-4A039CCED2E9}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Thumper_Modding_Tool_resharp</RootNamespace>
-    <AssemblyName>Thumper Modding Tool resharp</AssemblyName>
+    <RootNamespace>Thumper_Mod_Loader</RootNamespace>
+    <AssemblyName>Thumper Mod Loader</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>

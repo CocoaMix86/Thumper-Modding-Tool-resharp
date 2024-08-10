@@ -1,7 +1,7 @@
 ﻿using System.Windows.Forms;
 using System.Drawing;
 
-namespace Thumper_Modding_Tool_resharp
+namespace Thumper_Mod_Loader
 {
     /// <summary>
     /// https://stackoverflow.com/questions/9260303/how-to-change-menu-hover-color

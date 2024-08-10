@@ -9,7 +9,7 @@ using System.Text.RegularExpressions;
 using System.Text;
 using System.Drawing;
 
-namespace Thumper_Modding_Tool_resharp
+namespace Thumper_Mod_Loader
 {
 	public partial class ThumperModdingTool
 	{

@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Threading;
 using System.Windows.Forms;
 
-namespace Thumper_Modding_Tool_resharp
+namespace Thumper_Mod_Loader
 {
 	static class Program
 	{

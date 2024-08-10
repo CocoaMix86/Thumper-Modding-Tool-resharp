@@ -12,7 +12,7 @@ using Microsoft.WindowsAPICodePack.Dialogs;
 using Newtonsoft.Json;
 using DDS;
 
-namespace Thumper_Modding_Tool_resharp
+namespace Thumper_Mod_Loader
 {
 	public partial class ThumperModdingTool : Form
 	{
