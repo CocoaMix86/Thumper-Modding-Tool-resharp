@@ -1,15 +1,15 @@
 ﻿using System;
+using System.IO;
 
 namespace Thumper_Mod_Loader
 {
 	public class LevelTraits
 	{
-		public string name { get; set; }
-		public string difficulty { get; set; }
-		public string descript { get; set; }
-		public string path { get; set; }
-		public string folder_name { get; set; }
-		public string author { get; set; }
-		public int sublevels { get; set; }
+		public string Name { get; set; }
+		public string Difficulty { get; set; }
+		public string Description { get; set; }
+		public FileInfo FilePath { get; set; }
+		public string Authors { get; set; }
+		public int Sublevels { get; set; }
 	}
 }

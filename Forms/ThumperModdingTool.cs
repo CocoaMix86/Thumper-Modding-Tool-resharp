@@ -74,71 +74,53 @@ namespace Thumper_Mod_Loader
             ChangesMade = false;
         }
 
-        public void AddLevel(string dir, bool startup)
+        public void AddLevel(FileInfo TCL, bool startup)
         {
-            dynamic _leveldata;
-            dynamic _levelmaster;
+            dynamic ProjectJSON;
+            dynamic MasterJSON;
             int sublevels = 0;
-            var _path = dir;
             //create dynamic object from parsed JSON
             //this allows me to call each value further down
-            if (!Directory.Exists(dir)) {
-                MessageBox.Show($@"Could not find level folder {dir}");
+            if (!TCL.Exists) {
+                MessageBox.Show($@"Could not find the custom level {TCL.Name} at {TCL.DirectoryName}. Was it deleted?", "Thumper Mod Loader");
                 return;
             }
-            if (File.Exists($@"{_path}\LEVEL DETAILS.txt"))
-            {
-                _leveldata = LoadFileLock($@"{_path}\LEVEL DETAILS.txt");
-                //try-catch block on parsing master, in case it has issues
-                try
-                {
-                    _levelmaster = LoadFileLock($@"{_path}\master_sequin.txt");
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"error parsing:\n{ex.Message} in file \"master_sequin.txt\" for the selected level\n\nLEVEL NOT ADDED");
+
+            ProjectJSON = LoadFileLock(TCL.FullName);
+            //try-catch block on parsing master, in case it has issues
+            try {
+                FileInfo _locateMaster = TCL.Directory.GetFiles("*.master", SearchOption.AllDirectories).FirstOrDefault();
+                if (_locateMaster != null)
+                    MasterJSON = LoadFileLock(_locateMaster.FullName);
+                else {
+                    MessageBox.Show($@"No .Master file exists for {TCL.Name}.", "Thumper Mod Loader");
                     return;
                 }
             }
-            else
-            {
-                //if LEVEL DETAILS.txt does not exist, return. Do not add level
-                MessageBox.Show("\"LEVEL DETAILS.txt\" for the selected level could not be found." + dir);
+            catch (Exception ex) {
+                MessageBox.Show($"error parsing:\n{ex.Message} in .master file the selected level\n\nLEVEL NOT ADDED");
                 return;
             }
-            //check if the level has already been added
-            foreach (LevelTraits lt in LoadedLevels)
-            {
-                //if exists, tell user, then return and do not add level
-                if (lt.name == (string)_leveldata.level_name)
-                {
-                    //MessageBox.Show("That level has already been added");
-                    //return;
-                }
-            }
+
             //check which sublevels have checkpoint enabled. This determines how many sublevels exist
-            foreach (var lvl in _levelmaster["groupings"])
-            {
+            foreach (var lvl in MasterJSON["groupings"]) {
                 if ((string)lvl["checkpoint"] == "True")
                     sublevels++;
             }
             //add level to the List, initializing each value from parsed JSON
-            LoadedLevels.Add(new LevelTraits()
-            {
-                name = _leveldata.level_name,
-                difficulty = _leveldata.difficulty,
-                descript = _leveldata.description,
-                path = _path,
-                folder_name = Path.GetFileName(_path),
-                author = _leveldata.author,
-                sublevels = sublevels
+            LoadedLevels.Add(new LevelTraits() {
+                Name = ProjectJSON.level_name,
+                Difficulty = ProjectJSON.difficulty,
+                Description = ProjectJSON.description,
+                FilePath = TCL,
+                Authors = ProjectJSON.author,
+                Sublevels = sublevels
             });
             dgvLevels.Rows[dgvLevels.Rows.Count - 1].Selected = true;
             ///Add level to apps internal list of loaded levels
             ///It uses this to repopulate the list next time it closes/opens
-            if (!startup)
-            {
-                Properties.Settings.Default.level_paths.Add(_path);
+            if (!startup) {
+                Properties.Settings.Default.level_paths.Add(TCL.FullName);
                 Properties.Settings.Default.Save();
             }
 
@@ -207,14 +189,14 @@ namespace Thumper_Mod_Loader
 			if (Properties.Settings.Default.level_paths == null)
 				Properties.Settings.Default.level_paths = new List<string>();
 			foreach (string s in Properties.Settings.Default.level_paths)
-				AddLevel(s, true);
+				AddLevel(new FileInfo(s), true);
 
 			// custom splash screen
 			picSplashScreen.AllowDrop = true;
 			LoadSplashScreen();
 
             // Update title to reflect version number
-			Text = Title;
+			this.Text = Title;
         }
 
         private void LoadedLevels_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -227,7 +209,7 @@ namespace Thumper_Mod_Loader
             dgvLevels.RowCount = 0;
 			foreach (var _level in LoadedLevels) {
 				//populate rows with level name, and difficulty strings
-				dgvLevels.Rows.Add(new object[] { Image.FromFile($@"{_level.folder_name}\thumbnail.png") ,_level.name, Properties.Resources.ResourceManager.GetObject(_level.difficulty.ToLower()), _level.sublevels });
+				dgvLevels.Rows.Add(new object[] { Image.FromFile($@"{_level.FilePath.FullName}\thumbnail.png") ,_level.Name, Properties.Resources.ResourceManager.GetObject(_level.Difficulty.ToLower()), _level.Sublevels });
 			}
 
             if (i - 1 >= 0) dgvLevels.Rows[i - 1].Selected = true;
@@ -243,9 +225,9 @@ namespace Thumper_Mod_Loader
 			}
 
 			int i = dgvLevels.CurrentRow.Index;
-            lblCreator.Text = $"Creator: {LoadedLevels[i].author}";
-            richDescript.Text = $"{LoadedLevels[i].descript}";
-            pictureDifficulty.Image = (Image)Properties.Resources.ResourceManager.GetObject(LoadedLevels[i].difficulty.ToLower());
+            lblCreator.Text = $"Creator: {LoadedLevels[i].Authors}";
+            richDescript.Text = $"{LoadedLevels[i].Description}";
+            pictureDifficulty.Image = (Image)Properties.Resources.ResourceManager.GetObject(LoadedLevels[i].Difficulty.ToLower());
 
         }
 
@@ -274,8 +256,11 @@ namespace Thumper_Mod_Loader
             }
             foreach (string dir in data)
             {
-                if (Directory.Exists(dir))
-                    AddLevel(dir, false);
+                if (Directory.Exists(dir)) {
+                    FileInfo _locateTCL = new FileInfo(Directory.GetFiles(dir, "*.TCL", SearchOption.AllDirectories).FirstOrDefault());
+                    if (_locateTCL != null)
+                        AddLevel(_locateTCL, false);
+                }
             }
         }
 
@@ -312,22 +297,19 @@ namespace Thumper_Mod_Loader
 		private void btnLevelRemove_Click(object sender, EventArgs e)
 		{
             // get selected row index
-            if (dgvLevels.GetCellCount(DataGridViewElementStates.Selected) == 0) return;
-            int i = dgvLevels.SelectedCells[0].RowIndex;
+            if (dgvLevels.GetCellCount(DataGridViewElementStates.Selected) == 0) 
+                return;
 
+            int i = dgvLevels.SelectedRows[0].Index;
             // get level traits
             var Level = LoadedLevels[i];
-
             // remove from loaded levels
 			LoadedLevels.Remove(Level);
-
 			///Remove the path from the apps internal list so it doesn't load at reload
-			Properties.Settings.Default.level_paths.Remove(Level.path);
+			Properties.Settings.Default.level_paths.Remove(Level.FilePath.FullName);
 			Properties.Settings.Default.Save();
-
 			// disable remove button if no levels are left
 			btnLevelRemove.Enabled = LoadedLevels.Count != 0;
-
             // changes made
 			ChangesMade = true;
         }
@@ -484,7 +466,7 @@ namespace Thumper_Mod_Loader
         {
             Properties.Settings.Default.level_paths.Clear();
             foreach (LevelTraits lt in LoadedLevels) {
-                    Properties.Settings.Default.level_paths.Add(lt.path);
+                    Properties.Settings.Default.level_paths.Add(lt.FilePath);
             }
             Properties.Settings.Default.Save();
         }

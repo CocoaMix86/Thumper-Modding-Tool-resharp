@@ -15,8 +15,8 @@ namespace Thumper_Mod_Loader
 	{
 		public JsonLoadSettings jo = new() { CommentHandling = CommentHandling.Load};
 
-		List<string> file_types = new() { "gate", "leaf", "lvl", "master", "xfm", "config" };
-		List<string> file_special = new() { "spn", "samp" };
+		List<string> file_types = new() { ".gate", ".leaf", ".lvl", ".master", ".xfm", ".config" };
+		List<string> file_special = new() { ".spn", ".samp" };
 
 		List<string> list_cache_filename = new() { 
 			"23490781.pc", 
@@ -113,30 +113,11 @@ namespace Thumper_Mod_Loader
 		/// 
 		private void Make_Custom_Levels(string game_dir)
 		{
-			//string[] out_files = Directory.GetFiles("C:\\Users\\booge\\Documents\\GitHub\\Thumper-Modding-Tool-resharp\\bin\\Debug\\full_out\\cache");
-			//List<string> gfiles = Directory.GetFiles(Path.Combine(game_dir, "cache")).ToList();
-			//List<string> gf = new List<string>();
-			//foreach (var f in gfiles)
-			//{
-			//	gf.Add(Path.GetFileName(f));
-			//}
-
-   //         foreach (var f in out_files)
-			//{
-			//	if (gf.Contains(Path.GetFileName(f)))
-			//	{
-   //                 File.Copy(f, $"{new FileInfo(f).Directory.FullName}\\important\\{Path.GetFileName(f)}");
-   //             }
-			//}
-
-			//MessageBox.Show("Finished");
-			//return;
-
             int menulength = 2548;
 			List<string> src_filenames = new() { "lib/2e7b0500.pc", "lib/e0c51024.pc", "lib/f78b7d78.pc", "lib/d0d6149c.pc", "lib/aefa4352.pc", "lib/b868db07.pc",
 				"lib/ae685f16.pc" };
 			//these hashes are literally "customlevel#" hashed
-				List<string> menu_hashes = new() { "1DCB06CE", "2D5C3C41", "273EA275", "EBA1CBD7", "1F8AD438", "DDF57F91", "9402A958", "FB3C6A42", "85E4559B" };
+			List<string> menu_hashes = new() { "1DCB06CE", "2D5C3C41", "273EA275", "EBA1CBD7", "1F8AD438", "DDF57F91", "9402A958", "FB3C6A42", "85E4559B" };
 			List<string> menu_names = new();
 			//clear \out\ directory so that old level data is not stored anymore
 			if (Directory.Exists(@"out")) {
@@ -146,22 +127,22 @@ namespace Thumper_Mod_Loader
 			}
 
 			//loop over each selected level
-			foreach (LevelTraits level_name in LoadedLevels) {
+			foreach (LevelTraits Level in LoadedLevels) {
 				dynamic level_config = null;
 				var objs = new List<dynamic>();
 				var obj_count = 0;
 				dynamic new_objs = null;
 				string errorlist = "";
 
-				if (!Directory.Exists(level_name.path))
+				if (!Level.FilePath.Exists)
 				{
-					MessageBox.Show($"The level \"{level_name.name}\" no longer exists, please add it again and update.");
+					MessageBox.Show($"The level \"{Level.Name}\" no longer exists, please add it again and update.");
 					return;
 				}
 				//check if the custom level folder contains custom audio. This needs to be put into Thumper's cache folder
-				if (Directory.Exists(@$"{level_name.path}\extras")) {
+				if (Directory.Exists(@$"{Level.FilePath.FullName}\extras")) {
                     Properties.Settings.Default.loaded_files = new List<string>();
-                    foreach (string filename in Directory.GetFiles(@$"{level_name.path}\extras")) {
+                    foreach (string filename in Directory.GetFiles(@$"{Level.FilePath}\extras")) {
 						File.Copy(filename, $@"{game_dir}\cache\{Path.GetFileName(filename)}", true);
 						//audiofiles.Add(filename);
 						Properties.Settings.Default.loaded_files.Add(filename);
@@ -171,15 +152,14 @@ namespace Thumper_Mod_Loader
 				}
 				//iterate over each file in the custom level directory
 				//filter out files that do not match the <file_types> list
-				foreach (string filename in Directory.GetFiles(level_name.path)) {
-					if (file_types.Contains(Path.GetFileName(filename).Split('_')[0])) {
+				foreach (FileInfo FileInProject in Level.FilePath.Directory.GetFiles("*.*", SearchOption.AllDirectories)) {
+					if (file_types.Contains(FileInProject.Extension.ToLower())) {
 						//read file and store JSON in dynamic object
 						try {
-							//new_objs = JObject.Parse(Regex.Replace(File.ReadAllText(filename), @"#.*", ""), jo);
-							new_objs = LoadFileLock(filename);
+							new_objs = LoadFileLock(FileInProject.FullName);
 						}
 						catch (Exception ex) { 
-							errorlist += $"error parsing:\n{ex.Message} in file \"{Path.GetFileName(filename)}\" in level \"{level_name.name}\"\n\n";
+							errorlist += $"error parsing:\n{ex.Message} in file \"{FileInProject.Name}\" in level \"{Level.Name}\"\n\n";
 							continue;
 						}
 						//LevelLib contains important info for where the final level files go, so it gets put into its own object
@@ -191,13 +171,13 @@ namespace Thumper_Mod_Loader
 						obj_count++;
 					}
 					//these file types require different processing to get the data
-					else if (file_special.Contains(Path.GetFileName(filename).Split('_')[0])) {
+					else if (file_special.Contains(FileInProject.Extension.ToLower())) {
 						try {
 							//new_objs = JsonConvert.DeserializeObject(File.ReadAllText(filename));
-							new_objs = LoadFileLock(filename);
+							new_objs = LoadFileLock(FileInProject.FullName);
 						}
 						catch (Exception ex) {
-							errorlist += $"error parsing:\n{ex.Message} in file \"{Path.GetFileName(filename)}\" in level \"{level_name.name}\"\n\n";
+							errorlist += $"error parsing:\n{ex.Message} in file \"{FileInProject.Name}\" in level \"{Level.Name}\"\n\n";
 							continue;
 						}
 						//spn_ and samp_ files contain multiple entries, inside the "multi":[] list
@@ -214,8 +194,8 @@ namespace Thumper_Mod_Loader
 				}
 
 				//var cache_filename = $@"out\{level_name.folder_name}\{level_config["cache_filename"]}";
-				var cache_filename = $@"out\{level_name.folder_name}\{list_cache_filename[LoadedLevels.IndexOf(level_name)]}";
-				Directory.CreateDirectory($@"out\{level_name.folder_name}");
+				var cache_filename = $@"out\{Level.Name}\{list_cache_filename[LoadedLevels.IndexOf(Level)]}";
+				Directory.CreateDirectory($@"out\{Level.Name}");
 				byte[] bytes;
 
 				using (FileStream f = File.Open(cache_filename, FileMode.Create, FileAccess.Write, FileShare.None)) {
@@ -225,7 +205,7 @@ namespace Thumper_Mod_Loader
 
 					//write objlib path to level .pc file
 					//Write_String(f, (string)level_config["objlib_path"]);
-					Write_String(f, $"levels/custom/level{LoadedLevels.IndexOf(level_name)+1}.objlib");
+					Write_String(f, $"levels/custom/level{LoadedLevels.IndexOf(Level)+1}.objlib");
 
 					//write "basic list of objects #1" information to level .pc file
 					bytes = File.ReadAllBytes(@"lib/obj_list_1.objlib");
@@ -247,7 +227,7 @@ namespace Thumper_Mod_Loader
 							}
 							else {
 								Write_Hash(f, (string)obj["obj_type"]);
-								Write_String(f, $"levels/custom/level{LoadedLevels.IndexOf(level_name) + 1}.xfm");
+								Write_String(f, $"levels/custom/level{LoadedLevels.IndexOf(Level) + 1}.xfm");
 							}
 						}
 					}
@@ -293,8 +273,7 @@ namespace Thumper_Mod_Loader
 				}
 
 
-				//var config_cache_filename = $@"out\{level_name.folder_name}\{level_config["config_cache_filename"]}";
-				var config_cache_filename = $@"out\{level_name.folder_name}\{list_config_cache_filename[LoadedLevels.IndexOf(level_name)]}";
+				var config_cache_filename = $@"out\{Level.Name}\{list_config_cache_filename[LoadedLevels.IndexOf(Level)]}";
 				using (FileStream f = File.Open(config_cache_filename, FileMode.Create, FileAccess.Write, FileShare.None)) {
 					Write_Int(f, 9);
 					Write_Int(f, level_config["level_sections"].Count);
@@ -308,8 +287,8 @@ namespace Thumper_Mod_Loader
 
 					src_filenames.Add(config_cache_filename);
 				}
-				menu_names.Add(level_name.name);
-				menulength += level_name.name.Length + 1;
+				menu_names.Add(Level.Name);
+				menulength += Level.Name.Length + 1;
 			}
 
 			//Update menu names
@@ -439,8 +418,10 @@ namespace Thumper_Mod_Loader
 		}
 
 		private void Write_Sequencer_Objects(FileStream f, dynamic obj)
-		{
-			int beat_cnt = obj["beat_cnt"] ?? 0;
+        {
+            string interp = "kTraitInterpLinear";
+            string ease = "kEaseInOut";
+            int beat_cnt = obj["beat_cnt"] ?? 0;
 			dynamic seq_objs = obj["seq_objs"];
 			//write amount of seq_objs (different tracks) to .pc file
 			Write_Int(f, seq_objs.Count);
@@ -453,26 +434,37 @@ namespace Thumper_Mod_Loader
 
 				///data points of object
 				//
-				var interp = _obj.ContainsKey("default_interp") ? (string)_obj["default_interp"] : "kTraitInterpLinear";
-				if (interp == null)
-					interp = "kTraitInterpLinear";
-				var ease = _obj.ContainsKey("default_ease") ? (string)_obj["default_ease"] : "kEaseInOut";
 				//Data points written different depending on STEP
 				if (_obj["step"] == "True") {
 					//STEP true = value updates every beat, and if no value is set for a beat, it'll use _obj.default
 					Write_Int(f, beat_cnt);
+					int indexofwrittenbeat = 0;
 					for (int i = 0; i < beat_cnt; i++) {
 						Write_Float(f, i);
+						if ((int)_obj["data_points"][indexofwrittenbeat]["beat"] == i) {
+                            Write_Data_Point_Value(f, (string)_obj["data_points"][indexofwrittenbeat]["value"], (string)_obj["trait_type"]);
+                            Write_String(f, (string)_obj["data_points"][indexofwrittenbeat]["interp"]);
+                            Write_String(f, (string)_obj["data_points"][indexofwrittenbeat]["ease"]);
+							indexofwrittenbeat++;
+                        }
+						else {
+                            Write_Data_Point_Value(f, (string)_obj["default"], (string)_obj["trait_type"]);
+                            Write_String(f, interp);
+                            Write_String(f, ease);
+                        }
+						/*
 						//check if data_points contains an entry for beat `i`. If yes, write it
 						if (_obj["data_points"].ContainsKey(i.ToString()))
 							Write_Data_Point_Value(f, (string)_obj["data_points"][i.ToString()], (string)_obj["trait_type"]);
 						else
 							Write_Data_Point_Value(f, (string)_obj["default"], (string)_obj["trait_type"]);
+						
 						//write these after every beat for some reason
 						Write_String(f, interp);
 						Write_String(f, ease);
+						*/
 					}
-				}
+                }
 				else {
 					//STEP false = value interpolates between values set on beats. Default is ignored.
 					Write_Int(f, Enumerable.Count<dynamic>(_obj["data_points"]));

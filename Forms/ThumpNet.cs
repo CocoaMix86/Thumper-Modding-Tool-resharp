@@ -432,7 +432,7 @@ namespace Thumper_Mod_Loader
                             {
                                 foreach (LevelTraits l in ThumperModdingTool.LoadedLevels)
                                 {
-                                    if (l.path == fn)
+                                    if (l.FilePath == fn)
                                     {
                                         load.Text = "Already Added";
                                         load.ForeColor = Color.White;
