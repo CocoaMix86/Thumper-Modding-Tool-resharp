@@ -20,647 +20,657 @@ namespace Thumper_Mod_Loader
 			base.Dispose(disposing);
 		}
 
-		#region Windows Form Designer generated code
+        #region Windows Form Designer generated code
 
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent()
-		{
-            this.components = new System.ComponentModel.Container();
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ThumperModdingTool));
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.optionsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.changeGameDirToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.hashPanelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.resetSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.thumpNetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.changeGameDirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.label1 = new System.Windows.Forms.Label();
-            this.btnModMode = new System.Windows.Forms.Button();
-            this.btnUpdate = new System.Windows.Forms.Button();
-            this.btnLevelAdd = new System.Windows.Forms.Button();
-            this.btnLevelRemove = new System.Windows.Forms.Button();
-            this.btnLevelUp = new System.Windows.Forms.Button();
-            this.btnLevelDown = new System.Windows.Forms.Button();
-            this.dgvLevels = new System.Windows.Forms.DataGridView();
-            this.LevelName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Difficulty = new System.Windows.Forms.DataGridViewImageColumn();
-            this.Sublevels = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.richDescript = new System.Windows.Forms.RichTextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.BtnHash = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.panelHash = new System.Windows.Forms.Panel();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.btnSplashScreen = new System.Windows.Forms.Button();
-            this.btnSplashScreenReset = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.lblCustomDiffHelp = new System.Windows.Forms.Label();
-            this.lblCreator = new System.Windows.Forms.Label();
-            this.picSplashScreen = new System.Windows.Forms.PictureBox();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.discordServerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.githubToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.donateTipToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pictureDifficulty = new System.Windows.Forms.PictureBox();
-            this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvLevels)).BeginInit();
-            this.panelHash.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picSplashScreen)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureDifficulty)).BeginInit();
-            this.SuspendLayout();
+            menuStrip1 = new System.Windows.Forms.MenuStrip();
+            optionsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            changeGameDirToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            hashPanelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            resetSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            discordServerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            githubToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            donateTipToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            thumpNetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            changeGameDirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            label1 = new System.Windows.Forms.Label();
+            btnModMode = new System.Windows.Forms.Button();
+            btnUpdate = new System.Windows.Forms.Button();
+            btnLevelAdd = new System.Windows.Forms.Button();
+            btnLevelRemove = new System.Windows.Forms.Button();
+            btnLevelUp = new System.Windows.Forms.Button();
+            btnLevelDown = new System.Windows.Forms.Button();
+            dgvLevels = new System.Windows.Forms.DataGridView();
+            richDescript = new System.Windows.Forms.RichTextBox();
+            label3 = new System.Windows.Forms.Label();
+            BtnHash = new System.Windows.Forms.Button();
+            textBox1 = new System.Windows.Forms.TextBox();
+            textBox2 = new System.Windows.Forms.TextBox();
+            panelHash = new System.Windows.Forms.Panel();
+            toolTip1 = new System.Windows.Forms.ToolTip(components);
+            btnSplashScreen = new System.Windows.Forms.Button();
+            btnSplashScreenReset = new System.Windows.Forms.Button();
+            picSplashScreen = new System.Windows.Forms.PictureBox();
+            label2 = new System.Windows.Forms.Label();
+            label4 = new System.Windows.Forms.Label();
+            label5 = new System.Windows.Forms.Label();
+            lblCustomDiffHelp = new System.Windows.Forms.Label();
+            lblCreator = new System.Windows.Forms.Label();
+            pictureDifficulty = new System.Windows.Forms.PictureBox();
+            Thumbnail = new System.Windows.Forms.DataGridViewImageColumn();
+            LevelName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            Difficulty = new System.Windows.Forms.DataGridViewImageColumn();
+            Sublevels = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvLevels).BeginInit();
+            panelHash.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)picSplashScreen).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureDifficulty).BeginInit();
+            SuspendLayout();
             // 
             // menuStrip1
             // 
-            this.menuStrip1.BackColor = System.Drawing.Color.Maroon;
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.optionsToolStripMenuItem1,
-            this.helpToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(519, 24);
-            this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
+            menuStrip1.BackColor = System.Drawing.Color.Maroon;
+            menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { optionsToolStripMenuItem1, helpToolStripMenuItem });
+            menuStrip1.Location = new System.Drawing.Point(0, 0);
+            menuStrip1.Name = "menuStrip1";
+            menuStrip1.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
+            menuStrip1.Size = new System.Drawing.Size(1041, 24);
+            menuStrip1.TabIndex = 0;
+            menuStrip1.Text = "menuStrip1";
             // 
             // optionsToolStripMenuItem1
             // 
-            this.optionsToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.changeGameDirToolStripMenuItem1,
-            this.hashPanelToolStripMenuItem,
-            this.resetSettingsToolStripMenuItem});
-            this.optionsToolStripMenuItem1.Font = new System.Drawing.Font("Gadugi", 9.75F);
-            this.optionsToolStripMenuItem1.ForeColor = System.Drawing.Color.White;
-            this.optionsToolStripMenuItem1.Name = "optionsToolStripMenuItem1";
-            this.optionsToolStripMenuItem1.Padding = new System.Windows.Forms.Padding(0);
-            this.optionsToolStripMenuItem1.Size = new System.Drawing.Size(65, 20);
-            this.optionsToolStripMenuItem1.Text = "OPTIONS";
+            optionsToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { changeGameDirToolStripMenuItem1, hashPanelToolStripMenuItem, resetSettingsToolStripMenuItem });
+            optionsToolStripMenuItem1.Font = new System.Drawing.Font("Gadugi", 9.75F);
+            optionsToolStripMenuItem1.ForeColor = System.Drawing.Color.White;
+            optionsToolStripMenuItem1.Name = "optionsToolStripMenuItem1";
+            optionsToolStripMenuItem1.Padding = new System.Windows.Forms.Padding(0);
+            optionsToolStripMenuItem1.Size = new System.Drawing.Size(65, 20);
+            optionsToolStripMenuItem1.Text = "OPTIONS";
             // 
             // changeGameDirToolStripMenuItem1
             // 
-            this.changeGameDirToolStripMenuItem1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.changeGameDirToolStripMenuItem1.Font = new System.Drawing.Font("Gadugi", 9.75F);
-            this.changeGameDirToolStripMenuItem1.ForeColor = System.Drawing.Color.White;
-            this.changeGameDirToolStripMenuItem1.Name = "changeGameDirToolStripMenuItem1";
-            this.changeGameDirToolStripMenuItem1.Size = new System.Drawing.Size(204, 22);
-            this.changeGameDirToolStripMenuItem1.Text = "Change Game Dir";
-            this.changeGameDirToolStripMenuItem1.Click += new System.EventHandler(this.changeGameDirToolStripMenuItem_Click);
+            changeGameDirToolStripMenuItem1.BackColor = System.Drawing.Color.FromArgb(40, 40, 40);
+            changeGameDirToolStripMenuItem1.Font = new System.Drawing.Font("Gadugi", 9.75F);
+            changeGameDirToolStripMenuItem1.ForeColor = System.Drawing.Color.White;
+            changeGameDirToolStripMenuItem1.Name = "changeGameDirToolStripMenuItem1";
+            changeGameDirToolStripMenuItem1.Size = new System.Drawing.Size(204, 22);
+            changeGameDirToolStripMenuItem1.Text = "Change Game Dir";
+            changeGameDirToolStripMenuItem1.Click += changeGameDirToolStripMenuItem_Click;
             // 
             // hashPanelToolStripMenuItem
             // 
-            this.hashPanelToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.hashPanelToolStripMenuItem.CheckOnClick = true;
-            this.hashPanelToolStripMenuItem.Font = new System.Drawing.Font("Gadugi", 9.75F);
-            this.hashPanelToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.hashPanelToolStripMenuItem.Name = "hashPanelToolStripMenuItem";
-            this.hashPanelToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
-            this.hashPanelToolStripMenuItem.Text = "Hash Panel";
-            this.hashPanelToolStripMenuItem.Click += new System.EventHandler(this.hashPanelToolStripMenuItem_Click);
+            hashPanelToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(40, 40, 40);
+            hashPanelToolStripMenuItem.CheckOnClick = true;
+            hashPanelToolStripMenuItem.Font = new System.Drawing.Font("Gadugi", 9.75F);
+            hashPanelToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            hashPanelToolStripMenuItem.Name = "hashPanelToolStripMenuItem";
+            hashPanelToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            hashPanelToolStripMenuItem.Text = "Hash Panel";
+            hashPanelToolStripMenuItem.Click += hashPanelToolStripMenuItem_Click;
             // 
             // resetSettingsToolStripMenuItem
             // 
-            this.resetSettingsToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.resetSettingsToolStripMenuItem.Font = new System.Drawing.Font("Gadugi", 9.75F);
-            this.resetSettingsToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.resetSettingsToolStripMenuItem.Name = "resetSettingsToolStripMenuItem";
-            this.resetSettingsToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
-            this.resetSettingsToolStripMenuItem.Text = "[!!!] Reset Settings [!!!]";
-            this.resetSettingsToolStripMenuItem.Click += new System.EventHandler(this.resetSettingsToolStripMenuItem_Click);
+            resetSettingsToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(40, 40, 40);
+            resetSettingsToolStripMenuItem.Font = new System.Drawing.Font("Gadugi", 9.75F);
+            resetSettingsToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            resetSettingsToolStripMenuItem.Name = "resetSettingsToolStripMenuItem";
+            resetSettingsToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            resetSettingsToolStripMenuItem.Text = "[!!!] Reset Settings [!!!]";
+            resetSettingsToolStripMenuItem.Click += resetSettingsToolStripMenuItem_Click;
             // 
             // helpToolStripMenuItem
             // 
-            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.aboutToolStripMenuItem,
-            this.discordServerToolStripMenuItem,
-            this.githubToolStripMenuItem,
-            this.donateTipToolStripMenuItem});
-            this.helpToolStripMenuItem.Font = new System.Drawing.Font("Gadugi", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.helpToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Padding = new System.Windows.Forms.Padding(0);
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
-            this.helpToolStripMenuItem.Text = "HELP";
+            helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { aboutToolStripMenuItem, discordServerToolStripMenuItem, githubToolStripMenuItem, donateTipToolStripMenuItem });
+            helpToolStripMenuItem.Font = new System.Drawing.Font("Gadugi", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            helpToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            helpToolStripMenuItem.Padding = new System.Windows.Forms.Padding(0);
+            helpToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
+            helpToolStripMenuItem.Text = "HELP";
+            // 
+            // aboutToolStripMenuItem
+            // 
+            aboutToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(40, 40, 40);
+            aboutToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            aboutToolStripMenuItem.Image = Properties.Resources.icon_info;
+            aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            aboutToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            aboutToolStripMenuItem.Text = "About...";
+            aboutToolStripMenuItem.Click += aboutToolStripMenuItem_Click;
+            // 
+            // discordServerToolStripMenuItem
+            // 
+            discordServerToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(40, 40, 40);
+            discordServerToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            discordServerToolStripMenuItem.Image = Properties.Resources.discord32x;
+            discordServerToolStripMenuItem.Name = "discordServerToolStripMenuItem";
+            discordServerToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            discordServerToolStripMenuItem.Text = "Discord Server";
+            discordServerToolStripMenuItem.Click += discordServerToolStripMenuItem_Click;
+            // 
+            // githubToolStripMenuItem
+            // 
+            githubToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(40, 40, 40);
+            githubToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            githubToolStripMenuItem.Image = Properties.Resources.github48;
+            githubToolStripMenuItem.Name = "githubToolStripMenuItem";
+            githubToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            githubToolStripMenuItem.Text = "Github";
+            githubToolStripMenuItem.Click += githubToolStripMenuItem_Click;
+            // 
+            // donateTipToolStripMenuItem
+            // 
+            donateTipToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(40, 40, 40);
+            donateTipToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            donateTipToolStripMenuItem.Image = Properties.Resources.kofi_logo;
+            donateTipToolStripMenuItem.Name = "donateTipToolStripMenuItem";
+            donateTipToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            donateTipToolStripMenuItem.Text = "Donate && Tip (ko-fi)";
+            donateTipToolStripMenuItem.Click += donateTipToolStripMenuItem_Click;
             // 
             // thumpNetToolStripMenuItem
             // 
-            this.thumpNetToolStripMenuItem.Font = new System.Drawing.Font("Trebuchet MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.thumpNetToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.thumpNetToolStripMenuItem.Name = "thumpNetToolStripMenuItem";
-            this.thumpNetToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
-            this.thumpNetToolStripMenuItem.Text = "Download Levels";
-            this.thumpNetToolStripMenuItem.Click += new System.EventHandler(this.thumpNetToolStripMenuItem_Click);
+            thumpNetToolStripMenuItem.Font = new System.Drawing.Font("Trebuchet MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            thumpNetToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            thumpNetToolStripMenuItem.Name = "thumpNetToolStripMenuItem";
+            thumpNetToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
+            thumpNetToolStripMenuItem.Text = "Download Levels";
+            thumpNetToolStripMenuItem.Click += thumpNetToolStripMenuItem_Click;
             // 
             // optionsToolStripMenuItem
             // 
-            this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.changeGameDirToolStripMenuItem});
-            this.optionsToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.optionsToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
-            this.optionsToolStripMenuItem.Text = "Options";
+            optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { changeGameDirToolStripMenuItem });
+            optionsToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            optionsToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
+            optionsToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
+            optionsToolStripMenuItem.Text = "Options";
             // 
             // changeGameDirToolStripMenuItem
             // 
-            this.changeGameDirToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.changeGameDirToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.changeGameDirToolStripMenuItem.Name = "changeGameDirToolStripMenuItem";
-            this.changeGameDirToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
-            this.changeGameDirToolStripMenuItem.Text = "Change Game Dir";
-            this.changeGameDirToolStripMenuItem.Click += new System.EventHandler(this.changeGameDirToolStripMenuItem_Click);
+            changeGameDirToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(40, 40, 40);
+            changeGameDirToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            changeGameDirToolStripMenuItem.Name = "changeGameDirToolStripMenuItem";
+            changeGameDirToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            changeGameDirToolStripMenuItem.Text = "Change Game Dir";
+            changeGameDirToolStripMenuItem.Click += changeGameDirToolStripMenuItem_Click;
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Trebuchet MS", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(5, 24);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(185, 46);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Mod Mode";
+            label1.AutoSize = true;
+            label1.Font = new System.Drawing.Font("Trebuchet MS", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            label1.ForeColor = System.Drawing.Color.White;
+            label1.Location = new System.Drawing.Point(6, 28);
+            label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(185, 46);
+            label1.TabIndex = 1;
+            label1.Text = "Mod Mode";
             // 
             // btnModMode
             // 
-            this.btnModMode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.btnModMode.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnModMode.Font = new System.Drawing.Font("Trebuchet MS", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnModMode.ForeColor = System.Drawing.Color.Crimson;
-            this.btnModMode.Location = new System.Drawing.Point(182, 27);
-            this.btnModMode.Name = "btnModMode";
-            this.btnModMode.Size = new System.Drawing.Size(105, 45);
-            this.btnModMode.TabIndex = 3;
-            this.btnModMode.Text = "is OFF";
-            this.toolTip1.SetToolTip(this.btnModMode, "Click to change state");
-            this.btnModMode.UseVisualStyleBackColor = false;
-            this.btnModMode.Click += new System.EventHandler(this.btnModMode_Click);
+            btnModMode.BackColor = System.Drawing.Color.FromArgb(64, 0, 0);
+            btnModMode.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btnModMode.Font = new System.Drawing.Font("Trebuchet MS", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            btnModMode.ForeColor = System.Drawing.Color.Crimson;
+            btnModMode.Location = new System.Drawing.Point(186, 27);
+            btnModMode.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnModMode.Name = "btnModMode";
+            btnModMode.Size = new System.Drawing.Size(122, 52);
+            btnModMode.TabIndex = 3;
+            btnModMode.Text = "is OFF";
+            toolTip1.SetToolTip(btnModMode, "Click to change state");
+            btnModMode.UseVisualStyleBackColor = false;
+            btnModMode.Click += btnModMode_Click;
             // 
             // btnUpdate
             // 
-            this.btnUpdate.BackColor = System.Drawing.Color.MediumSlateBlue;
-            this.btnUpdate.Enabled = false;
-            this.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUpdate.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUpdate.Location = new System.Drawing.Point(63, 73);
-            this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(111, 29);
-            this.btnUpdate.TabIndex = 4;
-            this.btnUpdate.Text = "Update Levels";
-            this.toolTip1.SetToolTip(this.btnUpdate, "Update Thumper with these levels and splash screen.\r\nAdding or removing levels re" +
-        "quires a re-launch of the game.");
-            this.btnUpdate.UseVisualStyleBackColor = false;
-            this.btnUpdate.Visible = false;
-            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            btnUpdate.BackColor = System.Drawing.Color.MediumSlateBlue;
+            btnUpdate.Enabled = false;
+            btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btnUpdate.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            btnUpdate.Location = new System.Drawing.Point(74, 84);
+            btnUpdate.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnUpdate.Name = "btnUpdate";
+            btnUpdate.Size = new System.Drawing.Size(130, 33);
+            btnUpdate.TabIndex = 4;
+            btnUpdate.Text = "Update Levels";
+            toolTip1.SetToolTip(btnUpdate, "Update Thumper with these levels and splash screen.\r\nAdding or removing levels requires a re-launch of the game.");
+            btnUpdate.UseVisualStyleBackColor = false;
+            btnUpdate.Visible = false;
+            btnUpdate.Click += btnUpdate_Click;
             // 
             // btnLevelAdd
             // 
-            this.btnLevelAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnLevelAdd.BackColor = System.Drawing.Color.YellowGreen;
-            this.btnLevelAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLevelAdd.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLevelAdd.Location = new System.Drawing.Point(12, 425);
-            this.btnLevelAdd.Name = "btnLevelAdd";
-            this.btnLevelAdd.Size = new System.Drawing.Size(74, 25);
-            this.btnLevelAdd.TabIndex = 6;
-            this.btnLevelAdd.Text = "Add Level";
-            this.toolTip1.SetToolTip(this.btnLevelAdd, "You can click and drag level folders into the list\r\nto quickly add them");
-            this.btnLevelAdd.UseVisualStyleBackColor = false;
-            this.btnLevelAdd.Click += new System.EventHandler(this.btnLevelAdd_Click);
+            btnLevelAdd.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
+            btnLevelAdd.BackColor = System.Drawing.Color.YellowGreen;
+            btnLevelAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btnLevelAdd.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            btnLevelAdd.Location = new System.Drawing.Point(14, 490);
+            btnLevelAdd.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnLevelAdd.Name = "btnLevelAdd";
+            btnLevelAdd.Size = new System.Drawing.Size(86, 29);
+            btnLevelAdd.TabIndex = 6;
+            btnLevelAdd.Text = "Add Level";
+            toolTip1.SetToolTip(btnLevelAdd, "You can click and drag level folders into the list\r\nto quickly add them");
+            btnLevelAdd.UseVisualStyleBackColor = false;
+            btnLevelAdd.Click += btnLevelAdd_Click;
             // 
             // btnLevelRemove
             // 
-            this.btnLevelRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnLevelRemove.BackColor = System.Drawing.Color.Crimson;
-            this.btnLevelRemove.Enabled = false;
-            this.btnLevelRemove.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLevelRemove.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLevelRemove.Location = new System.Drawing.Point(86, 425);
-            this.btnLevelRemove.Name = "btnLevelRemove";
-            this.btnLevelRemove.Size = new System.Drawing.Size(74, 25);
-            this.btnLevelRemove.TabIndex = 7;
-            this.btnLevelRemove.Text = "Remove";
-            this.btnLevelRemove.UseVisualStyleBackColor = false;
-            this.btnLevelRemove.Click += new System.EventHandler(this.btnLevelRemove_Click);
+            btnLevelRemove.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
+            btnLevelRemove.BackColor = System.Drawing.Color.Crimson;
+            btnLevelRemove.Enabled = false;
+            btnLevelRemove.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btnLevelRemove.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            btnLevelRemove.Location = new System.Drawing.Point(100, 490);
+            btnLevelRemove.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnLevelRemove.Name = "btnLevelRemove";
+            btnLevelRemove.Size = new System.Drawing.Size(86, 29);
+            btnLevelRemove.TabIndex = 7;
+            btnLevelRemove.Text = "Remove";
+            btnLevelRemove.UseVisualStyleBackColor = false;
+            btnLevelRemove.Click += btnLevelRemove_Click;
             // 
             // btnLevelUp
             // 
-            this.btnLevelUp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnLevelUp.BackColor = System.Drawing.Color.Cyan;
-            this.btnLevelUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLevelUp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLevelUp.Location = new System.Drawing.Point(166, 425);
-            this.btnLevelUp.Name = "btnLevelUp";
-            this.btnLevelUp.Size = new System.Drawing.Size(23, 25);
-            this.btnLevelUp.TabIndex = 8;
-            this.btnLevelUp.Text = "↑";
-            this.toolTip1.SetToolTip(this.btnLevelUp, "Move selected level up");
-            this.btnLevelUp.UseCompatibleTextRendering = true;
-            this.btnLevelUp.UseVisualStyleBackColor = false;
-            this.btnLevelUp.Click += new System.EventHandler(this.btnLevelUp_Click);
+            btnLevelUp.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
+            btnLevelUp.BackColor = System.Drawing.Color.Cyan;
+            btnLevelUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btnLevelUp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            btnLevelUp.Location = new System.Drawing.Point(194, 490);
+            btnLevelUp.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnLevelUp.Name = "btnLevelUp";
+            btnLevelUp.Size = new System.Drawing.Size(27, 29);
+            btnLevelUp.TabIndex = 8;
+            btnLevelUp.Text = "↑";
+            toolTip1.SetToolTip(btnLevelUp, "Move selected level up");
+            btnLevelUp.UseCompatibleTextRendering = true;
+            btnLevelUp.UseVisualStyleBackColor = false;
+            btnLevelUp.Click += btnLevelUp_Click;
             // 
             // btnLevelDown
             // 
-            this.btnLevelDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnLevelDown.BackColor = System.Drawing.Color.Cyan;
-            this.btnLevelDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLevelDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLevelDown.Location = new System.Drawing.Point(189, 425);
-            this.btnLevelDown.Name = "btnLevelDown";
-            this.btnLevelDown.Size = new System.Drawing.Size(22, 25);
-            this.btnLevelDown.TabIndex = 9;
-            this.btnLevelDown.Text = "↓";
-            this.toolTip1.SetToolTip(this.btnLevelDown, "Move selected level down");
-            this.btnLevelDown.UseCompatibleTextRendering = true;
-            this.btnLevelDown.UseVisualStyleBackColor = false;
-            this.btnLevelDown.Click += new System.EventHandler(this.btnLevelDown_Click);
+            btnLevelDown.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
+            btnLevelDown.BackColor = System.Drawing.Color.Cyan;
+            btnLevelDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btnLevelDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            btnLevelDown.Location = new System.Drawing.Point(220, 490);
+            btnLevelDown.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnLevelDown.Name = "btnLevelDown";
+            btnLevelDown.Size = new System.Drawing.Size(26, 29);
+            btnLevelDown.TabIndex = 9;
+            btnLevelDown.Text = "↓";
+            toolTip1.SetToolTip(btnLevelDown, "Move selected level down");
+            btnLevelDown.UseCompatibleTextRendering = true;
+            btnLevelDown.UseVisualStyleBackColor = false;
+            btnLevelDown.Click += btnLevelDown_Click;
             // 
             // dgvLevels
             // 
-            this.dgvLevels.AllowDrop = true;
-            this.dgvLevels.AllowUserToAddRows = false;
-            this.dgvLevels.AllowUserToDeleteRows = false;
-            this.dgvLevels.AllowUserToResizeColumns = false;
-            this.dgvLevels.AllowUserToResizeRows = false;
-            this.dgvLevels.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvLevels.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvLevels.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.dgvLevels.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.dgvLevels.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
-            this.dgvLevels.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dgvLevels.AllowDrop = true;
+            dgvLevels.AllowUserToAddRows = false;
+            dgvLevels.AllowUserToDeleteRows = false;
+            dgvLevels.AllowUserToResizeColumns = false;
+            dgvLevels.AllowUserToResizeRows = false;
+            dgvLevels.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            dgvLevels.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            dgvLevels.BackgroundColor = System.Drawing.Color.FromArgb(32, 0, 0);
+            dgvLevels.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            dgvLevels.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
+            dgvLevels.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(40, 40, 40);
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
             dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Silver;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(40, 40, 40);
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvLevels.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvLevels.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvLevels.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.LevelName,
-            this.Difficulty,
-            this.Sublevels});
+            dgvLevels.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dgvLevels.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvLevels.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { Thumbnail, LevelName, Difficulty, Sublevels });
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(40, 40, 40);
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle2.Format = "N0";
             dataGridViewCellStyle2.NullValue = null;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvLevels.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvLevels.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dgvLevels.EnableHeadersVisualStyles = false;
-            this.dgvLevels.GridColor = System.Drawing.Color.Black;
-            this.dgvLevels.Location = new System.Drawing.Point(12, 104);
-            this.dgvLevels.MultiSelect = false;
-            this.dgvLevels.Name = "dgvLevels";
-            this.dgvLevels.ReadOnly = true;
-            this.dgvLevels.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dgvLevels.DefaultCellStyle = dataGridViewCellStyle2;
+            dgvLevels.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            dgvLevels.EnableHeadersVisualStyles = false;
+            dgvLevels.GridColor = System.Drawing.Color.Black;
+            dgvLevels.Location = new System.Drawing.Point(14, 120);
+            dgvLevels.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            dgvLevels.MultiSelect = false;
+            dgvLevels.Name = "dgvLevels";
+            dgvLevels.ReadOnly = true;
+            dgvLevels.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(90, 90, 90);
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
             dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvLevels.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.dgvLevels.RowHeadersVisible = false;
-            this.dgvLevels.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.dgvLevels.RowTemplate.Height = 40;
-            this.dgvLevels.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvLevels.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvLevels.Size = new System.Drawing.Size(280, 321);
-            this.dgvLevels.TabIndex = 41;
-            this.dgvLevels.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLevels_SelectionChanged);
-            this.dgvLevels.SelectionChanged += new System.EventHandler(this.dgvLevels_SelectionChanged);
-            this.dgvLevels.DragDrop += new System.Windows.Forms.DragEventHandler(this.dgvLevels_DragDrop);
-            this.dgvLevels.DragEnter += new System.Windows.Forms.DragEventHandler(this.dgvLevels_DragEnter);
-            // 
-            // LevelName
-            // 
-            this.LevelName.HeaderText = "Level Name";
-            this.LevelName.Name = "LevelName";
-            this.LevelName.ReadOnly = true;
-            this.LevelName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Difficulty
-            // 
-            this.Difficulty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.Difficulty.FillWeight = 40F;
-            this.Difficulty.HeaderText = "Difficulty";
-            this.Difficulty.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            this.Difficulty.Name = "Difficulty";
-            this.Difficulty.ReadOnly = true;
-            this.Difficulty.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Difficulty.Width = 59;
-            // 
-            // Sublevels
-            // 
-            this.Sublevels.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.Sublevels.FillWeight = 40F;
-            this.Sublevels.HeaderText = "Sublevels";
-            this.Sublevels.Name = "Sublevels";
-            this.Sublevels.ReadOnly = true;
-            this.Sublevels.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Sublevels.Width = 66;
+            dgvLevels.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dgvLevels.RowHeadersVisible = false;
+            dgvLevels.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            dgvLevels.RowTemplate.Height = 40;
+            dgvLevels.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            dgvLevels.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            dgvLevels.Size = new System.Drawing.Size(762, 370);
+            dgvLevels.TabIndex = 41;
+            dgvLevels.CellClick += dgvLevels_SelectionChanged;
+            dgvLevels.SelectionChanged += dgvLevels_SelectionChanged;
+            dgvLevels.DragDrop += dgvLevels_DragDrop;
+            dgvLevels.DragEnter += dgvLevels_DragEnter;
             // 
             // richDescript
             // 
-            this.richDescript.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.richDescript.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
-            this.richDescript.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richDescript.ForeColor = System.Drawing.Color.White;
-            this.richDescript.Location = new System.Drawing.Point(302, 268);
-            this.richDescript.Name = "richDescript";
-            this.richDescript.Size = new System.Drawing.Size(205, 182);
-            this.richDescript.TabIndex = 42;
-            this.richDescript.Text = "";
+            richDescript.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
+            richDescript.BackColor = System.Drawing.Color.FromArgb(35, 35, 35);
+            richDescript.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            richDescript.ForeColor = System.Drawing.Color.White;
+            richDescript.Location = new System.Drawing.Point(787, 309);
+            richDescript.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            richDescript.Name = "richDescript";
+            richDescript.Size = new System.Drawing.Size(238, 209);
+            richDescript.TabIndex = 42;
+            richDescript.Text = "";
             // 
             // label3
             // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Trebuchet MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(298, 232);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(135, 22);
-            this.label3.TabIndex = 43;
-            this.label3.Text = "Level Description";
+            label3.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            label3.AutoSize = true;
+            label3.Font = new System.Drawing.Font("Trebuchet MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            label3.ForeColor = System.Drawing.Color.White;
+            label3.Location = new System.Drawing.Point(783, 268);
+            label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(135, 22);
+            label3.TabIndex = 43;
+            label3.Text = "Level Description";
             // 
             // BtnHash
             // 
-            this.BtnHash.BackColor = System.Drawing.Color.MediumPurple;
-            this.BtnHash.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnHash.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnHash.Location = new System.Drawing.Point(3, 4);
-            this.BtnHash.Name = "BtnHash";
-            this.BtnHash.Size = new System.Drawing.Size(95, 27);
-            this.BtnHash.TabIndex = 44;
-            this.BtnHash.Text = "Hash Panel";
-            this.BtnHash.UseVisualStyleBackColor = false;
-            this.BtnHash.Click += new System.EventHandler(this.BtnHash_Click);
+            BtnHash.BackColor = System.Drawing.Color.MediumPurple;
+            BtnHash.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            BtnHash.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            BtnHash.Location = new System.Drawing.Point(4, 5);
+            BtnHash.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            BtnHash.Name = "BtnHash";
+            BtnHash.Size = new System.Drawing.Size(111, 31);
+            BtnHash.TabIndex = 44;
+            BtnHash.Text = "Hash Panel";
+            BtnHash.UseVisualStyleBackColor = false;
+            BtnHash.Click += BtnHash_Click;
             // 
             // textBox1
             // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(3, 37);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(110, 20);
-            this.textBox1.TabIndex = 45;
-            this.textBox1.Text = "type input here";
-            this.textBox1.TextChanged += new System.EventHandler(this.BtnHash_Click);
+            textBox1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            textBox1.Location = new System.Drawing.Point(4, 43);
+            textBox1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new System.Drawing.Size(128, 23);
+            textBox1.TabIndex = 45;
+            textBox1.Text = "type input here";
+            textBox1.TextChanged += BtnHash_Click;
             // 
             // textBox2
             // 
-            this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox2.Location = new System.Drawing.Point(3, 63);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(110, 20);
-            this.textBox2.TabIndex = 46;
+            textBox2.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            textBox2.Location = new System.Drawing.Point(4, 73);
+            textBox2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            textBox2.Name = "textBox2";
+            textBox2.Size = new System.Drawing.Size(128, 23);
+            textBox2.TabIndex = 46;
             // 
             // panelHash
             // 
-            this.panelHash.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelHash.BackColor = System.Drawing.Color.Maroon;
-            this.panelHash.Controls.Add(this.textBox2);
-            this.panelHash.Controls.Add(this.BtnHash);
-            this.panelHash.Controls.Add(this.textBox1);
-            this.panelHash.Location = new System.Drawing.Point(403, 79);
-            this.panelHash.Name = "panelHash";
-            this.panelHash.Size = new System.Drawing.Size(116, 89);
-            this.panelHash.TabIndex = 47;
-            this.panelHash.Visible = false;
+            panelHash.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            panelHash.BackColor = System.Drawing.Color.Maroon;
+            panelHash.Controls.Add(textBox2);
+            panelHash.Controls.Add(BtnHash);
+            panelHash.Controls.Add(textBox1);
+            panelHash.Location = new System.Drawing.Point(905, 91);
+            panelHash.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            panelHash.Name = "panelHash";
+            panelHash.Size = new System.Drawing.Size(135, 103);
+            panelHash.TabIndex = 47;
+            panelHash.Visible = false;
             // 
             // toolTip1
             // 
-            this.toolTip1.AutomaticDelay = 0;
-            this.toolTip1.AutoPopDelay = 5000;
-            this.toolTip1.InitialDelay = 0;
-            this.toolTip1.ReshowDelay = 100;
+            toolTip1.AutomaticDelay = 0;
+            toolTip1.AutoPopDelay = 5000;
+            toolTip1.InitialDelay = 0;
+            toolTip1.ReshowDelay = 100;
             // 
             // btnSplashScreen
             // 
-            this.btnSplashScreen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSplashScreen.BackColor = System.Drawing.Color.YellowGreen;
-            this.btnSplashScreen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSplashScreen.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSplashScreen.Location = new System.Drawing.Point(300, 176);
-            this.btnSplashScreen.Name = "btnSplashScreen";
-            this.btnSplashScreen.Size = new System.Drawing.Size(55, 25);
-            this.btnSplashScreen.TabIndex = 49;
-            this.btnSplashScreen.Text = "Change";
-            this.toolTip1.SetToolTip(this.btnSplashScreen, "Change splash screen image (DDS format)");
-            this.btnSplashScreen.UseVisualStyleBackColor = false;
-            this.btnSplashScreen.Click += new System.EventHandler(this.btnSplashScreen_Click);
+            btnSplashScreen.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            btnSplashScreen.BackColor = System.Drawing.Color.YellowGreen;
+            btnSplashScreen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btnSplashScreen.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            btnSplashScreen.Location = new System.Drawing.Point(785, 203);
+            btnSplashScreen.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnSplashScreen.Name = "btnSplashScreen";
+            btnSplashScreen.Size = new System.Drawing.Size(64, 29);
+            btnSplashScreen.TabIndex = 49;
+            btnSplashScreen.Text = "Change";
+            toolTip1.SetToolTip(btnSplashScreen, "Change splash screen image (DDS format)");
+            btnSplashScreen.UseVisualStyleBackColor = false;
+            btnSplashScreen.Click += btnSplashScreen_Click;
             // 
             // btnSplashScreenReset
             // 
-            this.btnSplashScreenReset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSplashScreenReset.BackColor = System.Drawing.Color.Crimson;
-            this.btnSplashScreenReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSplashScreenReset.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSplashScreenReset.Location = new System.Drawing.Point(350, 176);
-            this.btnSplashScreenReset.Name = "btnSplashScreenReset";
-            this.btnSplashScreenReset.Size = new System.Drawing.Size(50, 25);
-            this.btnSplashScreenReset.TabIndex = 52;
-            this.btnSplashScreenReset.Text = "Reset";
-            this.toolTip1.SetToolTip(this.btnSplashScreenReset, "Reset splash screen to the original Drool logo");
-            this.btnSplashScreenReset.UseVisualStyleBackColor = false;
-            this.btnSplashScreenReset.Click += new System.EventHandler(this.btnSplashScreenReset_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Cursor = System.Windows.Forms.Cursors.Default;
-            this.label2.Font = new System.Drawing.Font("Trebuchet MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(8, 79);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(55, 22);
-            this.label2.TabIndex = 50;
-            this.label2.Text = "Levels";
-            // 
-            // label4
-            // 
-            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Trebuchet MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(298, 30);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(107, 22);
-            this.label4.TabIndex = 51;
-            this.label4.Text = "Splash Screen";
-            // 
-            // label5
-            // 
-            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(299, 48);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(131, 32);
-            this.label5.TabIndex = 53;
-            this.label5.Text = "Recommended: 512x512\r\nRequires .DDS file format\r\n";
-            // 
-            // lblCustomDiffHelp
-            // 
-            this.lblCustomDiffHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblCustomDiffHelp.AutoSize = true;
-            this.lblCustomDiffHelp.BackColor = System.Drawing.Color.Transparent;
-            this.lblCustomDiffHelp.Cursor = System.Windows.Forms.Cursors.Help;
-            this.lblCustomDiffHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCustomDiffHelp.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.lblCustomDiffHelp.Location = new System.Drawing.Point(186, 86);
-            this.lblCustomDiffHelp.Name = "lblCustomDiffHelp";
-            this.lblCustomDiffHelp.Size = new System.Drawing.Size(15, 16);
-            this.lblCustomDiffHelp.TabIndex = 126;
-            this.lblCustomDiffHelp.Text = "?";
-            this.lblCustomDiffHelp.Click += new System.EventHandler(this.lblCustomDiffHelp_Click);
-            // 
-            // lblCreator
-            // 
-            this.lblCreator.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblCreator.AutoSize = true;
-            this.lblCreator.Font = new System.Drawing.Font("Trebuchet MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCreator.ForeColor = System.Drawing.Color.White;
-            this.lblCreator.Location = new System.Drawing.Point(299, 250);
-            this.lblCreator.Name = "lblCreator";
-            this.lblCreator.Size = new System.Drawing.Size(57, 18);
-            this.lblCreator.TabIndex = 128;
-            this.lblCreator.Text = "Creator:";
+            btnSplashScreenReset.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            btnSplashScreenReset.BackColor = System.Drawing.Color.Crimson;
+            btnSplashScreenReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btnSplashScreenReset.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            btnSplashScreenReset.Location = new System.Drawing.Point(843, 203);
+            btnSplashScreenReset.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnSplashScreenReset.Name = "btnSplashScreenReset";
+            btnSplashScreenReset.Size = new System.Drawing.Size(58, 29);
+            btnSplashScreenReset.TabIndex = 52;
+            btnSplashScreenReset.Text = "Reset";
+            toolTip1.SetToolTip(btnSplashScreenReset, "Reset splash screen to the original Drool logo");
+            btnSplashScreenReset.UseVisualStyleBackColor = false;
+            btnSplashScreenReset.Click += btnSplashScreenReset_Click;
             // 
             // picSplashScreen
             // 
-            this.picSplashScreen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.picSplashScreen.Location = new System.Drawing.Point(302, 79);
-            this.picSplashScreen.Name = "picSplashScreen";
-            this.picSplashScreen.Size = new System.Drawing.Size(98, 98);
-            this.picSplashScreen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picSplashScreen.TabIndex = 48;
-            this.picSplashScreen.TabStop = false;
-            this.toolTip1.SetToolTip(this.picSplashScreen, "Splash screen. Save by dragging to a folder or your desktop.\r\n\r\n***Accepts .DDS i" +
-        "mages only.***\r\nUse conversion tools if you need to.");
-            this.picSplashScreen.MouseMove += new System.Windows.Forms.MouseEventHandler(this.picSplashScreen_MouseMove);
+            picSplashScreen.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            picSplashScreen.Location = new System.Drawing.Point(787, 91);
+            picSplashScreen.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            picSplashScreen.Name = "picSplashScreen";
+            picSplashScreen.Size = new System.Drawing.Size(114, 113);
+            picSplashScreen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            picSplashScreen.TabIndex = 48;
+            picSplashScreen.TabStop = false;
+            toolTip1.SetToolTip(picSplashScreen, "Splash screen. Save by dragging to a folder or your desktop.\r\n\r\n***Accepts .DDS images only.***\r\nUse conversion tools if you need to.");
+            picSplashScreen.MouseMove += picSplashScreen_MouseMove;
             // 
-            // aboutToolStripMenuItem
+            // label2
             // 
-            this.aboutToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.aboutToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.aboutToolStripMenuItem.Image = global::Thumper_Mod_Loader.Properties.Resources.icon_info;
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
-            this.aboutToolStripMenuItem.Text = "About...";
-            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            label2.AutoSize = true;
+            label2.Font = new System.Drawing.Font("Trebuchet MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            label2.ForeColor = System.Drawing.Color.White;
+            label2.Location = new System.Drawing.Point(9, 91);
+            label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(55, 22);
+            label2.TabIndex = 50;
+            label2.Text = "Levels";
             // 
-            // discordServerToolStripMenuItem
+            // label4
             // 
-            this.discordServerToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.discordServerToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.discordServerToolStripMenuItem.Image = global::Thumper_Mod_Loader.Properties.Resources.discord32x;
-            this.discordServerToolStripMenuItem.Name = "discordServerToolStripMenuItem";
-            this.discordServerToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
-            this.discordServerToolStripMenuItem.Text = "Discord Server";
-            this.discordServerToolStripMenuItem.Click += new System.EventHandler(this.discordServerToolStripMenuItem_Click);
+            label4.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            label4.AutoSize = true;
+            label4.Font = new System.Drawing.Font("Trebuchet MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            label4.ForeColor = System.Drawing.Color.White;
+            label4.Location = new System.Drawing.Point(783, 35);
+            label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label4.Name = "label4";
+            label4.Size = new System.Drawing.Size(107, 22);
+            label4.TabIndex = 51;
+            label4.Text = "Splash Screen";
             // 
-            // githubToolStripMenuItem
+            // label5
             // 
-            this.githubToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.githubToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.githubToolStripMenuItem.Image = global::Thumper_Mod_Loader.Properties.Resources.github48;
-            this.githubToolStripMenuItem.Name = "githubToolStripMenuItem";
-            this.githubToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
-            this.githubToolStripMenuItem.Text = "Github";
-            this.githubToolStripMenuItem.Click += new System.EventHandler(this.githubToolStripMenuItem_Click);
+            label5.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            label5.AutoSize = true;
+            label5.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            label5.ForeColor = System.Drawing.Color.White;
+            label5.Location = new System.Drawing.Point(784, 55);
+            label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(131, 32);
+            label5.TabIndex = 53;
+            label5.Text = "Recommended: 512x512\r\nRequires .DDS file format\r\n";
             // 
-            // donateTipToolStripMenuItem
+            // lblCustomDiffHelp
             // 
-            this.donateTipToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.donateTipToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.donateTipToolStripMenuItem.Image = global::Thumper_Mod_Loader.Properties.Resources.kofi_logo;
-            this.donateTipToolStripMenuItem.Name = "donateTipToolStripMenuItem";
-            this.donateTipToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
-            this.donateTipToolStripMenuItem.Text = "Donate && Tip (ko-fi)";
-            this.donateTipToolStripMenuItem.Click += new System.EventHandler(this.donateTipToolStripMenuItem_Click);
+            lblCustomDiffHelp.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            lblCustomDiffHelp.AutoSize = true;
+            lblCustomDiffHelp.BackColor = System.Drawing.Color.Transparent;
+            lblCustomDiffHelp.Cursor = System.Windows.Forms.Cursors.Help;
+            lblCustomDiffHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, 0);
+            lblCustomDiffHelp.ForeColor = System.Drawing.Color.DodgerBlue;
+            lblCustomDiffHelp.Location = new System.Drawing.Point(652, 99);
+            lblCustomDiffHelp.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            lblCustomDiffHelp.Name = "lblCustomDiffHelp";
+            lblCustomDiffHelp.Size = new System.Drawing.Size(15, 16);
+            lblCustomDiffHelp.TabIndex = 126;
+            lblCustomDiffHelp.Text = "?";
+            lblCustomDiffHelp.Click += lblCustomDiffHelp_Click;
+            // 
+            // lblCreator
+            // 
+            lblCreator.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            lblCreator.AutoSize = true;
+            lblCreator.Font = new System.Drawing.Font("Trebuchet MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            lblCreator.ForeColor = System.Drawing.Color.White;
+            lblCreator.Location = new System.Drawing.Point(784, 288);
+            lblCreator.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            lblCreator.Name = "lblCreator";
+            lblCreator.Size = new System.Drawing.Size(57, 18);
+            lblCreator.TabIndex = 128;
+            lblCreator.Text = "Creator:";
             // 
             // pictureDifficulty
             // 
-            this.pictureDifficulty.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureDifficulty.BackColor = System.Drawing.Color.Transparent;
-            this.pictureDifficulty.Location = new System.Drawing.Point(443, 204);
-            this.pictureDifficulty.Name = "pictureDifficulty";
-            this.pictureDifficulty.Size = new System.Drawing.Size(64, 64);
-            this.pictureDifficulty.TabIndex = 127;
-            this.pictureDifficulty.TabStop = false;
+            pictureDifficulty.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            pictureDifficulty.BackColor = System.Drawing.Color.Transparent;
+            pictureDifficulty.Location = new System.Drawing.Point(952, 235);
+            pictureDifficulty.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            pictureDifficulty.Name = "pictureDifficulty";
+            pictureDifficulty.Size = new System.Drawing.Size(75, 74);
+            pictureDifficulty.TabIndex = 127;
+            pictureDifficulty.TabStop = false;
+            // 
+            // Thumbnail
+            // 
+            Thumbnail.HeaderText = "Thumbnail";
+            Thumbnail.Name = "Thumbnail";
+            Thumbnail.ReadOnly = true;
+            // 
+            // LevelName
+            // 
+            LevelName.HeaderText = "Level Name";
+            LevelName.Name = "LevelName";
+            LevelName.ReadOnly = true;
+            LevelName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Difficulty
+            // 
+            Difficulty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            Difficulty.FillWeight = 40F;
+            Difficulty.HeaderText = "Difficulty";
+            Difficulty.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            Difficulty.Name = "Difficulty";
+            Difficulty.ReadOnly = true;
+            Difficulty.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            Difficulty.Width = 59;
+            // 
+            // Sublevels
+            // 
+            Sublevels.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            Sublevels.FillWeight = 40F;
+            Sublevels.HeaderText = "Sublevels";
+            Sublevels.Name = "Sublevels";
+            Sublevels.ReadOnly = true;
+            Sublevels.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            Sublevels.Width = 66;
             // 
             // ThumperModdingTool
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.ClientSize = new System.Drawing.Size(519, 462);
-            this.Controls.Add(this.lblCreator);
-            this.Controls.Add(this.lblCustomDiffHelp);
-            this.Controls.Add(this.btnSplashScreenReset);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.btnSplashScreen);
-            this.Controls.Add(this.picSplashScreen);
-            this.Controls.Add(this.panelHash);
-            this.Controls.Add(this.richDescript);
-            this.Controls.Add(this.dgvLevels);
-            this.Controls.Add(this.btnLevelDown);
-            this.Controls.Add(this.btnLevelUp);
-            this.Controls.Add(this.btnLevelRemove);
-            this.Controls.Add(this.btnLevelAdd);
-            this.Controls.Add(this.btnModMode);
-            this.Controls.Add(this.menuStrip1);
-            this.Controls.Add(this.btnUpdate);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.pictureDifficulty);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MainMenuStrip = this.menuStrip1;
-            this.MaximizeBox = false;
-            this.Name = "ThumperModdingTool";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Thumper Mod Loader";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ThumperModdingTool_FormClosing);
-            this.Load += new System.EventHandler(this.Form1_Load);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvLevels)).EndInit();
-            this.panelHash.ResumeLayout(false);
-            this.panelHash.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picSplashScreen)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureDifficulty)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            BackColor = System.Drawing.Color.FromArgb(40, 40, 40);
+            ClientSize = new System.Drawing.Size(1041, 533);
+            Controls.Add(lblCreator);
+            Controls.Add(lblCustomDiffHelp);
+            Controls.Add(btnSplashScreenReset);
+            Controls.Add(label4);
+            Controls.Add(label2);
+            Controls.Add(btnSplashScreen);
+            Controls.Add(picSplashScreen);
+            Controls.Add(panelHash);
+            Controls.Add(richDescript);
+            Controls.Add(dgvLevels);
+            Controls.Add(btnLevelDown);
+            Controls.Add(btnLevelUp);
+            Controls.Add(btnLevelRemove);
+            Controls.Add(btnLevelAdd);
+            Controls.Add(btnModMode);
+            Controls.Add(menuStrip1);
+            Controls.Add(btnUpdate);
+            Controls.Add(label1);
+            Controls.Add(label5);
+            Controls.Add(label3);
+            Controls.Add(pictureDifficulty);
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
+            MainMenuStrip = menuStrip1;
+            Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            MaximizeBox = false;
+            Name = "ThumperModdingTool";
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            Text = "Thumper Mod Loader";
+            FormClosing += ThumperModdingTool_FormClosing;
+            Load += Form1_Load;
+            menuStrip1.ResumeLayout(false);
+            menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvLevels).EndInit();
+            panelHash.ResumeLayout(false);
+            panelHash.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)picSplashScreen).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureDifficulty).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
+        }
 
-		}
+        #endregion
 
-		#endregion
-
-		private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.MenuStrip menuStrip1;
 		private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Button btnModMode;
@@ -689,9 +699,6 @@ namespace Thumper_Mod_Loader
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnSplashScreenReset;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn LevelName;
-        private System.Windows.Forms.DataGridViewImageColumn Difficulty;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Sublevels;
         private System.Windows.Forms.Label lblCustomDiffHelp;
         private System.Windows.Forms.PictureBox pictureDifficulty;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
@@ -700,6 +707,10 @@ namespace Thumper_Mod_Loader
         private System.Windows.Forms.ToolStripMenuItem githubToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem donateTipToolStripMenuItem;
         private System.Windows.Forms.Label lblCreator;
+        private System.Windows.Forms.DataGridViewImageColumn Thumbnail;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LevelName;
+        private System.Windows.Forms.DataGridViewImageColumn Difficulty;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Sublevels;
     }
 }
 

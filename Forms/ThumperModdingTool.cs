@@ -22,10 +22,10 @@ namespace Thumper_Mod_Loader
             menuStrip1.Renderer = new MyRenderer();
         }
 
-        private readonly string Title = $"Thumper Mod Loader v{Application.ProductVersion}";
+        private readonly string Title = $"Thumper Mod Loader v3.0.0";
         private readonly CommonOpenFileDialog cfd_lvl = new() { IsFolderPicker = true, Multiselect = false };
         private readonly OpenFileDialog ofd_img = new() { Title = "Choose Image", Filter = "DDS files(*.DDS)|*.DDS" };
-		private ThumpNet tnet = null;
+		//private ThumpNet tnet = null;
         public ObservableCollection<LevelTraits> LoadedLevels = new();
         private bool _ChangesMade = false;
         public bool ChangesMade
@@ -176,12 +176,13 @@ namespace Thumper_Mod_Loader
         private void Form1_Load(object sender, EventArgs e)
 		{
             // Upgrade settings from previous versions
+            /*
             if (Properties.Settings.Default.UpgradeSettings)
             {
                 Properties.Settings.Default.Upgrade();
                 Properties.Settings.Default.UpgradeSettings = false;
                 Properties.Settings.Default.Save();
-            }
+            }*/
 
             InitializeTracks(dgvLevels);
 			LoadedLevels.CollectionChanged += LoadedLevels_CollectionChanged;
@@ -226,7 +227,7 @@ namespace Thumper_Mod_Loader
             dgvLevels.RowCount = 0;
 			foreach (var _level in LoadedLevels) {
 				//populate rows with level name, and difficulty strings
-				dgvLevels.Rows.Add(new object[] { _level.name, Properties.Resources.ResourceManager.GetObject(_level.difficulty.ToLower()), _level.sublevels });
+				dgvLevels.Rows.Add(new object[] { Image.FromFile($@"{_level.folder_name}\thumbnail.png") ,_level.name, Properties.Resources.ResourceManager.GetObject(_level.difficulty.ToLower()), _level.sublevels });
 			}
 
             if (i - 1 >= 0) dgvLevels.Rows[i - 1].Selected = true;
@@ -459,10 +460,12 @@ namespace Thumper_Mod_Loader
 
         private void thumpNetToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            /*
             if (tnet == null || tnet.IsDisposed) tnet = new ThumpNet(this);
             tnet.Show();
             tnet.SetDesktopLocation(Location.X + Width, Location.Y);
             tnet.Select();
+            */
         }
 
         private void resetSettingsToolStripMenuItem_Click(object sender, EventArgs e)

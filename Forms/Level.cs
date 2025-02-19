@@ -229,13 +229,15 @@ namespace Thumper_Mod_Loader
 
 					//write "basic list of objects #1" information to level .pc file
 					bytes = File.ReadAllBytes(@"lib/obj_list_1.objlib");
-					f.Write(bytes, 0, bytes.Length);
+					///f.Write(bytes, 0, bytes.Length);
+					Write_Int(f, 0);
 					//write to file the amount of objects that exists (after this number)
 					//this includes everything in "obj_list_2.objlib" (63) and obj_count
-					Write_Int(f, 63 + obj_count);
-					//write "basic list of objects #2" information to level .pc file
-					bytes = File.ReadAllBytes(@"lib/obj_list_2.objlib");
-					f.Write(bytes, 0, bytes.Length);
+					///Write_Int(f, 63 + obj_count);
+                    Write_Int(f, obj_count);
+                    //write "basic list of objects #2" information to level .pc file
+                    bytes = File.ReadAllBytes(@"lib/obj_list_2.objlib");
+					///f.Write(bytes, 0, bytes.Length);
 					//write every object to the .pc file, hashing its name
 					foreach (var obj in objs) {
 						if (obj_types.Contains((string)obj["obj_type"])) {
@@ -252,7 +254,7 @@ namespace Thumper_Mod_Loader
 
 					//bytes = File.ReadAllBytes($@"lib/obj_def_customlevel{LoadedLevels.IndexOf(level_name) + 1}.objlib");
 					bytes = File.ReadAllBytes($@"lib/obj_def_customlevel.objlib");
-					f.Write(bytes, 0, bytes.Length);
+					///f.Write(bytes, 0, bytes.Length);
 					//iterate over every loaded object, and write its data to .pc file in specific formats.
 					//format is different per object. I myself am not exactly sure how it works, but this is how it's done
 					foreach (var obj in objs) {
