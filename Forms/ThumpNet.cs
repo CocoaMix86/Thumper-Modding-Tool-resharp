@@ -432,6 +432,7 @@ namespace Thumper_Mod_Loader
                             {
                                 foreach (LevelTraits l in ThumperModdingTool.LoadedLevels)
                                 {
+                                    /*
                                     if (l.FilePath == fn)
                                     {
                                         load.Text = "Already Added";
@@ -439,7 +440,7 @@ namespace Thumper_Mod_Loader
                                         load.BackColor = Color.Green;
                                         download = false;
                                         break;
-                                    }
+                                    }*/
                                 }
                             }
                         }
@@ -473,7 +474,7 @@ namespace Thumper_Mod_Loader
                         }
                         else
                         {
-                            ThumperModdingTool.AddLevel(fn, false);
+                            ///ThumperModdingTool.AddLevel(fn, false);
                         }
                         update_text();
                     };

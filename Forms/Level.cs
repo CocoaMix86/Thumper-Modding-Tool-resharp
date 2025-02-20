@@ -432,23 +432,26 @@ namespace Thumper_Mod_Loader
 				Write_Param_Path(f, (string)_obj["param_path"], (string)_obj["param_path_hash"]);
 				Write_Int(f, trait_types.IndexOf((string)_obj["trait_type"]));
 
-				///data points of object
-				//
-				//Data points written different depending on STEP
-				if (_obj["step"] == "True") {
-					//STEP true = value updates every beat, and if no value is set for a beat, it'll use _obj.default
+				string traittype = (string)_obj["trait_type"];
+				string default_value = (string)_obj["default"];
+
+                ///data points of object
+                //
+                //Data points written different depending on STEP
+                if (_obj["step"] == "True") {
+					///STEP true = value updates every beat, and if no value is set for a beat, it'll use _obj.default
 					Write_Int(f, beat_cnt);
 					int indexofwrittenbeat = 0;
 					for (int i = 0; i < beat_cnt; i++) {
 						Write_Float(f, i);
 						if ((int)_obj["data_points"][indexofwrittenbeat]["beat"] == i) {
-                            Write_Data_Point_Value(f, (string)_obj["data_points"][indexofwrittenbeat]["value"], (string)_obj["trait_type"]);
+                            Write_Data_Point_Value(f, (string)_obj["data_points"][indexofwrittenbeat]["value"], traittype);
                             Write_String(f, (string)_obj["data_points"][indexofwrittenbeat]["interp"]);
                             Write_String(f, (string)_obj["data_points"][indexofwrittenbeat]["ease"]);
 							indexofwrittenbeat++;
                         }
 						else {
-                            Write_Data_Point_Value(f, (string)_obj["default"], (string)_obj["trait_type"]);
+                            Write_Data_Point_Value(f, default_value, (string)_obj["trait_type"]);
                             Write_String(f, interp);
                             Write_String(f, ease);
                         }
@@ -466,16 +469,22 @@ namespace Thumper_Mod_Loader
 					}
                 }
 				else {
-					//STEP false = value interpolates between values set on beats. Default is ignored.
+					///STEP false = value interpolates between values set on beats. Default is ignored.
 					Write_Int(f, Enumerable.Count<dynamic>(_obj["data_points"]));
 					int _iii = 0;
-					foreach (var _v in _obj["data_points"]) {
+					foreach (dynamic dp in _obj["data_points"]) {
+                        Write_Float(f, (float)dp["beat"]);
+                        Write_Data_Point_Value(f, (string)dp["value"], traittype);
+                        Write_String(f, (string)dp["interp"]);
+                        Write_String(f, (string)dp["ease"]);
+                        /*
 						JProperty _p = _v;
 						Write_Float(f, float.Parse(_p.Name)); _iii++;
 						Write_Data_Point_Value(f, (string)_v, (string)_obj["trait_type"]);
 						Write_String(f, interp);
 						Write_String(f, ease);
-					}
+						*/
+                    }
 				}
 				Write_Int(f, 0);
 

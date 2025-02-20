@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Drawing;
 
 namespace Thumper_Mod_Loader
 {
@@ -11,5 +12,6 @@ namespace Thumper_Mod_Loader
 		public FileInfo FilePath { get; set; }
 		public string Authors { get; set; }
 		public int Sublevels { get; set; }
+		public Image thumbnail { get; set; }
 	}
 }

@@ -54,6 +54,10 @@ namespace Thumper_Mod_Loader
             btnLevelUp = new System.Windows.Forms.Button();
             btnLevelDown = new System.Windows.Forms.Button();
             dgvLevels = new System.Windows.Forms.DataGridView();
+            Thumbnail = new System.Windows.Forms.DataGridViewImageColumn();
+            LevelName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            Difficulty = new System.Windows.Forms.DataGridViewImageColumn();
+            Sublevels = new System.Windows.Forms.DataGridViewTextBoxColumn();
             richDescript = new System.Windows.Forms.RichTextBox();
             label3 = new System.Windows.Forms.Label();
             BtnHash = new System.Windows.Forms.Button();
@@ -70,10 +74,6 @@ namespace Thumper_Mod_Loader
             lblCustomDiffHelp = new System.Windows.Forms.Label();
             lblCreator = new System.Windows.Forms.Label();
             pictureDifficulty = new System.Windows.Forms.PictureBox();
-            Thumbnail = new System.Windows.Forms.DataGridViewImageColumn();
-            LevelName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            Difficulty = new System.Windows.Forms.DataGridViewImageColumn();
-            Sublevels = new System.Windows.Forms.DataGridViewTextBoxColumn();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvLevels).BeginInit();
             panelHash.SuspendLayout();
@@ -327,7 +327,6 @@ namespace Thumper_Mod_Loader
             dgvLevels.AllowUserToAddRows = false;
             dgvLevels.AllowUserToDeleteRows = false;
             dgvLevels.AllowUserToResizeColumns = false;
-            dgvLevels.AllowUserToResizeRows = false;
             dgvLevels.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             dgvLevels.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             dgvLevels.BackgroundColor = System.Drawing.Color.FromArgb(32, 0, 0);
@@ -373,8 +372,9 @@ namespace Thumper_Mod_Loader
             dgvLevels.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             dgvLevels.RowHeadersVisible = false;
             dgvLevels.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dgvLevels.RowTemplate.Height = 40;
-            dgvLevels.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            dgvLevels.RowTemplate.DividerHeight = 2;
+            dgvLevels.RowTemplate.Height = 3;
+            dgvLevels.RowTemplate.ReadOnly = true;
             dgvLevels.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             dgvLevels.Size = new System.Drawing.Size(762, 370);
             dgvLevels.TabIndex = 41;
@@ -382,6 +382,40 @@ namespace Thumper_Mod_Loader
             dgvLevels.SelectionChanged += dgvLevels_SelectionChanged;
             dgvLevels.DragDrop += dgvLevels_DragDrop;
             dgvLevels.DragEnter += dgvLevels_DragEnter;
+            // 
+            // Thumbnail
+            // 
+            Thumbnail.HeaderText = "Thumbnail";
+            Thumbnail.Name = "Thumbnail";
+            Thumbnail.ReadOnly = true;
+            // 
+            // LevelName
+            // 
+            LevelName.HeaderText = "Level Name";
+            LevelName.Name = "LevelName";
+            LevelName.ReadOnly = true;
+            LevelName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Difficulty
+            // 
+            Difficulty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            Difficulty.FillWeight = 40F;
+            Difficulty.HeaderText = "Difficulty";
+            Difficulty.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            Difficulty.Name = "Difficulty";
+            Difficulty.ReadOnly = true;
+            Difficulty.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            Difficulty.Width = 59;
+            // 
+            // Sublevels
+            // 
+            Sublevels.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            Sublevels.FillWeight = 40F;
+            Sublevels.HeaderText = "Sublevels";
+            Sublevels.Name = "Sublevels";
+            Sublevels.ReadOnly = true;
+            Sublevels.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            Sublevels.Width = 66;
             // 
             // richDescript
             // 
@@ -586,40 +620,6 @@ namespace Thumper_Mod_Loader
             pictureDifficulty.Size = new System.Drawing.Size(75, 74);
             pictureDifficulty.TabIndex = 127;
             pictureDifficulty.TabStop = false;
-            // 
-            // Thumbnail
-            // 
-            Thumbnail.HeaderText = "Thumbnail";
-            Thumbnail.Name = "Thumbnail";
-            Thumbnail.ReadOnly = true;
-            // 
-            // LevelName
-            // 
-            LevelName.HeaderText = "Level Name";
-            LevelName.Name = "LevelName";
-            LevelName.ReadOnly = true;
-            LevelName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Difficulty
-            // 
-            Difficulty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            Difficulty.FillWeight = 40F;
-            Difficulty.HeaderText = "Difficulty";
-            Difficulty.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            Difficulty.Name = "Difficulty";
-            Difficulty.ReadOnly = true;
-            Difficulty.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            Difficulty.Width = 59;
-            // 
-            // Sublevels
-            // 
-            Sublevels.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            Sublevels.FillWeight = 40F;
-            Sublevels.HeaderText = "Sublevels";
-            Sublevels.Name = "Sublevels";
-            Sublevels.ReadOnly = true;
-            Sublevels.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            Sublevels.Width = 66;
             // 
             // ThumperModdingTool
             // 
