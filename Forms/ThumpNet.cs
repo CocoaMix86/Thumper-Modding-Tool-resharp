@@ -23,7 +23,7 @@ namespace Thumper_Mod_Loader
         {
             InitializeComponent();
             ThumperModdingTool = _ThumperModdingTool;
-            menuStrip1.Renderer = new MyRenderer();
+            menuStrip1.Renderer = new ToolStripOverride();
             toolstripSortButtons.Renderer = new ToolStripOverride();
             compactView = Settings.Default.thumpnet_compactview;
 

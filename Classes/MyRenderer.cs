@@ -1,49 +1,126 @@
-﻿using System.Windows.Forms;
-using System.Drawing;
+﻿using System.Drawing;
+using System.Windows.Forms;
 
 namespace Thumper_Mod_Loader
 {
-    /// <summary>
-    /// https://stackoverflow.com/questions/9260303/how-to-change-menu-hover-color
-    /// </summary>
-    class MyRenderer : ToolStripProfessionalRenderer
+    internal class ContextMenuColorTable : ProfessionalColorTable
     {
-        public MyRenderer() : base(new MyColors()) { }
-        //credit to https://stackoverflow.com/questions/47241021/prevent-showing-border-of-a-disabled-menu-item-on-mouse-hover
-        protected override void OnRenderMenuItemBackground(ToolStripItemRenderEventArgs e)
-        {
-            base.OnRenderMenuItemBackground(e);
-            if (e.Item.Enabled && e.Item.Selected) {
-                using (var pen = new Pen(((MyColors)ColorTable).MenuItemEnabledBorder)) {
-                    var r = new Rectangle(2, 0, e.Item.Width - 4, e.Item.Height - 1);
-                    e.Graphics.DrawRectangle(pen, r);
-                }
-            }
-        }
+        public override Color MenuBorder => Color.FromArgb(112, 112, 112);
+        public override Color MenuItemBorder => Color.Red;
+        public static Color MenuItemEnabledBorder => Color.FromArgb(112, 112, 112);
+        public override Color ToolStripDropDownBackground => Color.FromArgb(46, 46, 46);
+
+        public override Color ImageMarginGradientBegin => Color.FromArgb(46, 46, 46);
+        public override Color ImageMarginGradientEnd => Color.FromArgb(46, 46, 46);
+        public override Color ImageMarginGradientMiddle => Color.FromArgb(46, 46, 46);
+        public override Color MenuItemSelected => Color.FromArgb(61, 61, 61);
+
+        public override Color MenuItemSelectedGradientBegin => Color.FromArgb(61, 61, 61);
+        public override Color MenuItemSelectedGradientEnd => Color.FromArgb(61, 61, 61);
+        public override Color MenuItemPressedGradientBegin => Color.FromArgb(46, 46, 46);
+        public override Color MenuItemPressedGradientEnd => Color.FromArgb(46, 46, 46);
+
+        public override Color ButtonSelectedGradientBegin => Color.FromArgb(112, 112, 112);
+        public override Color ButtonSelectedGradientEnd => Color.FromArgb(112, 112, 112);
+        public override Color ButtonSelectedBorder => Color.FromArgb(112, 112, 112);
     }
 
-    class MyColors : ProfessionalColorTable
+    internal class EditorToolstripColorTable : ProfessionalColorTable
     {
-        public override Color MenuItemSelected { get { return Color.BlueViolet; } }
-        public override Color MenuItemSelectedGradientBegin { get { return Color.DarkRed; } }
-        public override Color MenuItemSelectedGradientEnd { get { return Color.Red; } }
-        public override Color MenuItemBorder { get { return Color.Transparent; } }
-        public Color MenuItemEnabledBorder { get { return Color.Magenta; } }
-        public override Color MenuItemPressedGradientBegin { get { return Color.DarkRed; } }
-        public override Color MenuItemPressedGradientEnd { get { return Color.Red; } }
+        public override Color MenuBorder => Color.FromArgb(112, 112, 112);
+        public override Color MenuItemBorder => Color.Red;
+        public static Color MenuItemEnabledBorder => Color.FromArgb(112, 112, 112);
+        public override Color ToolStripDropDownBackground => Color.FromArgb(46, 46, 46);
+
+        public override Color ImageMarginGradientBegin => Color.FromArgb(46, 46, 46);
+        public override Color ImageMarginGradientEnd => Color.FromArgb(46, 46, 46);
+        public override Color ImageMarginGradientMiddle => Color.FromArgb(46, 46, 46);
+        public override Color MenuItemSelected => Color.FromArgb(61, 61, 61);
+
+        public override Color MenuItemSelectedGradientBegin => Color.FromArgb(61, 61, 61);
+        public override Color MenuItemSelectedGradientEnd => Color.FromArgb(61, 61, 61);
+        public override Color MenuItemPressedGradientBegin => Color.FromArgb(46, 46, 46);
+        public override Color MenuItemPressedGradientEnd => Color.FromArgb(46, 46, 46);
+
+        public override Color ButtonSelectedGradientBegin => Color.FromArgb(61, 61, 61);
+        public override Color ButtonSelectedGradientEnd => Color.FromArgb(61, 61, 61);
+        public override Color ButtonSelectedBorder => Color.FromArgb(112, 112, 112);
+
+        public override Color ButtonCheckedGradientBegin => Color.FromArgb(61, 61, 61);
+        public override Color ButtonCheckedGradientEnd => Color.FromArgb(61, 61, 61);
+        public override Color ButtonCheckedHighlightBorder => Color.Purple;
+
+        public override Color ButtonPressedGradientBegin => Color.FromArgb(26, 26, 26);
+        public override Color ButtonPressedGradientEnd => Color.FromArgb(26, 26, 26);
     }
 
     public class ToolStripOverride : ToolStripProfessionalRenderer
     {
-        public ToolStripOverride() { }
+        public ToolStripOverride() : base(new EditorToolstripColorTable()) { }
         protected override void OnRenderToolStripBorder(ToolStripRenderEventArgs e) { }
+        protected override void OnRenderSplitButtonBackground(ToolStripItemRenderEventArgs e)
+        {
+            if (e.Item.BackColor != Color.FromArgb(46, 46, 46))
+                base.OnRenderSplitButtonBackground(e);
+            else {
+                ToolStripSplitButton? sb = e.Item as ToolStripSplitButton;
+                Rectangle button = sb.ButtonBounds;
+
+                button.Width--;
+                button.Height--;
+
+                e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(46, 46, 46)), button);
+                e.Graphics.DrawRectangle(new Pen(Color.FromArgb(113, 96, 232)), button);
+
+                OnRenderArrow(new ToolStripArrowRenderEventArgs(
+                    e.Graphics, e.Item, sb.DropDownButtonBounds, e.Item.ForeColor,
+                    ArrowDirection.Down));
+            }
+        }
         protected override void OnRenderButtonBackground(ToolStripItemRenderEventArgs e)
         {
             if (e.Item is ToolStripButton btn && btn.CheckOnClick && btn.Checked) {
                 Rectangle bounds = new(Point.Empty, e.Item.Size);
-                e.Graphics.FillRectangle(Brushes.PaleTurquoise, bounds);
+                bounds.Width--;
+                bounds.Height--;
+                e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(46, 46, 46)), bounds);
+                e.Graphics.DrawRectangle(new Pen(Color.FromArgb(113, 96, 232)), bounds);
             }
-            else base.OnRenderButtonBackground(e);
+            else
+                base.OnRenderButtonBackground(e);
+        }
+        protected override void OnRenderArrow(ToolStripArrowRenderEventArgs e)
+        {
+            e.ArrowColor = Color.White;
+            base.OnRenderArrow(e);
+        }
+    }
+
+    public class ToolStripMainForm : ToolStripProfessionalRenderer
+    {
+        public ToolStripMainForm() : base(new ContextMenuColorTable()) { }
+        protected override void OnRenderToolStripBorder(ToolStripRenderEventArgs e) { }
+        protected override void OnRenderArrow(ToolStripArrowRenderEventArgs e)
+        {
+            e.ArrowColor = Color.White;
+            base.OnRenderArrow(e);
+        }
+    }
+
+    public class ContextMenuColors : ToolStripProfessionalRenderer
+    {
+        public ContextMenuColors() : base(new ContextMenuColorTable()) { }
+        protected override void OnRenderArrow(ToolStripArrowRenderEventArgs e)
+        {
+            e.ArrowColor = Color.White;
+            base.OnRenderArrow(e);
+        }
+        protected override void OnRenderMenuItemBackground(ToolStripItemRenderEventArgs e)
+        {
+            if (!e.Item.Enabled && e.Item.Selected) {
+                return;
+            }
+            base.OnRenderMenuItemBackground(e);
         }
     }
 }

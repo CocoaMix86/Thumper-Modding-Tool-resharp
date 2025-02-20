@@ -14,27 +14,18 @@ using DDS;
 
 namespace Thumper_Mod_Loader
 {
-	public partial class ThumperModdingTool : Form
-	{
+    public partial class ThumperModdingTool : Form
+    {
         #region Form Constructor
         public ThumperModdingTool()
         {
-			InitializeComponent();
-            menuStrip1.Renderer = new MyRenderer();
+            InitializeComponent();
+            menuStrip1.Renderer = new ToolStripOverride();
             ((DataGridViewImageColumn)dgvLevels.Columns[0]).ImageLayout = DataGridViewImageCellLayout.Zoom;
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            // Upgrade settings from previous versions
-            /*
-            if (Properties.Settings.Default.UpgradeSettings)
-            {
-                Properties.Settings.Default.Upgrade();
-                Properties.Settings.Default.UpgradeSettings = false;
-                Properties.Settings.Default.Save();
-            }*/
-
             InitializeTracks(dgvLevels);
             LoadedLevels.CollectionChanged += LoadedLevels_CollectionChanged;
             Read_Config(true);
@@ -67,19 +58,27 @@ namespace Thumper_Mod_Loader
             // Update title to reflect version number
             this.Text = Title;
         }
+
+        private void ThumperModdingTool_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Properties.Settings.Default.level_paths.Clear();
+            foreach (LevelTraits lt in LoadedLevels) {
+                Properties.Settings.Default.level_paths.Add(lt.FilePath.FullName);
+            }
+            Properties.Settings.Default.Save();
+        }
         #endregion
         #region Variables
         private readonly string Title = $"Thumper Mod Loader v3.0.0";
         private readonly CommonOpenFileDialog cfd_lvl = new() { IsFolderPicker = false, Multiselect = false };
         private readonly OpenFileDialog ofd_img = new() { Title = "Choose Image", Filter = "DDS files(*.DDS)|*.DDS" };
-		//private ThumpNet tnet = null;
+        //private ThumpNet tnet = null;
         public ObservableCollection<LevelTraits> LoadedLevels = new();
         private bool _ChangesMade = false;
         public bool ChangesMade
         {
             get { return _ChangesMade; }
-            set
-            {
+            set {
                 _ChangesMade = value;
                 Text = Title + (ChangesMade ? " [Changes Made]" : "");
             }
@@ -92,7 +91,7 @@ namespace Thumper_Mod_Loader
         private void LoadedLevels_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             int i = 0;
-            if (dgvLevels.GetCellCount(DataGridViewElementStates.Selected) > 0) 
+            if (dgvLevels.GetCellCount(DataGridViewElementStates.Selected) > 0)
                 i = dgvLevels.SelectedCells[0].RowIndex;
 
             //clear and reload level list DGV whenever this collection updates
@@ -342,16 +341,12 @@ namespace Thumper_Mod_Loader
 
         private void hashPanelToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            panelHash.Visible = hashPanelToolStripMenuItem.Checked;
+            panelHash.Visible = !panelHash.Visible;
         }
 
-        private void ThumperModdingTool_FormClosing(object sender, FormClosingEventArgs e)
+        private void btnHashClose_Click(object sender, EventArgs e)
         {
-            Properties.Settings.Default.level_paths.Clear();
-            foreach (LevelTraits lt in LoadedLevels) {
-                Properties.Settings.Default.level_paths.Add(lt.FilePath.FullName);
-            }
-            Properties.Settings.Default.Save();
+            panelHash.Visible = false;
         }
 
         private void lblCustomDiffHelp_Click(object sender, EventArgs e)
@@ -475,8 +470,7 @@ namespace Thumper_Mod_Loader
         {
             //double buffering for DGV, found here: https://10tec.com/articles/why-datagridview-slow.aspx
             //used to significantly improve rendering performance
-            if (!SystemInformation.TerminalServerSession)
-            {
+            if (!SystemInformation.TerminalServerSession) {
                 Type dgvType = grid.GetType();
                 PropertyInfo pi = dgvType.GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic);
                 pi.SetValue(grid, true, null);
@@ -488,8 +482,7 @@ namespace Thumper_Mod_Loader
             List<byte> data = File.ReadAllBytes("lib/b868db07.pc").ToList();
             data.RemoveRange(0, 4);
             DDSImage img = DDSImage.Load(data.ToArray());
-            if (img.Images.Length > 0)
-            {
+            if (img.Images.Length > 0) {
                 picSplashScreen.Image = img.Images[0];
             }
         }

@@ -64,6 +64,7 @@ namespace Thumper_Mod_Loader
             textBox1 = new System.Windows.Forms.TextBox();
             textBox2 = new System.Windows.Forms.TextBox();
             panelHash = new System.Windows.Forms.Panel();
+            btnHashClose = new System.Windows.Forms.Button();
             toolTip1 = new System.Windows.Forms.ToolTip(components);
             btnSplashScreen = new System.Windows.Forms.Button();
             btnSplashScreenReset = new System.Windows.Forms.Button();
@@ -99,8 +100,8 @@ namespace Thumper_Mod_Loader
             optionsToolStripMenuItem1.ForeColor = System.Drawing.Color.White;
             optionsToolStripMenuItem1.Name = "optionsToolStripMenuItem1";
             optionsToolStripMenuItem1.Padding = new System.Windows.Forms.Padding(0);
-            optionsToolStripMenuItem1.Size = new System.Drawing.Size(65, 20);
-            optionsToolStripMenuItem1.Text = "OPTIONS";
+            optionsToolStripMenuItem1.Size = new System.Drawing.Size(57, 20);
+            optionsToolStripMenuItem1.Text = "Options";
             // 
             // changeGameDirToolStripMenuItem1
             // 
@@ -115,7 +116,6 @@ namespace Thumper_Mod_Loader
             // hashPanelToolStripMenuItem
             // 
             hashPanelToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(40, 40, 40);
-            hashPanelToolStripMenuItem.CheckOnClick = true;
             hashPanelToolStripMenuItem.Font = new System.Drawing.Font("Gadugi", 9.75F);
             hashPanelToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             hashPanelToolStripMenuItem.Name = "hashPanelToolStripMenuItem";
@@ -140,8 +140,8 @@ namespace Thumper_Mod_Loader
             helpToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             helpToolStripMenuItem.Padding = new System.Windows.Forms.Padding(0);
-            helpToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
-            helpToolStripMenuItem.Text = "HELP";
+            helpToolStripMenuItem.Size = new System.Drawing.Size(38, 20);
+            helpToolStripMenuItem.Text = "Help";
             // 
             // aboutToolStripMenuItem
             // 
@@ -463,7 +463,7 @@ namespace Thumper_Mod_Loader
             textBox1.Location = new System.Drawing.Point(4, 43);
             textBox1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             textBox1.Name = "textBox1";
-            textBox1.Size = new System.Drawing.Size(128, 23);
+            textBox1.Size = new System.Drawing.Size(283, 23);
             textBox1.TabIndex = 45;
             textBox1.Text = "type input here";
             textBox1.TextChanged += BtnHash_Click;
@@ -474,22 +474,39 @@ namespace Thumper_Mod_Loader
             textBox2.Location = new System.Drawing.Point(4, 73);
             textBox2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             textBox2.Name = "textBox2";
-            textBox2.Size = new System.Drawing.Size(128, 23);
+            textBox2.Size = new System.Drawing.Size(283, 23);
             textBox2.TabIndex = 46;
             // 
             // panelHash
             // 
             panelHash.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            panelHash.BackColor = System.Drawing.Color.Maroon;
+            panelHash.BackColor = System.Drawing.Color.FromArgb(64, 0, 0);
+            panelHash.Controls.Add(btnHashClose);
             panelHash.Controls.Add(textBox2);
             panelHash.Controls.Add(BtnHash);
             panelHash.Controls.Add(textBox1);
-            panelHash.Location = new System.Drawing.Point(905, 91);
+            panelHash.Location = new System.Drawing.Point(316, 7);
             panelHash.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             panelHash.Name = "panelHash";
-            panelHash.Size = new System.Drawing.Size(135, 103);
+            panelHash.Size = new System.Drawing.Size(290, 103);
             panelHash.TabIndex = 47;
             panelHash.Visible = false;
+            // 
+            // btnHashClose
+            // 
+            btnHashClose.BackColor = System.Drawing.Color.FromArgb(64, 0, 0);
+            btnHashClose.Enabled = false;
+            btnHashClose.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            btnHashClose.ForeColor = System.Drawing.Color.Red;
+            btnHashClose.Location = new System.Drawing.Point(266, 3);
+            btnHashClose.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnHashClose.Name = "btnHashClose";
+            btnHashClose.Size = new System.Drawing.Size(20, 23);
+            btnHashClose.TabIndex = 47;
+            btnHashClose.Text = "X";
+            toolTip1.SetToolTip(btnHashClose, "Update Thumper with these levels and splash screen.\r\nAdding or removing levels requires a re-launch of the game.");
+            btnHashClose.UseVisualStyleBackColor = false;
+            btnHashClose.Click += btnHashClose_Click;
             // 
             // toolTip1
             // 
@@ -589,7 +606,7 @@ namespace Thumper_Mod_Loader
             lblCustomDiffHelp.Cursor = System.Windows.Forms.Cursors.Help;
             lblCustomDiffHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, 0);
             lblCustomDiffHelp.ForeColor = System.Drawing.Color.DodgerBlue;
-            lblCustomDiffHelp.Location = new System.Drawing.Point(652, 99);
+            lblCustomDiffHelp.Location = new System.Drawing.Point(670, 101);
             lblCustomDiffHelp.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             lblCustomDiffHelp.Name = "lblCustomDiffHelp";
             lblCustomDiffHelp.Size = new System.Drawing.Size(15, 16);
@@ -711,6 +728,7 @@ namespace Thumper_Mod_Loader
         private System.Windows.Forms.DataGridViewTextBoxColumn LevelName;
         private System.Windows.Forms.DataGridViewImageColumn Difficulty;
         private System.Windows.Forms.DataGridViewTextBoxColumn Sublevels;
+        private System.Windows.Forms.Button btnHashClose;
     }
 }
 
