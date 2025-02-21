@@ -124,7 +124,7 @@ namespace Thumper_Mod_Loader
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop)) {
                 string[] data = (string[])e.Data.GetData(DataFormats.FileDrop);
-                if (Directory.Exists(data[0])) {
+                if (Directory.Exists(data[0]) || (File.Exists(data[0]) && data[0].EndsWith(".tcl", StringComparison.OrdinalIgnoreCase))) {
                     e.Effect = DragDropEffects.Copy;
                     return;
                 }
@@ -137,14 +137,23 @@ namespace Thumper_Mod_Loader
             if (!e.Data.GetDataPresent(DataFormats.FileDrop)) return;
             string[] data = (string[])e.Data.GetData(DataFormats.FileDrop);
             if (data.Length + LoadedLevels.Count > 8) {
-                MessageBox.Show("There can only be a total of 8 custom levels at any one time.", "Level Limit Reached");
+                MessageBox.Show("There can only be a total of 8 custom levels at any one time.", "Thumper Mod Loader");
                 return;
             }
             foreach (string dir in data) {
                 if (Directory.Exists(dir)) {
-                    FileInfo _locateTCL = new FileInfo(Directory.GetFiles(dir, "*.TCL", SearchOption.AllDirectories).FirstOrDefault());
-                    if (_locateTCL != null)
-                        AddLevel(_locateTCL, false);
+                    if (Directory.GetFiles(dir, "*.TCL", SearchOption.AllDirectories).Any()) {
+                        FileInfo _locateTCL = new FileInfo(Directory.GetFiles(dir, "*.TCL", SearchOption.AllDirectories).FirstOrDefault());
+                        if (_locateTCL != null)
+                            AddLevel(_locateTCL, false);
+                    }
+                    else {
+                        MessageBox.Show("That folder does not appear to contain level data (a .TCL file)", "Thumper Mod Loader");
+                    }
+                }
+                else if (File.Exists(dir)) {
+                    FileInfo _locateTCL = new FileInfo(dir);
+                    AddLevel(_locateTCL, false);
                 }
             }
         }
@@ -452,7 +461,7 @@ namespace Thumper_Mod_Loader
                 Authors = ProjectJSON.author,
                 Sublevels = sublevels,
             };
-            NewLevel.thumbnail = Image.FromFile(NewLevel.FilePath.Directory.GetFiles("thumbnail.png", SearchOption.AllDirectories).FirstOrDefault()?.FullName);
+            NewLevel.thumbnail = NewLevel.FilePath.Directory.GetFiles("thumbnail.png", SearchOption.AllDirectories).Any() ? Image.FromFile(NewLevel.FilePath.Directory.GetFiles("thumbnail.png", SearchOption.AllDirectories).First().FullName) : null;
             LoadedLevels.Add(NewLevel);
             dgvLevels.Rows[dgvLevels.Rows.Count - 1].Selected = true;
             ///Add level to apps internal list of loaded levels

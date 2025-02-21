@@ -162,18 +162,12 @@ namespace Thumper_Mod_Loader
 							errorlist += $"error parsing:\n{ex.Message} in file \"{FileInProject.Name}\" in level \"{Level.Name}\"\n\n";
 							continue;
 						}
-						//LevelLib contains important info for where the final level files go, so it gets put into its own object
-						if (new_objs.obj_type == "LevelLib") {
-							level_config = new_objs;
-							obj_count--;
-						}
 						objs.Add(new_objs);
 						obj_count++;
 					}
 					//these file types require different processing to get the data
 					else if (file_special.Contains(FileInProject.Extension.ToLower())) {
 						try {
-							//new_objs = JsonConvert.DeserializeObject(File.ReadAllText(filename));
 							new_objs = LoadFileLock(FileInProject.FullName);
 						}
 						catch (Exception ex) {
@@ -185,8 +179,11 @@ namespace Thumper_Mod_Loader
 							objs.Add(_v);
 							obj_count++;
 						}
-					}
-				}
+                    }
+                    else if (FileInProject.Extension.Equals(".tcl", StringComparison.OrdinalIgnoreCase)) {
+                        level_config = LoadFileLock(FileInProject.FullName);
+                    }
+                }
 				//if errors exist, show the error, then return to stop further processing
 				if (errorlist.Contains("error parsing")) {
 					MessageBox.Show(errorlist + "CUSTOM LEVELS NOT UPDATED", "Level load error");
@@ -209,15 +206,15 @@ namespace Thumper_Mod_Loader
 
 					//write "basic list of objects #1" information to level .pc file
 					bytes = File.ReadAllBytes(@"lib/obj_list_1.objlib");
-					///f.Write(bytes, 0, bytes.Length);
-					Write_Int(f, 0);
+					f.Write(bytes, 0, bytes.Length);
+					///Write_Int(f, 0);
 					//write to file the amount of objects that exists (after this number)
 					//this includes everything in "obj_list_2.objlib" (63) and obj_count
-					///Write_Int(f, 63 + obj_count);
-                    Write_Int(f, obj_count);
+					Write_Int(f, 63 + obj_count);
+                    ///Write_Int(f, obj_count);
                     //write "basic list of objects #2" information to level .pc file
                     bytes = File.ReadAllBytes(@"lib/obj_list_2.objlib");
-					///f.Write(bytes, 0, bytes.Length);
+					f.Write(bytes, 0, bytes.Length);
 					//write every object to the .pc file, hashing its name
 					foreach (var obj in objs) {
 						if (obj_types.Contains((string)obj["obj_type"])) {
@@ -234,7 +231,7 @@ namespace Thumper_Mod_Loader
 
 					//bytes = File.ReadAllBytes($@"lib/obj_def_customlevel{LoadedLevels.IndexOf(level_name) + 1}.objlib");
 					bytes = File.ReadAllBytes($@"lib/obj_def_customlevel.objlib");
-					///f.Write(bytes, 0, bytes.Length);
+					f.Write(bytes, 0, bytes.Length);
 					//iterate over every loaded object, and write its data to .pc file in specific formats.
 					//format is different per object. I myself am not exactly sure how it works, but this is how it's done
 					foreach (var obj in objs) {
@@ -444,7 +441,7 @@ namespace Thumper_Mod_Loader
 					int indexofwrittenbeat = 0;
 					for (int i = 0; i < beat_cnt; i++) {
 						Write_Float(f, i);
-						if ((int)_obj["data_points"][indexofwrittenbeat]["beat"] == i) {
+						if (_obj["data_points"].Count < indexofwrittenbeat && (int)_obj["data_points"][indexofwrittenbeat]["beat"] == i) {
                             Write_Data_Point_Value(f, (string)_obj["data_points"][indexofwrittenbeat]["value"], traittype);
                             Write_String(f, (string)_obj["data_points"][indexofwrittenbeat]["interp"]);
                             Write_String(f, (string)_obj["data_points"][indexofwrittenbeat]["ease"]);
