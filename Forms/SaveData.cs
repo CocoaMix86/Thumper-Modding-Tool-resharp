@@ -28,8 +28,10 @@ namespace Thumper_Mod_Loader
             // Get the subdirectories for the specified directory.
             DirectoryInfo dir = new(sourceDirName);
 
-            if (!dir.Exists) 
-                throw new DirectoryNotFoundException("Source directory does not exist or could not be found: "+ sourceDirName);
+            if (!dir.Exists) {
+                return;
+                ///throw new DirectoryNotFoundException("Source directory does not exist or could not be found: " + sourceDirName);
+            }
 
             DirectoryInfo[] dirs = dir.GetDirectories();
             // If the destination directory doesn't exist, create it.       
