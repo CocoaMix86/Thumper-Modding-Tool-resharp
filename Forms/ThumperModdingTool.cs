@@ -431,6 +431,11 @@ namespace Thumper_Mod_Loader
                 return;
             }
 
+            if (TCL.Directory.GetFiles("LEVEL DETAILS.txt", SearchOption.AllDirectories).Any()) {
+                MessageBox.Show($"This custom level contains a LEVEL DETAILS.txt file. Levels created with TCLE v2 are not compatible with mod loader 3.0 and higher.", "Thumper Mod Loader");
+                return;
+            }
+
             ProjectJSON = LoadFileLock(TCL.FullName);
             //try-catch block on parsing master, in case it has issues
             try {
