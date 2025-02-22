@@ -441,7 +441,7 @@ namespace Thumper_Mod_Loader
 					int indexofwrittenbeat = 0;
 					for (int i = 0; i < beat_cnt; i++) {
 						Write_Float(f, i);
-						if (_obj["data_points"].Count < indexofwrittenbeat && (int)_obj["data_points"][indexofwrittenbeat]["beat"] == i) {
+						if (_obj["data_points"].Count > indexofwrittenbeat && (int)_obj["data_points"][indexofwrittenbeat]["beat"] == i) {
                             Write_Data_Point_Value(f, (string)_obj["data_points"][indexofwrittenbeat]["value"], traittype);
                             Write_String(f, (string)_obj["data_points"][indexofwrittenbeat]["interp"]);
                             Write_String(f, (string)_obj["data_points"][indexofwrittenbeat]["ease"]);
