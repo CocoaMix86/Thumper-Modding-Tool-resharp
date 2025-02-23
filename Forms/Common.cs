@@ -86,9 +86,13 @@ namespace Thumper_Mod_Loader
 		{
 			byte[] bytes = StringToByteArray(val);
 			f.Write(bytes, 0, bytes.Length);
-		}
+        }
+        private void Write_Hex(FileStream f, byte[] val)
+        {
+            f.Write(val, 0, val.Length);
+        }
 
-		private void Write_Hex_Reverse(FileStream f, string val)
+        private void Write_Hex_Reverse(FileStream f, string val)
 		{
 			byte[] bytes = StringToByteArray(val);
 			bytes = bytes.Reverse().ToArray();

@@ -17,7 +17,7 @@ namespace Thumper_Mod_Loader
 
 		List<string> file_types = new() { ".gate", ".leaf", ".lvl", ".master", ".xfm", ".config" };
 		List<string> file_special = new() { ".spn", ".samp" };
-
+		/*
 		List<string> list_cache_filename = new() { 
 			"23490781.pc", 
 			"8b497b8b.pc", 
@@ -37,7 +37,7 @@ namespace Thumper_Mod_Loader
 			"14f2baa5.pc", 
 			"7b0b72e8.pc", 
 			"f9ac5eb5.pc" };
-
+		*/
 		List<string> trait_types = new() {
 			"kTraitInt",
 			"kTraitBool",
@@ -199,8 +199,10 @@ namespace Thumper_Mod_Loader
 				}
 
 				//var cache_filename = $@"out\{level_name.folder_name}\{level_config["cache_filename"]}";
-				var cache_filename = $@"out\{Level.Name}\{list_cache_filename[LoadedLevels.IndexOf(Level)]}";
-				Directory.CreateDirectory($@"out\{Level.Name}");
+				///var cache_filename = $@"out\{Level.Name}\{list_cache_filename[LoadedLevels.IndexOf(Level)]}";
+				string hashfilepath = Hash32($"Alevels/custom/{Level.Name}.objlib").ToString("x");
+                var cache_filename = $@"out\{Level.Name}\{hashfilepath}.pc";
+                Directory.CreateDirectory($@"out\{Level.Name}");
 				byte[] bytes;
 
 				using (FileStream f = File.Open(cache_filename, FileMode.Create, FileAccess.Write, FileShare.None)) {
@@ -278,8 +280,10 @@ namespace Thumper_Mod_Loader
 				}
 
 
-				var config_cache_filename = $@"out\{Level.Name}\{list_config_cache_filename[LoadedLevels.IndexOf(Level)]}";
-				using (FileStream f = File.Open(config_cache_filename, FileMode.Create, FileAccess.Write, FileShare.None)) {
+                ///var config_cache_filename = $@"out\{Level.Name}\{list_config_cache_filename[LoadedLevels.IndexOf(Level)]}";
+                string confighashfilepath = Hash32($"Alevels/custom/{Level.Name}.sec").ToString("x");
+                var config_cache_filename = $@"out\{Level.Name}\{confighashfilepath}.pc";
+                using (FileStream f = File.Open(config_cache_filename, FileMode.Create, FileAccess.Write, FileShare.None)) {
 					Write_Int(f, 9);
 					Write_Int(f, level_config["level_sections"].Count);
 					foreach (var level_section in level_config["level_sections"]) {
@@ -292,8 +296,8 @@ namespace Thumper_Mod_Loader
 
 					src_filenames.Add(config_cache_filename);
 				}
-				menu_names.Add(Level.Name);
-				menulength += Level.Name.Length + 1;
+				menu_names.Add(Level.Name!);
+				menulength += Level.Name!.Length + 1;
 			}
 
 			//Update menu names
@@ -303,16 +307,17 @@ namespace Thumper_Mod_Loader
 				//write menu headers/pointers
 				Write_Int(f, 6);
 				Write_Int(f, 183);
-				Write_Int(f, menulength + ((9 - menu_names.Count) * ("no level".Length + 1)));
+                Write_Int(f, menulength);
+                ///Write_Int(f, menulength + ((9 - menu_names.Count) * ("no level".Length + 1)));
 				//write all menu strings. Don't edit this
 				bytes = File.ReadAllBytes(@"lib/menu1.objlib");
 				f.Write(bytes, 0, bytes.Length);
 				//user set level names
-				for (int x = 0; x < 9; x++) {
-					if (x < menu_names.Count)
+				for (int x = 0; x < LoadedLevels.Count; x++) {
+					///if (x < menu_names.Count)
 						f.Write(Encoding.ASCII.GetBytes(menu_names[x]), 0, menu_names[x].Length);
-					else
-						f.Write(Encoding.ASCII.GetBytes($@"no level"), 0, "no level".Length);
+					///else
+					///	f.Write(Encoding.ASCII.GetBytes($@"no level"), 0, "no level".Length);
 					f.Write(new byte[] { 0x00 }, 0, 1);
 				}
 				//write menu hashes and positions. Don't edit this
@@ -320,13 +325,16 @@ namespace Thumper_Mod_Loader
 				f.Write(bytes, 0, bytes.Length);
 
 				//write custom hashes and string position in file.
-				for (int x = 0; x < 9; x++) {
-					Write_Hex(f, menu_hashes[x]);
-					Write_Int(f, pos);
-					if (x < menu_names.Count)
+				for (int x = 0; x < LoadedLevels.Count; x++) {
+					byte[] hashbytes = BitConverter.GetBytes(Hash32(LoadedLevels[x].Name));
+					hashbytes.Reverse();
+                    Write_Hex(f, hashbytes);
+                    ///Write_Hex(f, menu_hashes[x]);
+                    Write_Int(f, pos);
+					///if (x < menu_names.Count)
 						pos += menu_names[x].Length + 1;
-					else
-						pos += "no level".Length + 1;
+					///else
+					///	pos += "no level".Length + 1;
 				}
 			}
 			
@@ -336,19 +344,23 @@ namespace Thumper_Mod_Loader
 				Write_Int(f, menu_names.Count + 1);
 				//write blocks of each level
 				for (int x = 0; x < menu_names.Count; x++) {
-					Write_String(f, $@"customlevel{x + 1}");
+                    Write_String(f, $@"{menu_names[x]}");
+                    ///Write_String(f, $@"customlevel{x + 1}");
 					Write_Int(f, 0);
-					Write_String(f, $@"levels/custom/level{x + 1}.objlib");
+                    Write_String(f, $@"levels/custom/{menu_names[x]}.objlib");
+                    ///Write_String(f, $@"levels/custom/level{x + 1}.objlib");
 					if (x == menu_names.Count - 1)
 						Write_String(f, "level3");
-					else
-						Write_String(f, $@"customlevel{x + 2}");
+                    else
+                        Write_String(f, $@"{menu_names[x + 1]}");
+						///Write_String(f, $@"customlevel{x + 2}");
 					Write_Bool(f, "True");
 					Write_Bool(f, "True");
-					Write_Bool(f, "False");
+					Write_Bool(f, "True");
 					Write_Int(f, x);
-					Write_Int(f, x + 10);
-				}
+					Write_Int(f, x + menu_names.Count + 1);
+                    ///Write_Int(f, x + 10);
+                }
 				//write level 3 data. This is required to make the menu NOT crash
 				Write_String(f, "level3");
 				Write_Int(f, 0);
@@ -358,7 +370,7 @@ namespace Thumper_Mod_Loader
 				Write_Bool(f, "True");
 				Write_Bool(f, "True");
 				Write_Int(f, menu_names.Count);
-				Write_Int(f, menu_names.Count + 10);
+				Write_Int(f, menu_names.Count + menu_names.Count);
 			}
 
 			//copy new .pc files to game directory
