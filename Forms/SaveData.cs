@@ -8,7 +8,7 @@ namespace Thumper_Mod_Loader
 	public partial class ThumperModdingTool
 	{
 		int max_backup_count = 20;
-
+        /*
         public void Backup_SaveData(string game_dir)
 		{
 			var backup_time = DateTime.Now.ToString().Replace(":","").Replace("/","-");
@@ -19,7 +19,7 @@ namespace Thumper_Mod_Loader
             if (backups.Count() > max_backup_count) {
                 Directory.Delete($@"backup/{backups.OrderByDescending(d => d.LastWriteTimeUtc).Last()}/", true);
 			}
-        }
+        }*/
 
         /// via Microsoft
         /// https://docs.microsoft.com/en-us/dotnet/standard/io/how-to-copy-directories
@@ -50,7 +50,7 @@ namespace Thumper_Mod_Loader
                 }
             }
         }
-
+        /*
         private void Make_Custom_Savedata(string game_dir)
 		{
             foreach (string filename in Directory.EnumerateFiles($@"{game_dir}/savedata", "*.*", SearchOption.AllDirectories)) {
@@ -74,5 +74,6 @@ namespace Thumper_Mod_Loader
                 DirectoryCopy($@"backup/{last_backup_time}", $@"{game_dir}/savedata", true);
             }
         }
+        */
     }
 }

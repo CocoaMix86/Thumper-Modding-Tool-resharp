@@ -117,7 +117,7 @@ namespace Thumper_Mod_Loader
 			List<string> src_filenames = new() { "lib/2e7b0500.pc", "lib/e0c51024.pc", "lib/f78b7d78.pc", "lib/d0d6149c.pc", "lib/aefa4352.pc", "lib/b868db07.pc",
 				"lib/ae685f16.pc" };
 			//these hashes are literally "customlevel#" hashed
-			List<string> menu_hashes = new() { "1DCB06CE", "2D5C3C41", "273EA275", "EBA1CBD7", "1F8AD438", "DDF57F91", "9402A958", "FB3C6A42", "85E4559B" };
+			///List<string> menu_hashes = new() { "1DCB06CE", "2D5C3C41", "273EA275", "EBA1CBD7", "1F8AD438", "DDF57F91", "9402A958", "FB3C6A42", "85E4559B" };
 			List<string> menu_names = new();
 			//clear \out\ directory so that old level data is not stored anymore
 			if (Directory.Exists(@"out")) {
@@ -345,21 +345,20 @@ namespace Thumper_Mod_Loader
 				//write blocks of each level
 				for (int x = 0; x < menu_names.Count; x++) {
                     Write_String(f, $@"{menu_names[x]}");
-                    ///Write_String(f, $@"customlevel{x + 1}");
 					Write_Int(f, 0);
                     Write_String(f, $@"levels/custom/{menu_names[x]}.objlib");
-                    ///Write_String(f, $@"levels/custom/level{x + 1}.objlib");
+                    Write_Int(f, 0);
+                    /*
 					if (x == menu_names.Count - 1)
 						Write_String(f, "level3");
                     else
                         Write_String(f, $@"{menu_names[x + 1]}");
-						///Write_String(f, $@"customlevel{x + 2}");
-					Write_Bool(f, "True");
-					Write_Bool(f, "True");
+					*/
+                    Write_Bool(f, "True");
+					Write_Bool(f, "False");
 					Write_Bool(f, "True");
 					Write_Int(f, x);
 					Write_Int(f, x + menu_names.Count + 1);
-                    ///Write_Int(f, x + 10);
                 }
 				//write level 3 data. This is required to make the menu NOT crash
 				Write_String(f, "level3");

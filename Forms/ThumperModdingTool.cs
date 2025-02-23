@@ -273,7 +273,7 @@ namespace Thumper_Mod_Loader
         {
             if (dgvLevels.Rows.Count > 0) {
                 Make_Custom_Levels(Properties.Settings.Default.game_dir);
-                Make_Custom_Savedata(Properties.Settings.Default.game_dir);
+                ///Make_Custom_Savedata(Properties.Settings.Default.game_dir);
 
             }
             else if (Properties.Settings.Default.mod_mode) ModModeOFF();
@@ -390,7 +390,7 @@ namespace Thumper_Mod_Loader
         void ModModeOFF()
         {
             Restore_Levels(Properties.Settings.Default.game_dir);
-            Restore_Savedata(Properties.Settings.Default.game_dir);
+            ///Restore_Savedata(Properties.Settings.Default.game_dir);
             //set mod mode property in exe and save it
             Properties.Settings.Default.mod_mode = false;
             Properties.Settings.Default.Save();
@@ -404,9 +404,9 @@ namespace Thumper_Mod_Loader
 
         void ModModeON()
         {
-            Backup_SaveData(Properties.Settings.Default.game_dir);
+            ///Backup_SaveData(Properties.Settings.Default.game_dir);
             Make_Custom_Levels(Properties.Settings.Default.game_dir);
-            Make_Custom_Savedata(Properties.Settings.Default.game_dir);
+            ///Make_Custom_Savedata(Properties.Settings.Default.game_dir);
             //set mod mode property in exe and save it
             Properties.Settings.Default.mod_mode = true;
             Properties.Settings.Default.Save();
