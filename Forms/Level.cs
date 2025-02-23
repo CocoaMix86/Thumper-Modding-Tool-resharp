@@ -140,9 +140,9 @@ namespace Thumper_Mod_Loader
 					return;
 				}
 				//check if the custom level folder contains custom audio. This needs to be put into Thumper's cache folder
-				if (Directory.Exists(@$"{Level.FilePath.FullName}\extras")) {
+				if (Directory.Exists(@$"{Level.FilePath.DirectoryName}\extras")) {
                     Properties.Settings.Default.loaded_files = new List<string>();
-                    foreach (string filename in Directory.GetFiles(@$"{Level.FilePath}\extras")) {
+                    foreach (string filename in Directory.GetFiles(@$"{Level.FilePath.DirectoryName}\extras")) {
 						File.Copy(filename, $@"{game_dir}\cache\{Path.GetFileName(filename)}", true);
 						//audiofiles.Add(filename);
 						Properties.Settings.Default.loaded_files.Add(filename);
@@ -342,35 +342,33 @@ namespace Thumper_Mod_Loader
 			using (FileStream f = File.Open(@"lib\f78b7d78.pc", FileMode.Create, FileAccess.Write, FileShare.None)) {
 				Write_Int(f, 16);
 				Write_Int(f, menu_names.Count + 1);
-				//write blocks of each level
-				for (int x = 0; x < menu_names.Count; x++) {
+                //write blocks of each level
+                for (int x = 0; x < menu_names.Count; x++) {
                     Write_String(f, $@"{menu_names[x]}");
 					Write_Int(f, 0);
                     Write_String(f, $@"levels/custom/{menu_names[x]}.objlib");
-                    Write_Int(f, 0);
-                    /*
-					if (x == menu_names.Count - 1)
-						Write_String(f, "level3");
-                    else
-                        Write_String(f, $@"{menu_names[x + 1]}");
-					*/
-                    Write_Bool(f, "True");
+					if (x < menu_names.Count - 1)
+						Write_String(f, $@"{menu_names[x + 1]}");
+					else
+						Write_Int(f, 0);
+                    Write_Bool(f, "False");
 					Write_Bool(f, "False");
-					Write_Bool(f, "True");
+					Write_Bool(f, "False");
 					Write_Int(f, x);
 					Write_Int(f, x + menu_names.Count + 1);
                 }
-				//write level 3 data. This is required to make the menu NOT crash
-				Write_String(f, "level3");
+                //write level 3 data. This is required to make the menu NOT crash
+                Write_String(f, "level3");
+                Write_Int(f, 0);
+                Write_String(f, "levels/level3/level_3a.objlib");
 				Write_Int(f, 0);
-				Write_String(f, "levels/level3/level_3a.objlib");
-				Write_Int(f, 0);
-				Write_Bool(f, "True");
-				Write_Bool(f, "True");
-				Write_Bool(f, "True");
-				Write_Int(f, menu_names.Count);
-				Write_Int(f, menu_names.Count + menu_names.Count);
-			}
+                //Write_String(f, $@"{menu_names[0]}");
+                Write_Bool(f, "True");
+                Write_Bool(f, "True");
+                Write_Bool(f, "True");
+                Write_Int(f, menu_names.Count);
+                Write_Int(f, menu_names.Count + menu_names.Count);
+            }
 
 			//copy new .pc files to game directory
 			foreach (string src_filename in src_filenames) {
