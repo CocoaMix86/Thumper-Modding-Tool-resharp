@@ -1,0 +1,6 @@
+{
+'obj_type': 'SequinLeaf',
+'obj_name': 'pyramid_outro.leaf',
+'seq_objs': [ ],
+'beat_cnt': 32
+}

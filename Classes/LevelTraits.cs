@@ -6,12 +6,12 @@ namespace Thumper_Mod_Loader
 {
 	public class LevelTraits
 	{
-		public string Name { get; set; }
-		public string Difficulty { get; set; }
-		public string Description { get; set; }
-		public FileInfo FilePath { get; set; }
-		public string Authors { get; set; }
-		public int Sublevels { get; set; }
-		public Image thumbnail { get; set; }
+		public string? Name { get; set; }
+		public string? Difficulty { get; set; }
+		public string? Description { get; set; }
+		public FileInfo? FilePath { get; set; }
+		public string? Authors { get; set; }
+		public int? Sublevels { get; set; }
+		public Image? thumbnail { get; set; }
 	}
 }

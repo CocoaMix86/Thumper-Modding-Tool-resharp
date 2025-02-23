@@ -291,6 +291,20 @@ namespace Thumper_Mod_Loader.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {
+        ///&apos;obj_type&apos;: &apos;SequinLeaf&apos;,
+        ///&apos;obj_name&apos;: &apos;pyramid_outro.leaf&apos;,
+        ///&apos;seq_objs&apos;: [ ],
+        ///&apos;beat_cnt&apos;: 32
+        ///}.
+        /// </summary>
+        internal static string leaf_pyramid_outro {
+            get {
+                return ResourceManager.GetString("leaf_pyramid_outro", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap thumper_modding_tool {

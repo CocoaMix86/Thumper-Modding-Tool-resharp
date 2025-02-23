@@ -128,10 +128,10 @@ namespace Thumper_Mod_Loader
 
 			//loop over each selected level
 			foreach (LevelTraits Level in LoadedLevels) {
-				dynamic level_config = null;
+				dynamic? level_config = null;
 				var objs = new List<dynamic>();
 				var obj_count = 0;
-				dynamic new_objs = null;
+				dynamic? new_objs = null;
 				string errorlist = "";
 
 				if (!Level.FilePath.Exists)
@@ -150,9 +150,17 @@ namespace Thumper_Mod_Loader
 
                     Properties.Settings.Default.Save();
 				}
-				//iterate over each file in the custom level directory
-				//filter out files that do not match the <file_types> list
-				foreach (FileInfo FileInProject in Level.FilePath.Directory.GetFiles("*.*", SearchOption.AllDirectories)) {
+				//if pyramid exists... delete it
+				if (Level.FilePath.Directory?.GetFiles("pyramid_outro.leaf", SearchOption.AllDirectories).FirstOrDefault() is FileInfo pyramid) {
+					pyramid.Delete();
+                }
+				//load pyramid leaf
+				new_objs = JsonConvert.DeserializeObject(Properties.Resources.leaf_pyramid_outro);
+				objs.Add(new_objs);
+				obj_count++;
+                //iterate over each file in the custom level directory
+                //filter out files that do not match the <file_types> list
+                foreach (FileInfo FileInProject in Level.FilePath.Directory.GetFiles("*.*", SearchOption.AllDirectories)) {
 					if (file_types.Contains(FileInProject.Extension.ToLower())) {
 						//read file and store JSON in dynamic object
 						try {
@@ -452,35 +460,16 @@ namespace Thumper_Mod_Loader
                             Write_String(f, interp);
                             Write_String(f, ease);
                         }
-						/*
-						//check if data_points contains an entry for beat `i`. If yes, write it
-						if (_obj["data_points"].ContainsKey(i.ToString()))
-							Write_Data_Point_Value(f, (string)_obj["data_points"][i.ToString()], (string)_obj["trait_type"]);
-						else
-							Write_Data_Point_Value(f, (string)_obj["default"], (string)_obj["trait_type"]);
-						
-						//write these after every beat for some reason
-						Write_String(f, interp);
-						Write_String(f, ease);
-						*/
 					}
                 }
 				else {
 					///STEP false = value interpolates between values set on beats. Default is ignored.
 					Write_Int(f, Enumerable.Count<dynamic>(_obj["data_points"]));
-					int _iii = 0;
 					foreach (dynamic dp in _obj["data_points"]) {
                         Write_Float(f, (float)dp["beat"]);
                         Write_Data_Point_Value(f, (string)dp["value"], traittype);
                         Write_String(f, (string)dp["interp"]);
                         Write_String(f, (string)dp["ease"]);
-                        /*
-						JProperty _p = _v;
-						Write_Float(f, float.Parse(_p.Name)); _iii++;
-						Write_Data_Point_Value(f, (string)_v, (string)_obj["trait_type"]);
-						Write_String(f, interp);
-						Write_String(f, ease);
-						*/
                     }
 				}
 				Write_Int(f, 0);
@@ -492,19 +481,19 @@ namespace Thumper_Mod_Loader
 				Write_Int(f, (int)_footer[2]);
 				Write_Int(f, (int)_footer[3]);
 				Write_Int(f, (int)_footer[4]);
-				Write_String(f, (string)_footer[5]);
-				Write_String(f, (string)_footer[6]);
-				Write_Bool(f, (string)_footer[7]);
-				Write_Bool(f, (string)_footer[8]);
+				Write_String(f, (string)_footer[5]!);
+				Write_String(f, (string)_footer[6]!);
+				Write_Bool(f, (string)_footer[7]!);
+				Write_Bool(f, (string)_footer[8]!);
 				Write_Int(f, (int)_footer[9]);
 				Write_Float(f, (float)_footer[10]);
 				Write_Float(f, (float)_footer[11]);
 				Write_Float(f, (float)_footer[12]);
 				Write_Float(f, (float)_footer[13]);
 				Write_Float(f, (float)_footer[14]);
-				Write_Bool(f, (string)_footer[15]);
-				Write_Bool(f, (string)_footer[16]);
-				Write_Bool(f, (string)_footer[17]);
+				Write_Bool(f, (string)_footer[15]!);
+				Write_Bool(f, (string)_footer[16]!);
+				Write_Bool(f, (string)_footer[17]!);
 			}
 		}
 
