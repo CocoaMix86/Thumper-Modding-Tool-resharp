@@ -1,7 +1,4 @@
-﻿using System;
-using System.Data;
-using System.Linq;
-using System.IO;
+﻿using System.IO;
 
 namespace Thumper_Mod_Loader
 {

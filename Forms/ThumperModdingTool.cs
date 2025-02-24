@@ -6,10 +6,8 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Collections.Generic;
 using System.Reflection;
-using System.Text.RegularExpressions;
 using System.Linq;
 using Microsoft.WindowsAPICodePack.Dialogs;
-using Newtonsoft.Json;
 using DDS;
 
 namespace Thumper_Mod_Loader
@@ -99,7 +97,7 @@ namespace Thumper_Mod_Loader
             foreach (var _level in LoadedLevels) {
                 //populate rows with level name, and difficulty strings
                 dgvLevels.Rows.Add(new object[] { _level.thumbnail, _level.Name, Properties.Resources.ResourceManager.GetObject(_level.Difficulty.ToLower()), _level.Sublevels });
-                dgvLevels.Rows[^1].Height = 100;
+                dgvLevels.Rows[^1].Height = 50;
             }
 
             if (i - 1 >= 0) dgvLevels.Rows[i - 1].Selected = true;
@@ -116,8 +114,7 @@ namespace Thumper_Mod_Loader
             int i = dgvLevels.CurrentRow.Index;
             lblCreator.Text = $"Creator: {LoadedLevels[i].Authors}";
             richDescript.Text = $"{LoadedLevels[i].Description}";
-            pictureDifficulty.Image = (Image)Properties.Resources.ResourceManager.GetObject(LoadedLevels[i].Difficulty.ToLower());
-
+            pictureDifficulty.Image = (Image)Properties.Resources.ResourceManager.GetObject(LoadedLevels[i].Difficulty!.ToLower())!;
         }
 
         private void dgvLevels_DragEnter(object sender, DragEventArgs e)
@@ -330,6 +327,13 @@ namespace Thumper_Mod_Loader
         }
 
         private void changeGameDirToolStripMenuItem_Click(object sender, EventArgs e) => Read_Config(false);
+        private void hashPanelToolStripMenuItem_Click(object sender, EventArgs e) => panelHash.Visible = !panelHash.Visible;
+        private void btnHashClose_Click(object sender, EventArgs e) => panelHash.Visible = false;
+        private void lblCustomDiffHelp_Click(object sender, EventArgs e) => new ImageMessageBox("difficultyhelp").Show();
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e) => new AboutBox1().Show();
+        private void discordServerToolStripMenuItem_Click(object sender, EventArgs e) => System.Diagnostics.Process.Start("https://discord.com/invite/gTQbquY");
+        private void githubToolStripMenuItem_Click(object sender, EventArgs e) => System.Diagnostics.Process.Start("https://github.com/CocoaMix86/Thumper-Custom-Level-Editor");
+        private void donateTipToolStripMenuItem_Click(object sender, EventArgs e) => System.Diagnostics.Process.Start("https://ko-fi.com/I2I5ZZBRH");
 
         private void thumpNetToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -346,41 +350,6 @@ namespace Thumper_Mod_Loader
             Properties.Settings.Default.Reset();
             Properties.Settings.Default.Save();
             Application.Restart();
-        }
-
-        private void hashPanelToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            panelHash.Visible = !panelHash.Visible;
-        }
-
-        private void btnHashClose_Click(object sender, EventArgs e)
-        {
-            panelHash.Visible = false;
-        }
-
-        private void lblCustomDiffHelp_Click(object sender, EventArgs e)
-        {
-            new ImageMessageBox("difficultyhelp").Show();
-        }
-
-        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            new AboutBox1().Show();
-        }
-
-        private void discordServerToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            System.Diagnostics.Process.Start("https://discord.com/invite/gTQbquY");
-        }
-
-        private void githubToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            System.Diagnostics.Process.Start("https://github.com/CocoaMix86/Thumper-Custom-Level-Editor");
-        }
-
-        private void donateTipToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            System.Diagnostics.Process.Start("https://ko-fi.com/I2I5ZZBRH");
         }
         #endregion
         #region Methods

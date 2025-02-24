@@ -1,8 +1,6 @@
-﻿using System;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using System.Diagnostics;
 using Microsoft.WindowsAPICodePack.Dialogs;
-using System.Drawing;
 
 namespace Thumper_Mod_Loader
 {

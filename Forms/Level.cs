@@ -5,7 +5,6 @@ using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.IO;
-using System.Text.RegularExpressions;
 using System.Text;
 using System.Drawing;
 
@@ -347,13 +346,16 @@ namespace Thumper_Mod_Loader
                     Write_String(f, $@"{menu_names[x]}");
 					Write_Int(f, 0);
                     Write_String(f, $@"levels/custom/{menu_names[x]}.objlib");
+                    Write_Int(f, 0);
+                    /*
 					if (x < menu_names.Count - 1)
 						Write_String(f, $@"{menu_names[x + 1]}");
 					else
 						Write_Int(f, 0);
+					*/
                     Write_Bool(f, "False");
-					Write_Bool(f, "False");
-					Write_Bool(f, "False");
+					Write_Bool(f, "True");
+					Write_Bool(f, "True");
 					Write_Int(f, x);
 					Write_Int(f, x + menu_names.Count + 1);
                 }
@@ -363,7 +365,7 @@ namespace Thumper_Mod_Loader
                 Write_String(f, "levels/level3/level_3a.objlib");
 				Write_Int(f, 0);
                 //Write_String(f, $@"{menu_names[0]}");
-                Write_Bool(f, "True");
+                Write_Bool(f, "False");
                 Write_Bool(f, "True");
                 Write_Bool(f, "True");
                 Write_Int(f, menu_names.Count);
