@@ -67,7 +67,7 @@ namespace Thumper_Mod_Loader
         }
         #endregion
         #region Variables
-        private readonly string Title = $"Thumper Mod Loader v3.0.0";
+        private readonly string Title = $"Thumper Mod Loader v3alpha51";
         private readonly CommonOpenFileDialog cfd_lvl = new() { IsFolderPicker = false, Multiselect = false };
         private readonly OpenFileDialog ofd_img = new() { Title = "Choose Image", Filter = "DDS files(*.DDS)|*.DDS" };
         //private ThumpNet tnet = null;

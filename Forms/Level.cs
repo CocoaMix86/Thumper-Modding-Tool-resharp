@@ -347,15 +347,16 @@ namespace Thumper_Mod_Loader
 					Write_Int(f, 0);
                     Write_String(f, $@"levels/custom/{menu_names[x]}.objlib");
                     Write_Int(f, 0);
-                    /*
+					/*
 					if (x < menu_names.Count - 1)
 						Write_String(f, $@"{menu_names[x + 1]}");
 					else
 						Write_Int(f, 0);
 					*/
-                    Write_Bool(f, "False");
-					Write_Bool(f, "True");
-					Write_Bool(f, "True");
+					int[] order = { 0, 0, 0 };
+                    Write_Bool(f, order[0] == 1 ? "True" : "False");
+					Write_Bool(f, order[1] == 1 ? "True" : "False");
+					Write_Bool(f, order[2] == 1 ? "True" : "False");
 					Write_Int(f, x);
 					Write_Int(f, x + menu_names.Count + 1);
                 }
@@ -365,9 +366,10 @@ namespace Thumper_Mod_Loader
                 Write_String(f, "levels/level3/level_3a.objlib");
 				Write_Int(f, 0);
                 //Write_String(f, $@"{menu_names[0]}");
-                Write_Bool(f, "False");
-                Write_Bool(f, "True");
-                Write_Bool(f, "True");
+                int[] order2 = { 0, 0, 0 };
+                Write_Bool(f, order2[0] == 1 ? "True" : "False");
+                Write_Bool(f, order2[1] == 1 ? "True" : "False");
+                Write_Bool(f, order2[2] == 1 ? "True" : "False");
                 Write_Int(f, menu_names.Count);
                 Write_Int(f, menu_names.Count + menu_names.Count);
             }
