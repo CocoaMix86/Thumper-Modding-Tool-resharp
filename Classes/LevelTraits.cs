@@ -13,5 +13,6 @@ namespace Thumper_Mod_Loader
 		public string? Authors { get; set; }
 		public int? Sublevels { get; set; }
 		public Image? thumbnail { get; set; }
+		public int EditorVersion { get; set; }
 	}
 }

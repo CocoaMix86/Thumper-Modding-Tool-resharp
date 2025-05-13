@@ -24,7 +24,7 @@ namespace Thumper_Mod_Loader
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            InitializeTracks(dgvLevels);
+            DoubleBufferForms(dgvLevels);
             LoadedLevels.CollectionChanged += LoadedLevels_CollectionChanged;
             Read_Config(true);
 
@@ -68,7 +68,7 @@ namespace Thumper_Mod_Loader
         #endregion
         #region Variables
         private readonly string Title = $"Thumper Mod Loader v3alpha51";
-        private readonly CommonOpenFileDialog cfd_lvl = new() { IsFolderPicker = false, Multiselect = false };
+        private readonly OpenFileDialog cfd_lvl = new() { Multiselect = false };
         private readonly OpenFileDialog ofd_img = new() { Title = "Choose Image", Filter = "DDS files(*.DDS)|*.DDS" };
         //private ThumpNet tnet = null;
         public ObservableCollection<LevelTraits> LoadedLevels = new();
@@ -179,8 +179,9 @@ namespace Thumper_Mod_Loader
             }
             //initialize the FolderBrowser to start where the app is launched
             cfd_lvl.Title = "Select the Level Folder";
+            cfd_lvl.Filter = "Thumper Custom Level (*.TCL; LEVEL DETAILS.txt)|*.TCL;LEVEL DETAILS.txt";
             cfd_lvl.InitialDirectory = Application.StartupPath;
-            if (cfd_lvl.ShowDialog() == CommonFileDialogResult.Ok)
+            if (cfd_lvl.ShowDialog() == DialogResult.OK)
                 AddLevel(new FileInfo(cfd_lvl.FileName), false);
         }
 
@@ -219,8 +220,7 @@ namespace Thumper_Mod_Loader
                 dgvLevels.Rows[rowIndex - 1].Selected = true;
                 ChangesMade = true;
 
-            }
-            catch { }
+            } catch { }
         }
 
         private void btnLevelDown_Click(object sender, EventArgs e)
@@ -237,8 +237,7 @@ namespace Thumper_Mod_Loader
                 LoadedLevels.Insert(rowIndex + 1, selectedLevel);
                 dgvLevels.Rows[rowIndex + 1].Selected = true;
                 ChangesMade = true;
-            }
-            catch { }
+            } catch { }
         }
 
         private void btnModMode_Click(object sender, EventArgs e)
@@ -286,8 +285,7 @@ namespace Thumper_Mod_Loader
             // load dds
             DDSImage img = null;
             bool failed = false;
-            try { img = DDSImage.Load(ofd_img.FileName); }
-            catch { failed = true; }
+            try { img = DDSImage.Load(ofd_img.FileName); } catch { failed = true; }
 
             // if failed to load dds / invalid dds
             if (failed || img == null || img.Images.Length == 0) {
@@ -400,24 +398,23 @@ namespace Thumper_Mod_Loader
                 return;
             }
 
-            if (TCL.Directory.GetFiles("LEVEL DETAILS.txt", SearchOption.AllDirectories).Any()) {
+            /*if (TCL.Directory.GetFiles("LEVEL DETAILS.txt", SearchOption.AllDirectories).Any()) {
                 MessageBox.Show($"This custom level contains a LEVEL DETAILS.txt file. Levels created with TCLE v2 are not compatible with mod loader 3.0 and higher.", "Thumper Mod Loader");
                 return;
-            }
+            }*/
 
             ProjectJSON = LoadFileLock(TCL.FullName);
             //try-catch block on parsing master, in case it has issues
             try {
-                FileInfo _locateMaster = TCL.Directory.GetFiles("*.master", SearchOption.AllDirectories).FirstOrDefault();
+                FileInfo _locateMaster = TCL.Name == "LEVEL DETAILS.txt" ? TCL.Directory.GetFiles("master_sequin.txt").FirstOrDefault() : TCL.Directory.GetFiles("*.master", SearchOption.AllDirectories).FirstOrDefault();
                 if (_locateMaster != null)
                     MasterJSON = LoadFileLock(_locateMaster.FullName);
                 else {
                     MessageBox.Show($@"No .Master file exists for {TCL.Name}.", "Thumper Mod Loader");
                     return;
                 }
-            }
-            catch (Exception ex) {
-                MessageBox.Show($"error parsing:\n{ex.Message} in .master file the selected level\n\nLEVEL NOT ADDED");
+            } catch (Exception ex) {
+                MessageBox.Show($"error parsing:\n{ex.Message} in .master file the selected level\n\nLEVEL NOT ADDED", "Thumper Mod Loader");
                 return;
             }
 
@@ -434,6 +431,7 @@ namespace Thumper_Mod_Loader
                 FilePath = TCL,
                 Authors = ProjectJSON.author,
                 Sublevels = sublevels,
+                EditorVersion = TCL.Extension == ".txt" ? 2 : 3
             };
             NewLevel.thumbnail = NewLevel.FilePath.Directory.GetFiles("thumbnail.png", SearchOption.AllDirectories).Any() ? Image.FromFile(NewLevel.FilePath.Directory.GetFiles("thumbnail.png", SearchOption.AllDirectories).First().FullName) : null;
             LoadedLevels.Add(NewLevel);
@@ -449,7 +447,7 @@ namespace Thumper_Mod_Loader
             ChangesMade = true;
         }
 
-        public void InitializeTracks(DataGridView grid)
+        public void DoubleBufferForms(DataGridView grid)
         {
             //double buffering for DGV, found here: https://10tec.com/articles/why-datagridview-slow.aspx
             //used to significantly improve rendering performance
@@ -470,5 +468,17 @@ namespace Thumper_Mod_Loader
             }
         }
         #endregion
+
+        private void chkNewTitleScreen_CheckedChanged(object sender, EventArgs e)
+        {
+            if (Properties.Settings.Default.mod_mode) {
+                if (chkNewTitleScreen.Checked) {
+                    File.Copy("lib/d0d6149c.pc", $@"{Properties.Settings.Default.game_dir}\cache\{Path.GetFileName("lib/d0d6149c.pc")}", true);
+                }
+                else {
+                    File.Copy("lib/original/d0d6149c.pc", $@"{Properties.Settings.Default.game_dir}\cache\{Path.GetFileName("lib/original/d0d6149c.pc")}", true);
+                }
+            }
+        }
     }
 }

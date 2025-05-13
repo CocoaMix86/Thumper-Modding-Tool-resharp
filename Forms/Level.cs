@@ -7,6 +7,7 @@ using Newtonsoft.Json.Linq;
 using System.IO;
 using System.Text;
 using System.Drawing;
+using System.Runtime.InteropServices;
 
 namespace Thumper_Mod_Loader
 {
@@ -110,11 +111,16 @@ namespace Thumper_Mod_Loader
 		///
 		/// The primary code block that turns the custom level data into a format the game can read
 		/// 
+		public LevelTraits CurrentLevelProcessing;
 		private void Make_Custom_Levels(string game_dir)
 		{
             int menulength = 2548;
 			List<string> src_filenames = new() { "lib/2e7b0500.pc", "lib/e0c51024.pc", "lib/f78b7d78.pc", "lib/d0d6149c.pc", "lib/aefa4352.pc", "lib/b868db07.pc",
 				"lib/ae685f16.pc" };
+			if (!chkNewTitleScreen.Checked) {
+				src_filenames.Remove("lib/d0d6149c.pc");
+                src_filenames.Add("lib/original/d0d6149c.pc");
+            }
 			//these hashes are literally "customlevel#" hashed
 			///List<string> menu_hashes = new() { "1DCB06CE", "2D5C3C41", "273EA275", "EBA1CBD7", "1F8AD438", "DDF57F91", "9402A958", "FB3C6A42", "85E4559B" };
 			List<string> menu_names = new();
@@ -127,8 +133,10 @@ namespace Thumper_Mod_Loader
 
 			//loop over each selected level
 			foreach (LevelTraits Level in LoadedLevels) {
-				dynamic? level_config = null;
-				var objs = new List<dynamic>();
+				CurrentLevelProcessing = Level;
+                dynamic? level_config = null;
+                dynamic? level_details = null;
+                var objs = new List<dynamic>();
 				var obj_count = 0;
 				dynamic? new_objs = null;
 				string errorlist = "";
@@ -153,8 +161,11 @@ namespace Thumper_Mod_Loader
 				if (Level.FilePath.Directory?.GetFiles("pyramid_outro.leaf", SearchOption.AllDirectories).FirstOrDefault() is FileInfo pyramid) {
 					pyramid.Delete();
                 }
-				//load pyramid leaf
-				new_objs = JsonConvert.DeserializeObject(Properties.Resources.leaf_pyramid_outro);
+                if (Level.FilePath.Directory?.GetFiles("leaf_pyramid_outro.txt", SearchOption.AllDirectories).FirstOrDefault() is FileInfo pyramid2) {
+                    pyramid2.Delete();
+                }
+                //load pyramid leaf
+                new_objs = JsonConvert.DeserializeObject(Properties.Resources.leaf_pyramid_outro);
 				objs.Add(new_objs);
 				obj_count++;
                 //iterate over each file in the custom level directory
@@ -187,8 +198,12 @@ namespace Thumper_Mod_Loader
 							obj_count++;
 						}
                     }
-                    else if (FileInProject.Extension.Equals(".tcl", StringComparison.OrdinalIgnoreCase)) {
+                    else if (CurrentLevelProcessing.EditorVersion == 3 && FileInProject.Extension.Equals(".tcl", StringComparison.OrdinalIgnoreCase)) {
                         level_config = LoadFileLock(FileInProject.FullName);
+                    }
+                    else if (CurrentLevelProcessing.EditorVersion == 2 && FileInProject.Name.Equals("LEVEL DETAILS.txt", StringComparison.OrdinalIgnoreCase)) {
+                        level_config = LoadFileLock(FileInProject.Directory.GetFiles("config_*.txt").First().FullName);
+                        level_details = LoadFileLock(FileInProject.FullName);
                     }
                 }
 				//if errors exist, show the error, then return to stop further processing
@@ -284,14 +299,26 @@ namespace Thumper_Mod_Loader
                 var config_cache_filename = $@"out\{Level.Name}\{confighashfilepath}.pc";
                 using (FileStream f = File.Open(config_cache_filename, FileMode.Create, FileAccess.Write, FileShare.None)) {
 					Write_Int(f, 9);
-					Write_Int(f, level_config["level_sections"].Count);
-					foreach (var level_section in level_config["level_sections"]) {
-						Write_String(f, (string)level_section);
+					if (CurrentLevelProcessing.EditorVersion == 3) {
+						Write_Int(f, level_config["level_sections"].Count);
+						foreach (var level_section in level_config["level_sections"]) {
+							Write_String(f, (string)level_section);
+						}
+						Write_Color(f, level_config["rails_color"]);
+						Write_Color(f, level_config["rails_glow_color"]);
+						Write_Color(f, level_config["path_color"]);
+						Write_Color(f, level_config["joy_color"]);
 					}
-					Write_Color(f, level_config["rails_color"]);
-					Write_Color(f, level_config["rails_glow_color"]);
-					Write_Color(f, level_config["path_color"]);
-					Write_Color(f, level_config["joy_color"]);
+					else if (CurrentLevelProcessing.EditorVersion == 2) {
+                        Write_Int(f, level_config["level_sections"].Count);
+                        foreach (var level_section in level_config["level_sections"]) {
+                            Write_String(f, (string)level_section);
+                        }
+                        Write_Color(f, level_config["rails_color"]);
+                        Write_Color(f, level_config["rails_glow_color"]);
+                        Write_Color(f, level_config["path_color"]);
+                        Write_Color(f, level_config["joy_color"]);
+                    }
 
 					src_filenames.Add(config_cache_filename);
 				}
@@ -435,57 +462,21 @@ namespace Thumper_Mod_Loader
 			}
 		}
 
-		private void Write_Sequencer_Objects(FileStream f, dynamic obj)
+        string interpv3 = "kTraitInterpLinear";
+        string easev3 = "kEaseInOut";
+        private void Write_Sequencer_Objects(FileStream f, dynamic obj)
         {
-            string interp = "kTraitInterpLinear";
-            string ease = "kEaseInOut";
             int beat_cnt = obj["beat_cnt"] ?? 0;
 			dynamic seq_objs = obj["seq_objs"];
 			//write amount of seq_objs (different tracks) to .pc file
 			Write_Int(f, seq_objs.Count);
 
 			foreach (var _obj in seq_objs) {
-				///header of object
-				Write_String(f, (string)_obj["obj_name"]);
-				Write_Param_Path(f, (string)_obj["param_path"], (string)_obj["param_path_hash"]);
-				Write_Int(f, trait_types.IndexOf((string)_obj["trait_type"]));
-
-				string traittype = (string)_obj["trait_type"];
-				string default_value = (string)_obj["default"];
-
-                ///data points of object
-                //
-                //Data points written different depending on STEP
-                if (_obj["step"] == "True") {
-					///STEP true = value updates every beat, and if no value is set for a beat, it'll use _obj.default
-					Write_Int(f, beat_cnt);
-					int indexofwrittenbeat = 0;
-					for (int i = 0; i < beat_cnt; i++) {
-						Write_Float(f, i);
-						if (_obj["data_points"].Count > indexofwrittenbeat && (int)_obj["data_points"][indexofwrittenbeat]["beat"] == i) {
-                            Write_Data_Point_Value(f, (string)_obj["data_points"][indexofwrittenbeat]["value"], traittype);
-                            Write_String(f, (string)_obj["data_points"][indexofwrittenbeat]["interp"]);
-                            Write_String(f, (string)_obj["data_points"][indexofwrittenbeat]["ease"]);
-							indexofwrittenbeat++;
-                        }
-						else {
-                            Write_Data_Point_Value(f, default_value, (string)_obj["trait_type"]);
-                            Write_String(f, interp);
-                            Write_String(f, ease);
-                        }
-					}
-                }
-				else {
-					///STEP false = value interpolates between values set on beats. Default is ignored.
-					Write_Int(f, Enumerable.Count<dynamic>(_obj["data_points"]));
-					foreach (dynamic dp in _obj["data_points"]) {
-                        Write_Float(f, (float)dp["beat"]);
-                        Write_Data_Point_Value(f, (string)dp["value"], traittype);
-                        Write_String(f, (string)dp["interp"]);
-                        Write_String(f, (string)dp["ease"]);
-                    }
-				}
-				Write_Int(f, 0);
+				if (CurrentLevelProcessing.EditorVersion == 2)
+					Write_Sequencer_Object_v2(f, _obj, beat_cnt);
+                else
+                    Write_Sequencer_Object_v3(f, _obj, beat_cnt);
+                Write_Int(f, 0);
 
 				///footer of object
 				JArray _footer = _obj["footer"].GetType() == typeof(JArray) ? _obj["footer"] : JArray.FromObject(((string)_obj["footer"]).Replace("[", "").Replace("]", "").Replace("'", "").Split(','));
@@ -510,7 +501,94 @@ namespace Thumper_Mod_Loader
 			}
 		}
 
-		private void Write_Anim_Comp(FileStream f)
+		private void Write_Sequencer_Object_v2(FileStream f, dynamic _obj, int beat_cnt)
+		{
+            ///header of object
+            Write_String(f, (string)_obj["obj_name"]);
+            Write_Param_Path(f, (string)_obj["param_path"], (string)_obj["param_path_hash"]);
+            Write_Int(f, trait_types.IndexOf((string)_obj["trait_type"]));
+
+            ///data points of object
+            //
+            var interp = _obj.ContainsKey("default_interp") ? (string)_obj["default_interp"] : "kTraitInterpLinear";
+            if (interp == null)
+                interp = "kTraitInterpLinear";
+            var ease = _obj.ContainsKey("default_ease") ? (string)_obj["default_ease"] : "kEaseInOut";
+            //Data points written different depending on STEP
+            if (_obj["step"] == "True") {
+                //STEP true = value updates every beat, and if no value is set for a beat, it'll use _obj.default
+                Write_Int(f, beat_cnt);
+                for (int i = 0; i < beat_cnt; i++) {
+                    Write_Float(f, i);
+                    //check if data_points contains an entry for beat `i`. If yes, write it
+                    if (_obj["data_points"].ContainsKey(i.ToString()))
+                        Write_Data_Point_Value(f, (string)_obj["data_points"][i.ToString()], (string)_obj["trait_type"]);
+                    else
+                        Write_Data_Point_Value(f, (string)_obj["default"], (string)_obj["trait_type"]);
+                    //write these after every beat for some reason
+                    Write_String(f, interp);
+                    Write_String(f, ease);
+                }
+            }
+            else {
+                //STEP false = value interpolates between values set on beats. Default is ignored.
+                Write_Int(f, Enumerable.Count<dynamic>(_obj["data_points"]));
+                int _iii = 0;
+                foreach (var _v in _obj["data_points"]) {
+                    JProperty _p = _v;
+                    Write_Float(f, float.Parse(_p.Name)); _iii++;
+                    Write_Data_Point_Value(f, (string)_v, (string)_obj["trait_type"]);
+                    Write_String(f, interp);
+                    Write_String(f, ease);
+                }
+            }
+        }
+
+        private void Write_Sequencer_Object_v3(FileStream f, dynamic _obj, int beat_cnt)
+        {
+            ///header of object
+            Write_String(f, (string)_obj["obj_name"]);
+            Write_Param_Path(f, (string)_obj["param_path"], (string)_obj["param_path_hash"]);
+            Write_Int(f, trait_types.IndexOf((string)_obj["trait_type"]));
+
+            string traittype = (string)_obj["trait_type"];
+            string default_value = (string)_obj["default"];
+
+            ///data points of object
+            //
+            //Data points written different depending on STEP
+            if (_obj["step"] == "True") {
+                ///STEP true = value updates every beat, and if no value is set for a beat, it'll use _obj.default
+                Write_Int(f, beat_cnt);
+                int indexofwrittenbeat = 0;
+                for (int i = 0; i < beat_cnt; i++) {
+                    Write_Float(f, i);
+                    if (_obj["data_points"].Count > indexofwrittenbeat && (int)_obj["data_points"][indexofwrittenbeat]["beat"] == i) {
+                        Write_Data_Point_Value(f, (string)_obj["data_points"][indexofwrittenbeat]["value"], traittype);
+                        Write_String(f, (string)_obj["data_points"][indexofwrittenbeat]["interp"]);
+                        Write_String(f, (string)_obj["data_points"][indexofwrittenbeat]["ease"]);
+                        indexofwrittenbeat++;
+                    }
+                    else {
+                        Write_Data_Point_Value(f, default_value, (string)_obj["trait_type"]);
+                        Write_String(f, interpv3);
+                        Write_String(f, easev3);
+                    }
+                }
+            }
+            else {
+                ///STEP false = value interpolates between values set on beats. Default is ignored.
+                Write_Int(f, Enumerable.Count<dynamic>(_obj["data_points"]));
+                foreach (dynamic dp in _obj["data_points"]) {
+                    Write_Float(f, (float)dp["beat"]);
+                    Write_Data_Point_Value(f, (string)dp["value"], traittype);
+                    Write_String(f, (string)dp["interp"]);
+                    Write_String(f, (string)dp["ease"]);
+                }
+            }
+        }
+
+        private void Write_Anim_Comp(FileStream f)
 		{
 			Write_Hash(f, "AnimComp");
 			Write_Int(f, 1);

@@ -75,6 +75,7 @@ namespace Thumper_Mod_Loader
             lblCustomDiffHelp = new System.Windows.Forms.Label();
             lblCreator = new System.Windows.Forms.Label();
             pictureDifficulty = new System.Windows.Forms.PictureBox();
+            chkNewTitleScreen = new System.Windows.Forms.ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvLevels).BeginInit();
             panelHash.SuspendLayout();
@@ -95,7 +96,7 @@ namespace Thumper_Mod_Loader
             // 
             // optionsToolStripMenuItem1
             // 
-            optionsToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { changeGameDirToolStripMenuItem1, hashPanelToolStripMenuItem, resetSettingsToolStripMenuItem });
+            optionsToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { changeGameDirToolStripMenuItem1, hashPanelToolStripMenuItem, resetSettingsToolStripMenuItem, chkNewTitleScreen });
             optionsToolStripMenuItem1.Font = new System.Drawing.Font("Gadugi", 9.75F);
             optionsToolStripMenuItem1.ForeColor = System.Drawing.Color.White;
             optionsToolStripMenuItem1.Name = "optionsToolStripMenuItem1";
@@ -638,6 +639,18 @@ namespace Thumper_Mod_Loader
             pictureDifficulty.TabIndex = 127;
             pictureDifficulty.TabStop = false;
             // 
+            // chkNewTitleScreen
+            // 
+            chkNewTitleScreen.BackColor = System.Drawing.Color.FromArgb(40, 40, 40);
+            chkNewTitleScreen.Checked = true;
+            chkNewTitleScreen.CheckOnClick = true;
+            chkNewTitleScreen.CheckState = System.Windows.Forms.CheckState.Checked;
+            chkNewTitleScreen.ForeColor = System.Drawing.Color.White;
+            chkNewTitleScreen.Name = "chkNewTitleScreen";
+            chkNewTitleScreen.Size = new System.Drawing.Size(204, 22);
+            chkNewTitleScreen.Text = "Use New Title Screen";
+            chkNewTitleScreen.CheckedChanged += chkNewTitleScreen_CheckedChanged;
+            // 
             // ThumperModdingTool
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -729,6 +742,7 @@ namespace Thumper_Mod_Loader
         private System.Windows.Forms.DataGridViewImageColumn Difficulty;
         private System.Windows.Forms.DataGridViewTextBoxColumn Sublevels;
         private System.Windows.Forms.Button btnHashClose;
+        public System.Windows.Forms.ToolStripMenuItem chkNewTitleScreen;
     }
 }
 
