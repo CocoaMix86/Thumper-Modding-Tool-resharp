@@ -17,7 +17,9 @@ namespace Thumper_Mod_Loader
 
 		List<string> file_types = new() { ".gate", ".leaf", ".lvl", ".master", ".xfm", ".config" };
 		List<string> file_special = new() { ".spn", ".samp" };
-		/*
+        List<string> file_types_v2 = new() { "gate", "leaf", "lvl", "master", "xfm" };
+        List<string> file_special_v2 = new() { "spn", "samp" };
+        /*
 		List<string> list_cache_filename = new() { 
 			"23490781.pc", 
 			"8b497b8b.pc", 
@@ -38,7 +40,7 @@ namespace Thumper_Mod_Loader
 			"7b0b72e8.pc", 
 			"f9ac5eb5.pc" };
 		*/
-		List<string> trait_types = new() {
+        List<string> trait_types = new() {
 			"kTraitInt",
 			"kTraitBool",
 			"kTraitFloat",
@@ -168,42 +170,71 @@ namespace Thumper_Mod_Loader
                 new_objs = JsonConvert.DeserializeObject(Properties.Resources.leaf_pyramid_outro);
 				objs.Add(new_objs);
 				obj_count++;
-                //iterate over each file in the custom level directory
-                //filter out files that do not match the <file_types> list
-                foreach (FileInfo FileInProject in Level.FilePath.Directory.GetFiles("*.*", SearchOption.AllDirectories)) {
-					if (file_types.Contains(FileInProject.Extension.ToLower())) {
-						//read file and store JSON in dynamic object
-						try {
-							new_objs = LoadFileLock(FileInProject.FullName);
-						}
-						catch (Exception ex) { 
-							errorlist += $"error parsing:\n{ex.Message} in file \"{FileInProject.Name}\" in level \"{Level.Name}\"\n\n";
-							continue;
-						}
-						objs.Add(new_objs);
-						obj_count++;
-					}
-					//these file types require different processing to get the data
-					else if (file_special.Contains(FileInProject.Extension.ToLower())) {
-						try {
-							new_objs = LoadFileLock(FileInProject.FullName);
-						}
-						catch (Exception ex) {
-							errorlist += $"error parsing:\n{ex.Message} in file \"{FileInProject.Name}\" in level \"{Level.Name}\"\n\n";
-							continue;
-						}
-						//spn_ and samp_ files contain multiple entries, inside the "multi":[] list
-						foreach (var _v in new_objs.items) {
-							objs.Add(_v);
+				//iterate over each file in the custom level directory
+				//filter out files that do not match the <file_types> list
+				if (Level.EditorVersion == 3) {
+					foreach (FileInfo FileInProject in Level.FilePath.Directory.GetFiles("*.*", SearchOption.AllDirectories)) {
+						if (file_types.Contains(FileInProject.Extension.ToLower())) {
+							//read file and store JSON in dynamic object
+							try {
+								new_objs = LoadFileLock(FileInProject.FullName);
+							} catch (Exception ex) {
+								errorlist += $"error parsing:\n{ex.Message} in file \"{FileInProject.Name}\" in level \"{Level.Name}\"\n\n";
+								continue;
+							}
+							objs.Add(new_objs);
 							obj_count++;
 						}
-                    }
-                    else if (CurrentLevelProcessing.EditorVersion == 3 && FileInProject.Extension.Equals(".tcl", StringComparison.OrdinalIgnoreCase)) {
-                        level_config = LoadFileLock(FileInProject.FullName);
-                    }
-                    else if (CurrentLevelProcessing.EditorVersion == 2 && FileInProject.Name.Equals("LEVEL DETAILS.txt", StringComparison.OrdinalIgnoreCase)) {
-                        level_config = LoadFileLock(FileInProject.Directory.GetFiles("config_*.txt").First().FullName);
-                        level_details = LoadFileLock(FileInProject.FullName);
+						//these file types require different processing to get the data
+						else if (file_special.Contains(FileInProject.Extension.ToLower())) {
+							try {
+								new_objs = LoadFileLock(FileInProject.FullName);
+							} catch (Exception ex) {
+								errorlist += $"error parsing:\n{ex.Message} in file \"{FileInProject.Name}\" in level \"{Level.Name}\"\n\n";
+								continue;
+							}
+							//spn_ and samp_ files contain multiple entries, inside the "multi":[] list
+							foreach (var _v in new_objs.items) {
+								objs.Add(_v);
+								obj_count++;
+							}
+						}
+						else if (FileInProject.Extension.Equals(".tcl", StringComparison.OrdinalIgnoreCase)) {
+							level_config = LoadFileLock(FileInProject.FullName);
+						}
+					}
+				}
+				else if (Level.EditorVersion == 2) {
+                    foreach (FileInfo FileInProject in Level.FilePath.Directory.GetFiles("*.*", SearchOption.AllDirectories)) {
+						if (FileInProject.Extension == ".txt" && file_types_v2.Contains(FileInProject.Name.Split('_')[0].ToLower())) {
+                            //read file and store JSON in dynamic object
+                            try {
+                                new_objs = LoadFileLock(FileInProject.FullName);
+                            } catch (Exception ex) {
+                                errorlist += $"error parsing:\n{ex.Message} in file \"{FileInProject.Name}\" in level \"{Level.Name}\"\n\n";
+                                continue;
+                            }
+                            objs.Add(new_objs);
+                            obj_count++;
+                        }
+                        //these file types require different processing to get the data
+                        else if (FileInProject.Extension == ".txt" && file_special_v2.Contains(FileInProject.Name.Split('_')[0].ToLower())) {
+                            try {
+                                new_objs = LoadFileLock(FileInProject.FullName);
+                            } catch (Exception ex) {
+                                errorlist += $"error parsing:\n{ex.Message} in file \"{FileInProject.Name}\" in level \"{Level.Name}\"\n\n";
+                                continue;
+                            }
+                            //spn_ and samp_ files contain multiple entries, inside the "multi":[] list
+                            foreach (var _v in new_objs.items) {
+                                objs.Add(_v);
+                                obj_count++;
+                            }
+                        }
+                        else if (FileInProject.Name.Equals("LEVEL DETAILS.txt", StringComparison.OrdinalIgnoreCase)) {
+                            level_config = LoadFileLock(FileInProject.Directory.GetFiles("config_*.txt").First().FullName);
+                            level_details = LoadFileLock(FileInProject.FullName);
+                        }
                     }
                 }
 				//if errors exist, show the error, then return to stop further processing
@@ -227,9 +258,10 @@ namespace Thumper_Mod_Loader
 					//write objlib path to level .pc file
 					//Write_String(f, (string)level_config["objlib_path"]);
 					Write_String(f, $"levels/custom/level{LoadedLevels.IndexOf(Level)+1}.objlib");
+                    ///Write_String(f, $"levels/custom/{Level.Name}.objlib");
 
-					//write "basic list of objects #1" information to level .pc file
-					bytes = File.ReadAllBytes(@"lib/obj_list_1.objlib");
+                    //write "basic list of objects #1" information to level .pc file
+                    bytes = File.ReadAllBytes(@"lib/obj_list_1.objlib");
 					f.Write(bytes, 0, bytes.Length);
 					///Write_Int(f, 0);
 					//write to file the amount of objects that exists (after this number)
@@ -373,13 +405,13 @@ namespace Thumper_Mod_Loader
                     Write_String(f, $@"{menu_names[x]}");
 					Write_Int(f, 0);
                     Write_String(f, $@"levels/custom/{menu_names[x]}.objlib");
-                    Write_Int(f, 0);
-					/*
+                    //Write_Int(f, 0);
+					
 					if (x < menu_names.Count - 1)
 						Write_String(f, $@"{menu_names[x + 1]}");
 					else
 						Write_Int(f, 0);
-					*/
+					
 					int[] order = { 0, 0, 0 };
                     Write_Bool(f, order[0] == 1 ? "True" : "False");
 					Write_Bool(f, order[1] == 1 ? "True" : "False");
@@ -398,7 +430,7 @@ namespace Thumper_Mod_Loader
                 Write_Bool(f, order2[1] == 1 ? "True" : "False");
                 Write_Bool(f, order2[2] == 1 ? "True" : "False");
                 Write_Int(f, menu_names.Count);
-                Write_Int(f, menu_names.Count + menu_names.Count);
+                Write_Int(f, menu_names.Count + menu_names.Count + 1);
             }
 
 			//copy new .pc files to game directory

@@ -71,7 +71,7 @@ namespace Thumper_Mod_Loader
         private readonly OpenFileDialog cfd_lvl = new() { Multiselect = false };
         private readonly OpenFileDialog ofd_img = new() { Title = "Choose Image", Filter = "DDS files(*.DDS)|*.DDS" };
         //private ThumpNet tnet = null;
-        public ObservableCollection<LevelTraits> LoadedLevels = new();
+        public static ObservableCollection<LevelTraits> LoadedLevels = new();
         private bool _ChangesMade = false;
         public bool ChangesMade
         {
@@ -268,6 +268,7 @@ namespace Thumper_Mod_Loader
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             if (dgvLevels.Rows.Count > 0) {
+                Backup_SaveData(Properties.Settings.Default.game_dir);
                 Make_Custom_Levels(Properties.Settings.Default.game_dir);
                 ///Make_Custom_Savedata(Properties.Settings.Default.game_dir);
 
