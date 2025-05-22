@@ -14,6 +14,9 @@ namespace Thumper_Mod_Loader
 {
     public partial class ThumperModdingTool : Form
     {
+        private static List<Image> beebleimages = new() { Properties.Resources.beeblehappy, Properties.Resources.beebleconfuse, Properties.Resources.beeblecool, Properties.Resources.beeblederp, Properties.Resources.beeblelaugh, Properties.Resources.beeblestare, Properties.Resources.beeblethink, Properties.Resources.beebletiny, Properties.Resources.beeblelove, Properties.Resources.beebleflesh, Properties.Resources.beebleuwu };
+        private static Random rng = new();
+
         #region Form Constructor
         public ThumperModdingTool()
         {
@@ -267,15 +270,23 @@ namespace Thumper_Mod_Loader
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
+            panelLoading.Visible = true;
+            pictureBeeble.Image = beebleimages[rng.Next(0, beebleimages.Count)];
+            panelLoading.Invalidate();
+            panelLoading.Update();
+            panelLoading.Refresh();
+            Application.DoEvents();
+
             if (dgvLevels.Rows.Count > 0) {
                 Backup_SaveData(Properties.Settings.Default.game_dir);
                 Make_Custom_Levels(Properties.Settings.Default.game_dir);
-                ///Make_Custom_Savedata(Properties.Settings.Default.game_dir);
-
+                LoadRecords();
+                Create_SaveData();
             }
             else if (Properties.Settings.Default.mod_mode) ModModeOFF();
 
             ChangesMade = false;
+            panelLoading.Visible = false;
         }
 
         private void btnSplashScreen_Click(object sender, EventArgs e)
@@ -372,9 +383,16 @@ namespace Thumper_Mod_Loader
 
         void ModModeON()
         {
-            ///Backup_SaveData(Properties.Settings.Default.game_dir);
+            panelLoading.Visible = true;
+            pictureBeeble.Image = beebleimages[rng.Next(0, beebleimages.Count)];
+            panelLoading.Invalidate();
+            panelLoading.Update();
+            panelLoading.Refresh();
+            Application.DoEvents();
+
+            LoadRecords();
             Make_Custom_Levels(Properties.Settings.Default.game_dir);
-            ///Make_Custom_Savedata(Properties.Settings.Default.game_dir);
+            Create_SaveData();
             //set mod mode property in exe and save it
             Properties.Settings.Default.mod_mode = true;
             Properties.Settings.Default.Save();
@@ -385,6 +403,7 @@ namespace Thumper_Mod_Loader
             btnUpdate.Enabled = true;
             btnUpdate.Visible = true;
             ChangesMade = false;
+            panelLoading.Visible = false;
         }
 
         public void AddLevel(FileInfo TCL, bool startup)

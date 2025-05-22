@@ -29,15 +29,16 @@ namespace Thumper_Mod_Loader
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ThumperModdingTool));
             menuStrip1 = new System.Windows.Forms.MenuStrip();
             optionsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             changeGameDirToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             hashPanelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             resetSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            chkNewTitleScreen = new System.Windows.Forms.ToolStripMenuItem();
             helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             discordServerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -75,12 +76,16 @@ namespace Thumper_Mod_Loader
             lblCustomDiffHelp = new System.Windows.Forms.Label();
             lblCreator = new System.Windows.Forms.Label();
             pictureDifficulty = new System.Windows.Forms.PictureBox();
-            chkNewTitleScreen = new System.Windows.Forms.ToolStripMenuItem();
+            panelLoading = new System.Windows.Forms.Panel();
+            label6 = new System.Windows.Forms.Label();
+            pictureBeeble = new System.Windows.Forms.PictureBox();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvLevels).BeginInit();
             panelHash.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)picSplashScreen).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureDifficulty).BeginInit();
+            panelLoading.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBeeble).BeginInit();
             SuspendLayout();
             // 
             // menuStrip1
@@ -133,6 +138,18 @@ namespace Thumper_Mod_Loader
             resetSettingsToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
             resetSettingsToolStripMenuItem.Text = "[!!!] Reset Settings [!!!]";
             resetSettingsToolStripMenuItem.Click += resetSettingsToolStripMenuItem_Click;
+            // 
+            // chkNewTitleScreen
+            // 
+            chkNewTitleScreen.BackColor = System.Drawing.Color.FromArgb(40, 40, 40);
+            chkNewTitleScreen.Checked = true;
+            chkNewTitleScreen.CheckOnClick = true;
+            chkNewTitleScreen.CheckState = System.Windows.Forms.CheckState.Checked;
+            chkNewTitleScreen.ForeColor = System.Drawing.Color.White;
+            chkNewTitleScreen.Name = "chkNewTitleScreen";
+            chkNewTitleScreen.Size = new System.Drawing.Size(204, 22);
+            chkNewTitleScreen.Text = "Use New Title Screen";
+            chkNewTitleScreen.CheckedChanged += chkNewTitleScreen_CheckedChanged;
             // 
             // helpToolStripMenuItem
             // 
@@ -334,26 +351,26 @@ namespace Thumper_Mod_Loader
             dgvLevels.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             dgvLevels.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             dgvLevels.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(40, 40, 40);
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Silver;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(40, 40, 40);
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            dgvLevels.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(40, 40, 40);
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Silver;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(40, 40, 40);
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            dgvLevels.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             dgvLevels.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvLevels.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { Thumbnail, LevelName, Difficulty, Sublevels });
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(40, 40, 40);
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.Format = "N0";
-            dataGridViewCellStyle2.NullValue = null;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            dgvLevels.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(40, 40, 40);
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.Format = "N0";
+            dataGridViewCellStyle5.NullValue = null;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            dgvLevels.DefaultCellStyle = dataGridViewCellStyle5;
             dgvLevels.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             dgvLevels.EnableHeadersVisualStyles = false;
             dgvLevels.GridColor = System.Drawing.Color.Black;
@@ -363,14 +380,14 @@ namespace Thumper_Mod_Loader
             dgvLevels.Name = "dgvLevels";
             dgvLevels.ReadOnly = true;
             dgvLevels.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(90, 90, 90);
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            dgvLevels.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(90, 90, 90);
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            dgvLevels.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             dgvLevels.RowHeadersVisible = false;
             dgvLevels.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             dgvLevels.RowTemplate.DividerHeight = 2;
@@ -639,17 +656,39 @@ namespace Thumper_Mod_Loader
             pictureDifficulty.TabIndex = 127;
             pictureDifficulty.TabStop = false;
             // 
-            // chkNewTitleScreen
+            // panelLoading
             // 
-            chkNewTitleScreen.BackColor = System.Drawing.Color.FromArgb(40, 40, 40);
-            chkNewTitleScreen.Checked = true;
-            chkNewTitleScreen.CheckOnClick = true;
-            chkNewTitleScreen.CheckState = System.Windows.Forms.CheckState.Checked;
-            chkNewTitleScreen.ForeColor = System.Drawing.Color.White;
-            chkNewTitleScreen.Name = "chkNewTitleScreen";
-            chkNewTitleScreen.Size = new System.Drawing.Size(204, 22);
-            chkNewTitleScreen.Text = "Use New Title Screen";
-            chkNewTitleScreen.CheckedChanged += chkNewTitleScreen_CheckedChanged;
+            panelLoading.Controls.Add(label6);
+            panelLoading.Controls.Add(pictureBeeble);
+            panelLoading.Location = new System.Drawing.Point(252, 190);
+            panelLoading.Name = "panelLoading";
+            panelLoading.Size = new System.Drawing.Size(329, 116);
+            panelLoading.TabIndex = 129;
+            panelLoading.Visible = false;
+            // 
+            // label6
+            // 
+            label6.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            label6.AutoSize = true;
+            label6.Font = new System.Drawing.Font("Trebuchet MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            label6.ForeColor = System.Drawing.Color.White;
+            label6.Location = new System.Drawing.Point(143, 45);
+            label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label6.Name = "label6";
+            label6.Size = new System.Drawing.Size(171, 22);
+            label6.TabIndex = 129;
+            label6.Text = "Loading... Please Wait";
+            // 
+            // pictureBeeble
+            // 
+            pictureBeeble.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            pictureBeeble.BackColor = System.Drawing.Color.Transparent;
+            pictureBeeble.Location = new System.Drawing.Point(4, 6);
+            pictureBeeble.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            pictureBeeble.Name = "pictureBeeble";
+            pictureBeeble.Size = new System.Drawing.Size(131, 105);
+            pictureBeeble.TabIndex = 128;
+            pictureBeeble.TabStop = false;
             // 
             // ThumperModdingTool
             // 
@@ -657,6 +696,7 @@ namespace Thumper_Mod_Loader
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             BackColor = System.Drawing.Color.FromArgb(40, 40, 40);
             ClientSize = new System.Drawing.Size(914, 533);
+            Controls.Add(panelLoading);
             Controls.Add(lblCreator);
             Controls.Add(lblCustomDiffHelp);
             Controls.Add(btnSplashScreenReset);
@@ -694,6 +734,9 @@ namespace Thumper_Mod_Loader
             panelHash.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)picSplashScreen).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureDifficulty).EndInit();
+            panelLoading.ResumeLayout(false);
+            panelLoading.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBeeble).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -743,6 +786,9 @@ namespace Thumper_Mod_Loader
         private System.Windows.Forms.DataGridViewTextBoxColumn Sublevels;
         private System.Windows.Forms.Button btnHashClose;
         public System.Windows.Forms.ToolStripMenuItem chkNewTitleScreen;
+        private System.Windows.Forms.Panel panelLoading;
+        private System.Windows.Forms.PictureBox pictureBeeble;
+        private System.Windows.Forms.Label label6;
     }
 }
 

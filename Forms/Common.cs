@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
-using System.IO;
 using System.Text.RegularExpressions;
-using Newtonsoft.Json;
 
 namespace Thumper_Mod_Loader
 {
@@ -18,7 +19,7 @@ namespace Thumper_Mod_Loader
             return bytes;
         }
 
-        private uint Hash32(string s)
+        private static uint Hash32(string s)
 		{
 			//this hashes stuff. Don't know why it does it this why.
 			//this is ripped directly from the game's code
@@ -34,26 +35,32 @@ namespace Thumper_Mod_Loader
 			return h;
 		}
 
-		private void Write_Int(FileStream f, int val)
+        private static void Write_Int(FileStream f, int val)
 		{
 			//convert int to bytes and append to file
 			byte[] bytes = BitConverter.GetBytes((int)val);
 			f.Write(bytes, 0, bytes.Length);
 		}
 
-		private void Write_Bool(FileStream f, string val)
+        private static void Write_Bool(FileStream f, string val)
 		{
 			byte bytes = val == "1" || val == "True" ? (byte)1 : (byte)0;
 			f.WriteByte(bytes);
-		}
+        }
 
-		private void Write_Float(FileStream f, float val)
+        private static void Write_Bool(FileStream f, bool val)
+        {
+            byte bytes = val ? (byte)1 : (byte)0;
+            f.WriteByte(bytes);
+        }
+
+        private static void Write_Float(FileStream f, float val)
 		{
 			byte[] bytes = BitConverter.GetBytes((float)val);
 			f.Write(bytes, 0, bytes.Length);
 		}
 
-		private void Write_Color(FileStream f, dynamic val)
+        private static void Write_Color(FileStream f, dynamic val)
 		{
 			Write_Float(f, (float)val[0]);
 			Write_Float(f, (float)val[1]);
@@ -61,38 +68,38 @@ namespace Thumper_Mod_Loader
 			Write_Float(f, (float)val[3]);
 		}
 
-		private void Write_Vec3(FileStream f, dynamic val)
+        private static void Write_Vec3(FileStream f, dynamic val)
 		{
 			Write_Float(f, (float)val[0]);
 			Write_Float(f, (float)val[1]);
 			Write_Float(f, (float)val[2]);
 		}
 
-		private void Write_String(FileStream f, string val)
+        private static void Write_String(FileStream f, string val)
 		{
 			//In the .pc file, strings are preceeded by their length
 			Write_Int(f, val.Length);
 			f.Write(Encoding.ASCII.GetBytes(val), 0, val.Length);
 		}
 
-		private void Write_Hash(FileStream f, string val)
+        private static void Write_Hash(FileStream f, string val)
 		{
 			//pass the string to the hash function first before writing to file
 			byte[] bytes = BitConverter.GetBytes((uint)Hash32(val));
 			f.Write(bytes, 0, bytes.Length);
 		}
 
-		private void Write_Hex(FileStream f, string val)
+        private static void Write_Hex(FileStream f, string val)
 		{
 			byte[] bytes = StringToByteArray(val);
 			f.Write(bytes, 0, bytes.Length);
         }
-        private void Write_Hex(FileStream f, byte[] val)
+        private static void Write_Hex(FileStream f, byte[] val)
         {
             f.Write(val, 0, val.Length);
         }
 
-        private void Write_Hex_Reverse(FileStream f, string val)
+        private static void Write_Hex_Reverse(FileStream f, string val)
 		{
 			byte[] bytes = StringToByteArray(val);
 			bytes = bytes.Reverse().ToArray();
@@ -156,5 +163,32 @@ namespace Thumper_Mod_Loader
 
 			return _load;
 		}
-	}
+
+        public static List<int> Search(byte[] src, byte[] pattern)
+        {
+            List<int> indexes = new List<int>();
+            int maxFirstCharSlot = src.Length - pattern.Length + 1;
+            if (pattern.Length == 1) {
+                for (int i = 0; i < maxFirstCharSlot; i++) {
+                    if (src[i] == pattern[0])
+                        indexes.Add(i);
+                }
+            }
+            else {
+                for (int i = 0; i < maxFirstCharSlot; i++) {
+                    if (src[i] != pattern[0]) // compare only first byte
+                        continue;
+
+                    for (int j = pattern.Length - 1; j > 0; j--) {
+                        if (src[i + j] != pattern[j])
+                            break;
+                        if (j == 1) {
+                            indexes.Add(i);
+                        }
+                    }
+                }
+            }
+            return indexes;
+        }
+    }
 }

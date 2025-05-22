@@ -12,7 +12,9 @@ namespace Thumper_Mod_Loader
 	public partial class ThumperModdingTool
 	{
         public static List<LevelRecord> LevelRecords = new();
-        
+        public static string SaveFooter = "060000006C6576656C33060000006C6576656C330B0000004D4F44455F4E4F524D414C060000006C6576656C33000000001400000053454354494F4E5F424F53535F4352414B484544010108000000010B000000464143455F424F54544F4D0E00000053484F554C4445525F52494748540D00000053484F554C4445525F4C4546540B0000004E554D5F425554544F4E5300010B000000464143455F424F54544F4D0E00000053484F554C4445525F52494748540D00000053484F554C4445525F4C4546540B0000004E554D5F425554544F4E5300010B000000464143455F424F54544F4D0E00000053484F554C4445525F52494748540D00000053484F554C4445525F4C4546540B0000004E554D5F425554544F4E5300010B000000464143455F424F54544F4D0E00000053484F554C4445525F52494748540D00000053484F554C4445525F4C4546540B0000004E554D5F425554544F4E530000000000200000000A000000420100007700000040010000610000004301000073000000410100006400000072000000000000002000000000";
+
+
         public static void Backup_SaveData(string game_dir)
 		{
 			var backup_time = DateTime.Now.ToString().Replace(":","").Replace("/","-");
@@ -24,6 +26,8 @@ namespace Thumper_Mod_Loader
             if (dataindex != null)
                 index = File.ReadAllBytes(dataindex)[8];
             string savefile = Directory.GetFiles($@"{game_dir}\savedata\", $"data_{index}.sav", SearchOption.AllDirectories).FirstOrDefault();
+            if (savefile == null)
+                goto skipbackup;
 
             List<LevelRecord> BackupRecords = new();
             using (BinaryReader br = new(new FileStream(savefile, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))) {
@@ -78,12 +82,14 @@ namespace Thumper_Mod_Loader
 
             foreach (LevelRecord lr in BackupRecords) {
                 if (File.Exists($@"level records\{lr.Name}.record")) {
-                    LevelRecord existingrecord = (LevelRecord)JsonConvert.DeserializeObject(File.ReadAllText($@"level records\{lr.Name}.record"));
+                    LevelRecord existingrecord = JsonConvert.DeserializeObject<LevelRecord>(File.ReadAllText($@"level records\{lr.Name}.record"));
                     if (existingrecord.Name == null || existingrecord.Rank == null || existingrecord.RankPlus == null || existingrecord.Score == null || existingrecord.ScorePlus == null || existingrecord.IntegrityHash == null) {
+                        lr.ResetRecord();
                         File.WriteAllText($@"level records\{lr.Name}.record", JsonConvert.SerializeObject(lr, Formatting.Indented));
                         return;
                     }
-                    if (LevelRecord.GetHashString($"{existingrecord.Name}{existingrecord.Rank}{existingrecord.RankPlus}{existingrecord.Score}{existingrecord.ScorePlus}{86}{new Random(Properties.Resources.d6.GetPixel(32, 32).R).Next()}") != existingrecord.IntegrityHash) {
+                    if (existingrecord.GetIntegrityHash() != existingrecord.IntegrityHash) {
+                        lr.ResetRecord();
                         File.WriteAllText($@"level records\{lr.Name}.record", JsonConvert.SerializeObject(lr, Formatting.Indented));
                         return;
                     }
@@ -99,20 +105,21 @@ namespace Thumper_Mod_Loader
                 //finally, write the record to file
                 File.WriteAllText($@"level records\{lr.Name}.record", JsonConvert.SerializeObject(lr, Formatting.Indented));
             }
+        skipbackup:;
         }
 
         public static void LoadRecords()
         {
             LevelRecords.Clear();
             foreach (string _record in Directory.GetFiles($@"level records\", "*.record", SearchOption.AllDirectories)) {
-                LevelRecord existingrecord = (LevelRecord)JsonConvert.DeserializeObject(File.ReadAllText(_record));
+                LevelRecord existingrecord = JsonConvert.DeserializeObject<LevelRecord>(File.ReadAllText(_record));
                 //check if all fields of record are ok or have been tampered
                 if (existingrecord.Name == null || existingrecord.Rank == null || existingrecord.RankPlus == null || existingrecord.Score == null || existingrecord.ScorePlus == null || existingrecord.IntegrityHash == null) {
-                    existingrecord = ResetRecord(existingrecord);
+                    existingrecord.ResetRecord();
                     File.WriteAllText(_record, JsonConvert.SerializeObject(existingrecord, Formatting.Indented));
                 }
-                else if (LevelRecord.GetHashString($"{existingrecord.Name}{existingrecord.Rank}{existingrecord.RankPlus}{existingrecord.Score}{existingrecord.ScorePlus}{86}{new Random(Properties.Resources.d6.GetPixel(32, 32).R).Next()}") != existingrecord.IntegrityHash) {
-                    existingrecord = ResetRecord(existingrecord);
+                else if (existingrecord.GetIntegrityHash() != existingrecord.IntegrityHash) {
+                    existingrecord.ResetRecord();
                     File.WriteAllText(_record, JsonConvert.SerializeObject(existingrecord, Formatting.Indented));
                 }
 
@@ -120,33 +127,84 @@ namespace Thumper_Mod_Loader
             }
         }
 
-        public static LevelRecord ResetRecord(LevelRecord record)
-        {
-            record.Rank = "RANK_C";
-            record.RankPlus = "RANK_C";
-            record.Score = 0;
-            record.ScorePlus = 0;
-            return record;
-        }
-
         public static void Create_SaveData()
         {
             string saveloc = Directory.GetFiles($@"{Properties.Settings.Default.game_dir}\savedata", "*.sav", SearchOption.AllDirectories).FirstOrDefault();
             if (saveloc == null) {
-                MessageBox.Show("The mod loader was unable to locate your save data. Try launching the game unmodded first and open the leaderboards. The exit the game and try again. If the error persists, make sure you set your Game Directory to the correct path.", "Thumper Mod Loader");
+                MessageBox.Show("The mod loader was unable to locate your save data. Try launching the game unmodded first and open the leaderboards. Then exit the game and try again. If the error persists, make sure you set your Game Directory to the correct path.", "Thumper Mod Loader");
                 return;
             }
-            saveloc = Path.GetDirectoryName(saveloc);
+            try {
+                if (saveloc.EndsWith("data_0.sav")) {
+                    File.Delete($@"{Path.GetDirectoryName(saveloc)}\data_1.sav");
+                }
+                else if (saveloc.EndsWith("data_1.sav")) {
+                    File.Delete($@"{Path.GetDirectoryName(saveloc)}\data_0.sav");
+                }
+            } catch (Exception ex) {
+                MessageBox.Show("Either one of your Thumper save files are open/in use and could not be edited. Please make sure they are closed and try again.", "Thumper Mod Loader");
+                return;
+            }
 
             List<LevelRecord> RecordsToWrite = new();
             foreach (LevelTraits lt in LoadedLevels) {
-                if (LevelRecords.First(x => x.Name == lt.Name) is LevelRecord lr)
+                if (LevelRecords.FirstOrDefault(x => x.Name == lt.Name) is LevelRecord lr)
                     RecordsToWrite.Add(lr);
                 else {
                     LevelRecord _newrecord = new() { Name = lt.Name };
                     File.WriteAllText($@"level records\{lt.Name}.record", JsonConvert.SerializeObject(_newrecord, Formatting.Indented));
                     RecordsToWrite.Add(_newrecord);
                 }
+            }
+            //need to add level 3
+            if (LevelRecords.FirstOrDefault(x => x.Name == "level3") is LevelRecord lr3)
+                RecordsToWrite.Add(lr3);
+            else {
+                LevelRecord level3 = new() { Name = "level3" };
+                File.WriteAllText($@"level records\level3.record", JsonConvert.SerializeObject(level3, Formatting.Indented));
+                RecordsToWrite.Add(level3);
+            }
+            //locate the last null terminator and then copy all bytes after it. Important to store user control preferences
+            byte[] savefooter = File.ReadAllBytes(saveloc);
+            List<int> terminators = Search(savefooter, new byte[] { 0xff, 0xff, 0xff, 0xff });
+            int offset = 4; //depending what's at the end of the records, we either need to skip 4 or 8 bytes
+            if (savefooter[terminators.Last() + 4] == 0x00)
+                offset = 8;
+            savefooter = savefooter.AsSpan(terminators.Last() + offset).ToArray();
+            //
+            using (FileStream f = File.Open(saveloc, FileMode.Create, FileAccess.Write, FileShare.None)) {
+                Write_Int(f, 65); //header
+                int sumofbytes = RecordsToWrite.Sum(x => x.Name.Length) + (RecordsToWrite.Sum(x => x.Rank.Length + x.RankPlus.Length) * 2) + (5 * 4) + (((13 * 4) + 1) * RecordsToWrite.Count) + savefooter.Length;
+                Write_Int(f, sumofbytes); //total bytes of file
+                Write_Int(f, (int)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds); //unix timestamp
+                Write_Int(f, 0); //0
+                Write_Int(f, RecordsToWrite.Count); //number of levels
+                ///Level structure
+                foreach (LevelRecord lr in RecordsToWrite) {
+                    Write_String(f, lr.Name); //level name
+                    Write_String(f, lr.Rank); //level play rank
+                    Write_Int(f, lr.Score ?? 0); //level play score
+                    Write_String(f, lr.Rank); //level play rank
+                    Write_Bool(f, true); //true
+                    Write_Int(f, (int)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds); //unix timestamp
+                    Write_Int(f, 0); //0
+                    Write_Int(f, lr.ScorePlus ?? 0); //level play+ score
+                    Write_String(f, lr.RankPlus); //level play+ rank
+                    Write_String(f, lr.RankPlus); //level play+ rank again
+                    Write_Int(f, -1); //null terminator
+                    Write_Int(f, 0); //number of sublevels in level play [Optional]
+                    Write_Int(f, -1); //null terminator
+                    Write_Int(f, 0); //number of sublevels in level play+ [Optional]
+                }
+                ///Save file footer
+                f.Write(savefooter, 0, savefooter.Length);
+            }
+
+            if (saveloc.EndsWith("data_0.sav")) {
+                File.Copy(saveloc, $@"{Path.GetDirectoryName(saveloc)}\data_1.sav");
+            }
+            else if (saveloc.EndsWith("data_1.sav")) {
+                File.Copy(saveloc, $@"{Path.GetDirectoryName(saveloc)}\data_0.sav");
             }
         }
 
