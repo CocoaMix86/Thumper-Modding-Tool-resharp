@@ -13,7 +13,7 @@ namespace Thumper_Mod_Loader
         [JsonProperty(Order = 1)]
         public string Info = "This file is used to locally store your highest score for a level and is used whenever you have this level in the mod loader. If you delete this file, your local record/completion of this level will be zero.";
         [JsonProperty(Order = 2)]
-        public string Name { get; set; } = "";
+        public string Name { get; set; }
         [JsonProperty(Order = 3)]
         public string Rank
         {

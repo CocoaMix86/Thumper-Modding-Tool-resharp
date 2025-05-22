@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Windows.Devices.Geolocation;
 using System.Windows;
+using System.Runtime.ExceptionServices;
 
 namespace Thumper_Mod_Loader
 {
@@ -81,8 +82,16 @@ namespace Thumper_Mod_Loader
             }
 
             foreach (LevelRecord lr in BackupRecords) {
+                lr.IntegrityHash = lr.GetIntegrityHash();
                 if (File.Exists($@"level records\{lr.Name}.record")) {
-                    LevelRecord existingrecord = JsonConvert.DeserializeObject<LevelRecord>(File.ReadAllText($@"level records\{lr.Name}.record"));
+                    LevelRecord existingrecord = new();
+                    try {
+                        existingrecord = JsonConvert.DeserializeObject<LevelRecord>(File.ReadAllText($@"level records\{lr.Name}.record"));
+                    } catch (Exception) {
+                        lr.ResetRecord();
+                        File.WriteAllText($@"level records\{lr.Name}.record", JsonConvert.SerializeObject(lr, Formatting.Indented));
+                        return;
+                    }
                     if (existingrecord.Name == null || existingrecord.Rank == null || existingrecord.RankPlus == null || existingrecord.Score == null || existingrecord.ScorePlus == null || existingrecord.IntegrityHash == null) {
                         lr.ResetRecord();
                         File.WriteAllText($@"level records\{lr.Name}.record", JsonConvert.SerializeObject(lr, Formatting.Indented));
@@ -112,13 +121,21 @@ namespace Thumper_Mod_Loader
         {
             LevelRecords.Clear();
             foreach (string _record in Directory.GetFiles($@"level records\", "*.record", SearchOption.AllDirectories)) {
-                LevelRecord existingrecord = JsonConvert.DeserializeObject<LevelRecord>(File.ReadAllText(_record));
-                //check if all fields of record are ok or have been tampered
-                if (existingrecord.Name == null || existingrecord.Rank == null || existingrecord.RankPlus == null || existingrecord.Score == null || existingrecord.ScorePlus == null || existingrecord.IntegrityHash == null) {
-                    existingrecord.ResetRecord();
-                    File.WriteAllText(_record, JsonConvert.SerializeObject(existingrecord, Formatting.Indented));
-                }
-                else if (existingrecord.GetIntegrityHash() != existingrecord.IntegrityHash) {
+                LevelRecord existingrecord = new();
+                try {
+                    existingrecord = JsonConvert.DeserializeObject<LevelRecord>(File.ReadAllText(_record));
+                    //check if all fields of record are ok or have been tampered
+                    if (existingrecord.Name == null || existingrecord.Rank == null || existingrecord.RankPlus == null || existingrecord.Score == null || existingrecord.ScorePlus == null || existingrecord.IntegrityHash == null) {
+                        existingrecord.Name = Path.GetFileNameWithoutExtension(_record);
+                        existingrecord.ResetRecord();
+                        File.WriteAllText(_record, JsonConvert.SerializeObject(existingrecord, Formatting.Indented));
+                    }
+                    else if (existingrecord.GetIntegrityHash() != existingrecord.IntegrityHash) {
+                        existingrecord.ResetRecord();
+                        File.WriteAllText(_record, JsonConvert.SerializeObject(existingrecord, Formatting.Indented));
+                    }
+                } catch (Exception) {
+                    existingrecord.Name = Path.GetFileNameWithoutExtension(_record);
                     existingrecord.ResetRecord();
                     File.WriteAllText(_record, JsonConvert.SerializeObject(existingrecord, Formatting.Indented));
                 }

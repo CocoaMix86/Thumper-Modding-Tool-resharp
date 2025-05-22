@@ -55,10 +55,6 @@ namespace Thumper_Mod_Loader
             btnLevelUp = new System.Windows.Forms.Button();
             btnLevelDown = new System.Windows.Forms.Button();
             dgvLevels = new System.Windows.Forms.DataGridView();
-            Thumbnail = new System.Windows.Forms.DataGridViewImageColumn();
-            LevelName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            Difficulty = new System.Windows.Forms.DataGridViewImageColumn();
-            Sublevels = new System.Windows.Forms.DataGridViewTextBoxColumn();
             richDescript = new System.Windows.Forms.RichTextBox();
             label3 = new System.Windows.Forms.Label();
             BtnHash = new System.Windows.Forms.Button();
@@ -79,6 +75,14 @@ namespace Thumper_Mod_Loader
             panelLoading = new System.Windows.Forms.Panel();
             label6 = new System.Windows.Forms.Label();
             pictureBeeble = new System.Windows.Forms.PictureBox();
+            Thumbnail = new System.Windows.Forms.DataGridViewImageColumn();
+            LevelName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            Difficulty = new System.Windows.Forms.DataGridViewImageColumn();
+            Sublevels = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            rankcolumn = new System.Windows.Forms.DataGridViewImageColumn();
+            Score = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            rankpluscolumn = new System.Windows.Forms.DataGridViewImageColumn();
+            Scoreplus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvLevels).BeginInit();
             panelHash.SuspendLayout();
@@ -95,7 +99,7 @@ namespace Thumper_Mod_Loader
             menuStrip1.Location = new System.Drawing.Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
-            menuStrip1.Size = new System.Drawing.Size(914, 24);
+            menuStrip1.Size = new System.Drawing.Size(1164, 24);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -360,7 +364,7 @@ namespace Thumper_Mod_Loader
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             dgvLevels.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgvLevels.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvLevels.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { Thumbnail, LevelName, Difficulty, Sublevels });
+            dgvLevels.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { Thumbnail, LevelName, Difficulty, Sublevels, rankcolumn, Score, rankpluscolumn, Scoreplus });
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(40, 40, 40);
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
@@ -394,46 +398,12 @@ namespace Thumper_Mod_Loader
             dgvLevels.RowTemplate.Height = 3;
             dgvLevels.RowTemplate.ReadOnly = true;
             dgvLevels.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            dgvLevels.Size = new System.Drawing.Size(635, 370);
+            dgvLevels.Size = new System.Drawing.Size(885, 370);
             dgvLevels.TabIndex = 41;
             dgvLevels.CellClick += dgvLevels_SelectionChanged;
             dgvLevels.SelectionChanged += dgvLevels_SelectionChanged;
             dgvLevels.DragDrop += dgvLevels_DragDrop;
             dgvLevels.DragEnter += dgvLevels_DragEnter;
-            // 
-            // Thumbnail
-            // 
-            Thumbnail.HeaderText = "Thumbnail";
-            Thumbnail.Name = "Thumbnail";
-            Thumbnail.ReadOnly = true;
-            // 
-            // LevelName
-            // 
-            LevelName.HeaderText = "Level Name";
-            LevelName.Name = "LevelName";
-            LevelName.ReadOnly = true;
-            LevelName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Difficulty
-            // 
-            Difficulty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            Difficulty.FillWeight = 40F;
-            Difficulty.HeaderText = "Difficulty";
-            Difficulty.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            Difficulty.Name = "Difficulty";
-            Difficulty.ReadOnly = true;
-            Difficulty.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            Difficulty.Width = 59;
-            // 
-            // Sublevels
-            // 
-            Sublevels.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            Sublevels.FillWeight = 40F;
-            Sublevels.HeaderText = "Sublevels";
-            Sublevels.Name = "Sublevels";
-            Sublevels.ReadOnly = true;
-            Sublevels.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            Sublevels.Width = 66;
             // 
             // richDescript
             // 
@@ -441,7 +411,7 @@ namespace Thumper_Mod_Loader
             richDescript.BackColor = System.Drawing.Color.FromArgb(35, 35, 35);
             richDescript.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             richDescript.ForeColor = System.Drawing.Color.White;
-            richDescript.Location = new System.Drawing.Point(660, 309);
+            richDescript.Location = new System.Drawing.Point(910, 309);
             richDescript.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             richDescript.Name = "richDescript";
             richDescript.Size = new System.Drawing.Size(238, 209);
@@ -454,7 +424,7 @@ namespace Thumper_Mod_Loader
             label3.AutoSize = true;
             label3.Font = new System.Drawing.Font("Trebuchet MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             label3.ForeColor = System.Drawing.Color.White;
-            label3.Location = new System.Drawing.Point(656, 268);
+            label3.Location = new System.Drawing.Point(906, 268);
             label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label3.Name = "label3";
             label3.Size = new System.Drawing.Size(135, 22);
@@ -481,7 +451,7 @@ namespace Thumper_Mod_Loader
             textBox1.Location = new System.Drawing.Point(4, 43);
             textBox1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             textBox1.Name = "textBox1";
-            textBox1.Size = new System.Drawing.Size(283, 23);
+            textBox1.Size = new System.Drawing.Size(394, 23);
             textBox1.TabIndex = 45;
             textBox1.Text = "type input here";
             textBox1.TextChanged += BtnHash_Click;
@@ -492,7 +462,7 @@ namespace Thumper_Mod_Loader
             textBox2.Location = new System.Drawing.Point(4, 73);
             textBox2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             textBox2.Name = "textBox2";
-            textBox2.Size = new System.Drawing.Size(283, 23);
+            textBox2.Size = new System.Drawing.Size(394, 23);
             textBox2.TabIndex = 46;
             // 
             // panelHash
@@ -503,10 +473,10 @@ namespace Thumper_Mod_Loader
             panelHash.Controls.Add(textBox2);
             panelHash.Controls.Add(BtnHash);
             panelHash.Controls.Add(textBox1);
-            panelHash.Location = new System.Drawing.Point(316, 7);
+            panelHash.Location = new System.Drawing.Point(455, 7);
             panelHash.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             panelHash.Name = "panelHash";
-            panelHash.Size = new System.Drawing.Size(290, 103);
+            panelHash.Size = new System.Drawing.Size(401, 103);
             panelHash.TabIndex = 47;
             panelHash.Visible = false;
             // 
@@ -539,7 +509,7 @@ namespace Thumper_Mod_Loader
             btnSplashScreen.BackColor = System.Drawing.Color.YellowGreen;
             btnSplashScreen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             btnSplashScreen.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            btnSplashScreen.Location = new System.Drawing.Point(658, 203);
+            btnSplashScreen.Location = new System.Drawing.Point(908, 203);
             btnSplashScreen.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             btnSplashScreen.Name = "btnSplashScreen";
             btnSplashScreen.Size = new System.Drawing.Size(64, 29);
@@ -555,7 +525,7 @@ namespace Thumper_Mod_Loader
             btnSplashScreenReset.BackColor = System.Drawing.Color.Crimson;
             btnSplashScreenReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             btnSplashScreenReset.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            btnSplashScreenReset.Location = new System.Drawing.Point(716, 203);
+            btnSplashScreenReset.Location = new System.Drawing.Point(966, 203);
             btnSplashScreenReset.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             btnSplashScreenReset.Name = "btnSplashScreenReset";
             btnSplashScreenReset.Size = new System.Drawing.Size(58, 29);
@@ -568,7 +538,7 @@ namespace Thumper_Mod_Loader
             // picSplashScreen
             // 
             picSplashScreen.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            picSplashScreen.Location = new System.Drawing.Point(660, 91);
+            picSplashScreen.Location = new System.Drawing.Point(910, 91);
             picSplashScreen.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             picSplashScreen.Name = "picSplashScreen";
             picSplashScreen.Size = new System.Drawing.Size(114, 113);
@@ -596,7 +566,7 @@ namespace Thumper_Mod_Loader
             label4.AutoSize = true;
             label4.Font = new System.Drawing.Font("Trebuchet MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             label4.ForeColor = System.Drawing.Color.White;
-            label4.Location = new System.Drawing.Point(656, 35);
+            label4.Location = new System.Drawing.Point(906, 35);
             label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label4.Name = "label4";
             label4.Size = new System.Drawing.Size(107, 22);
@@ -609,7 +579,7 @@ namespace Thumper_Mod_Loader
             label5.AutoSize = true;
             label5.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             label5.ForeColor = System.Drawing.Color.White;
-            label5.Location = new System.Drawing.Point(657, 55);
+            label5.Location = new System.Drawing.Point(907, 55);
             label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label5.Name = "label5";
             label5.Size = new System.Drawing.Size(131, 32);
@@ -624,7 +594,7 @@ namespace Thumper_Mod_Loader
             lblCustomDiffHelp.Cursor = System.Windows.Forms.Cursors.Help;
             lblCustomDiffHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, 0);
             lblCustomDiffHelp.ForeColor = System.Drawing.Color.DodgerBlue;
-            lblCustomDiffHelp.Location = new System.Drawing.Point(543, 101);
+            lblCustomDiffHelp.Location = new System.Drawing.Point(793, 101);
             lblCustomDiffHelp.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             lblCustomDiffHelp.Name = "lblCustomDiffHelp";
             lblCustomDiffHelp.Size = new System.Drawing.Size(15, 16);
@@ -638,7 +608,7 @@ namespace Thumper_Mod_Loader
             lblCreator.AutoSize = true;
             lblCreator.Font = new System.Drawing.Font("Trebuchet MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             lblCreator.ForeColor = System.Drawing.Color.White;
-            lblCreator.Location = new System.Drawing.Point(657, 288);
+            lblCreator.Location = new System.Drawing.Point(907, 288);
             lblCreator.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             lblCreator.Name = "lblCreator";
             lblCreator.Size = new System.Drawing.Size(57, 18);
@@ -649,7 +619,7 @@ namespace Thumper_Mod_Loader
             // 
             pictureDifficulty.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             pictureDifficulty.BackColor = System.Drawing.Color.Transparent;
-            pictureDifficulty.Location = new System.Drawing.Point(825, 235);
+            pictureDifficulty.Location = new System.Drawing.Point(1075, 235);
             pictureDifficulty.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             pictureDifficulty.Name = "pictureDifficulty";
             pictureDifficulty.Size = new System.Drawing.Size(75, 74);
@@ -691,12 +661,80 @@ namespace Thumper_Mod_Loader
             pictureBeeble.TabIndex = 128;
             pictureBeeble.TabStop = false;
             // 
+            // Thumbnail
+            // 
+            Thumbnail.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            Thumbnail.HeaderText = "Thumbnail";
+            Thumbnail.Name = "Thumbnail";
+            Thumbnail.ReadOnly = true;
+            Thumbnail.Width = 70;
+            // 
+            // LevelName
+            // 
+            LevelName.HeaderText = "Level Name";
+            LevelName.Name = "LevelName";
+            LevelName.ReadOnly = true;
+            LevelName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Difficulty
+            // 
+            Difficulty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            Difficulty.FillWeight = 40F;
+            Difficulty.HeaderText = "Difficulty";
+            Difficulty.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            Difficulty.Name = "Difficulty";
+            Difficulty.ReadOnly = true;
+            Difficulty.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            Difficulty.Width = 59;
+            // 
+            // Sublevels
+            // 
+            Sublevels.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            Sublevels.FillWeight = 40F;
+            Sublevels.HeaderText = "Sublevels";
+            Sublevels.Name = "Sublevels";
+            Sublevels.ReadOnly = true;
+            Sublevels.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            Sublevels.Width = 66;
+            // 
+            // rankcolumn
+            // 
+            rankcolumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            rankcolumn.HeaderText = "Rank";
+            rankcolumn.Name = "rankcolumn";
+            rankcolumn.ReadOnly = true;
+            rankcolumn.Width = 39;
+            // 
+            // Score
+            // 
+            Score.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            Score.HeaderText = "Score";
+            Score.Name = "Score";
+            Score.ReadOnly = true;
+            Score.Width = 63;
+            // 
+            // rankpluscolumn
+            // 
+            rankpluscolumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            rankpluscolumn.HeaderText = "Rank+";
+            rankpluscolumn.Name = "rankpluscolumn";
+            rankpluscolumn.ReadOnly = true;
+            rankpluscolumn.Width = 45;
+            // 
+            // Scoreplus
+            // 
+            Scoreplus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            Scoreplus.HeaderText = "Score+";
+            Scoreplus.Name = "Scoreplus";
+            Scoreplus.ReadOnly = true;
+            Scoreplus.Width = 69;
+            // 
             // ThumperModdingTool
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             BackColor = System.Drawing.Color.FromArgb(40, 40, 40);
-            ClientSize = new System.Drawing.Size(914, 533);
+            ClientSize = new System.Drawing.Size(1164, 533);
             Controls.Add(panelLoading);
             Controls.Add(lblCreator);
             Controls.Add(lblCustomDiffHelp);
@@ -781,15 +819,19 @@ namespace Thumper_Mod_Loader
         private System.Windows.Forms.ToolStripMenuItem githubToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem donateTipToolStripMenuItem;
         private System.Windows.Forms.Label lblCreator;
-        private System.Windows.Forms.DataGridViewImageColumn Thumbnail;
-        private System.Windows.Forms.DataGridViewTextBoxColumn LevelName;
-        private System.Windows.Forms.DataGridViewImageColumn Difficulty;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Sublevels;
         private System.Windows.Forms.Button btnHashClose;
         public System.Windows.Forms.ToolStripMenuItem chkNewTitleScreen;
         private System.Windows.Forms.Panel panelLoading;
         private System.Windows.Forms.PictureBox pictureBeeble;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.DataGridViewImageColumn Thumbnail;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LevelName;
+        private System.Windows.Forms.DataGridViewImageColumn Difficulty;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Sublevels;
+        private System.Windows.Forms.DataGridViewImageColumn rankcolumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Score;
+        private System.Windows.Forms.DataGridViewImageColumn rankpluscolumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Scoreplus;
     }
 }
 

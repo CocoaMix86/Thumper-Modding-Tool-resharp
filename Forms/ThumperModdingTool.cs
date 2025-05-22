@@ -30,6 +30,7 @@ namespace Thumper_Mod_Loader
             DoubleBufferForms(dgvLevels);
             LoadedLevels.CollectionChanged += LoadedLevels_CollectionChanged;
             Read_Config(true);
+            LoadRecords();
 
             if (!Properties.Settings.Default.mod_mode) {
                 // update visual elements on the form
@@ -98,8 +99,12 @@ namespace Thumper_Mod_Loader
             //clear and reload level list DGV whenever this collection updates
             dgvLevels.RowCount = 0;
             foreach (var _level in LoadedLevels) {
+                LevelRecord _Record = LevelRecords.FirstOrDefault(x => x.Name == _level.Name);
                 //populate rows with level name, and difficulty strings
-                dgvLevels.Rows.Add(new object[] { _level.thumbnail, _level.Name, Properties.Resources.ResourceManager.GetObject(_level.Difficulty.ToLower()), _level.Sublevels });
+                if (_Record != null)
+                    dgvLevels.Rows.Add(new object[] { _level.thumbnail, _level.Name, Properties.Resources.ResourceManager.GetObject(_level.Difficulty.ToLower()), _level.Sublevels, (_Record.Score == 0 && _Record.Rank == "RANK_C" ? Properties.Resources.RANK_NONE : Properties.Resources.ResourceManager.GetObject(_Record.Rank)), _Record.Score, (_Record.ScorePlus == 0 && _Record.RankPlus == "RANK_C" ? Properties.Resources.RANK_NONE : Properties.Resources.ResourceManager.GetObject(_Record.RankPlus)), _Record.ScorePlus });
+                else
+                    dgvLevels.Rows.Add(new object[] { _level.thumbnail, _level.Name, Properties.Resources.ResourceManager.GetObject(_level.Difficulty.ToLower()), _level.Sublevels, Properties.Resources.RANK_NONE, 0, Properties.Resources.RANK_NONE, 0 });
                 dgvLevels.Rows[^1].Height = 50;
             }
 
@@ -282,6 +287,7 @@ namespace Thumper_Mod_Loader
                 Make_Custom_Levels(Properties.Settings.Default.game_dir);
                 LoadRecords();
                 Create_SaveData();
+                LoadedLevels_CollectionChanged(null, null);
             }
             else if (Properties.Settings.Default.mod_mode) ModModeOFF();
 
