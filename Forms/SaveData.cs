@@ -3,10 +3,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Windows.Devices.Geolocation;
 using System.Windows;
-using System.Runtime.ExceptionServices;
 
 namespace Thumper_Mod_Loader
 {
@@ -16,17 +13,23 @@ namespace Thumper_Mod_Loader
 
         public static void Backup_SaveData(string game_dir)
 		{
-			var backup_time = DateTime.Now.ToString().Replace(":","").Replace("/","-");
-            if (!Directory.Exists(@"level records"))
-                Directory.CreateDirectory(@"level records");
+            string savefile = "";
+            try {
+                var backup_time = DateTime.Now.ToString().Replace(":", "").Replace("/", "-");
+                if (!Directory.Exists(@"level records"))
+                    Directory.CreateDirectory(@"level records");
 
-            int index = 0;
-            string dataindex = Directory.GetFiles($@"{game_dir}\savedata\", "data.index", SearchOption.AllDirectories).FirstOrDefault();
-            if (dataindex != null)
-                index = File.ReadAllBytes(dataindex)[8];
-            string savefile = Directory.GetFiles($@"{game_dir}\savedata\", $"data_{index}.sav", SearchOption.AllDirectories).FirstOrDefault();
-            if (savefile == null)
+                int index = 0;
+                string dataindex = Directory.GetFiles($@"{game_dir}\savedata\", "data.index", SearchOption.AllDirectories).FirstOrDefault();
+                if (dataindex != null)
+                    index = File.ReadAllBytes(dataindex)[8];
+                savefile = Directory.GetFiles($@"{game_dir}\savedata\", $"data_{index}.sav", SearchOption.AllDirectories).FirstOrDefault();
+                if (savefile == null)
+                    goto skipbackup;
+            }
+            catch (Exception) {
                 goto skipbackup;
+            }
 
             List<LevelRecord> BackupRecords = new();
             using (BinaryReader br = new(new FileStream(savefile, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))) {
@@ -117,6 +120,8 @@ namespace Thumper_Mod_Loader
 
         public static void LoadRecords()
         {
+            if (!Directory.Exists(@"level records"))
+                Directory.CreateDirectory(@"level records");
             LevelRecords.Clear();
             foreach (string _record in Directory.GetFiles($@"level records\", "*.record", SearchOption.AllDirectories)) {
                 LevelRecord existingrecord = new();
@@ -144,7 +149,14 @@ namespace Thumper_Mod_Loader
 
         public static void Create_SaveData()
         {
-            string saveloc = Directory.GetFiles($@"{Properties.Settings.Default.game_dir}\savedata", "*.sav", SearchOption.AllDirectories).FirstOrDefault();
+            string saveloc = "";
+            try {
+                saveloc = Directory.GetFiles($@"{Properties.Settings.Default.game_dir}\savedata", "*.sav", SearchOption.AllDirectories).FirstOrDefault();
+            }
+            catch (Exception) {
+                MessageBox.Show("The mod loader was unable to locate your save data. Try launching the game unmodded first and open the leaderboards. Then exit the game and try again. If the error persists, make sure you set your Game Directory to the correct path.", "Thumper Mod Loader");
+                return;
+            }
             if (saveloc == null) {
                 MessageBox.Show("The mod loader was unable to locate your save data. Try launching the game unmodded first and open the leaderboards. Then exit the game and try again. If the error persists, make sure you set your Game Directory to the correct path.", "Thumper Mod Loader");
                 return;

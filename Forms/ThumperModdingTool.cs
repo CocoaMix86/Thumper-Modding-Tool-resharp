@@ -27,6 +27,8 @@ namespace Thumper_Mod_Loader
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            if (!Directory.Exists(@"level records"))
+                Directory.CreateDirectory(@"level records");
             DoubleBufferForms(dgvLevels);
             LoadedLevels.CollectionChanged += LoadedLevels_CollectionChanged;
             Read_Config(true);
