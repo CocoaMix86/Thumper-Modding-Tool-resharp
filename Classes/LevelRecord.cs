@@ -10,6 +10,14 @@ namespace Thumper_Mod_Loader
 {
     public class LevelRecord
     {
+        public LevelRecord()
+        {
+            _rank = "RANK_C";
+            _rankplus = "RANK_C";
+            Score = 0;
+            ScorePlus = 0;
+        }
+
         [JsonProperty(Order = 1)]
         public string Info = "This file is used to locally store your highest score for a level and is used whenever you have this level in the mod loader. If you delete this file, your local record/completion of this level will be zero.";
         [JsonProperty(Order = 2)]

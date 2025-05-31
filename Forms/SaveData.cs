@@ -147,7 +147,7 @@ namespace Thumper_Mod_Loader
             }
         }
 
-        public static void Create_SaveData()
+        public static bool Create_SaveData()
         {
             string saveloc = "";
             try {
@@ -155,11 +155,11 @@ namespace Thumper_Mod_Loader
             }
             catch (Exception) {
                 MessageBox.Show("The mod loader was unable to locate your save data. Try launching the game unmodded first and open the leaderboards. Then exit the game and try again. If the error persists, make sure you set your Game Directory to the correct path.", "Thumper Mod Loader");
-                return;
+                return false;
             }
             if (saveloc == null) {
                 MessageBox.Show("The mod loader was unable to locate your save data. Try launching the game unmodded first and open the leaderboards. Then exit the game and try again. If the error persists, make sure you set your Game Directory to the correct path.", "Thumper Mod Loader");
-                return;
+                return false;
             }
             try {
                 if (saveloc.EndsWith("data_0.sav")) {
@@ -170,7 +170,7 @@ namespace Thumper_Mod_Loader
                 }
             } catch (Exception ex) {
                 MessageBox.Show("Either one of your Thumper save files are open/in use and could not be edited. Please make sure they are closed and try again.", "Thumper Mod Loader");
-                return;
+                return false;
             }
 
             List<LevelRecord> RecordsToWrite = new();
@@ -191,13 +191,18 @@ namespace Thumper_Mod_Loader
                 File.WriteAllText($@"level records\level3.record", JsonConvert.SerializeObject(level3, Formatting.Indented));
                 RecordsToWrite.Add(level3);
             }
-            //locate the last null terminator and then copy all bytes after it. Important to store user control preferences
             byte[] savefooter = File.ReadAllBytes(saveloc);
-            List<int> terminators = Search(savefooter, new byte[] { 0xff, 0xff, 0xff, 0xff });
-            int offset = 4; //depending what's at the end of the records, we either need to skip 4 or 8 bytes
-            if (savefooter[terminators.Last() + 4] == 0x00)
-                offset = 8;
-            savefooter = savefooter.AsSpan(terminators.Last() + offset).ToArray();
+            try {
+                //locate the last null terminator and then copy all bytes after it. Important to store user control preferences
+                List<int> terminators = Search(savefooter, new byte[] { 0xff, 0xff, 0xff, 0xff });
+                int offset = 4; //depending what's at the end of the records, we either need to skip 4 or 8 bytes
+                if (savefooter[terminators.Last() + 4] == 0x00)
+                    offset = 8;
+                savefooter = savefooter.AsSpan(terminators.Last() + offset).ToArray();
+            } catch (Exception) {
+                MessageBox.Show("The mod loader was unable to locate your save data. Try launching the game unmodded first and open the leaderboards. Then exit the game and try again. If the error persists, make sure you set your Game Directory to the correct path.", "Thumper Mod Loader");
+                return false;
+            }
             //
             using (FileStream f = File.Open(saveloc, FileMode.Create, FileAccess.Write, FileShare.None)) {
                 Write_Int(f, 65); //header
@@ -233,6 +238,8 @@ namespace Thumper_Mod_Loader
             else if (saveloc.EndsWith("data_1.sav")) {
                 File.Copy(saveloc, $@"{Path.GetDirectoryName(saveloc)}\data_0.sav");
             }
+
+            return true;
         }
 
         /// via Microsoft

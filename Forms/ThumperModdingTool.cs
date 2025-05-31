@@ -400,16 +400,17 @@ namespace Thumper_Mod_Loader
 
             LoadRecords();
             Make_Custom_Levels(Properties.Settings.Default.game_dir);
-            Create_SaveData();
-            //set mod mode property in exe and save it
-            Properties.Settings.Default.mod_mode = true;
-            Properties.Settings.Default.Save();
-            //update visual elements on the form
-            btnModMode.BackColor = Color.YellowGreen;
-            btnModMode.ForeColor = Color.White;
-            btnModMode.Text = "is ON";
-            btnUpdate.Enabled = true;
-            btnUpdate.Visible = true;
+            if (Create_SaveData()) {
+                //set mod mode property in exe and save it
+                Properties.Settings.Default.mod_mode = true;
+                Properties.Settings.Default.Save();
+                //update visual elements on the form
+                btnModMode.BackColor = Color.YellowGreen;
+                btnModMode.ForeColor = Color.White;
+                btnModMode.Text = "is ON";
+                btnUpdate.Enabled = true;
+                btnUpdate.Visible = true;
+            }
             ChangesMade = false;
             panelLoading.Visible = false;
         }
