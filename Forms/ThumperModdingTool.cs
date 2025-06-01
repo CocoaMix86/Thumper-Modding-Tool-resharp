@@ -399,8 +399,8 @@ namespace Thumper_Mod_Loader
             Application.DoEvents();
 
             LoadRecords();
-            Make_Custom_Levels(Properties.Settings.Default.game_dir);
             if (Create_SaveData()) {
+                Make_Custom_Levels(Properties.Settings.Default.game_dir);
                 //set mod mode property in exe and save it
                 Properties.Settings.Default.mod_mode = true;
                 Properties.Settings.Default.Save();
@@ -410,6 +410,9 @@ namespace Thumper_Mod_Loader
                 btnModMode.Text = "is ON";
                 btnUpdate.Enabled = true;
                 btnUpdate.Visible = true;
+            }
+            else {
+                btnModMode.Text = "is OFF";
             }
             ChangesMade = false;
             panelLoading.Visible = false;
@@ -508,6 +511,12 @@ namespace Thumper_Mod_Loader
                     File.Copy("lib/original/d0d6149c.pc", $@"{Properties.Settings.Default.game_dir}\cache\{Path.GetFileName("lib/original/d0d6149c.pc")}", true);
                 }
             }
+        }
+
+        private void ForceModModeOff_Click(object sender, EventArgs e)
+        {
+            ModModeOFF();
+            MessageBox.Show("Successfully unmodded game", "Thumper Mod Loader");
         }
     }
 }

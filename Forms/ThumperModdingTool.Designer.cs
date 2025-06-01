@@ -44,6 +44,8 @@ namespace Thumper_Mod_Loader
             discordServerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             githubToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             donateTipToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            ForceModModeOff = new System.Windows.Forms.ToolStripMenuItem();
             thumpNetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             changeGameDirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -55,6 +57,14 @@ namespace Thumper_Mod_Loader
             btnLevelUp = new System.Windows.Forms.Button();
             btnLevelDown = new System.Windows.Forms.Button();
             dgvLevels = new System.Windows.Forms.DataGridView();
+            Thumbnail = new System.Windows.Forms.DataGridViewImageColumn();
+            LevelName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            Difficulty = new System.Windows.Forms.DataGridViewImageColumn();
+            Sublevels = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            rankcolumn = new System.Windows.Forms.DataGridViewImageColumn();
+            Score = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            rankpluscolumn = new System.Windows.Forms.DataGridViewImageColumn();
+            Scoreplus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             richDescript = new System.Windows.Forms.RichTextBox();
             label3 = new System.Windows.Forms.Label();
             BtnHash = new System.Windows.Forms.Button();
@@ -75,14 +85,7 @@ namespace Thumper_Mod_Loader
             panelLoading = new System.Windows.Forms.Panel();
             label6 = new System.Windows.Forms.Label();
             pictureBeeble = new System.Windows.Forms.PictureBox();
-            Thumbnail = new System.Windows.Forms.DataGridViewImageColumn();
-            LevelName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            Difficulty = new System.Windows.Forms.DataGridViewImageColumn();
-            Sublevels = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            rankcolumn = new System.Windows.Forms.DataGridViewImageColumn();
-            Score = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            rankpluscolumn = new System.Windows.Forms.DataGridViewImageColumn();
-            Scoreplus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            label7 = new System.Windows.Forms.Label();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvLevels).BeginInit();
             panelHash.SuspendLayout();
@@ -157,7 +160,7 @@ namespace Thumper_Mod_Loader
             // 
             // helpToolStripMenuItem
             // 
-            helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { aboutToolStripMenuItem, discordServerToolStripMenuItem, githubToolStripMenuItem, donateTipToolStripMenuItem });
+            helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { aboutToolStripMenuItem, discordServerToolStripMenuItem, githubToolStripMenuItem, donateTipToolStripMenuItem, toolStripSeparator1, ForceModModeOff });
             helpToolStripMenuItem.Font = new System.Drawing.Font("Gadugi", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             helpToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             helpToolStripMenuItem.Name = "helpToolStripMenuItem";
@@ -171,7 +174,7 @@ namespace Thumper_Mod_Loader
             aboutToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             aboutToolStripMenuItem.Image = Properties.Resources.icon_info;
             aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            aboutToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            aboutToolStripMenuItem.Size = new System.Drawing.Size(332, 22);
             aboutToolStripMenuItem.Text = "About...";
             aboutToolStripMenuItem.Click += aboutToolStripMenuItem_Click;
             // 
@@ -181,7 +184,7 @@ namespace Thumper_Mod_Loader
             discordServerToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             discordServerToolStripMenuItem.Image = Properties.Resources.discord32x;
             discordServerToolStripMenuItem.Name = "discordServerToolStripMenuItem";
-            discordServerToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            discordServerToolStripMenuItem.Size = new System.Drawing.Size(332, 22);
             discordServerToolStripMenuItem.Text = "Discord Server";
             discordServerToolStripMenuItem.Click += discordServerToolStripMenuItem_Click;
             // 
@@ -191,7 +194,7 @@ namespace Thumper_Mod_Loader
             githubToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             githubToolStripMenuItem.Image = Properties.Resources.github48;
             githubToolStripMenuItem.Name = "githubToolStripMenuItem";
-            githubToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            githubToolStripMenuItem.Size = new System.Drawing.Size(332, 22);
             githubToolStripMenuItem.Text = "Github";
             githubToolStripMenuItem.Click += githubToolStripMenuItem_Click;
             // 
@@ -201,9 +204,23 @@ namespace Thumper_Mod_Loader
             donateTipToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             donateTipToolStripMenuItem.Image = Properties.Resources.kofi_logo;
             donateTipToolStripMenuItem.Name = "donateTipToolStripMenuItem";
-            donateTipToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            donateTipToolStripMenuItem.Size = new System.Drawing.Size(332, 22);
             donateTipToolStripMenuItem.Text = "Donate && Tip (ko-fi)";
             donateTipToolStripMenuItem.Click += donateTipToolStripMenuItem_Click;
+            // 
+            // toolStripSeparator1
+            // 
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            toolStripSeparator1.Size = new System.Drawing.Size(329, 6);
+            // 
+            // ForceModModeOff
+            // 
+            ForceModModeOff.BackColor = System.Drawing.Color.FromArgb(40, 40, 40);
+            ForceModModeOff.ForeColor = System.Drawing.Color.White;
+            ForceModModeOff.Name = "ForceModModeOff";
+            ForceModModeOff.Size = new System.Drawing.Size(332, 22);
+            ForceModModeOff.Text = "Mod Mode is off but game is still modded!!";
+            ForceModModeOff.Click += ForceModModeOff_Click;
             // 
             // thumpNetToolStripMenuItem
             // 
@@ -404,6 +421,74 @@ namespace Thumper_Mod_Loader
             dgvLevels.SelectionChanged += dgvLevels_SelectionChanged;
             dgvLevels.DragDrop += dgvLevels_DragDrop;
             dgvLevels.DragEnter += dgvLevels_DragEnter;
+            // 
+            // Thumbnail
+            // 
+            Thumbnail.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            Thumbnail.HeaderText = "Thumbnail";
+            Thumbnail.Name = "Thumbnail";
+            Thumbnail.ReadOnly = true;
+            Thumbnail.Width = 70;
+            // 
+            // LevelName
+            // 
+            LevelName.HeaderText = "Level Name";
+            LevelName.Name = "LevelName";
+            LevelName.ReadOnly = true;
+            LevelName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Difficulty
+            // 
+            Difficulty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            Difficulty.FillWeight = 40F;
+            Difficulty.HeaderText = "Difficulty";
+            Difficulty.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            Difficulty.Name = "Difficulty";
+            Difficulty.ReadOnly = true;
+            Difficulty.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            Difficulty.Width = 59;
+            // 
+            // Sublevels
+            // 
+            Sublevels.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            Sublevels.FillWeight = 40F;
+            Sublevels.HeaderText = "Sublevels";
+            Sublevels.Name = "Sublevels";
+            Sublevels.ReadOnly = true;
+            Sublevels.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            Sublevels.Width = 66;
+            // 
+            // rankcolumn
+            // 
+            rankcolumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            rankcolumn.HeaderText = "Rank";
+            rankcolumn.Name = "rankcolumn";
+            rankcolumn.ReadOnly = true;
+            rankcolumn.Width = 39;
+            // 
+            // Score
+            // 
+            Score.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            Score.HeaderText = "Score";
+            Score.Name = "Score";
+            Score.ReadOnly = true;
+            Score.Width = 63;
+            // 
+            // rankpluscolumn
+            // 
+            rankpluscolumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            rankpluscolumn.HeaderText = "Rank+";
+            rankpluscolumn.Name = "rankpluscolumn";
+            rankpluscolumn.ReadOnly = true;
+            rankpluscolumn.Width = 45;
+            // 
+            // Scoreplus
+            // 
+            Scoreplus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            Scoreplus.HeaderText = "Score+";
+            Scoreplus.Name = "Scoreplus";
+            Scoreplus.ReadOnly = true;
+            Scoreplus.Width = 69;
             // 
             // richDescript
             // 
@@ -661,73 +746,18 @@ namespace Thumper_Mod_Loader
             pictureBeeble.TabIndex = 128;
             pictureBeeble.TabStop = false;
             // 
-            // Thumbnail
+            // label7
             // 
-            Thumbnail.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            Thumbnail.HeaderText = "Thumbnail";
-            Thumbnail.Name = "Thumbnail";
-            Thumbnail.ReadOnly = true;
-            Thumbnail.Width = 70;
-            // 
-            // LevelName
-            // 
-            LevelName.HeaderText = "Level Name";
-            LevelName.Name = "LevelName";
-            LevelName.ReadOnly = true;
-            LevelName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Difficulty
-            // 
-            Difficulty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            Difficulty.FillWeight = 40F;
-            Difficulty.HeaderText = "Difficulty";
-            Difficulty.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            Difficulty.Name = "Difficulty";
-            Difficulty.ReadOnly = true;
-            Difficulty.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            Difficulty.Width = 59;
-            // 
-            // Sublevels
-            // 
-            Sublevels.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            Sublevels.FillWeight = 40F;
-            Sublevels.HeaderText = "Sublevels";
-            Sublevels.Name = "Sublevels";
-            Sublevels.ReadOnly = true;
-            Sublevels.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            Sublevels.Width = 66;
-            // 
-            // rankcolumn
-            // 
-            rankcolumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            rankcolumn.HeaderText = "Rank";
-            rankcolumn.Name = "rankcolumn";
-            rankcolumn.ReadOnly = true;
-            rankcolumn.Width = 39;
-            // 
-            // Score
-            // 
-            Score.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            Score.HeaderText = "Score";
-            Score.Name = "Score";
-            Score.ReadOnly = true;
-            Score.Width = 63;
-            // 
-            // rankpluscolumn
-            // 
-            rankpluscolumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            rankpluscolumn.HeaderText = "Rank+";
-            rankpluscolumn.Name = "rankpluscolumn";
-            rankpluscolumn.ReadOnly = true;
-            rankpluscolumn.Width = 45;
-            // 
-            // Scoreplus
-            // 
-            Scoreplus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            Scoreplus.HeaderText = "Score+";
-            Scoreplus.Name = "Scoreplus";
-            Scoreplus.ReadOnly = true;
-            Scoreplus.Width = 69;
+            label7.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            label7.AutoSize = true;
+            label7.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, 0);
+            label7.ForeColor = System.Drawing.Color.White;
+            label7.Location = new System.Drawing.Point(320, 28);
+            label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label7.Name = "label7";
+            label7.Size = new System.Drawing.Size(371, 16);
+            label7.TabIndex = 130;
+            label7.Text = "if mod mode says off, but the game is still modded, go to the HELP menu";
             // 
             // ThumperModdingTool
             // 
@@ -757,6 +787,7 @@ namespace Thumper_Mod_Loader
             Controls.Add(label5);
             Controls.Add(label3);
             Controls.Add(pictureDifficulty);
+            Controls.Add(label7);
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             MainMenuStrip = menuStrip1;
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -832,6 +863,9 @@ namespace Thumper_Mod_Loader
         private System.Windows.Forms.DataGridViewTextBoxColumn Score;
         private System.Windows.Forms.DataGridViewImageColumn rankpluscolumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn Scoreplus;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem ForceModModeOff;
+        private System.Windows.Forms.Label label7;
     }
 }
 
